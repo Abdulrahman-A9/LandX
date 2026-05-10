@@ -7,7 +7,17 @@ const OpportunityCard = ({ opportunity }) => {
   const { id, title, municipality, location, season, area, areaUnit, expectedReturn, investmentRequired, currency, status, images } = opportunity;
   
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('ar-SA').format(amount);
+    return new Intl.NumberFormat('en-US').format(amount);
+  };
+  
+  const getSeasonText = (season) => {
+    const seasons = {
+      'winter': 'Winter',
+      'summer': 'Summer',
+      'spring': 'Spring',
+      'autumn': 'Autumn',
+    };
+    return seasons[season] || season;
   };
   
   return (
@@ -26,7 +36,7 @@ const OpportunityCard = ({ opportunity }) => {
         )}
         <div className="absolute top-3 right-3">
           <Badge variant={status === 'active' ? 'success' : 'warning'}>
-            {status === 'active' ? 'نشط' : 'قيد المراجعة'}
+            {status === 'active' ? 'Active' : 'Under Review'}
           </Badge>
         </div>
       </div>
@@ -42,22 +52,22 @@ const OpportunityCard = ({ opportunity }) => {
         
         <div className="grid grid-cols-2 gap-2 mb-4 text-sm">
           <div className="bg-dark-800/50 border border-primary-500/20 rounded-lg p-2">
-            <p className="text-dark-500 text-xs">الموسم</p>
-            <p className="font-medium text-white">{season === 'winter' ? 'شتوي' : season === 'summer' ? 'صيفي' : season === 'spring' ? 'ربيعي' : 'خريفي'}</p>
+            <p className="text-dark-500 text-xs">Season</p>
+            <p className="font-medium text-white">{getSeasonText(season)}</p>
           </div>
           <div className="bg-dark-800/50 border border-primary-500/20 rounded-lg p-2">
-            <p className="text-dark-500 text-xs">المساحة</p>
+            <p className="text-dark-500 text-xs">Area</p>
             <p className="font-medium text-white">{area} {areaUnit}</p>
           </div>
         </div>
         
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-xs text-dark-500">العائد المتوقع</p>
+            <p className="text-xs text-dark-500">Expected Return</p>
             <p className="text-lg font-bold text-primary-400">{expectedReturn}%</p>
           </div>
           <div className="text-left">
-            <p className="text-xs text-dark-500">الاستثمار المطلوب</p>
+            <p className="text-xs text-dark-500">Investment Required</p>
             <p className="text-lg font-bold text-secondary-400">{formatCurrency(investmentRequired)} {currency}</p>
           </div>
         </div>
@@ -66,7 +76,7 @@ const OpportunityCard = ({ opportunity }) => {
           to={`/opportunities/${id}`}
           className="block w-full text-center bg-gradient-to-r from-primary-500/20 to-secondary-500/20 text-primary-400 py-2 rounded-lg hover:from-primary-500/30 hover:to-secondary-500/30 font-medium transition-all duration-300 hover:scale-105"
         >
-          عرض التفاصيل
+          View Details
         </Link>
       </div>
     </Card>

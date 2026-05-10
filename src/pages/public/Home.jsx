@@ -23,80 +23,80 @@ const Home = () => {
             {/* Left Section - Cards */}
             <div className="space-y-6 animate-slide-in-right">
               <div className="bg-gradient-to-r from-primary-500/20 to-secondary-500/20 border border-primary-500/30 rounded-lg p-4 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <span className="text-primary-400 text-sm font-medium">رؤية ٢٠٣٠: استثمار مستدام</span>
+                <span className="text-primary-400 text-sm font-medium">Vision 2030: Sustainable Investment</span>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <Card className="bg-card-gradient backdrop-blur border border-primary-500/30 p-5 hover:border-primary-500/50 transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                  <h3 className="text-dark-400 text-sm mb-2">الأحياء ذات الأولوية</h3>
-                  <p className="text-white font-semibold">النقرة، مشار</p>
+                  <h3 className="text-dark-400 text-sm mb-2">Priority Neighborhoods</h3>
+                  <p className="text-white font-semibold">Al-Naqrah, Mashar</p>
                 </Card>
                 
                 <Card className="bg-card-gradient backdrop-blur border border-primary-500/30 p-5 hover:border-primary-500/50 transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                  <h3 className="text-dark-400 text-sm mb-2">التحويل إلى فرص</h3>
-                  <span className="inline-block px-3 py-1 bg-primary-500/20 text-primary-400 rounded-full text-sm animate-pulse">جاهز</span>
+                  <h3 className="text-dark-400 text-sm mb-2">Conversion to Opportunities</h3>
+                  <span className="inline-block px-3 py-1 bg-primary-500/20 text-primary-400 rounded-full text-sm animate-pulse">Ready</span>
                 </Card>
               </div>
               
               <div className="bg-card-gradient backdrop-blur border border-primary-500/30 rounded-lg p-6 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                <h3 className="text-primary-400 font-semibold mb-4">مركز القرار الاستثماري</h3>
+                <h3 className="text-primary-400 font-semibold mb-4">Investment Decision Center</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <Card className="bg-dark-800/50 border border-secondary-500/30 p-4 hover:border-secondary-500/50 transition-all duration-300">
-                    <h4 className="text-dark-400 text-xs mb-1">الطلب الموسمي</h4>
-                    <p className="text-primary-400 font-semibold">مرتفع</p>
+                    <h4 className="text-dark-400 text-xs mb-1">Seasonal Demand</h4>
+                    <p className="text-primary-400 font-semibold">High</p>
                   </Card>
                   <Card className="bg-dark-800/50 border border-secondary-500/30 p-4 hover:border-secondary-500/50 transition-all duration-300">
-                    <h4 className="text-dark-400 text-xs mb-1">المخاطر القابلة للإدارة</h4>
-                    <p className="text-white font-semibold">7 فرص</p>
+                    <h4 className="text-dark-400 text-xs mb-1">Manageable Risks</h4>
+                    <p className="text-white font-semibold">7 Opportunities</p>
                   </Card>
                 </div>
               </div>
               
               <Card className="bg-card-gradient backdrop-blur border border-primary-500/30 p-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                <h3 className="text-primary-400 font-semibold mb-3">لماذا هذا مهم؟</h3>
+                <h3 className="text-primary-400 font-semibold mb-3">Why is this important?</h3>
                 <p className="text-dark-300 text-sm leading-relaxed">
-                  منصة LandX تقدم تحليلاً أوضح للفرص الاستثمارية في الأراضي الموسمية، مما يوفر للمستثمرين والجهات التنظيمية قراءة أوضح للفرص والأحياء والمخاطر والعوائد قبل التقديم عبر المسارات الرسمية.
+                  LandX provides clearer analysis of investment opportunities in seasonal lands, giving investors and regulatory bodies a clearer reading of opportunities, neighborhoods, risks, and returns before official submission.
                 </p>
               </Card>
             </div>
             
             {/* Right Section - Hero Content */}
-            <div className="text-right space-y-6 animate-slide-in-left">
+            <div className="text-left space-y-6 animate-slide-in-left">
               <div className="space-y-2">
                 <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400 animate-fade-in">
-                  LandX | لاند إكس
+                  LandX
                 </h1>
-                <p className="text-primary-400 text-xl animate-fade-in" style={{ animationDelay: '0.1s' }}>في لاند إكس نقدم</p>
+                <p className="text-primary-400 text-xl animate-fade-in" style={{ animationDelay: '0.1s' }}>At LandX we offer</p>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold text-white leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
-                تحليلاً أوضح للفرص قبل التقديم على المسارات الرسمية.
+                Clearer analysis of opportunities before applying to official channels.
               </h2>
               
               <p className="text-dark-400 text-lg leading-relaxed animate-slide-up" style={{ animationDelay: '0.3s' }}>
-                منصة استدلالية لدعم القرار الاستثماري في منطقة حائل، تقدم للمستثمرين والجهات التنظيمية قراءة أوضح للفرص والأحياء والمخاطر والعوائد قبل التقديم الرسمي.
+                An indicative platform supporting investment decisions in Hail region, providing investors and regulatory bodies with a clearer reading of opportunities, neighborhoods, risks, and returns before official submission.
               </p>
               
               <div className="space-y-4 pt-4">
-                <Link to="/register" className="group flex items-center justify-end gap-3 text-primary-400 hover:text-primary-300 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                  <span className="text-lg font-semibold">ابدأ طلب استشاري</span>
+                <Link to="/register" className="group flex items-center justify-start gap-3 text-primary-400 hover:text-primary-300 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
                   <span className="w-10 h-10 rounded-full bg-gradient-to-r from-primary-500/20 to-secondary-500/20 flex items-center justify-center group-hover:from-primary-500/30 group-hover:to-secondary-500/30 transition-all duration-300 group-hover:scale-110">
-                    ←
+                    →
                   </span>
+                  <span className="text-lg font-semibold">Start a consultation request</span>
                 </Link>
                 
-                <Link to="/opportunities" className="group flex items-center justify-end gap-3 text-primary-400 hover:text-primary-300 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                  <span className="text-lg font-semibold">استعرض الفرص</span>
+                <Link to="/opportunities" className="group flex items-center justify-start gap-3 text-primary-400 hover:text-primary-300 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.5s' }}>
                   <span className="w-10 h-10 rounded-full bg-gradient-to-r from-primary-500/20 to-secondary-500/20 flex items-center justify-center group-hover:from-primary-500/30 group-hover:to-secondary-500/30 transition-all duration-300 group-hover:scale-110">
-                    ←
+                    →
                   </span>
+                  <span className="text-lg font-semibold">Browse opportunities</span>
                 </Link>
                 
-                <Link to="/opportunities" className="group flex items-center justify-end gap-3 text-primary-400 hover:text-primary-300 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                  <span className="text-lg font-semibold">استعرض الأراضي المتاحة</span>
+                <Link to="/opportunities" className="group flex items-center justify-start gap-3 text-primary-400 hover:text-primary-300 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.6s' }}>
                   <span className="w-10 h-10 rounded-full bg-gradient-to-r from-primary-500/20 to-secondary-500/20 flex items-center justify-center group-hover:from-primary-500/30 group-hover:to-secondary-500/30 transition-all duration-300 group-hover:scale-110">
-                    ←
+                    →
                   </span>
+                  <span className="text-lg font-semibold">Browse available lands</span>
                 </Link>
               </div>
             </div>
@@ -109,10 +109,10 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400 mb-4 animate-fade-in">
-              فرص استثمارية مميزة
+              Featured Investment Opportunities
             </h2>
             <p className="text-dark-400 max-w-2xl mx-auto animate-slide-up">
-              استكشف أحدث الفرص الاستثمارية في الأراضي الزراعية الموسمية
+              Explore the latest investment opportunities in seasonal agricultural lands
             </p>
           </div>
           
@@ -126,8 +126,8 @@ const Home = () => {
           
           <div className="text-center mt-8">
             <Link to="/opportunities" className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 font-semibold transition-all duration-300 hover:translate-x-2">
-              عرض جميع الفرص الاستثمارية
-              <span>←</span>
+              View all investment opportunities
+              <span>→</span>
             </Link>
           </div>
         </div>
