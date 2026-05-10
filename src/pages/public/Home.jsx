@@ -20,46 +20,6 @@ const Home = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-200px)]">
-            {/* Left Section - Cards */}
-            <div className="space-y-6 animate-slide-in-right">
-              <div className="bg-gradient-to-r from-primary-500/20 to-secondary-500/20 border border-primary-500/30 rounded-lg p-4 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <span className="text-primary-400 text-sm font-medium">رؤية ٢٠٣٠: استثمار مستدام</span>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <Card className="bg-card-gradient backdrop-blur border border-primary-500/30 p-5 hover:border-primary-500/50 transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                  <h3 className="text-dark-400 text-sm mb-2">الأحياء ذات الأولوية</h3>
-                  <p className="text-white font-semibold">النقرة، مشار</p>
-                </Card>
-                
-                <Card className="bg-card-gradient backdrop-blur border border-primary-500/30 p-5 hover:border-primary-500/50 transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                  <h3 className="text-dark-400 text-sm mb-2">التحويل إلى فرص</h3>
-                  <span className="inline-block px-3 py-1 bg-primary-500/20 text-primary-400 rounded-full text-sm animate-pulse">جاهز</span>
-                </Card>
-              </div>
-              
-              <div className="bg-card-gradient backdrop-blur border border-primary-500/30 rounded-lg p-6 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                <h3 className="text-primary-400 font-semibold mb-4">مركز القرار الاستثماري</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <Card className="bg-dark-800/50 border border-secondary-500/30 p-4 hover:border-secondary-500/50 transition-all duration-300">
-                    <h4 className="text-dark-400 text-xs mb-1">الطلب الموسمي</h4>
-                    <p className="text-primary-400 font-semibold">مرتفع</p>
-                  </Card>
-                  <Card className="bg-dark-800/50 border border-secondary-500/30 p-4 hover:border-secondary-500/50 transition-all duration-300">
-                    <h4 className="text-dark-400 text-xs mb-1">المخاطر القابلة للإدارة</h4>
-                    <p className="text-white font-semibold">7 فرص</p>
-                  </Card>
-                </div>
-              </div>
-              
-              <Card className="bg-card-gradient backdrop-blur border border-primary-500/30 p-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                <h3 className="text-primary-400 font-semibold mb-3">لماذا هذا مهم؟</h3>
-                <p className="text-dark-300 text-sm leading-relaxed">
-                  منصة LandX تقدم تحليلاً أوضح للفرص الاستثمارية في الأراضي الموسمية، مما يوفر للمستثمرين والجهات التنظيمية قراءة أوضح للفرص والأحياء والمخاطر والعوائد قبل التقديم عبر المسارات الرسمية.
-                </p>
-              </Card>
-            </div>
-            
             {/* Right Section - Hero Content */}
             <div className="text-right space-y-6 animate-slide-in-left">
               <div className="space-y-2">
@@ -99,6 +59,46 @@ const Home = () => {
                   </span>
                 </Link>
               </div>
+            </div>
+
+            {/* Left Section - Cards */}
+            <div className="space-y-6 animate-slide-in-right">
+              <div className="bg-gradient-to-r from-primary-500/20 to-secondary-500/20 border border-primary-500/30 rounded-lg p-4 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <span className="text-primary-400 text-sm font-medium">رؤية ٢٠٣٠: استثمار مستدام</span>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <Card className="bg-card-gradient backdrop-blur border border-primary-500/30 p-5 hover:border-primary-500/50 transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                  <h3 className="text-dark-400 text-sm mb-2">الأحياء ذات الأولوية</h3>
+                  <p className="text-white font-semibold">النقرة، مشار</p>
+                </Card>
+                
+                <Card className="bg-card-gradient backdrop-blur border border-primary-500/30 p-5 hover:border-primary-500/50 transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                  <h3 className="text-dark-400 text-sm mb-2">التحويل إلى فرص</h3>
+                  <span className="inline-block px-3 py-1 bg-primary-500/20 text-primary-400 rounded-full text-sm animate-pulse">جاهز</span>
+                </Card>
+              </div>
+              
+              <div className="bg-card-gradient backdrop-blur border border-primary-500/30 rounded-lg p-6 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                <h3 className="text-primary-400 font-semibold mb-4">مركز القرار الاستثماري</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <Card className="bg-dark-800/50 border border-secondary-500/30 p-4 hover:border-secondary-500/50 transition-all duration-300">
+                    <h4 className="text-dark-400 text-xs mb-1">الطلب الموسمي</h4>
+                    <p className="text-primary-400 font-semibold">مرتفع</p>
+                  </Card>
+                  <Card className="bg-dark-800/50 border border-secondary-500/30 p-4 hover:border-secondary-500/50 transition-all duration-300">
+                    <h4 className="text-dark-400 text-xs mb-1">المخاطر القابلة للإدارة</h4>
+                    <p className="text-white font-semibold">7 فرص</p>
+                  </Card>
+                </div>
+              </div>
+              
+              <Card className="bg-card-gradient backdrop-blur border border-primary-500/30 p-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                <h3 className="text-primary-400 font-semibold mb-3">لماذا هذا مهم؟</h3>
+                <p className="text-dark-300 text-sm leading-relaxed">
+                  منصة LandX تقدم تحليلاً أوضح للفرص الاستثمارية في الأراضي الموسمية، مما يوفر للمستثمرين والجهات التنظيمية قراءة أوضح للفرص والأحياء والمخاطر والعوائد قبل التقديم عبر المسارات الرسمية.
+                </p>
+              </Card>
             </div>
           </div>
         </div>

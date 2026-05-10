@@ -14,39 +14,39 @@ const NewsCard = ({ news }) => {
   };
   
   return (
-    <Card hover className="overflow-hidden">
-      <div className="aspect-video bg-gray-200 relative">
+    <Card hover className="overflow-hidden bg-card-gradient border border-primary-500/30 hover:border-primary-500/50 transition-all duration-300 hover:scale-105">
+      <div className="aspect-video bg-dark-800 relative overflow-hidden">
         {image ? (
           <img 
             src={image} 
             alt={title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-300">
-            <span className="text-gray-500 text-4xl">📰</span>
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-dark-800 to-dark-900">
+            <span className="text-dark-500 text-4xl">📰</span>
           </div>
         )}
       </div>
       
       <div className="p-4">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs text-primary-600 font-medium">{municipality}</span>
-          <span className="text-gray-300">•</span>
-          <span className="text-xs text-gray-500">{formatDate(date)}</span>
+          <span className="text-xs text-primary-400 font-medium">{municipality}</span>
+          <span className="text-dark-600">•</span>
+          <span className="text-xs text-dark-500">{formatDate(date)}</span>
         </div>
         
-        <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+        <h3 className="text-lg font-semibold text-white mb-2 line-clamp-2">
           {title}
         </h3>
         
-        <p className="text-sm text-gray-600 line-clamp-3 mb-4">
+        <p className="text-sm text-dark-400 line-clamp-3 mb-4">
           {content}
         </p>
         
         <Link
           to={`/news/${id}`}
-          className="text-primary-600 hover:text-primary-700 font-medium text-sm"
+          className="text-primary-400 hover:text-primary-300 font-medium text-sm transition-colors"
         >
           قراءة المزيد ←
         </Link>
