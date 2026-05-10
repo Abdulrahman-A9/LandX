@@ -3,7 +3,7 @@ import React from 'react';
 const Card = ({ children, className = '', hover = false, ...props }) => {
   return (
     <div
-      className={`bg-dark-900/80 backdrop-blur rounded-lg shadow-sm border border-dark-700 ${hover ? 'hover:shadow-md transition-shadow' : ''} ${className}`}
+      className={`bg-card-gradient backdrop-blur rounded-lg shadow-sm border border-primary-500/30 ${hover ? 'hover:shadow-lg hover:scale-105 transition-all duration-300' : ''} ${className}`}
       {...props}
     >
       {children}
@@ -13,7 +13,7 @@ const Card = ({ children, className = '', hover = false, ...props }) => {
 
 const CardHeader = ({ children, className = '' }) => {
   return (
-    <div className={`px-6 py-4 border-b border-dark-700 ${className}`}>
+    <div className={`px-6 py-4 border-b border-primary-500/20 ${className}`}>
       {children}
     </div>
   );
@@ -29,7 +29,7 @@ const CardBody = ({ children, className = '' }) => {
 
 const CardFooter = ({ children, className = '' }) => {
   return (
-    <div className={`px-6 py-4 border-t border-dark-700 ${className}`}>
+    <div className={`px-6 py-4 border-t border-primary-500/20 ${className}`}>
       {children}
     </div>
   );
