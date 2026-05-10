@@ -1,6 +1,6 @@
 import React from 'react';
-import Card from '../../../components/ui/Card';
-import { mockDashboardStats } from '../../../data/mock/dashboard';
+import Card from '../../components/ui/Card';
+import { mockDashboardStats } from '../../data/mock/dashboard';
 
 const AdminDashboard = () => {
   const stats = mockDashboardStats.admin;
