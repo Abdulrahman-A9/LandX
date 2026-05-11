@@ -275,54 +275,72 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="bg-gradient-to-b from-pearl-50 to-pearl-100 py-20">
+      <section className="bg-gradient-to-b from-pearl-100 via-pearl-50 to-pearl-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full border border-brown-400 text-brown-700 text-sm font-semibold mb-4">
+              <SparklesIcon className="w-4 h-4" />
+              خدمات مميزة
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
               خدمات المنصة
             </h2>
-            <p className="text-brown-700 max-w-2xl mx-auto">
-              أدوات ذكية وخدمات تحليلية تدعم قرارك الاستثماري
+            <p className="text-brown-700 max-w-2xl mx-auto text-lg">
+              أدوات ذكية وخدمات تحليلية شاملة تدعم قرارك الاستثماري من البداية للنهاية
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
-                <SparklesIcon className="text-brown-600" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Service 1: AI Analysis */}
+            <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 hover:shadow-xl p-8 text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-amber-300 group-hover:scale-110 transition-transform duration-300">
+                <SparklesIcon className="text-amber-700 w-8 h-8" />
               </div>
-              <h3 className="text-lg font-bold text-brown-900 mb-2">التحليل الاستثماري الذكي</h3>
-              <p className="text-brown-700 text-sm mb-4 leading-relaxed">
-                أدخل بيانات مشروعك ويقوم الذكاء الاصطناعي بتحليل الجدوى وتقدير التكاليف والعوائد
+              <h3 className="text-xl font-bold text-brown-900 mb-3">التحليل الاستثماري الذكي</h3>
+              <p className="text-brown-700 text-sm mb-6 leading-relaxed">
+                أدخل بيانات مشروعك ويقوم الذكاء الاصطناعي بتحليل الجدوى وتقدير التكاليف والعوائد وإصدار تقرير احترافي
               </p>
-              <Link to="/investment-analysis" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold text-sm transition-all duration-300 hover:translate-x-1">
-                جرب الخدمة
-                <ChevronLeftIcon />
+              <Link
+                to="/investment-analysis"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-brown-600 to-brown-700 text-pearl-100 font-bold rounded-lg hover:from-brown-700 hover:to-brown-800 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center"
+              >
+                <SparklesIcon className="w-4 h-4" />
+                جرب الخدمة الآن
               </Link>
             </Card>
-            <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
-                <SearchIcon className="text-brown-600" />
+
+            {/* Service 2: Browse Opportunities */}
+            <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 hover:shadow-xl p-8 text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-green-300 group-hover:scale-110 transition-transform duration-300">
+                <SearchIcon className="text-green-700 w-8 h-8" />
               </div>
-              <h3 className="text-lg font-bold text-brown-900 mb-2">استكشاف الفرص</h3>
-              <p className="text-brown-700 text-sm mb-4 leading-relaxed">
-                تصفح فرص استثمارية موثقة من بلديات حكومية في مختلف المناطق
+              <h3 className="text-xl font-bold text-brown-900 mb-3">استكشاف الفرص</h3>
+              <p className="text-brown-700 text-sm mb-6 leading-relaxed">
+                تصفح فرص استثمارية موثقة من بلديات حكومية في مختلف المناطق مع تفاصيل شاملة لكل فرصة
               </p>
-              <Link to="/opportunities" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold text-sm transition-all duration-300 hover:translate-x-1">
+              <Link
+                to="/opportunities"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-bold rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center"
+              >
+                <SearchIcon className="w-4 h-4" />
                 استعرض الفرص
-                <ChevronLeftIcon />
               </Link>
             </Card>
-            <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 p-6 text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
-                <HandshakeIcon className="text-brown-600" />
+
+            {/* Service 3: Consulting */}
+            <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 hover:shadow-xl p-8 text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-blue-300 group-hover:scale-110 transition-transform duration-300">
+                <HandshakeIcon className="text-blue-700 w-8 h-8" />
               </div>
-              <h3 className="text-lg font-bold text-brown-900 mb-2">الاستشارات المخصصة</h3>
-              <p className="text-brown-700 text-sm mb-4 leading-relaxed">
-                تواصل مع فريق المتخصصين للحصول على مراجعة بشرية لمشروعك
+              <h3 className="text-xl font-bold text-brown-900 mb-3">الاستشارات المخصصة</h3>
+              <p className="text-brown-700 text-sm mb-6 leading-relaxed">
+                تواصل مع فريق المتخصصين للحصول على مراجعة بشرية عميقة لمشروعك وتوصيات مخصصة
               </p>
-              <Link to="/contact" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold text-sm transition-all duration-300 hover:translate-x-1">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center"
+              >
+                <HandshakeIcon className="w-4 h-4" />
                 تواصل معنا
-                <ChevronLeftIcon />
               </Link>
             </Card>
           </div>
