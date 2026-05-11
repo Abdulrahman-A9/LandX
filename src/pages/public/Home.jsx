@@ -170,35 +170,6 @@ const Home = () => {
         </div>
       </div>
       
-      {/* Featured Opportunities Section */}
-      <section className="bg-gradient-to-b from-pearl-100 to-pearl-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4 animate-fade-in">
-              فرص استثمارية مميزة
-            </h2>
-            <p className="text-brown-700 max-w-2xl mx-auto animate-slide-up">
-              استكشف أحدث الفرص الاستثمارية في الأراضي الزراعية الموسمية
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredOpportunities.map((opportunity, index) => (
-              <div key={opportunity.id} className="animate-fade-in" style={{ animationDelay: `${0.1 * index}s` }}>
-                <OpportunityCard opportunity={opportunity} />
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <Link to="/opportunities" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold transition-all duration-300 hover:translate-x-2">
-              عرض جميع الفرص الاستثمارية
-              <ChevronLeftIcon />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Statistics Section */}
       <section className="bg-gradient-to-r from-brown-600 to-brown-700 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -298,6 +269,35 @@ const Home = () => {
                 </Card>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Opportunities Section */}
+      <section className="bg-gradient-to-b from-pearl-100 to-pearl-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4 animate-fade-in">
+              فرص استثمارية مميزة
+            </h2>
+            <p className="text-brown-700 max-w-2xl mx-auto animate-slide-up">
+              استكشف أحدث الفرص الاستثمارية في الأراضي الزراعية الموسمية
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredOpportunities.map((opportunity, index) => (
+              <div key={opportunity.id} className="animate-fade-in" style={{ animationDelay: `${0.1 * index}s` }}>
+                <OpportunityCard opportunity={opportunity} />
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link to="/opportunities" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold transition-all duration-300 hover:translate-x-2">
+              عرض جميع الفرص الاستثمارية
+              <ChevronLeftIcon />
+            </Link>
           </div>
         </div>
       </section>
