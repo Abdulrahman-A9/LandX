@@ -10,6 +10,7 @@ import About from './pages/public/About';
 import Contact from './pages/public/Contact';
 import News from './pages/public/News';
 import InvestorJourney from './pages/public/InvestorJourney';
+import InvestmentAnalysis from './pages/public/InvestmentAnalysis';
 
 // Auth Pages
 import Login from './pages/auth/Login';
@@ -32,6 +33,7 @@ function App() {
         <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
         <Route path="/news" element={<PublicLayout><News /></PublicLayout>} />
         <Route path="/investor-journey" element={<PublicLayout><InvestorJourney /></PublicLayout>} />
+        <Route path="/investment-analysis" element={<PublicLayout><InvestmentAnalysis /></PublicLayout>} />
         
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />

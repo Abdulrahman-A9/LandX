@@ -9,7 +9,8 @@ import {
   TargetIcon, UsersIcon, BuildingIcon, DollarSignIcon,
   SearchIcon, EyeIcon, PieChartIcon, HandshakeIcon,
   ShieldCheckIcon, ZapIcon, GlobeIcon, AwardIcon,
-  NewspaperIcon, ArrowRightIcon, ChevronLeftIcon, MessageCircleIcon
+  NewspaperIcon, ArrowRightIcon, ChevronLeftIcon, MessageCircleIcon,
+  SparklesIcon
 } from '../../components/ui/Icons';
 
 const Home = () => {
@@ -269,6 +270,61 @@ const Home = () => {
                 </Card>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="bg-gradient-to-b from-pearl-50 to-pearl-100 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
+              خدمات المنصة
+            </h2>
+            <p className="text-brown-700 max-w-2xl mx-auto">
+              أدوات ذكية وخدمات تحليلية تدعم قرارك الاستثماري
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 p-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
+                <SparklesIcon className="text-brown-600" />
+              </div>
+              <h3 className="text-lg font-bold text-brown-900 mb-2">التحليل الاستثماري الذكي</h3>
+              <p className="text-brown-700 text-sm mb-4 leading-relaxed">
+                أدخل بيانات مشروعك ويقوم الذكاء الاصطناعي بتحليل الجدوى وتقدير التكاليف والعوائد
+              </p>
+              <Link to="/investment-analysis" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold text-sm transition-all duration-300 hover:translate-x-1">
+                جرب الخدمة
+                <ChevronLeftIcon />
+              </Link>
+            </Card>
+            <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 p-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
+                <SearchIcon className="text-brown-600" />
+              </div>
+              <h3 className="text-lg font-bold text-brown-900 mb-2">استكشاف الفرص</h3>
+              <p className="text-brown-700 text-sm mb-4 leading-relaxed">
+                تصفح فرص استثمارية موثقة من بلديات حكومية في مختلف المناطق
+              </p>
+              <Link to="/opportunities" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold text-sm transition-all duration-300 hover:translate-x-1">
+                استعرض الفرص
+                <ChevronLeftIcon />
+              </Link>
+            </Card>
+            <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 p-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
+                <HandshakeIcon className="text-brown-600" />
+              </div>
+              <h3 className="text-lg font-bold text-brown-900 mb-2">الاستشارات المخصصة</h3>
+              <p className="text-brown-700 text-sm mb-4 leading-relaxed">
+                تواصل مع فريق المتخصصين للحصول على مراجعة بشرية لمشروعك
+              </p>
+              <Link to="/contact" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold text-sm transition-all duration-300 hover:translate-x-1">
+                تواصل معنا
+                <ChevronLeftIcon />
+              </Link>
+            </Card>
           </div>
         </div>
       </section>

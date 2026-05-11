@@ -27,8 +27,8 @@ const PublicLayout = ({ children }) => {
               <Link to="/investor-journey" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
                 رحلة المستثمر
               </Link>
-              <Link to="/contact" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
-                الاستشارات
+              <Link to="/investment-analysis" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
+                التحليل الاستثماري
               </Link>
             </nav>
             
