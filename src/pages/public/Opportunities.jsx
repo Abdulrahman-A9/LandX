@@ -3,6 +3,7 @@ import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
 import OpportunityCard from '../../components/shared/OpportunityCard';
 import { mockOpportunities } from '../../data/mock/opportunities';
+import { SearchIcon } from '../../components/ui/Icons';
 
 const Opportunities = () => {
   const [filterSeason, setFilterSeason] = useState('all');
@@ -92,7 +93,7 @@ const Opportunities = () => {
           </div>
         ) : (
           <Card className="text-center py-12">
-            <div className="text-6xl mb-4">🔍</div>
+            <SearchIcon className="w-16 h-16 text-brown-600 mb-4" />
             <h3 className="text-xl font-semibold text-brown-900 mb-2">
               لا توجد نتائج
             </h3>

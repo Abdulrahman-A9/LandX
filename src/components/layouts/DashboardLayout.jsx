@@ -1,35 +1,36 @@
 import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import { BarChartIcon, LeafIcon, WalletIcon, FileTextIcon, UserIcon, PlusIcon, MegaphoneIcon, NewspaperIcon, BuildingIcon, UsersIcon, TrendingUpIcon, ShieldCheckIcon, SettingsIcon, HomeIcon, LogOutIcon } from '../ui/Icons';
 
 const DashboardLayout = ({ role = 'investor' }) => {
   const location = useLocation();
   
   const investorNav = [
-    { path: '/investor/dashboard', label: 'لوحة التحكم', icon: '📊' },
-    { path: '/investor/opportunities', label: 'الفرص الاستثمارية', icon: '🌾' },
-    { path: '/investor/investments', label: 'استثماراتي', icon: '💰' },
-    { path: '/investor/inquiries', label: 'الاستفسارات', icon: '📝' },
-    { path: '/investor/profile', label: 'الملف الشخصي', icon: '👤' },
+    { path: '/investor/dashboard', label: 'لوحة التحكم', icon: <BarChartIcon /> },
+    { path: '/investor/opportunities', label: 'الفرص الاستثمارية', icon: <LeafIcon /> },
+    { path: '/investor/investments', label: 'استثماراتي', icon: <WalletIcon /> },
+    { path: '/investor/inquiries', label: 'الاستفسارات', icon: <FileTextIcon /> },
+    { path: '/investor/profile', label: 'الملف الشخصي', icon: <UserIcon /> },
   ];
   
   const municipalityNav = [
-    { path: '/municipality/dashboard', label: 'لوحة التحكم', icon: '📊' },
-    { path: '/municipality/opportunities', label: 'إدارة الفرص', icon: '🌾' },
-    { path: '/municipality/opportunities/create', label: 'إضافة فرصة', icon: '➕' },
-    { path: '/municipality/announcements', label: 'الإعلانات', icon: '📢' },
-    { path: '/municipality/news', label: 'الأخبار', icon: '📰' },
-    { path: '/municipality/inquiries', label: 'استفسارات المستثمرين', icon: '📝' },
-    { path: '/municipality/profile', label: 'إعدادات البلدية', icon: '⚙️' },
+    { path: '/municipality/dashboard', label: 'لوحة التحكم', icon: <BarChartIcon /> },
+    { path: '/municipality/opportunities', label: 'إدارة الفرص', icon: <LeafIcon /> },
+    { path: '/municipality/opportunities/create', label: 'إضافة فرصة', icon: <PlusIcon /> },
+    { path: '/municipality/announcements', label: 'الإعلانات', icon: <MegaphoneIcon /> },
+    { path: '/municipality/news', label: 'الأخبار', icon: <NewspaperIcon /> },
+    { path: '/municipality/inquiries', label: 'استفسارات المستثمرين', icon: <FileTextIcon /> },
+    { path: '/municipality/profile', label: 'إعدادات البلدية', icon: <SettingsIcon /> },
   ];
   
   const adminNav = [
-    { path: '/admin/dashboard', label: 'نظرة عامة', icon: '📊' },
-    { path: '/admin/users', label: 'إدارة المستخدمين', icon: '👥' },
-    { path: '/admin/municipalities', label: 'إدارة البلديات', icon: '🏛️' },
-    { path: '/admin/opportunities', label: 'إشراف الفرص', icon: '🌾' },
-    { path: '/admin/analytics', label: 'التقارير والتحليلات', icon: '📈' },
-    { path: '/admin/moderation', label: 'المراجعة', icon: '✅' },
-    { path: '/admin/settings', label: 'إعدادات المنصة', icon: '⚙️' },
+    { path: '/admin/dashboard', label: 'نظرة عامة', icon: <BarChartIcon /> },
+    { path: '/admin/users', label: 'إدارة المستخدمين', icon: <UsersIcon /> },
+    { path: '/admin/municipalities', label: 'إدارة البلديات', icon: <BuildingIcon /> },
+    { path: '/admin/opportunities', label: 'إشراف الفرص', icon: <LeafIcon /> },
+    { path: '/admin/analytics', label: 'التقارير والتحليلات', icon: <TrendingUpIcon /> },
+    { path: '/admin/moderation', label: 'المراجعة', icon: <ShieldCheckIcon /> },
+    { path: '/admin/settings', label: 'إعدادات المنصة', icon: <SettingsIcon /> },
   ];
   
   const navItems = role === 'investor' ? investorNav : role === 'municipality' ? municipalityNav : adminNav;
@@ -63,7 +64,7 @@ const DashboardLayout = ({ role = 'investor' }) => {
                       : 'text-pearl-100 hover:bg-pearl-300/30 hover:text-white'
                   }`}
                 >
-                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-lg text-pearl-100">{item.icon}</span>
                   <span>{item.label}</span>
                 </Link>
               </li>
@@ -76,14 +77,14 @@ const DashboardLayout = ({ role = 'investor' }) => {
             to="/"
             className="flex items-center gap-3 px-3 py-2 text-pearl-100 hover:bg-pearl-300/30 hover:text-white rounded-lg transition-all duration-300"
           >
-            <span className="text-lg">🏠</span>
+            <HomeIcon className="text-lg text-pearl-100" />
             <span>العودة للرئيسية</span>
           </Link>
           <Link
             to="/logout"
             className="flex items-center gap-3 px-3 py-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-300 mt-2"
           >
-            <span className="text-lg">🚪</span>
+            <LogOutIcon className="text-lg text-pearl-100" />
             <span>تسجيل الخروج</span>
           </Link>
         </div>

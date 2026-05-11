@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../ui/Card';
+import { NewspaperIcon } from '../ui/Icons';
 
 const NewsCard = ({ news }) => {
   const { id, title, content, municipality, date, image } = news;
@@ -24,7 +25,7 @@ const NewsCard = ({ news }) => {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pearl-200 to-pearl-300">
-            <span className="text-brown-400 text-4xl">📰</span>
+            <NewspaperIcon className="w-16 h-16 text-brown-400" />
           </div>
         )}
       </div>

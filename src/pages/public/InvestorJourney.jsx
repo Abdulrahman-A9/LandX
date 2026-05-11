@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
+import { LightbulbIcon, FileTextIcon, SearchIcon, HandshakeIcon } from '../../components/ui/Icons';
 
 const InvestorJourney = () => {
   return (
@@ -65,7 +66,7 @@ const InvestorJourney = () => {
           <Card className="bg-gradient-to-r from-brown-200/10 to-brown-300/10 border border-brown-300 p-8">
             <div className="flex items-start gap-6">
               <div className="w-12 h-12 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-300">
-                <span className="text-2xl">💡</span>
+                <LightbulbIcon className="text-2xl text-brown-600" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-brown-900 mb-3">القاعدة التي يجب أن يفهمها المستثمر من أول دقيقة</h3>
@@ -197,7 +198,7 @@ const InvestorJourney = () => {
             <Card className="bg-card-gradient border border-brown-300 p-6 hover:border-brown-400 transition-all duration-300">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-10 h-10 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-300">
-                  <span className="text-lg">📋</span>
+                  <FileTextIcon className="text-lg text-brown-600" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-brown-900 mb-2">مستثمر لديه فرصة جاهزة</h3>
@@ -218,7 +219,7 @@ const InvestorJourney = () => {
             <Card className="bg-card-gradient border border-pearl-400 p-6 hover:border-pearl-500 transition-all duration-300">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-10 h-10 bg-gradient-to-r from-pearl-200/20 to-pearl-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-pearl-400">
-                  <span className="text-lg">💡</span>
+                  <LightbulbIcon className="text-lg text-brown-600" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-brown-900 mb-2">مستثمر لديه فكرة وليس لديه موقع</h3>
@@ -239,7 +240,7 @@ const InvestorJourney = () => {
             <Card className="bg-card-gradient border border-brown-500 p-6 hover:border-brown-600 transition-all duration-300">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-10 h-10 bg-gradient-to-r from-brown-300/20 to-brown-400/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-500">
-                  <span className="text-lg">🤔</span>
+                  <SearchIcon className="text-lg text-brown-600" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-brown-900 mb-2">مستثمر متردد ويخاف من التعقيد</h3>
@@ -260,7 +261,7 @@ const InvestorJourney = () => {
             <Card className="bg-card-gradient border border-brown-300 p-6 hover:border-brown-400 transition-all duration-300">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-10 h-10 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-300">
-                  <span className="text-lg">🤝</span>
+                  <HandshakeIcon className="text-lg text-brown-600" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-brown-900 mb-2">مستثمر يحتاج شريكاً أو دعماً تنفيذياً</h3>
@@ -322,7 +323,7 @@ const InvestorJourney = () => {
             <Card className="bg-gradient-to-r from-brown-200/10 to-brown-300/10 border border-brown-300 p-6 hover:border-brown-400 transition-all duration-300">
               <div className="text-center mb-4">
                 <div className="w-16 h-16 bg-brown-200/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-300">
-                  <span className="text-3xl">🤝</span>
+                  <HandshakeIcon className="text-3xl text-brown-600" />
                 </div>
                 <h3 className="text-xl font-bold text-brown-900 mb-3">طلب استشارة أو شراكة قبل التقديم</h3>
               </div>

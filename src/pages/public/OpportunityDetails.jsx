@@ -4,6 +4,7 @@ import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
 import Badge from '../../components/ui/Badge';
 import { mockOpportunities } from '../../data/mock/opportunities';
+import { SearchIcon, LeafIcon, BuildingIcon, MailIcon } from '../../components/ui/Icons';
 
 const OpportunityDetails = () => {
   const { id } = useParams();
@@ -13,7 +14,7 @@ const OpportunityDetails = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 flex items-center justify-center px-4">
         <Card className="text-center py-12 px-6 max-w-xl w-full bg-card-gradient border border-brown-300">
-          <div className="text-6xl mb-4">😕</div>
+          <SearchIcon className="w-16 h-16 text-brown-600 mb-4" />
           <h2 className="text-2xl font-bold text-brown-900 mb-2">
             الفرصة غير موجودة
           </h2>
@@ -90,7 +91,7 @@ const OpportunityDetails = () => {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pearl-200 to-pearl-300">
-                    <span className="text-brown-400 text-4xl">🌾</span>
+                    <LeafIcon className="w-16 h-16 text-brown-400" />
                   </div>
                 )}
               </div>
@@ -167,7 +168,7 @@ const OpportunityDetails = () => {
               <h2 className="text-xl font-bold text-brown-900 mb-4">الجهة المصدرة</h2>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-full border border-brown-400 flex items-center justify-center">
-                  <span className="text-brown-700 font-bold text-xl">🏛️</span>
+                  <BuildingIcon className="text-3xl text-brown-700" />
                 </div>
                 <div>
                   <p className="font-semibold text-brown-900">{municipality}</p>

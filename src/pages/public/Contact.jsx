@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
 import Input from '../../components/ui/Input';
+import { MailIcon, PhoneIcon, MapPinIcon, WalletIcon } from '../../components/ui/Icons';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -47,7 +48,7 @@ const Contact = () => {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-400">
-                    <span className="text-2xl">📧</span>
+                    <MailIcon className="text-2xl text-brown-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-brown-900 mb-1">البريد الإلكتروني</h3>
@@ -58,7 +59,7 @@ const Contact = () => {
                 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-400">
-                    <span className="text-2xl">📞</span>
+                    <PhoneIcon className="text-2xl text-brown-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-brown-900 mb-1">الهاتف</h3>
@@ -69,7 +70,7 @@ const Contact = () => {
                 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-400">
-                    <span className="text-2xl">📍</span>
+                    <MapPinIcon className="text-2xl text-brown-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-brown-900 mb-1">العنوان</h3>

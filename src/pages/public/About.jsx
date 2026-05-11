@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
+import { ShieldCheckIcon, BarChartIcon, HandshakeIcon, LightbulbIcon, BuildingIcon } from '../../components/ui/Icons';
 
 const About = () => {
   return (
@@ -39,7 +40,7 @@ const About = () => {
             </h2>
             <div className="space-y-4">
               <Card className="p-4 flex items-start gap-4 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
-                <div className="text-3xl">🛡️</div>
+                <ShieldCheckIcon className="text-3xl text-brown-600" />
                 <div>
                   <h3 className="font-semibold text-brown-900 mb-1">الأمان والموثوقية</h3>
                   <p className="text-brown-700 text-sm">
@@ -49,7 +50,7 @@ const About = () => {
               </Card>
               
               <Card className="p-4 flex items-start gap-4 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
-                <div className="text-3xl">📊</div>
+                <BarChartIcon className="text-3xl text-brown-600" />
                 <div>
                   <h3 className="font-semibold text-brown-900 mb-1">الشفافية</h3>
                   <p className="text-brown-700 text-sm">
@@ -59,7 +60,7 @@ const About = () => {
               </Card>
               
               <Card className="p-4 flex items-start gap-4 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
-                <div className="text-3xl">🤝</div>
+                <HandshakeIcon className="text-3xl text-brown-600" />
                 <div>
                   <h3 className="font-semibold text-brown-900 mb-1">الشراكة</h3>
                   <p className="text-brown-700 text-sm">
@@ -69,7 +70,7 @@ const About = () => {
               </Card>
               
               <Card className="p-4 flex items-start gap-4 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
-                <div className="text-3xl">💡</div>
+                <LightbulbIcon className="text-3xl text-brown-600" />
                 <div>
                   <h3 className="font-semibold text-brown-900 mb-1">الابتكار</h3>
                   <p className="text-brown-700 text-sm">
@@ -137,7 +138,7 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="text-center p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300 hover:scale-105">
               <div className="w-16 h-16 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
-                <span className="text-3xl">🏛️</span>
+                <BuildingIcon className="text-3xl text-brown-600" />
               </div>
               <h3 className="font-semibold text-brown-900 mb-2">أمانة منطقة حائل</h3>
               <p className="text-brown-700 text-sm">
@@ -147,7 +148,7 @@ const About = () => {
             
             <Card className="text-center p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300 hover:scale-105">
               <div className="w-16 h-16 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
-                <span className="text-3xl">🏛️</span>
+                <BuildingIcon className="text-3xl text-brown-600" />
               </div>
               <h3 className="font-semibold text-brown-900 mb-2">أمانة منطقة القصيم</h3>
               <p className="text-brown-700 text-sm">
@@ -157,7 +158,7 @@ const About = () => {
             
             <Card className="text-center p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300 hover:scale-105">
               <div className="w-16 h-16 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
-                <span className="text-3xl">🏛️</span>
+                <BuildingIcon className="text-3xl text-brown-600" />
               </div>
               <h3 className="font-semibold text-brown-900 mb-2">أمانة منطقة تبوك</h3>
               <p className="text-brown-700 text-sm">

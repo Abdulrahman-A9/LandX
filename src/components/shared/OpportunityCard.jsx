@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../ui/Card';
 import Badge from '../ui/Badge';
+import { LeafIcon } from '../ui/Icons';
 
 const OpportunityCard = ({ opportunity }) => {
   const { id, title, municipality, location, season, area, areaUnit, expectedReturn, investmentRequired, currency, status, images } = opportunity;
@@ -21,7 +22,7 @@ const OpportunityCard = ({ opportunity }) => {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pearl-200 to-pearl-300">
-            <span className="text-brown-400 text-4xl">🌾</span>
+            <LeafIcon className="w-16 h-16 text-brown-400" />
           </div>
         )}
         <div className="absolute top-3 right-3">
