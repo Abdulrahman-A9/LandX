@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
+import AnimatedSection from '../../components/shared/AnimatedSection';
 import { mockDashboardStats } from '../../data/mock/dashboard';
 import { UsersIcon, BuildingIcon, LeafIcon, DollarSignIcon, ShieldCheckIcon } from '../../components/ui/Icons';
 
@@ -18,7 +19,8 @@ const AdminDashboard = () => {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card className="p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
+        <AnimatedSection animation="fadeUp" delay={0}>
+        <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700">إجمالي المستخدمين</h3>
             <UsersIcon className="text-brown-600" />
@@ -26,8 +28,10 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-brown-900">{stats.totalUsers}</p>
           <p className="text-sm text-brown-600 mt-2">مستخدم مسجل</p>
         </Card>
-        
-        <Card className="p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
+        </AnimatedSection>
+
+        <AnimatedSection animation="fadeUp" delay={100}>
+        <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700">البلديات</h3>
             <BuildingIcon className="text-brown-600" />
@@ -35,8 +39,10 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-brown-700">{stats.totalMunicipalities}</p>
           <p className="text-sm text-brown-600 mt-2">جهة حكومية</p>
         </Card>
-        
-        <Card className="p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
+        </AnimatedSection>
+
+        <AnimatedSection animation="fadeUp" delay={200}>
+        <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700">الفرص الاستثمارية</h3>
             <LeafIcon className="text-brown-600" />
@@ -44,8 +50,10 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-brown-900">{stats.totalOpportunities}</p>
           <p className="text-sm text-brown-600 mt-2">{stats.activeOpportunities} نشط</p>
         </Card>
-        
-        <Card className="p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
+        </AnimatedSection>
+
+        <AnimatedSection animation="fadeUp" delay={300}>
+        <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700">إجمالي الاستثمار</h3>
             <DollarSignIcon className="text-brown-600" />
@@ -53,10 +61,12 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-pearl-700">{formatCurrency(stats.totalInvestment)} ر.س</p>
           <p className="text-sm text-brown-600 mt-2">ريال سعودي</p>
         </Card>
+        </AnimatedSection>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <Card className="p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
+        <AnimatedSection animation="fadeUp" delay={0}>
+        <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700">قيد المراجعة</h3>
             <ShieldCheckIcon className="text-brown-600" />
@@ -64,8 +74,10 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-yellow-600">{stats.pendingModeration}</p>
           <p className="text-sm text-brown-600 mt-2">بانتظار الموافقة</p>
         </Card>
-        
-        <Card className="p-6 lg:col-span-2 bg-card-gradient border border-brown-300">
+        </AnimatedSection>
+
+        <AnimatedSection animation="slideRight" className="lg:col-span-2">
+        <Card className="p-6 h-full bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 mb-4">النشاط الحديث</h2>
           <div className="space-y-4">
             <div className="flex items-start gap-3">
@@ -91,9 +103,11 @@ const AdminDashboard = () => {
             </div>
           </div>
         </Card>
+        </AnimatedSection>
       </div>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <AnimatedSection animation="slideLeft">
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 mb-4">البلديات النشطة</h2>
           <div className="space-y-4">
@@ -114,7 +128,9 @@ const AdminDashboard = () => {
             ))}
           </div>
         </Card>
-        
+        </AnimatedSection>
+
+        <AnimatedSection animation="slideRight">
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 mb-4">المحتوى قيد المراجعة</h2>
           <div className="space-y-4">
@@ -136,6 +152,7 @@ const AdminDashboard = () => {
             ))}
           </div>
         </Card>
+        </AnimatedSection>
       </div>
     </div>
   );

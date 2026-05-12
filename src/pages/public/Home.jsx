@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Card from '../../components/ui/Card';
 import OpportunityCard from '../../components/shared/OpportunityCard';
 import NewsCard from '../../components/shared/NewsCard';
+import AnimatedSection from '../../components/shared/AnimatedSection';
 import { mockOpportunities } from '../../data/mock/opportunities';
 import { mockNews } from '../../data/mock/news';
 import {
@@ -176,13 +177,13 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center animate-fade-in" style={{ animationDelay: `${0.1 * index}s` }}>
+              <AnimatedSection key={index} animation="fadeIn" delay={index * 100} className="text-center">
                 <div className="w-16 h-16 bg-pearl-100/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-pearl-300/30">
                   <span className="text-pearl-100">{stat.icon}</span>
                 </div>
                 <div className="text-3xl md:text-4xl font-bold text-pearl-100 mb-2">{stat.value}</div>
                 <div className="text-pearl-200 text-sm">{stat.label}</div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -191,21 +192,21 @@ const Home = () => {
       {/* How It Works Section */}
       <section className="bg-gradient-to-b from-pearl-50 to-pearl-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <AnimatedSection animation="fadeUp" className="text-center mb-16">
             <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
               كيف تعمل المنصة
             </h2>
             <p className="text-brown-700 max-w-2xl mx-auto">
               رحلة استثمارية واضحة من الاستكشاف حتى تنفيذ المشروع
             </p>
-          </div>
+          </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
             {/* Connection Line */}
             <div className="hidden lg:block absolute top-1/2 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-brown-300 via-brown-400 to-brown-300 transform -translate-y-1/2 z-0"></div>
 
             {steps.map((step, index) => (
-              <div key={index} className="relative z-10 animate-fade-in" style={{ animationDelay: `${0.15 * index}s` }}>
+              <AnimatedSection key={index} animation="scaleIn" delay={index * 150} className="relative z-10">
                 <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 p-6 h-full text-center">
                   <div className="w-14 h-14 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
                     <span className="text-brown-600">{step.icon}</span>
@@ -214,7 +215,7 @@ const Home = () => {
                   <h3 className="text-lg font-bold text-brown-900 mb-3">{step.title}</h3>
                   <p className="text-brown-700 text-sm leading-relaxed">{step.description}</p>
                 </Card>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -224,7 +225,7 @@ const Home = () => {
       <section className="bg-gradient-to-b from-pearl-100 to-pearl-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div className="order-2 lg:order-1">
+            <AnimatedSection animation="slideLeft" className="order-2 lg:order-1">
               <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-6">
                 لماذا LandX؟
               </h2>
@@ -244,8 +245,8 @@ const Home = () => {
                   </div>
                 ))}
               </div>
-            </div>
-            <div className="order-1 lg:order-2">
+            </AnimatedSection>
+            <AnimatedSection animation="slideRight" className="order-1 lg:order-2">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-2xl transform rotate-3"></div>
                 <Card className="relative bg-card-gradient border border-brown-300 p-8">
@@ -269,7 +270,7 @@ const Home = () => {
                   </div>
                 </Card>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -277,7 +278,7 @@ const Home = () => {
       {/* Services Section */}
       <section className="bg-gradient-to-b from-pearl-100 via-pearl-50 to-pearl-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <AnimatedSection animation="fadeUp" className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full border border-brown-400 text-brown-700 text-sm font-semibold mb-4">
               <SparklesIcon className="w-4 h-4" />
               خدمات مميزة
@@ -288,9 +289,10 @@ const Home = () => {
             <p className="text-brown-700 max-w-2xl mx-auto text-lg">
               أدوات ذكية وخدمات تحليلية شاملة تدعم قرارك الاستثماري من البداية للنهاية
             </p>
-          </div>
+          </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Service 1: AI Analysis */}
+            <AnimatedSection animation="fadeUp" delay={0}>
             <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 hover:shadow-xl p-8 text-center group">
               <div className="w-20 h-20 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-amber-300 group-hover:scale-110 transition-transform duration-300">
                 <SparklesIcon className="text-amber-700 w-8 h-8" />
@@ -307,8 +309,10 @@ const Home = () => {
                 جرب الخدمة الآن
               </Link>
             </Card>
+            </AnimatedSection>
 
             {/* Service 2: Browse Opportunities */}
+            <AnimatedSection animation="fadeUp" delay={150}>
             <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 hover:shadow-xl p-8 text-center group">
               <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-green-300 group-hover:scale-110 transition-transform duration-300">
                 <SearchIcon className="text-green-700 w-8 h-8" />
@@ -325,8 +329,10 @@ const Home = () => {
                 استعرض الفرص
               </Link>
             </Card>
+            </AnimatedSection>
 
             {/* Service 3: Consulting */}
+            <AnimatedSection animation="fadeUp" delay={300}>
             <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 hover:shadow-xl p-8 text-center group">
               <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-blue-300 group-hover:scale-110 transition-transform duration-300">
                 <HandshakeIcon className="text-blue-700 w-8 h-8" />
@@ -343,6 +349,7 @@ const Home = () => {
                 تواصل معنا
               </Link>
             </Card>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -350,20 +357,20 @@ const Home = () => {
       {/* Featured Opportunities Section */}
       <section className="bg-gradient-to-b from-pearl-100 to-pearl-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4 animate-fade-in">
+          <AnimatedSection animation="fadeUp" className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
               فرص استثمارية مميزة
             </h2>
-            <p className="text-brown-700 max-w-2xl mx-auto animate-slide-up">
+            <p className="text-brown-700 max-w-2xl mx-auto">
               استكشف أحدث الفرص الاستثمارية في الأراضي الزراعية الموسمية
             </p>
-          </div>
+          </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredOpportunities.map((opportunity, index) => (
-              <div key={opportunity.id} className="animate-fade-in" style={{ animationDelay: `${0.1 * index}s` }}>
+              <AnimatedSection key={opportunity.id} animation="scaleIn" delay={index * 100}>
                 <OpportunityCard opportunity={opportunity} />
-              </div>
+              </AnimatedSection>
             ))}
           </div>
 
@@ -379,7 +386,7 @@ const Home = () => {
       {/* News Section */}
       <section className="bg-gradient-to-b from-pearl-50 to-pearl-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-12">
+          <AnimatedSection animation="fadeUp" className="flex items-center justify-between mb-12">
             <div>
               <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-2">
                 آخر الأخبار والإعلانات
@@ -390,13 +397,13 @@ const Home = () => {
               عرض الكل
               <ChevronLeftIcon />
             </Link>
-          </div>
+          </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredNews.map((news, index) => (
-              <div key={news.id} className="animate-fade-in" style={{ animationDelay: `${0.1 * index}s` }}>
+              <AnimatedSection key={news.id} animation="fadeUp" delay={index * 100}>
                 <NewsCard news={news} />
-              </div>
+              </AnimatedSection>
             ))}
           </div>
 
@@ -412,10 +419,10 @@ const Home = () => {
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-brown-600 via-brown-700 to-brown-600 py-20 relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-72 h-72 bg-pearl-200/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-brown-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 left-0 w-72 h-72 bg-pearl-200/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-brown-400/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
         </div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <AnimatedSection animation="scaleIn" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-pearl-100 mb-6">
             جاهز لبدء رحلتك الاستثمارية؟
           </h2>
@@ -438,7 +445,7 @@ const Home = () => {
               <MessageCircleIcon />
             </Link>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
     </div>
   );

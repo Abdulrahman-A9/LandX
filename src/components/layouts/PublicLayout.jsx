@@ -1,7 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { MenuIcon, XIcon, LogOutIcon, UserIcon } from '../ui/Icons';
 
 const PublicLayout = ({ children }) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const navLinks = [
+    { to: '/', label: 'الرئيسية' },
+    { to: '/opportunities', label: 'الفرص' },
+    { to: '/investor-journey', label: 'رحلة المستثمر' },
+    { to: '/investment-analysis', label: 'التحليل الاستثماري' },
+    { to: '/news', label: 'الأخبار' },
+    { to: '/contact', label: 'تواصل معنا' },
+  ];
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-brown-50">
       <header className="bg-brown-gradient backdrop-blur border-b border-brown-200/30 sticky top-0 z-50">
@@ -13,43 +33,98 @@ const PublicLayout = ({ children }) => {
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-brown-700 to-brown-600 bg-clip-text text-transparent">LandX</span>
             </Link>
-            
+
             <nav className="hidden md:flex items-center gap-6">
-              <Link to="/" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
-                الرئيسية
-              </Link>
-              <Link to="/opportunities" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
-                الأراضي
-              </Link>
-              <Link to="/opportunities" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
-                الفرص
-              </Link>
-              <Link to="/investor-journey" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
-                رحلة المستثمر
-              </Link>
-              <Link to="/investment-analysis" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
-                التحليل الاستثماري
-              </Link>
+              {navLinks.map((link) => (
+                <Link key={link.to} to={link.to} className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
+                  {link.label}
+                </Link>
+              ))}
             </nav>
-            
+
             <div className="flex items-center gap-3">
-              <div className="relative group">
-                <button className="text-brown-600 hover:text-brown-800 transition-all duration-300 group-hover:scale-110">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                  </svg>
-                </button>
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-brown-500 to-brown-600 rounded-full text-white text-xs flex items-center justify-center animate-pulse">6</span>
-              </div>
-              <Link to="/login" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
-                الحساب
-              </Link>
-              <Link to="/municipality/dashboard" className="text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
-                إدارة الأمانة
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  <div className="hidden sm:flex items-center gap-2">
+                    <div className="w-8 h-8 bg-gradient-to-r from-brown-500 to-brown-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                      {user?.name?.charAt(0) || 'م'}
+                    </div>
+                    <span className="text-brown-800 font-medium text-sm">{user?.name}</span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="hidden sm:flex items-center gap-1 text-brown-600 hover:text-red-600 font-medium transition-colors text-sm"
+                    title="تسجيل الخروج"
+                  >
+                    <LogOutIcon className="w-4 h-4" />
+                    <span>خروج</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="hidden sm:block text-brown-700 hover:text-brown-900 font-medium transition-all duration-300 hover:translate-y-[-2px]">
+                    تسجيل الدخول
+                  </Link>
+                  <Link to="/register" className="hidden sm:inline-flex items-center gap-1 bg-gradient-to-r from-brown-600 to-brown-700 text-white px-4 py-1.5 rounded-lg font-medium text-sm hover:from-brown-700 hover:to-brown-800 transition-all">
+                    <UserIcon className="w-4 h-4" />
+                    حساب جديد
+                  </Link>
+                </>
+              )}
+
+              {/* Mobile toggle */}
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="md:hidden text-brown-700 hover:text-brown-900 p-1"
+                aria-label="Toggle menu"
+              >
+                {mobileOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {mobileOpen && (
+          <div className="md:hidden bg-brown-gradient border-t border-brown-200/30 animate-fade-in">
+            <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-3 py-2.5 rounded-lg text-brown-800 hover:bg-brown-200/30 font-medium transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="border-t border-brown-200/30 pt-2 mt-2 flex flex-col gap-1">
+                {isAuthenticated ? (
+                  <>
+                    <div className="px-3 py-2 text-brown-700 font-semibold text-sm">
+                      مرحباً، {user?.name}
+                    </div>
+                    <button
+                      onClick={() => { handleLogout(); setMobileOpen(false); }}
+                      className="block text-right px-3 py-2.5 rounded-lg text-red-600 hover:bg-red-50 font-medium transition-colors"
+                    >
+                      تسجيل الخروج
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 rounded-lg text-brown-800 hover:bg-brown-200/30 font-medium transition-colors">
+                      تسجيل الدخول
+                    </Link>
+                    <Link to="/register" onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 rounded-lg text-brown-800 hover:bg-brown-200/30 font-medium transition-colors">
+                      إنشاء حساب
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </header>
       
       <main className="flex-1">

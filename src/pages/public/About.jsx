@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../components/ui/Card';
+import AnimatedSection from '../../components/shared/AnimatedSection';
 import { ShieldCheckIcon, BarChartIcon, HandshakeIcon, LightbulbIcon, BuildingIcon } from '../../components/ui/Icons';
 
 const About = () => {
@@ -18,7 +20,7 @@ const About = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div>
+          <AnimatedSection animation="slideLeft">
             <h2 className="text-2xl font-bold text-brown-900 mb-4">
               رؤيتنا
             </h2>
@@ -32,9 +34,9 @@ const About = () => {
             <p className="text-brown-800 leading-relaxed">
               تسهيل الوصول إلى الفرص الاستثمارية في الأراضي الزراعية الموسمية عبر منصة رقمية موثوقة، مع ضمان الشفافية والامتثال للأنظمة واللوائح الحكومية، وتوفير تجربة استثمارية سلسة للمستثمرين.
             </p>
-          </div>
-          
-          <div>
+          </AnimatedSection>
+
+          <AnimatedSection animation="slideRight">
             <h2 className="text-2xl font-bold text-brown-900 mb-4">
               قيمنا
             </h2>
@@ -79,10 +81,10 @@ const About = () => {
                 </div>
               </Card>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
-        
-        <div className="mb-16">
+
+        <AnimatedSection animation="fadeUp" className="mb-16">
           <h2 className="text-2xl font-bold text-brown-900 mb-8 text-center">
             كيف نعمل؟
           </h2>
@@ -128,9 +130,9 @@ const About = () => {
               </p>
             </Card>
           </div>
-        </div>
-        
-        <div>
+        </AnimatedSection>
+
+        <AnimatedSection animation="fadeUp">
           <h2 className="text-2xl font-bold text-brown-900 mb-8 text-center">
             شركاؤنا
           </h2>
@@ -166,7 +168,24 @@ const About = () => {
               </p>
             </Card>
           </div>
-        </div>
+        </AnimatedSection>
+
+        <AnimatedSection animation="scaleIn" className="mt-16 bg-gradient-to-r from-brown-600/90 to-brown-700/90 rounded-2xl p-8 md:p-12 text-center border border-brown-400/20 backdrop-blur">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            ابدأ رحلتك الاستثمارية اليوم
+          </h2>
+          <p className="text-pearl-100 mb-8 max-w-2xl mx-auto">
+            انضم إلى آلاف المستثمرين واستفد من الفرص الاستثمارية المتاحة في الأراضي الزراعية الموسمية
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/opportunities" className="inline-flex items-center gap-2 bg-white text-brown-700 px-8 py-3 rounded-lg font-bold hover:bg-pearl-50 transition-all duration-300 shadow-lg">
+              استكشف الفرص
+            </Link>
+            <Link to="/contact" className="inline-flex items-center gap-2 border border-pearl-200 text-white px-8 py-3 rounded-lg font-medium hover:bg-white/10 transition-all duration-300">
+              تواصل معنا
+            </Link>
+          </div>
+        </AnimatedSection>
       </div>
     </div>
   );

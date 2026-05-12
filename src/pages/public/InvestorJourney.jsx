@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
-import { LightbulbIcon, FileTextIcon, SearchIcon, HandshakeIcon } from '../../components/ui/Icons';
+import { LightbulbIcon, FileTextIcon, SearchIcon, HandshakeIcon, ArrowRightIcon } from '../../components/ui/Icons';
 
 const InvestorJourney = () => {
   return (
@@ -344,6 +346,25 @@ const InvestorJourney = () => {
               </p>
             </Card>
           </div>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <Card className="p-8 bg-gradient-to-r from-brown-200/10 to-brown-300/10 border border-brown-300 inline-block w-full max-w-3xl">
+            <h2 className="text-2xl font-bold text-brown-900 mb-3">ابدأ رحلتك الآن</h2>
+            <p className="text-brown-800 mb-6 max-w-xl mx-auto">اختر المسار الأنسب لك واكتشف الفرص الاستثمارية المتاحة</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/opportunities">
+                <Button size="lg" className="w-full sm:w-auto">استكشف الفرص</Button>
+              </Link>
+              <Link to="/investment-analysis">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">التحليل الاستثماري</Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">استشارة مخصصة</Button>
+              </Link>
+            </div>
+          </Card>
         </div>
       </div>
     </div>

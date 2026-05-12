@@ -2,113 +2,118 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
-import Input from '../../components/ui/Input';
+import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
+import { MailIcon, LockIcon } from '../../components/ui/Icons';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const { addToast } = useToast();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [error, setError] = useState('');
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
-    
+
     if (!formData.email || !formData.password) {
       setError('يرجى ملء جميع الحقول المطلوبة');
       return;
     }
-    
-    console.log('Login attempt:', formData);
-    navigate('/investor/dashboard');
+
+    const result = login(formData.email, formData.password);
+    if (result.success) {
+      addToast(result.message, 'success');
+      const dashboard = result.role === 'admin' ? '/admin/dashboard' : result.role === 'municipality' ? '/municipality/dashboard' : '/investor/dashboard';
+      navigate(dashboard);
+    } else {
+      setError(result.message);
+      addToast(result.message, 'error');
+    }
   };
-  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full">
+    <div className="min-h-screen bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full animate-fade-in-up">
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 mb-4">
-            <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">ل</span>
+          <Link to="/" className="inline-flex items-center gap-2 mb-6">
+            <div className="w-12 h-12 bg-gradient-to-br from-brown-200 to-brown-300 rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-brown-800 font-bold text-2xl">ل</span>
             </div>
-            <span className="text-2xl font-bold text-gray-900">لاند إكس</span>
+            <span className="text-3xl font-bold text-brown-900">LandX</span>
           </Link>
-          <h2 className="text-3xl font-bold text-gray-900">
-            تسجيل الدخول
-          </h2>
-          <p className="text-gray-600 mt-2">
-            أدخل بياناتك للوصول إلى حسابك
-          </p>
+          <h2 className="text-2xl font-bold text-brown-900 mb-2">تسجيل الدخول</h2>
+          <p className="text-brown-700">أدخل بياناتك للوصول إلى حسابك</p>
         </div>
-        
-        <Card className="p-8">
+
+        <Card className="p-8 bg-card-gradient border border-brown-300 shadow-xl animate-scale-in">
           {error && (
-            <div className="bg-accent-50 border border-accent-200 text-accent-700 px-4 py-3 rounded-lg mb-6">
+            <div className="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">
               {error}
             </div>
           )}
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <Input
-              label="البريد الإلكتروني"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="example@email.com"
-            />
-            
-            <Input
-              label="كلمة المرور"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              placeholder="••••••••"
-            />
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-sm font-semibold text-brown-800 mb-2">البريد الإلكتروني</label>
+              <div className="relative">
+                <MailIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
                 <input
-                  id="remember"
-                  type="checkbox"
-                  className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                  name="email" type="email" value={formData.email} onChange={handleChange} required
+                  placeholder="example@email.com"
+                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
                 />
-                <label htmlFor="remember" className="mr-2 block text-sm text-gray-700">
-                  تذكرني
-                </label>
               </div>
-              
-              <a href="#" className="text-sm text-primary-600 hover:text-primary-700">
-                نسيت كلمة المرور؟
-              </a>
             </div>
-            
+
+            <div>
+              <label className="block text-sm font-semibold text-brown-800 mb-2">كلمة المرور</label>
+              <div className="relative">
+                <LockIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+                <input
+                  name="password" type="password" value={formData.password} onChange={handleChange} required
+                  placeholder="••••••••"
+                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between text-sm">
+              <label className="flex items-center gap-2 text-brown-700 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4 text-brown-600 border-brown-300 rounded focus:ring-brown-500" />
+                تذكرني
+              </label>
+              <button type="button" onClick={() => alert('سيتم إرسال رابط إعادة التعيين')}
+                className="text-brown-700 hover:text-brown-900 font-medium transition-colors">
+                نسيت كلمة المرور؟
+              </button>
+            </div>
+
             <Button type="submit" size="lg" className="w-full">
               تسجيل الدخول
             </Button>
           </form>
-          
-          <div className="mt-6 text-center">
-            <p className="text-gray-600">
+
+          <div className="mt-6 pt-6 border-t border-brown-200 text-center">
+            <p className="text-brown-700 text-sm">
               ليس لديك حساب؟{' '}
-              <Link to="/register" className="text-primary-600 hover:text-primary-700 font-medium">
+              <Link to="/register" className="text-brown-900 hover:text-brown-700 font-bold transition-colors">
                 إنشاء حساب جديد
               </Link>
             </p>
           </div>
         </Card>
-        
-        <div className="mt-8 text-center text-sm text-gray-500">
-          <Link to="/" className="hover:text-gray-700">
+
+        <div className="mt-6 text-center">
+          <Link to="/" className="text-brown-600 hover:text-brown-800 text-sm font-medium transition-colors">
             العودة للصفحة الرئيسية
           </Link>
         </div>

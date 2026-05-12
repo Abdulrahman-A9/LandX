@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
-import Input from '../../components/ui/Input';
-import Select from '../../components/ui/Select';
+import { useToast } from '../../context/ToastContext';
+import { UserIcon, MailIcon, LockIcon, PhoneIcon, BuildingIcon } from '../../components/ui/Icons';
 
 const Register = () => {
   const navigate = useNavigate();
+  const { addToast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,158 +17,167 @@ const Register = () => {
     confirmPassword: '',
   });
   const [error, setError] = useState('');
-  
+
   const roleOptions = [
     { value: 'investor', label: 'مستثمر' },
     { value: 'municipality', label: 'بلدية / جهة حكومية' },
   ];
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
-    
+
     if (!formData.name || !formData.email || !formData.password) {
       setError('يرجى ملء جميع الحقول المطلوبة');
       return;
     }
-    
+
     if (formData.password !== formData.confirmPassword) {
       setError('كلمة المرور وتأكيدها غير متطابقتين');
       return;
     }
-    
+
     if (formData.password.length < 6) {
       setError('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
       return;
     }
-    
-    console.log('Registration attempt:', formData);
+
+    addToast('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.', 'success');
     navigate('/login');
   };
-  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full">
+    <div className="min-h-screen bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full animate-fade-in-up">
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 mb-4">
-            <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">ل</span>
+          <Link to="/" className="inline-flex items-center gap-2 mb-6">
+            <div className="w-12 h-12 bg-gradient-to-br from-brown-200 to-brown-300 rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-brown-800 font-bold text-2xl">ل</span>
             </div>
-            <span className="text-2xl font-bold text-gray-900">لاند إكس</span>
+            <span className="text-3xl font-bold text-brown-900">LandX</span>
           </Link>
-          <h2 className="text-3xl font-bold text-gray-900">
-            إنشاء حساب جديد
-          </h2>
-          <p className="text-gray-600 mt-2">
-            انضم إلى منصة لاند إكس وابدأ رحلتك الاستثمارية
-          </p>
+          <h2 className="text-2xl font-bold text-brown-900 mb-2">إنشاء حساب جديد</h2>
+          <p className="text-brown-700">انضم إلى منصة لاند إكس وابدأ رحلتك الاستثمارية</p>
         </div>
-        
-        <Card className="p-8">
+
+        <Card className="p-8 bg-card-gradient border border-brown-300 shadow-xl animate-scale-in">
           {error && (
-            <div className="bg-accent-50 border border-accent-200 text-accent-700 px-4 py-3 rounded-lg mb-6">
+            <div className="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">
               {error}
             </div>
           )}
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <Input
-              label="الاسم الكامل"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              placeholder="أدخل اسمك الكامل"
-            />
-            
-            <Input
-              label="البريد الإلكتروني"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="example@email.com"
-            />
-            
-            <Input
-              label="رقم الهاتف"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="+966 XX XXX XXXX"
-            />
-            
-            <Select
-              label="نوع الحساب"
-              name="role"
-              options={roleOptions}
-              value={formData.role}
-              onChange={handleChange}
-            />
-            
-            <Input
-              label="كلمة المرور"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              placeholder="••••••••"
-            />
-            
-            <Input
-              label="تأكيد كلمة المرور"
-              name="confirmPassword"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              placeholder="••••••••"
-            />
-            
-            <div className="flex items-start">
-              <input
-                id="terms"
-                type="checkbox"
-                required
-                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-1"
-              />
-              <label htmlFor="terms" className="mr-2 block text-sm text-gray-700">
-                أوافق على{' '}
-                <a href="#" className="text-primary-600 hover:text-primary-700">
-                  الشروط والأحكام
-                </a>
-                {' '}
-                و{' '}
-                <a href="#" className="text-primary-600 hover:text-primary-700">
-                  سياسة الخصوصية
-                </a>
-              </label>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-semibold text-brown-800 mb-2">الاسم الكامل</label>
+              <div className="relative">
+                <UserIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+                <input
+                  name="name" value={formData.name} onChange={handleChange} required
+                  placeholder="أدخل اسمك الكامل"
+                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
+                />
+              </div>
             </div>
-            
+
+            <div>
+              <label className="block text-sm font-semibold text-brown-800 mb-2">البريد الإلكتروني</label>
+              <div className="relative">
+                <MailIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+                <input
+                  name="email" type="email" value={formData.email} onChange={handleChange} required
+                  placeholder="example@email.com"
+                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-brown-800 mb-2">رقم الهاتف</label>
+              <div className="relative">
+                <PhoneIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+                <input
+                  name="phone" type="tel" value={formData.phone} onChange={handleChange}
+                  placeholder="+966 XX XXX XXXX"
+                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-brown-800 mb-2">نوع الحساب</label>
+              <div className="relative">
+                <BuildingIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+                <select
+                  name="role" value={formData.role} onChange={handleChange}
+                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 text-sm appearance-none"
+                >
+                  {roleOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-brown-800 mb-2">كلمة المرور</label>
+              <div className="relative">
+                <LockIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+                <input
+                  name="password" type="password" value={formData.password} onChange={handleChange} required
+                  placeholder="••••••••"
+                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-brown-800 mb-2">تأكيد كلمة المرور</label>
+              <div className="relative">
+                <LockIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+                <input
+                  name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} required
+                  placeholder="••••••••"
+                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
+                />
+              </div>
+            </div>
+
+            <label className="flex items-start gap-2 text-brown-700 text-sm cursor-pointer pt-1">
+              <input type="checkbox" required className="w-4 h-4 text-brown-600 border-brown-300 rounded focus:ring-brown-500 mt-0.5" />
+              <span>
+                أوافق على{' '}
+                <button type="button" onClick={() => alert('الشروط والأحكام ستعرض هنا')} className="text-brown-900 font-bold hover:underline">
+                  الشروط والأحكام
+                </button>
+                {' '}و{' '}
+                <button type="button" onClick={() => alert('سياسة الخصوصية ستعرض هنا')} className="text-brown-900 font-bold hover:underline">
+                  سياسة الخصوصية
+                </button>
+              </span>
+            </label>
+
             <Button type="submit" size="lg" className="w-full">
               إنشاء الحساب
             </Button>
           </form>
-          
-          <div className="mt-6 text-center">
-            <p className="text-gray-600">
+
+          <div className="mt-6 pt-6 border-t border-brown-200 text-center">
+            <p className="text-brown-700 text-sm">
               لديك حساب بالفعل؟{' '}
-              <Link to="/login" className="text-primary-600 hover:text-primary-700 font-medium">
+              <Link to="/login" className="text-brown-900 hover:text-brown-700 font-bold transition-colors">
                 تسجيل الدخول
               </Link>
             </p>
           </div>
         </Card>
-        
-        <div className="mt-8 text-center text-sm text-gray-500">
-          <Link to="/" className="hover:text-gray-700">
+
+        <div className="mt-6 text-center">
+          <Link to="/" className="text-brown-600 hover:text-brown-800 text-sm font-medium transition-colors">
             العودة للصفحة الرئيسية
           </Link>
         </div>

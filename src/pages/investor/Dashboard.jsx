@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
+import AnimatedSection from '../../components/shared/AnimatedSection';
 import { mockDashboardStats } from '../../data/mock/dashboard';
 import { WalletIcon, TrendingUpIcon, BuildingIcon, FileTextIcon } from '../../components/ui/Icons';
 
@@ -18,7 +19,8 @@ const InvestorDashboard = () => {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card className="p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
+        <AnimatedSection animation="fadeUp" delay={0}>
+        <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700">إجمالي الاستثمارات</h3>
             <WalletIcon className="text-brown-600" />
@@ -26,8 +28,10 @@ const InvestorDashboard = () => {
           <p className="text-3xl font-bold text-brown-900">{stats.totalInvestments}</p>
           <p className="text-sm text-brown-600 mt-2">فرص استثمارية</p>
         </Card>
-        
-        <Card className="p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
+        </AnimatedSection>
+
+        <AnimatedSection animation="fadeUp" delay={100}>
+        <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700">الاستثمارات النشطة</h3>
             <TrendingUpIcon className="text-green-600" />
@@ -35,8 +39,10 @@ const InvestorDashboard = () => {
           <p className="text-3xl font-bold text-green-600">{stats.activeInvestments}</p>
           <p className="text-sm text-brown-600 mt-2">قيد التنفيذ</p>
         </Card>
-        
-        <Card className="p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
+        </AnimatedSection>
+
+        <AnimatedSection animation="fadeUp" delay={200}>
+        <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700">إجمالي المستثمر</h3>
             <BuildingIcon className="text-brown-600" />
@@ -44,8 +50,10 @@ const InvestorDashboard = () => {
           <p className="text-3xl font-bold text-brown-700">{formatCurrency(stats.totalInvested)} ر.س</p>
           <p className="text-sm text-brown-600 mt-2">ريال سعودي</p>
         </Card>
-        
-        <Card className="p-6 bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300">
+        </AnimatedSection>
+
+        <AnimatedSection animation="fadeUp" delay={300}>
+        <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700">الاستفسارات المعلقة</h3>
             <FileTextIcon className="text-brown-600" />
@@ -53,9 +61,11 @@ const InvestorDashboard = () => {
           <p className="text-3xl font-bold text-yellow-600">{stats.pendingInquiries}</p>
           <p className="text-sm text-brown-600 mt-2">بانتظار الرد</p>
         </Card>
+        </AnimatedSection>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <AnimatedSection animation="slideLeft">
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 mb-4">آخر الاستثمارات</h2>
           <div className="space-y-4">
@@ -73,7 +83,9 @@ const InvestorDashboard = () => {
             ))}
           </div>
         </Card>
-        
+        </AnimatedSection>
+
+        <AnimatedSection animation="slideRight">
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 mb-4">الأنشطة الحديثة</h2>
           <div className="space-y-4">
@@ -100,6 +112,7 @@ const InvestorDashboard = () => {
             </div>
           </div>
         </Card>
+        </AnimatedSection>
       </div>
     </div>
   );

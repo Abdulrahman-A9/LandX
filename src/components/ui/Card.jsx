@@ -3,7 +3,7 @@ import React from 'react';
 const Card = ({ children, className = '', hover = false, ...props }) => {
   return (
     <div
-      className={`bg-card-gradient backdrop-blur rounded-lg shadow-sm border border-brown-300 ${hover ? 'hover:shadow-lg hover:scale-105 transition-all duration-300' : ''} ${className}`}
+      className={`bg-card-gradient backdrop-blur rounded-lg shadow-sm border border-brown-300 transition-all duration-300 ${hover ? 'hover:shadow-lg hover:scale-105 hover:border-brown-400' : 'hover:shadow-md hover:border-brown-400'} ${className}`}
       {...props}
     >
       {children}

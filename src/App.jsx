@@ -1,9 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ToastProvider } from './context/ToastContext';
+import { AuthProvider } from './context/AuthContext';
 import PublicLayout from './components/layouts/PublicLayout';
 import DashboardLayout from './components/layouts/DashboardLayout';
 
 // Public Pages
 import Home from './pages/public/Home';
+import NotFound from './pages/public/NotFound';
 import Opportunities from './pages/public/Opportunities';
 import OpportunityDetails from './pages/public/OpportunityDetails';
 import About from './pages/public/About';
@@ -23,8 +26,10 @@ import AdminDashboard from './pages/admin/Dashboard';
 
 function App() {
   return (
-    <Router>
-      <Routes>
+    <AuthProvider>
+      <ToastProvider>
+        <Router>
+          <Routes>
         {/* Public Routes */}
         <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
         <Route path="/opportunities" element={<PublicLayout><Opportunities /></PublicLayout>} />
@@ -58,9 +63,11 @@ function App() {
         </Route>
         
         {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
+        <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
+          </Routes>
+        </Router>
+      </ToastProvider>
+    </AuthProvider>
   );
 }
 
