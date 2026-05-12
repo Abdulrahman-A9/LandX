@@ -38,7 +38,7 @@ const DashboardLayout = ({ role = 'investor' }) => {
   const roleTitle = role === 'investor' ? 'لوحة المستثمر' : role === 'municipality' ? 'لوحة البلدية' : 'لوحة الإدارة';
   
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 text-brown-900">
+    <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 dark:from-[#1c1917] dark:via-[#292524] dark:to-[#44403c] text-brown-900 dark:text-stone-100">
       <aside className="w-full md:w-64 bg-gradient-to-b from-brown-600 to-brown-700 border-r border-brown-400/20 flex-shrink-0">
         <div className="p-6 border-b border-brown-400/20">
           <Link to="/" className="flex items-center gap-2">
@@ -90,7 +90,7 @@ const DashboardLayout = ({ role = 'investor' }) => {
         </div>
       </aside>
       
-      <main className="flex-1 overflow-auto bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200">
+      <main className="flex-1 overflow-auto bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 dark:from-[#1c1917] dark:via-[#292524] dark:to-[#44403c]">
         <div className="p-6">
           <Outlet />
         </div>

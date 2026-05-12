@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -82,7 +83,9 @@ export default {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'hero-gradient': 'linear-gradient(135deg, #fefcf8 0%, #f5efe3 30%, #d4bfa5 70%, #a68568 100%)',
+        'hero-gradient-dark': 'linear-gradient(135deg, #1c1917 0%, #292524 30%, #44403c 70%, #5a3922 100%)',
         'card-gradient': 'linear-gradient(135deg, rgba(254, 252, 248, 0.95) 0%, rgba(245, 239, 220, 0.9) 100%)',
+        'card-gradient-dark': 'linear-gradient(135deg, rgba(41, 37, 36, 0.95) 0%, rgba(28, 25, 23, 0.9) 100%)',
         'header-gradient': 'linear-gradient(135deg, #8c6b50 0%, #735239 50%, #5a3922 100%)',
         'footer-gradient': 'linear-gradient(135deg, #735239 0%, #5a3922 50%, #41200b 100%)',
       },

@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
   body {
-    @apply bg-dark-950 text-gray-100;
+    @apply bg-brown-50 text-brown-900 transition-colors duration-300;
+  }
+  html.dark body {
+    @apply bg-[#1c1917] text-stone-100;
   }
 }
 

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { MenuIcon, XIcon, LogOutIcon, UserIcon } from '../ui/Icons';
+import { useTheme } from '../../context/ThemeContext';
+import { MenuIcon, XIcon, LogOutIcon, UserIcon, MoonIcon, SunIcon } from '../ui/Icons';
 
 const PublicLayout = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const navLinks = [
@@ -23,8 +25,8 @@ const PublicLayout = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-brown-50">
-      <header className="bg-brown-gradient backdrop-blur border-b border-brown-200/30 sticky top-0 z-50">
+    <div className="min-h-screen flex flex-col bg-brown-50 dark:bg-[#1c1917] transition-colors duration-300">
+      <header className="bg-brown-gradient backdrop-blur border-b border-brown-200/30 dark:border-stone-700/40 sticky top-0 z-50 dark:bg-[#292524]/90">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2 group">
@@ -72,6 +74,16 @@ const PublicLayout = ({ children }) => {
                 </>
               )}
 
+              {/* Theme toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-lg text-brown-700 dark:text-stone-300 hover:bg-brown-200/40 dark:hover:bg-stone-700/40 transition-colors"
+                title={isDark ? 'الوضع الفاتح' : 'الوضع الداكن'}
+                aria-label="Toggle theme"
+              >
+                {isDark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
+              </button>
+
               {/* Mobile toggle */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
@@ -86,22 +98,22 @@ const PublicLayout = ({ children }) => {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden bg-brown-gradient border-t border-brown-200/30 animate-fade-in">
+          <div className="md:hidden bg-brown-gradient dark:bg-[#292524]/95 border-t border-brown-200/30 dark:border-stone-700/40 animate-fade-in">
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-3 py-2.5 rounded-lg text-brown-800 hover:bg-brown-200/30 font-medium transition-colors"
+                  className="block px-3 py-2.5 rounded-lg text-brown-800 dark:text-stone-200 hover:bg-brown-200/30 dark:hover:bg-stone-700/30 font-medium transition-colors"
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="border-t border-brown-200/30 pt-2 mt-2 flex flex-col gap-1">
+              <div className="border-t border-brown-200/30 dark:border-stone-700/40 pt-2 mt-2 flex flex-col gap-1">
                 {isAuthenticated ? (
                   <>
-                    <div className="px-3 py-2 text-brown-700 font-semibold text-sm">
+                    <div className="px-3 py-2 text-brown-700 dark:text-stone-300 font-semibold text-sm">
                       مرحباً، {user?.name}
                     </div>
                     <button
@@ -113,10 +125,10 @@ const PublicLayout = ({ children }) => {
                   </>
                 ) : (
                   <>
-                    <Link to="/login" onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 rounded-lg text-brown-800 hover:bg-brown-200/30 font-medium transition-colors">
+                    <Link to="/login" onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 rounded-lg text-brown-800 dark:text-stone-200 hover:bg-brown-200/30 dark:hover:bg-stone-700/30 font-medium transition-colors">
                       تسجيل الدخول
                     </Link>
-                    <Link to="/register" onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 rounded-lg text-brown-800 hover:bg-brown-200/30 font-medium transition-colors">
+                    <Link to="/register" onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 rounded-lg text-brown-800 dark:text-stone-200 hover:bg-brown-200/30 dark:hover:bg-stone-700/30 font-medium transition-colors">
                       إنشاء حساب
                     </Link>
                   </>
@@ -131,7 +143,7 @@ const PublicLayout = ({ children }) => {
         {children}
       </main>
       
-      <footer className="bg-footer-gradient border-t border-brown-200/30 text-white">
+      <footer className="bg-footer-gradient border-t border-brown-200/30 dark:border-stone-700/40 text-white dark:bg-[#1c1917]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>

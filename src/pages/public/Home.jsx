@@ -76,9 +76,9 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-pearl-50">
+    <div className="min-h-screen bg-pearl-50 dark:bg-[#1c1917]">
       {/* Hero Section */}
-      <div className="min-h-screen bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 dark:from-[#1c1917] dark:via-[#292524] dark:to-[#44403c] relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-brown-200/30 rounded-full blur-3xl animate-float"></div>
@@ -190,7 +190,7 @@ const Home = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="bg-gradient-to-b from-pearl-50 to-pearl-100 py-20">
+      <section className="py-20 bg-gradient-to-b from-pearl-100 to-brown-50 dark:from-[#292524] dark:to-[#1c1917]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fadeUp" className="text-center mb-16">
             <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
@@ -207,8 +207,8 @@ const Home = () => {
 
             {steps.map((step, index) => (
               <AnimatedSection key={index} animation="scaleIn" delay={index * 150} className="relative z-10">
-                <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 p-6 h-full text-center">
-                  <div className="w-14 h-14 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
+                <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 hover:shadow-xl p-6 h-full text-center">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
                     <span className="text-brown-600">{step.icon}</span>
                   </div>
                   <div className="text-xs font-bold text-brown-500 mb-2 tracking-wider">خطوة {step.step}</div>
@@ -222,7 +222,7 @@ const Home = () => {
       </section>
 
       {/* Why LandX Section */}
-      <section className="bg-gradient-to-b from-pearl-100 to-pearl-50 py-20">
+      <section className="py-20 bg-gradient-to-b from-pearl-100 to-brown-50 dark:from-[#292524] dark:to-[#1c1917]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <AnimatedSection animation="slideLeft" className="order-2 lg:order-1">
@@ -276,7 +276,7 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="bg-gradient-to-b from-pearl-100 via-pearl-50 to-pearl-100 py-20">
+      <section className="py-20 bg-gradient-to-b from-pearl-100 to-brown-50 dark:from-[#292524] dark:to-[#1c1917]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fadeUp" className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full border border-brown-400 text-brown-700 text-sm font-semibold mb-4">
@@ -355,7 +355,7 @@ const Home = () => {
       </section>
 
       {/* Featured Opportunities Section */}
-      <section className="bg-gradient-to-b from-pearl-100 to-pearl-50 py-16">
+      <section className="py-20 bg-gradient-to-b from-brown-50 to-pearl-100 dark:from-[#1c1917] dark:to-[#292524]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fadeUp" className="text-center mb-12">
             <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
@@ -384,7 +384,7 @@ const Home = () => {
       </section>
 
       {/* News Section */}
-      <section className="bg-gradient-to-b from-pearl-50 to-pearl-100 py-20">
+      <section className="py-20 bg-gradient-to-b from-pearl-50 to-pearl-100 dark:from-[#1c1917] dark:to-[#292524]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fadeUp" className="flex items-center justify-between mb-12">
             <div>

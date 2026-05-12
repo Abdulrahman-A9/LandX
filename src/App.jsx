@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastProvider } from './context/ToastContext';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import PublicLayout from './components/layouts/PublicLayout';
 import DashboardLayout from './components/layouts/DashboardLayout';
 
@@ -26,9 +27,10 @@ import AdminDashboard from './pages/admin/Dashboard';
 
 function App() {
   return (
-    <AuthProvider>
-      <ToastProvider>
-        <Router>
+    <ThemeProvider>
+      <AuthProvider>
+        <ToastProvider>
+          <Router>
           <Routes>
         {/* Public Routes */}
         <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
@@ -68,6 +70,7 @@ function App() {
         </Router>
       </ToastProvider>
     </AuthProvider>
+    </ThemeProvider>
   );
 }
 
