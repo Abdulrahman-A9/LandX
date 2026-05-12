@@ -68,7 +68,7 @@ const Login = () => {
                 <MailIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
                 <input
                   name="email" type="email" value={formData.email} onChange={handleChange} required
-                  placeholder="example@email.com"
+                  placeholder="investor@landx.sa"
                   className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
                 />
               </div>
@@ -80,7 +80,7 @@ const Login = () => {
                 <LockIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
                 <input
                   name="password" type="password" value={formData.password} onChange={handleChange} required
-                  placeholder="••••••••"
+                  placeholder="123456"
                   className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
                 />
               </div>
@@ -97,10 +97,19 @@ const Login = () => {
               </button>
             </div>
 
-            <Button type="submit" size="lg" className="w-full">
+            <Button type="submit" variant="primary" className="w-full py-3 text-lg font-bold">
               تسجيل الدخول
             </Button>
           </form>
+
+          {/* Demo credentials helper */}
+          <div className="mt-6 p-4 bg-pearl-100/60 border border-brown-300 rounded-lg text-sm text-brown-800">
+            <p className="font-semibold mb-2 text-brown-900">بيانات تجريبية للدخول:</p>
+            <div className="space-y-1">
+              <p><span className="font-medium">مستثمر:</span> investor@landx.sa / 123456</p>
+              <p><span className="font-medium">أمانة:</span> municipality@landx.sa / 123456</p>
+            </div>
+          </div>
 
           <div className="mt-6 pt-6 border-t border-brown-200 text-center">
             <p className="text-brown-700 text-sm">
