@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { BarChartIcon, LeafIcon, WalletIcon, FileTextIcon, UserIcon, PlusIcon, MegaphoneIcon, NewspaperIcon, BuildingIcon, UsersIcon, TrendingUpIcon, ShieldCheckIcon, SettingsIcon, HomeIcon, LogOutIcon } from '../ui/Icons';
+import { useTheme } from '../../context/ThemeContext';
+import { BarChartIcon, LeafIcon, WalletIcon, FileTextIcon, UserIcon, PlusIcon, MegaphoneIcon, NewspaperIcon, BuildingIcon, UsersIcon, TrendingUpIcon, ShieldCheckIcon, SettingsIcon, HomeIcon, LogOutIcon, MoonIcon, SunIcon } from '../ui/Icons';
 
 const DashboardLayout = ({ role = 'investor' }) => {
   const location = useLocation();
@@ -34,12 +35,12 @@ const DashboardLayout = ({ role = 'investor' }) => {
   ];
   
   const navItems = role === 'investor' ? investorNav : role === 'municipality' ? municipalityNav : adminNav;
-  
   const roleTitle = role === 'investor' ? 'لوحة المستثمر' : role === 'municipality' ? 'لوحة البلدية' : 'لوحة الإدارة';
-  
+  const { isDark, toggleTheme } = useTheme();
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 dark:from-[#1c1917] dark:via-[#292524] dark:to-[#44403c] text-brown-900 dark:text-stone-100">
-      <aside className="w-full md:w-64 bg-gradient-to-b from-brown-600 to-brown-700 border-r border-brown-400/20 flex-shrink-0">
+      <aside className="w-full md:w-64 bg-gradient-to-b from-brown-600 to-brown-700 dark:from-stone-800 dark:to-stone-900 border-r border-brown-400/20 dark:border-stone-700/40 flex-shrink-0">
         <div className="p-6 border-b border-brown-400/20">
           <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-gradient-to-br from-pearl-200 to-pearl-300 rounded-lg flex items-center justify-center">
@@ -72,10 +73,19 @@ const DashboardLayout = ({ role = 'investor' }) => {
           </ul>
         </nav>
         
-        <div className="p-4 border-t border-brown-400/20">
+        <div className="p-4 border-t border-brown-400/20 dark:border-stone-700/40">
+          <button
+            onClick={toggleTheme}
+            className="flex items-center gap-3 px-3 py-2 text-pearl-100 hover:bg-pearl-300/30 hover:text-white rounded-lg transition-all duration-300 w-full"
+            title={isDark ? 'الوضع الفاتح' : 'الوضع الداكن'}
+            aria-label="Toggle theme"
+          >
+            {isDark ? <SunIcon className="text-lg" /> : <MoonIcon className="text-lg" />}
+            <span>{isDark ? 'الوضع الفاتح' : 'الوضع الداكن'}</span>
+          </button>
           <Link
             to="/"
-            className="flex items-center gap-3 px-3 py-2 text-pearl-100 hover:bg-pearl-300/30 hover:text-white rounded-lg transition-all duration-300"
+            className="flex items-center gap-3 px-3 py-2 text-pearl-100 hover:bg-pearl-300/30 hover:text-white rounded-lg transition-all duration-300 mt-2"
           >
             <HomeIcon className="text-lg text-pearl-100" />
             <span>العودة للرئيسية</span>
