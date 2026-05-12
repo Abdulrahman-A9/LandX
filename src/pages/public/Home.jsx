@@ -19,10 +19,10 @@ const Home = () => {
   const featuredNews = mockNews.slice(0, 3);
 
   const stats = [
-    { icon: <TargetIcon />, value: '+120', label: 'فرصة استثمارية', color: 'text-brown-600' },
-    { icon: <UsersIcon />, value: '+350', label: 'مستثمر مسجل', color: 'text-brown-600' },
-    { icon: <BuildingIcon />, value: '15', label: 'بلدية شريكة', color: 'text-brown-600' },
-    { icon: <DollarSignIcon />, value: '85M', label: 'ريال إجمالي الاستثمار', color: 'text-brown-600' },
+    { icon: <TargetIcon />, value: '+120', label: 'فرصة استثمارية', color: 'text-brown-600 dark:text-stone-400' },
+    { icon: <UsersIcon />, value: '+350', label: 'مستثمر مسجل', color: 'text-brown-600 dark:text-stone-400' },
+    { icon: <BuildingIcon />, value: '15', label: 'بلدية شريكة', color: 'text-brown-600 dark:text-stone-400' },
+    { icon: <DollarSignIcon />, value: '85M', label: 'ريال إجمالي الاستثمار', color: 'text-brown-600 dark:text-stone-400' },
   ];
 
   const steps = [
@@ -94,33 +94,33 @@ const Home = () => {
                 <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 animate-fade-in">
                   LandX
                 </h1>
-                <p className="text-brown-600 text-xl animate-fade-in" style={{ animationDelay: '0.1s' }}>في LandX نقدم</p>
+                <p className="text-brown-600 dark:text-stone-400 text-xl animate-fade-in" style={{ animationDelay: '0.1s' }}>في LandX نقدم</p>
               </div>
               
-              <h2 className="text-3xl md:text-4xl font-bold text-brown-900 leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
+              <h2 className="text-3xl md:text-4xl font-bold text-brown-900 dark:text-stone-100 leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
                 تحليلاً أوضح للفرص قبل التقديم على المسارات الرسمية.
               </h2>
               
-              <p className="text-brown-700 text-lg leading-relaxed animate-slide-up" style={{ animationDelay: '0.3s' }}>
+              <p className="text-brown-700 dark:text-stone-400 text-lg leading-relaxed animate-slide-up" style={{ animationDelay: '0.3s' }}>
                 منصة استدلالية لدعم القرار الاستثماري في منطقة حائل، تقدم للمستثمرين والجهات التنظيمية قراءة أوضح للفرص والأحياء والمخاطر والعوائد قبل التقديم الرسمي.
               </p>
               
               <div className="space-y-4 pt-4">
-                <Link to="/register" className="group flex items-center justify-end gap-3 text-brown-700 hover:text-brown-900 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                <Link to="/register" className="group flex items-center justify-end gap-3 text-brown-700 dark:text-stone-400 hover:text-brown-900 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
                   <span className="text-lg font-semibold">ابدأ طلب استشاري</span>
                   <span className="w-10 h-10 rounded-full bg-gradient-to-r from-brown-200 to-brown-300 flex items-center justify-center group-hover:from-brown-300 group-hover:to-brown-400 transition-all duration-300 group-hover:scale-110">
                     ←
                   </span>
                 </Link>
                 
-                <Link to="/opportunities" className="group flex items-center justify-end gap-3 text-brown-700 hover:text-brown-900 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                <Link to="/opportunities" className="group flex items-center justify-end gap-3 text-brown-700 dark:text-stone-400 hover:text-brown-900 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.5s' }}>
                   <span className="text-lg font-semibold">استعرض الفرص</span>
                   <span className="w-10 h-10 rounded-full bg-gradient-to-r from-brown-200 to-brown-300 flex items-center justify-center group-hover:from-brown-300 group-hover:to-brown-400 transition-all duration-300 group-hover:scale-110">
                     ←
                   </span>
                 </Link>
                 
-                <Link to="/opportunities" className="group flex items-center justify-end gap-3 text-brown-700 hover:text-brown-900 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                <Link to="/opportunities" className="group flex items-center justify-end gap-3 text-brown-700 dark:text-stone-400 hover:text-brown-900 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.6s' }}>
                   <span className="text-lg font-semibold">استعرض الأراضي المتاحة</span>
                   <span className="w-10 h-10 rounded-full bg-gradient-to-r from-brown-200 to-brown-300 flex items-center justify-center group-hover:from-brown-300 group-hover:to-brown-400 transition-all duration-300 group-hover:scale-110">
                     ←
@@ -132,38 +132,38 @@ const Home = () => {
             {/* Left Section - Cards */}
             <div className="space-y-6 animate-slide-in-right">
               <div className="bg-gradient-to-r from-brown-200/50 to-pearl-200/50 border border-brown-300 rounded-lg p-4 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <span className="text-brown-700 text-sm font-medium">رؤية ٢٠٣٠: استثمار مستدام</span>
+                <span className="text-brown-700 dark:text-stone-400 text-sm font-medium">رؤية ٢٠٣٠: استثمار مستدام</span>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <Card className="bg-card-gradient backdrop-blur border border-brown-300 p-5 hover:border-brown-400 transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                  <h3 className="text-brown-600 text-sm mb-2">الأحياء ذات الأولوية</h3>
-                  <p className="text-brown-900 font-semibold">النقرة، مشار</p>
+                  <h3 className="text-brown-600 dark:text-stone-400 text-sm mb-2">الأحياء ذات الأولوية</h3>
+                  <p className="text-brown-900 dark:text-stone-100 font-semibold">النقرة، مشار</p>
                 </Card>
                 
                 <Card className="bg-card-gradient backdrop-blur border border-brown-300 p-5 hover:border-brown-400 transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                  <h3 className="text-brown-600 text-sm mb-2">التحويل إلى فرص</h3>
-                  <span className="inline-block px-3 py-1 bg-brown-200 text-brown-700 rounded-full text-sm animate-pulse">جاهز</span>
+                  <h3 className="text-brown-600 dark:text-stone-400 text-sm mb-2">التحويل إلى فرص</h3>
+                  <span className="inline-block px-3 py-1 bg-brown-200 text-brown-700 dark:text-stone-400 rounded-full text-sm animate-pulse">جاهز</span>
                 </Card>
               </div>
               
               <div className="bg-card-gradient backdrop-blur border border-brown-300 rounded-lg p-6 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                <h3 className="text-brown-700 font-semibold mb-4">مركز القرار الاستثماري</h3>
+                <h3 className="text-brown-700 dark:text-stone-400 font-semibold mb-4">مركز القرار الاستثماري</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <Card className="bg-pearl-50/80 border border-pearl-300 p-4 hover:border-pearl-400 transition-all duration-300">
-                    <h4 className="text-brown-600 text-xs mb-1">الطلب الموسمي</h4>
-                    <p className="text-brown-800 font-semibold">مرتفع</p>
+                  <Card className="bg-pearl-50/80 dark:bg-stone-800/80 border border-pearl-300 dark:border-stone-600 p-4 hover:border-pearl-400 dark:hover:border-stone-500 transition-all duration-300">
+                    <h4 className="text-brown-600 dark:text-stone-400 text-xs mb-1">الطلب الموسمي</h4>
+                    <p className="text-brown-800 dark:text-stone-300 font-semibold">مرتفع</p>
                   </Card>
-                  <Card className="bg-pearl-50/80 border border-pearl-300 p-4 hover:border-pearl-400 transition-all duration-300">
-                    <h4 className="text-brown-600 text-xs mb-1">المخاطر القابلة للإدارة</h4>
-                    <p className="text-brown-900 font-semibold">7 فرص</p>
+                  <Card className="bg-pearl-50/80 dark:bg-stone-800/80 border border-pearl-300 dark:border-stone-600 p-4 hover:border-pearl-400 dark:hover:border-stone-500 transition-all duration-300">
+                    <h4 className="text-brown-600 dark:text-stone-400 text-xs mb-1">المخاطر القابلة للإدارة</h4>
+                    <p className="text-brown-900 dark:text-stone-100 font-semibold">7 فرص</p>
                   </Card>
                 </div>
               </div>
               
               <Card className="bg-card-gradient backdrop-blur border border-brown-300 p-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                <h3 className="text-brown-700 font-semibold mb-3">لماذا هذا مهم؟</h3>
-                <p className="text-brown-800 text-sm leading-relaxed">
+                <h3 className="text-brown-700 dark:text-stone-400 font-semibold mb-3">لماذا هذا مهم؟</h3>
+                <p className="text-brown-800 dark:text-stone-300 text-sm leading-relaxed">
                   منصة LandX تقدم تحليلاً أوضح للفرص الاستثمارية في الأراضي الموسمية، مما يوفر للمستثمرين والجهات التنظيمية قراءة أوضح للفرص والأحياء والمخاطر والعوائد قبل التقديم عبر المسارات الرسمية.
                 </p>
               </Card>
@@ -196,7 +196,7 @@ const Home = () => {
             <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
               كيف تعمل المنصة
             </h2>
-            <p className="text-brown-700 max-w-2xl mx-auto">
+            <p className="text-brown-700 dark:text-stone-400 max-w-2xl mx-auto">
               رحلة استثمارية واضحة من الاستكشاف حتى تنفيذ المشروع
             </p>
           </AnimatedSection>
@@ -209,11 +209,11 @@ const Home = () => {
               <AnimatedSection key={index} animation="scaleIn" delay={index * 150} className="relative z-10">
                 <Card className="bg-card-gradient border border-brown-300 hover:border-brown-500 transition-all duration-300 hover:scale-105 hover:shadow-xl p-6 h-full text-center">
                   <div className="w-14 h-14 bg-gradient-to-br from-brown-200/30 to-brown-300/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brown-400">
-                    <span className="text-brown-600">{step.icon}</span>
+                    <span className="text-brown-600 dark:text-stone-400">{step.icon}</span>
                   </div>
-                  <div className="text-xs font-bold text-brown-500 mb-2 tracking-wider">خطوة {step.step}</div>
-                  <h3 className="text-lg font-bold text-brown-900 mb-3">{step.title}</h3>
-                  <p className="text-brown-700 text-sm leading-relaxed">{step.description}</p>
+                  <div className="text-xs font-bold text-brown-500 dark:text-stone-500 mb-2 tracking-wider">خطوة {step.step}</div>
+                  <h3 className="text-lg font-bold text-brown-900 dark:text-stone-100 mb-3">{step.title}</h3>
+                  <p className="text-brown-700 dark:text-stone-400 text-sm leading-relaxed">{step.description}</p>
                 </Card>
               </AnimatedSection>
             ))}
@@ -229,18 +229,18 @@ const Home = () => {
               <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-6">
                 لماذا LandX؟
               </h2>
-              <p className="text-brown-700 text-lg leading-relaxed mb-8">
+              <p className="text-brown-700 dark:text-stone-400 text-lg leading-relaxed mb-8">
                 نحن نقدم تجربة استثمارية فريدة تجمع بين البيانات الدقيقة، التحليل الذكي، والشراكات الرسمية مع الجهات الحكومية
               </p>
               <div className="space-y-4">
                 {features.map((feature, index) => (
                   <div key={index} className="flex items-start gap-4 animate-slide-up" style={{ animationDelay: `${0.1 * index}s` }}>
                     <div className="w-12 h-12 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-400">
-                      <span className="text-brown-600">{feature.icon}</span>
+                      <span className="text-brown-600 dark:text-stone-400">{feature.icon}</span>
                     </div>
                     <div>
-                      <h3 className="font-bold text-brown-900 mb-1">{feature.title}</h3>
-                      <p className="text-brown-700 text-sm">{feature.description}</p>
+                      <h3 className="font-bold text-brown-900 dark:text-stone-100 mb-1">{feature.title}</h3>
+                      <p className="text-brown-700 dark:text-stone-400 text-sm">{feature.description}</p>
                     </div>
                   </div>
                 ))}
@@ -251,21 +251,21 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-2xl transform rotate-3"></div>
                 <Card className="relative bg-card-gradient border border-brown-300 p-8">
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-pearl-100/50 rounded-lg p-4 text-center border border-brown-300">
-                      <div className="text-2xl font-bold text-brown-700 mb-1">98%</div>
-                      <div className="text-xs text-brown-600">نسبة رضا المستثمرين</div>
+                    <div className="bg-pearl-100/50 dark:bg-stone-800/50 rounded-lg p-4 text-center border border-brown-300 dark:border-stone-700">
+                      <div className="text-2xl font-bold text-brown-700 dark:text-stone-400 mb-1">98%</div>
+                      <div className="text-xs text-brown-600 dark:text-stone-400">نسبة رضا المستثمرين</div>
                     </div>
-                    <div className="bg-pearl-100/50 rounded-lg p-4 text-center border border-brown-300">
-                      <div className="text-2xl font-bold text-brown-700 mb-1">24/7</div>
-                      <div className="text-xs text-brown-600">دعم فني متواصل</div>
+                    <div className="bg-pearl-100/50 dark:bg-stone-800/50 rounded-lg p-4 text-center border border-brown-300 dark:border-stone-700">
+                      <div className="text-2xl font-bold text-brown-700 dark:text-stone-400 mb-1">24/7</div>
+                      <div className="text-xs text-brown-600 dark:text-stone-400">دعم فني متواصل</div>
                     </div>
-                    <div className="bg-pearl-100/50 rounded-lg p-4 text-center border border-brown-300">
-                      <div className="text-2xl font-bold text-brown-700 mb-1">+40%</div>
-                      <div className="text-xs text-brown-600">متوسط العائد السنوي</div>
+                    <div className="bg-pearl-100/50 dark:bg-stone-800/50 rounded-lg p-4 text-center border border-brown-300 dark:border-stone-700">
+                      <div className="text-2xl font-bold text-brown-700 dark:text-stone-400 mb-1">+40%</div>
+                      <div className="text-xs text-brown-600 dark:text-stone-400">متوسط العائد السنوي</div>
                     </div>
-                    <div className="bg-pearl-100/50 rounded-lg p-4 text-center border border-brown-300">
-                      <div className="text-2xl font-bold text-brown-700 mb-1">&lt;24h</div>
-                      <div className="text-xs text-brown-600">وقت الرد على الاستفسارات</div>
+                    <div className="bg-pearl-100/50 dark:bg-stone-800/50 rounded-lg p-4 text-center border border-brown-300 dark:border-stone-700">
+                      <div className="text-2xl font-bold text-brown-700 dark:text-stone-400 mb-1">&lt;24h</div>
+                      <div className="text-xs text-brown-600 dark:text-stone-400">وقت الرد على الاستفسارات</div>
                     </div>
                   </div>
                 </Card>
@@ -279,14 +279,14 @@ const Home = () => {
       <section className="py-20 bg-gradient-to-b from-pearl-100 to-brown-50 dark:from-[#292524] dark:to-[#1c1917]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fadeUp" className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brown-200/30 to-brown-300/30 rounded-full border border-brown-400 text-brown-700 text-sm font-semibold mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brown-200/30 to-brown-300/30 dark:from-stone-700/30 dark:to-stone-600/30 rounded-full border border-brown-400 dark:border-stone-600 text-brown-700 dark:text-stone-400 text-sm font-semibold mb-4">
               <SparklesIcon className="w-4 h-4" />
               خدمات مميزة
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
               خدمات المنصة
             </h2>
-            <p className="text-brown-700 max-w-2xl mx-auto text-lg">
+            <p className="text-brown-700 dark:text-stone-400 max-w-2xl mx-auto text-lg">
               أدوات ذكية وخدمات تحليلية شاملة تدعم قرارك الاستثماري من البداية للنهاية
             </p>
           </AnimatedSection>
@@ -297,8 +297,8 @@ const Home = () => {
               <div className="w-20 h-20 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-amber-300 group-hover:scale-110 transition-transform duration-300">
                 <SparklesIcon className="text-amber-700 w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-brown-900 mb-3">التحليل الاستثماري الذكي</h3>
-              <p className="text-brown-700 text-sm mb-6 leading-relaxed">
+              <h3 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-3">التحليل الاستثماري الذكي</h3>
+              <p className="text-brown-700 dark:text-stone-400 text-sm mb-6 leading-relaxed">
                 أدخل بيانات مشروعك ويقوم الذكاء الاصطناعي بتحليل الجدوى وتقدير التكاليف والعوائد وإصدار تقرير احترافي
               </p>
               <Link
@@ -317,8 +317,8 @@ const Home = () => {
               <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-green-300 group-hover:scale-110 transition-transform duration-300">
                 <SearchIcon className="text-green-700 w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-brown-900 mb-3">استكشاف الفرص</h3>
-              <p className="text-brown-700 text-sm mb-6 leading-relaxed">
+              <h3 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-3">استكشاف الفرص</h3>
+              <p className="text-brown-700 dark:text-stone-400 text-sm mb-6 leading-relaxed">
                 تصفح فرص استثمارية موثقة من بلديات حكومية في مختلف المناطق مع تفاصيل شاملة لكل فرصة
               </p>
               <Link
@@ -337,8 +337,8 @@ const Home = () => {
               <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-blue-300 group-hover:scale-110 transition-transform duration-300">
                 <HandshakeIcon className="text-blue-700 w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-brown-900 mb-3">الاستشارات المخصصة</h3>
-              <p className="text-brown-700 text-sm mb-6 leading-relaxed">
+              <h3 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-3">الاستشارات المخصصة</h3>
+              <p className="text-brown-700 dark:text-stone-400 text-sm mb-6 leading-relaxed">
                 تواصل مع فريق المتخصصين للحصول على مراجعة بشرية عميقة لمشروعك وتوصيات مخصصة
               </p>
               <Link
@@ -361,7 +361,7 @@ const Home = () => {
             <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-4">
               فرص استثمارية مميزة
             </h2>
-            <p className="text-brown-700 max-w-2xl mx-auto">
+            <p className="text-brown-700 dark:text-stone-400 max-w-2xl mx-auto">
               استكشف أحدث الفرص الاستثمارية في الأراضي الزراعية الموسمية
             </p>
           </AnimatedSection>
@@ -375,7 +375,7 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-8">
-            <Link to="/opportunities" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold transition-all duration-300 hover:translate-x-2">
+            <Link to="/opportunities" className="inline-flex items-center gap-2 text-brown-700 dark:text-stone-400 hover:text-brown-900 dark:hover:text-stone-100 font-semibold transition-all duration-300 hover:translate-x-2">
               عرض جميع الفرص الاستثمارية
               <ChevronLeftIcon />
             </Link>
@@ -391,9 +391,9 @@ const Home = () => {
               <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-600 mb-2">
                 آخر الأخبار والإعلانات
               </h2>
-              <p className="text-brown-700">تابع آخر مستجدات الفرص والمشاريع الاستثمارية</p>
+              <p className="text-brown-700 dark:text-stone-400">تابع آخر مستجدات الفرص والمشاريع الاستثمارية</p>
             </div>
-            <Link to="/news" className="hidden md:inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold transition-all duration-300 hover:translate-x-1">
+            <Link to="/news" className="hidden md:inline-flex items-center gap-2 text-brown-700 dark:text-stone-400 hover:text-brown-900 dark:hover:text-stone-100 font-semibold transition-all duration-300 hover:translate-x-1">
               عرض الكل
               <ChevronLeftIcon />
             </Link>
@@ -408,7 +408,7 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-8 md:hidden">
-            <Link to="/news" className="inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-semibold transition-all duration-300">
+            <Link to="/news" className="inline-flex items-center gap-2 text-brown-700 dark:text-stone-400 hover:text-brown-900 dark:hover:text-stone-100 font-semibold transition-all duration-300">
               عرض الكل
               <ChevronLeftIcon />
             </Link>
@@ -432,7 +432,7 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/register"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-pearl-100 text-brown-700 font-bold rounded-lg hover:bg-pearl-200 transition-all duration-300 hover:scale-105 shadow-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-pearl-100 text-brown-700 dark:text-stone-400 font-bold rounded-lg hover:bg-pearl-200 transition-all duration-300 hover:scale-105 shadow-lg"
             >
               سجل الآن مجاناً
               <ArrowRightIcon />
