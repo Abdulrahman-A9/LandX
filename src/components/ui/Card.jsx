@@ -13,7 +13,7 @@ const Card = ({ children, className = '', hover = false, ...props }) => {
 
 const CardHeader = ({ children, className = '' }) => {
   return (
-    <div className={`px-6 py-4 border-b border-brown-300 ${className}`}>
+    <div className={`px-6 py-4 border-b border-brown-300 dark:border-stone-700 ${className}`}>
       {children}
     </div>
   );
@@ -29,7 +29,7 @@ const CardBody = ({ children, className = '' }) => {
 
 const CardFooter = ({ children, className = '' }) => {
   return (
-    <div className={`px-6 py-4 border-t border-brown-300 ${className}`}>
+    <div className={`px-6 py-4 border-t border-brown-300 dark:border-stone-700 ${className}`}>
       {children}
     </div>
   );

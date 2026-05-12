@@ -27,7 +27,7 @@ const NewsCard = ({ news, type = 'news' }) => {
 
   return (
     <Card className="overflow-hidden bg-card-gradient border border-brown-300 hover:border-brown-400 transition-all duration-300 hover:shadow-lg h-full flex flex-col">
-      <div className="aspect-video bg-pearl-200 relative overflow-hidden">
+      <div className="aspect-video bg-pearl-200 dark:bg-stone-800 relative overflow-hidden">
         {image ? (
           <img
             src={image}
@@ -35,11 +35,11 @@ const NewsCard = ({ news, type = 'news' }) => {
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pearl-200 to-pearl-300">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pearl-200 to-pearl-300 dark:from-stone-800 dark:to-stone-700">
             {type === 'announcements' ? (
-              <MegaphoneIcon className="w-16 h-16 text-brown-400" />
+              <MegaphoneIcon className="w-16 h-16 text-brown-400 dark:text-stone-500" />
             ) : (
-              <NewspaperIcon className="w-16 h-16 text-brown-400" />
+              <NewspaperIcon className="w-16 h-16 text-brown-400 dark:text-stone-500" />
             )}
           </div>
         )}
@@ -51,19 +51,19 @@ const NewsCard = ({ news, type = 'news' }) => {
       </div>
 
       <div className="p-5 flex flex-col flex-1">
-        <div className="flex items-center gap-2 mb-3 text-xs text-brown-600">
-          <span className="font-medium bg-brown-200/40 px-2 py-0.5 rounded">{municipality}</span>
+        <div className="flex items-center gap-2 mb-3 text-xs text-brown-600 dark:text-stone-400">
+          <span className="font-medium bg-brown-200/40 dark:bg-stone-700/50 px-2 py-0.5 rounded">{municipality}</span>
           <span className="flex items-center gap-1">
             <CalendarIcon className="w-3 h-3" />
             {formatDate(date)}
           </span>
         </div>
 
-        <h3 className="text-base font-bold text-brown-900 mb-2 leading-relaxed">
+        <h3 className="text-base font-bold text-brown-900 dark:text-stone-100 mb-2 leading-relaxed">
           {title}
         </h3>
 
-        <p className="text-sm text-brown-700 leading-relaxed flex-1">
+        <p className="text-sm text-brown-700 dark:text-stone-400 leading-relaxed flex-1">
           {content}
         </p>
       </div>
