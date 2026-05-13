@@ -6,11 +6,22 @@
   html {
     @apply scroll-smooth;
   }
+  html,
+  body,
+  #root {
+    @apply min-h-screen;
+  }
+  html {
+    direction: rtl;
+  }
   body {
     @apply bg-brown-50 text-brown-900 transition-colors duration-300;
   }
   html.dark body {
-    @apply bg-[#1c1917] text-stone-100;
+    @apply bg-stone-950 text-stone-100;
+  }
+  html.dark {
+    color-scheme: dark;
   }
 }
 
