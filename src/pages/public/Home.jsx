@@ -173,16 +173,16 @@ const Home = () => {
       </div>
       
       {/* Statistics Section */}
-      <section className="bg-gradient-to-r from-brown-600 to-brown-700 py-16">
+      <section className="bg-gradient-to-r from-brown-600 to-brown-700 dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <AnimatedSection key={index} animation="fadeIn" delay={index * 100} className="text-center">
-                <div className="w-16 h-16 bg-pearl-100/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-pearl-300/30">
+                <div className="w-16 h-16 bg-pearl-100/20 dark:bg-stone-700/40 rounded-full flex items-center justify-center mx-auto mb-4 border border-pearl-300/30 dark:border-stone-500/40">
                   <span className="text-pearl-100">{stat.icon}</span>
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-pearl-100 mb-2">{stat.value}</div>
-                <div className="text-pearl-200 text-sm">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-bold text-pearl-100 dark:text-stone-100 mb-2">{stat.value}</div>
+                <div className="text-pearl-200 dark:text-stone-300 text-sm">{stat.label}</div>
               </AnimatedSection>
             ))}
           </div>
@@ -417,10 +417,10 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-brown-600 via-brown-700 to-brown-600 py-20 relative overflow-hidden">
+      <section className="bg-gradient-to-r from-brown-600 via-brown-700 to-brown-600 dark:from-stone-950 dark:via-stone-900 dark:to-stone-950 py-20 relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-72 h-72 bg-pearl-200/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-brown-400/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute top-0 left-0 w-72 h-72 bg-pearl-200/10 dark:bg-stone-400/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-brown-400/10 dark:bg-stone-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
         </div>
         <AnimatedSection animation="scaleIn" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-pearl-100 mb-6">
@@ -432,7 +432,7 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/register"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-pearl-100 text-brown-700 dark:text-stone-400 font-bold rounded-lg hover:bg-pearl-200 transition-all duration-300 hover:scale-105 shadow-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-pearl-100 text-brown-700 dark:bg-stone-100 dark:text-stone-900 font-bold rounded-lg hover:bg-pearl-200 dark:hover:bg-stone-200 transition-all duration-300 hover:scale-105 shadow-lg"
             >
               سجل الآن مجاناً
               <ArrowRightIcon />

@@ -143,7 +143,7 @@ const PublicLayout = ({ children }) => {
         {children}
       </main>
       
-      <footer className="bg-footer-gradient border-t border-brown-200/30 dark:border-stone-700/40 text-white dark:bg-[#1c1917]">
+      <footer className="bg-footer-gradient border-t border-brown-200/30 dark:border-stone-700/40 text-white dark:bg-gradient-to-r dark:from-stone-950 dark:via-stone-900 dark:to-stone-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -161,19 +161,19 @@ const PublicLayout = ({ children }) => {
             <div>
               <h3 className="font-semibold mb-4 text-pearl-100">روابط سريعة</h3>
               <ul className="space-y-2 text-pearl-200 text-sm">
-                <li><Link to="/opportunities" className="hover:text-pearl-50 transition-all duration-300 hover:translate-x-1">الفرص الاستثمارية</Link></li>
-                <li><Link to="/news" className="hover:text-pearl-50 transition-all duration-300 hover:translate-x-1">الأخبار</Link></li>
-                <li><Link to="/about" className="hover:text-pearl-50 transition-all duration-300 hover:translate-x-1">عن المنصة</Link></li>
-                <li><Link to="/contact" className="hover:text-pearl-50 transition-all duration-300 hover:translate-x-1">تواصل معنا</Link></li>
+                <li><Link to="/opportunities" className="hover:text-pearl-50 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-1">الفرص الاستثمارية</Link></li>
+                <li><Link to="/news" className="hover:text-pearl-50 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-1">الأخبار</Link></li>
+                <li><Link to="/about" className="hover:text-pearl-50 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-1">عن المنصة</Link></li>
+                <li><Link to="/contact" className="hover:text-pearl-50 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-1">تواصل معنا</Link></li>
               </ul>
             </div>
             
             <div>
               <h3 className="font-semibold mb-4 text-pearl-100">المناطق</h3>
               <ul className="space-y-2 text-pearl-200 text-sm">
-                <li><Link to="/opportunities?region=hail" className="hover:text-pearl-50 transition-all duration-300 hover:translate-x-1">منطقة حائل</Link></li>
-                <li><Link to="/opportunities?region=qassim" className="hover:text-pearl-50 transition-all duration-300 hover:translate-x-1">منطقة القصيم</Link></li>
-                <li><Link to="/opportunities?region=tabuk" className="hover:text-pearl-50 transition-all duration-300 hover:translate-x-1">منطقة تبوك</Link></li>
+                <li><Link to="/opportunities?region=hail" className="hover:text-pearl-50 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-1">منطقة حائل</Link></li>
+                <li><Link to="/opportunities?region=qassim" className="hover:text-pearl-50 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-1">منطقة القصيم</Link></li>
+                <li><Link to="/opportunities?region=tabuk" className="hover:text-pearl-50 dark:hover:text-stone-100 transition-all duration-300 hover:translate-x-1">منطقة تبوك</Link></li>
               </ul>
             </div>
             
