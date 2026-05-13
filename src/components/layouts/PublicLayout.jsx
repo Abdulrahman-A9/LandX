@@ -26,7 +26,7 @@ const PublicLayout = ({ children }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-brown-50 dark:bg-stone-950 transition-colors duration-300">
-      <header className="bg-header-gradient backdrop-blur border-b border-brown-200/30 dark:border-stone-700/40 sticky top-0 z-50 dark:bg-stone-900/95">
+      <header className="bg-brown-gradient backdrop-blur border-b border-brown-200/30 dark:border-stone-700/40 sticky top-0 z-50 dark:bg-stone-900/95">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2 group">
@@ -38,7 +38,7 @@ const PublicLayout = ({ children }) => {
 
             <nav className="hidden md:flex items-center gap-6">
               {navLinks.map((link) => (
-                <Link key={link.to} to={link.to} className="text-brown-700 dark:text-stone-200 hover:text-brown-900 dark:hover:text-white font-medium transition-all duration-300 hover:translate-y-[-2px]">
+                <Link key={link.to} to={link.to} className="text-brown-700 hover:text-brown-900 dark:text-stone-200 dark:hover:text-white font-medium transition-all duration-300 hover:translate-y-[-2px]">
                   {link.label}
                 </Link>
               ))}
@@ -64,7 +64,7 @@ const PublicLayout = ({ children }) => {
                 </>
               ) : (
                 <>
-                  <Link to="/login" className="hidden sm:block text-brown-700 dark:text-stone-200 hover:text-brown-900 dark:hover:text-white font-medium transition-all duration-300 hover:translate-y-[-2px]">
+                  <Link to="/login" className="hidden sm:block text-brown-700 hover:text-brown-900 dark:text-stone-200 dark:hover:text-white font-medium transition-all duration-300 hover:translate-y-[-2px]">
                     تسجيل الدخول
                   </Link>
                   <Link to="/register" className="hidden sm:inline-flex items-center gap-1 bg-gradient-to-r from-brown-600 to-brown-700 text-white px-4 py-1.5 rounded-lg font-medium text-sm hover:from-brown-700 hover:to-brown-800 transition-all">
@@ -87,7 +87,7 @@ const PublicLayout = ({ children }) => {
               {/* Mobile toggle */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden text-brown-700 dark:text-stone-200 hover:text-brown-900 dark:hover:text-white p-1"
+                className="md:hidden text-brown-700 hover:text-brown-900 dark:text-stone-200 dark:hover:text-white p-1"
                 aria-label="Toggle menu"
               >
                 {mobileOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
@@ -98,7 +98,7 @@ const PublicLayout = ({ children }) => {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden bg-header-gradient dark:bg-stone-900/95 border-t border-brown-200/30 dark:border-stone-700/40 animate-fade-in">
+          <div className="md:hidden bg-brown-gradient dark:bg-stone-900/95 border-t border-brown-200/30 dark:border-stone-700/40 animate-fade-in">
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
               {navLinks.map((link) => (
                 <Link
