@@ -23,8 +23,11 @@ const AnimatedSection = ({
   return (
     <div
       ref={ref}
-      className={`${className} transition-all duration-700 ease-out ${isVisible ? animations[animation] : 'opacity-0 translate-y-4'}`}
-      style={{ animationDelay: isVisible && delay > 0 ? `${delay}ms` : undefined }}
+      className={`${className} ${isVisible ? animations[animation] : 'opacity-0'}`}
+      style={{
+        animationDelay: isVisible && delay > 0 ? `${delay}ms` : undefined,
+        willChange: isVisible ? 'transform, opacity' : 'auto',
+      }}
     >
       {children}
     </div>
