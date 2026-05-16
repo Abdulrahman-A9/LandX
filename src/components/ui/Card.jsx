@@ -3,7 +3,7 @@ import React from 'react';
 const Card = ({ children, className = '', hover = false, ...props }) => {
   return (
     <div
-      className={`bg-card-gradient dark:bg-gradient-to-br dark:from-stone-900 dark:to-stone-800 backdrop-blur rounded-lg shadow-sm dark:shadow-black/30 border border-brown-300 dark:border-stone-700 transition-all duration-300 ${hover ? 'hover:shadow-lg hover:scale-105 hover:border-brown-400 dark:hover:border-stone-500' : 'hover:shadow-md hover:border-brown-400 dark:hover:border-stone-500'} ${className}`}
+      className={`bg-card-gradient backdrop-blur rounded-lg shadow-lg border border-app-border transition-all duration-300 ${hover ? 'hover:shadow-xl hover:scale-105 hover:border-brand' : 'hover:shadow-md hover:border-muted'} ${className}`}
       {...props}
     >
       {children}
@@ -13,7 +13,7 @@ const Card = ({ children, className = '', hover = false, ...props }) => {
 
 const CardHeader = ({ children, className = '' }) => {
   return (
-    <div className={`px-6 py-4 border-b border-brown-300 dark:border-stone-700 ${className}`}>
+    <div className={`px-6 py-4 border-b border-app-border ${className}`}>
       {children}
     </div>
   );
@@ -29,7 +29,7 @@ const CardBody = ({ children, className = '' }) => {
 
 const CardFooter = ({ children, className = '' }) => {
   return (
-    <div className={`px-6 py-4 border-t border-brown-300 dark:border-stone-700 ${className}`}>
+    <div className={`px-6 py-4 border-t border-app-border ${className}`}>
       {children}
     </div>
   );

@@ -10,14 +10,15 @@ const Button = ({
   onClick,
   ...props 
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
   
   const variants = {
-    primary: 'bg-gradient-to-r from-brown-600 to-brown-700 text-white hover:from-brown-700 hover:to-brown-800 focus:ring-brown-500',
-    secondary: 'bg-gradient-to-r from-pearl-400 to-pearl-500 text-brown-900 hover:from-pearl-500 hover:to-pearl-600 focus:ring-pearl-300 dark:from-stone-600 dark:to-stone-500 dark:text-stone-100 dark:hover:from-stone-500 dark:hover:to-stone-400 dark:focus:ring-stone-500',
-    outline: 'border-2 border-brown-500 text-brown-700 hover:bg-brown-100 focus:ring-brown-500 dark:border-stone-500 dark:text-stone-200 dark:hover:bg-stone-800 dark:focus:ring-stone-500',
-    ghost: 'text-brown-700 hover:bg-brown-100 hover:text-brown-900 focus:ring-brown-500 dark:text-stone-300 dark:hover:bg-stone-800 dark:hover:text-stone-100 dark:focus:ring-stone-500',
-    danger: 'bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 focus:ring-red-500',
+    primary: 'bg-gradient-to-r from-brand to-brand-deep text-app-text hover:from-brand-deep hover:to-brand focus:ring-brand shadow-lg hover:shadow-xl',
+    secondary: 'bg-app-surface border border-app-border text-app-text hover:bg-app-surface-strong hover:border-brand focus:ring-accent',
+    outline: 'border-2 border-app-border text-app-text hover:bg-app-surface-soft hover:border-brand focus:ring-brand',
+    ghost: 'text-app-text-muted hover:bg-app-surface-soft hover:text-app-text focus:ring-brand',
+    danger: 'bg-gradient-to-r from-danger to-danger/90 text-app-text hover:from-danger/90 hover:to-danger focus:ring-danger shadow-lg',
+    success: 'bg-gradient-to-r from-success to-success/90 text-app-text hover:from-success/90 hover:to-success focus:ring-success shadow-lg',
   };
   
   const sizes = {

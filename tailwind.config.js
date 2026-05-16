@@ -8,6 +8,32 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Core Design System Colors
+        bg: '#1b130f',
+        'bg-soft': '#2a1c16',
+        'surface-dark': 'rgba(45, 28, 20, 0.68)',
+        'surface-strong': 'rgba(72, 46, 31, 0.9)',
+        text: '#f7efe6',
+        'text-dark': '#f6eadf',
+        muted: '#c8ad95',
+        'muted-dark': '#d1b59c',
+        brand: '#c57b45',
+        'brand-deep': '#824123',
+        accent: '#e3c2a1',
+        success: '#7f9b63',
+        warning: '#d29456',
+        danger: '#7d2f36',
+        // App Specific Colors
+        'app-bg': '#1c120d',
+        'app-bg-soft': '#261813',
+        'app-surface': 'rgba(55, 35, 24, 0.78)',
+        'app-surface-strong': 'rgba(72, 46, 31, 0.9)',
+        'app-surface-soft': 'rgba(98, 64, 43, 0.2)',
+        'app-border': 'rgba(231, 200, 168, 0.11)',
+        'app-text': '#f6eadf',
+        'app-text-muted': '#d1b59c',
+        'app-text-soft': '#b89273',
+        // Legacy colors for backward compatibility (will be removed)
         pearl: {
           50: '#fefcf8',
           100: '#fbf7ed',
@@ -76,18 +102,18 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Cairo', 'Inter', 'system-ui', 'sans-serif'],
-        arabic: ['Cairo', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Cairo', 'Tajawal', '"Segoe UI"', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
+        heading: ['Cairo', '"Segoe UI"', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
+        body: ['Tajawal', '"Segoe UI"', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(135deg, #fefcf8 0%, #f5efe3 30%, #d4bfa5 70%, #a68568 100%)',
-        'hero-gradient-dark': 'linear-gradient(135deg, #1c1917 0%, #292524 30%, #44403c 70%, #5a3922 100%)',
-        'card-gradient': 'linear-gradient(135deg, rgba(254, 252, 248, 0.95) 0%, rgba(245, 239, 220, 0.9) 100%)',
-        'card-gradient-dark': 'linear-gradient(135deg, rgba(41, 37, 36, 0.95) 0%, rgba(28, 25, 23, 0.9) 100%)',
-        'header-gradient': 'linear-gradient(135deg, #8c6b50 0%, #735239 50%, #5a3922 100%)',
-        'footer-gradient': 'linear-gradient(135deg, #735239 0%, #5a3922 50%, #41200b 100%)',
+        'hero-gradient': 'linear-gradient(135deg, #1b130f 0%, #2a1c16 30%, #1c120d 70%, #261813 100%)',
+        'card-gradient': 'linear-gradient(135deg, rgba(55, 35, 24, 0.78) 0%, rgba(72, 46, 31, 0.9) 100%)',
+        'card-gradient-strong': 'linear-gradient(135deg, rgba(72, 46, 31, 0.9) 0%, rgba(98, 64, 43, 0.95) 100%)',
+        'header-gradient': 'linear-gradient(135deg, #c57b45 0%, #824123 50%, #1b130f 100%)',
+        'footer-gradient': 'linear-gradient(135deg, #1c120d 0%, #261813 50%, #2a1c16 100%)',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',
