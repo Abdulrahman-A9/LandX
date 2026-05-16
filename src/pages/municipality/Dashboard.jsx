@@ -1,8 +1,7 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
 import { mockDashboardStats } from '../../data/mock/dashboard';
-import { LeafIcon, CheckIcon, FileTextIcon, DollarSignIcon } from '../../components/ui/Icons';
+import { LeafIcon, CheckIcon, FileTextIcon, DollarSignIcon, UsersIcon, TrendingUpIcon, BarChartIcon, PieChartIcon } from '../../components/ui/Icons';
 
 const MunicipalityDashboard = () => {
   const stats = mockDashboardStats.municipality;
@@ -18,8 +17,8 @@ const MunicipalityDashboard = () => {
         <p className="text-brown-700 dark:text-stone-400 mt-2">إدارة الفرص الاستثمارية والاستفسارات</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الفرص</h3>
@@ -28,9 +27,9 @@ const MunicipalityDashboard = () => {
           <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{stats.totalOpportunities}</p>
           <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">فرص استثمارية</p>
         </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">الفرص النشطة</h3>
@@ -39,9 +38,9 @@ const MunicipalityDashboard = () => {
           <p className="text-3xl font-bold text-green-600">{stats.activeOpportunities}</p>
           <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">متاحة للاستثمار</p>
         </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">الاستفسارات</h3>
@@ -50,9 +49,9 @@ const MunicipalityDashboard = () => {
           <p className="text-3xl font-bold text-yellow-600">{stats.pendingInquiries}</p>
           <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">بانتظار الرد</p>
         </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={300}>
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الاستثمار</h3>
@@ -61,11 +60,11 @@ const MunicipalityDashboard = () => {
           <p className="text-3xl font-bold text-brown-700 dark:text-stone-400">{formatCurrency(stats.totalInvestment)} ر.س</p>
           <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">ريال سعودي</p>
         </Card>
-        </AnimatedSection>
+        </div>
       </div>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <AnimatedSection animation="slideLeft">
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-4">الفرص الاستثمارية الأخيرة</h2>
           <div className="space-y-4">
@@ -82,9 +81,9 @@ const MunicipalityDashboard = () => {
             ))}
           </div>
         </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="slideRight">
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-4">استفسارات المستثمرين</h2>
           <div className="space-y-4">
@@ -101,7 +100,7 @@ const MunicipalityDashboard = () => {
             ))}
           </div>
         </Card>
-        </AnimatedSection>
+        </div>
       </div>
     </div>
   );

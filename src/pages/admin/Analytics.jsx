@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
 import { TrendingUpIcon, DollarSignIcon, UsersIcon, LeafIcon, BarChartIcon, PieChartIcon } from '../../components/ui/Icons';
 
 const AdminAnalytics = () => {
@@ -38,7 +37,7 @@ const AdminAnalytics = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الاستثمار</h3>
@@ -47,9 +46,9 @@ const AdminAnalytics = () => {
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{formatCurrency(stats.totalInvestment)} ر.س</p>
             <p className="text-sm text-green-600 mt-2">+25% من الشهر الماضي</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">المستخدمين</h3>
@@ -58,9 +57,9 @@ const AdminAnalytics = () => {
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{stats.totalUsers}</p>
             <p className="text-sm text-green-600 mt-2">+15 مستخدم جديد</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">الفرص الاستثمارية</h3>
@@ -69,9 +68,9 @@ const AdminAnalytics = () => {
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{stats.totalOpportunities}</p>
             <p className="text-sm text-green-600 mt-2">+3 فرص جديدة</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={300}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">متوسط العائد</h3>
@@ -80,11 +79,11 @@ const AdminAnalytics = () => {
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{stats.avgReturn}%</p>
             <p className="text-sm text-green-600 mt-2">+2% من المعدل السابق</p>
           </Card>
-        </AnimatedSection>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <AnimatedSection animation="slideLeft">
+        <div>
           <Card className="bg-card-gradient border border-brown-300 p-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">توزيع الاستثمار حسب المنطقة</h2>
@@ -109,9 +108,9 @@ const AdminAnalytics = () => {
               ))}
             </div>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="slideRight">
+        <div>
           <Card className="bg-card-gradient border border-brown-300 p-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">نمو الاستثمار الشهري</h2>
@@ -136,10 +135,10 @@ const AdminAnalytics = () => {
               ))}
             </div>
           </Card>
-        </AnimatedSection>
+        </div>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={400}>
+      <div>
         <Card className="bg-card-gradient border border-brown-300 p-6">
           <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-6">أداء الفرص الاستثمارية</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -160,7 +159,7 @@ const AdminAnalytics = () => {
             </div>
           </div>
         </Card>
-      </AnimatedSection>
+      </div>
     </div>
   );
 };

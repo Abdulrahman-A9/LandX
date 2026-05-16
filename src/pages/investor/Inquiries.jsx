@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
-import { ClockIcon, CheckCircleIcon, MessageCircleIcon } from '../../components/ui/Icons';
+import { MessageCircleIcon, ReplyIcon, UploadIcon } from '../../components/ui/Icons';
 
 const Inquiries = () => {
   const inquiries = [
@@ -45,8 +44,8 @@ const Inquiries = () => {
 
   const getStatusBadge = (status) => {
     const badges = {
-      pending: { label: 'بانتظار الرد', className: 'bg-yellow-500/20 text-yellow-600 border-yellow-500/30', icon: <ClockIcon /> },
-      answered: { label: 'تم الرد', className: 'bg-green-500/20 text-green-600 border-green-500/30', icon: <CheckCircleIcon /> },
+      pending: { label: 'بانتظار الرد', className: 'bg-yellow-500/20 text-yellow-600 border-yellow-500/30', icon: <ReplyIcon /> },
+      answered: { label: 'تم الرد', className: 'bg-green-500/20 text-green-600 border-green-500/30', icon: <ReplyIcon /> },
     };
     return badges[status] || badges.pending;
   };
@@ -58,8 +57,8 @@ const Inquiries = () => {
         <p className="text-brown-700 dark:text-stone-400 mt-2">تتبع استفساراتك والتواصل مع البلديات</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الاستفسارات</h3>
@@ -68,26 +67,39 @@ const Inquiries = () => {
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{inquiries.length}</p>
             <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">استفسار</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">بانتظار الرد</h3>
-              <ClockIcon className="text-yellow-600" />
+              <ReplyIcon className="text-yellow-600" />
             </div>
             <p className="text-3xl font-bold text-yellow-600">
               {inquiries.filter(i => i.status === 'pending').length}
             </p>
             <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">استفسار</p>
           </Card>
-        </AnimatedSection>
+        </div>
+
+        <div>
+          <Card className="p-6 bg-card-gradient border border-brown-300">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">تم الرد</h3>
+              <ReplyIcon className="text-green-600" />
+            </div>
+            <p className="text-3xl font-bold text-green-600">
+              {inquiries.filter(i => i.status === 'answered').length}
+            </p>
+            <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">استفسار</p>
+          </Card>
+        </div>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={200}>
+      <div>
         <Card className="bg-card-gradient border border-brown-300">
           <div className="p-6 border-b border-brown-300 dark:border-stone-700">
-            <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">سجل الاستفسارات</h2>
+            <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">قائمة الاستفسارات</h2>
           </div>
           <div className="p-6">
             <div className="space-y-4">
@@ -135,7 +147,7 @@ const Inquiries = () => {
             </div>
           </div>
         </Card>
-      </AnimatedSection>
+      </div>
     </div>
   );
 };

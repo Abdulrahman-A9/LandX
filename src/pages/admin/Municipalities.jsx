@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
 import { BuildingIcon, EditIcon, TrashIcon, CheckIcon, XIcon } from '../../components/ui/Icons';
 
 const AdminMunicipalities = () => {
@@ -64,7 +63,7 @@ const AdminMunicipalities = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي البلديات</h3>
@@ -72,9 +71,9 @@ const AdminMunicipalities = () => {
             </div>
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{municipalities.length}</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">النشطة</h3>
@@ -84,9 +83,9 @@ const AdminMunicipalities = () => {
               {municipalities.filter(m => m.status === 'active').length}
             </p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">قيد المراجعة</h3>
@@ -96,10 +95,10 @@ const AdminMunicipalities = () => {
               {municipalities.filter(m => m.status === 'pending').length}
             </p>
           </Card>
-        </AnimatedSection>
+        </div>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={300}>
+      <div>
         <Card className="bg-card-gradient border border-brown-300">
           <div className="p-6 border-b border-brown-300 dark:border-stone-700 flex items-center justify-between">
             <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">قائمة البلديات</h2>
@@ -156,7 +155,7 @@ const AdminMunicipalities = () => {
             </div>
           </div>
         </Card>
-      </AnimatedSection>
+      </div>
     </div>
   );
 };

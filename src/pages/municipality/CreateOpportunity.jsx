@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
-import { SaveIcon, XIcon, UploadIcon } from '../../components/ui/Icons';
+import { SaveIcon, XIcon, UploadIcon, LeafIcon, MapPinIcon, DollarSignIcon, CalendarIcon } from '../../components/ui/Icons';
 
 const CreateOpportunity = () => {
   const [formData, setFormData] = useState({
@@ -49,7 +48,7 @@ const CreateOpportunity = () => {
         <p className="text-brown-700 dark:text-stone-400 mt-2">أدخل تفاصيل الفرصة الاستثمارية</p>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={0}>
+      <div>
         <Card className="bg-card-gradient border border-brown-300 p-6">
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -220,7 +219,7 @@ const CreateOpportunity = () => {
             </div>
           </form>
         </Card>
-      </AnimatedSection>
+      </div>
     </div>
   );
 };

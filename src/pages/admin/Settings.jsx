@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
 import { SettingsIcon, SaveIcon, BellIcon, ShieldIcon, PaletteIcon, DatabaseIcon } from '../../components/ui/Icons';
 
 const AdminSettings = () => {
@@ -36,7 +35,7 @@ const AdminSettings = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <AnimatedSection animation="fadeUp" delay={0}>
+        <div>
           <Card className="bg-card-gradient border border-brown-300 p-6">
             <div className="flex items-center gap-3 mb-6">
               <PaletteIcon className="text-brown-600 dark:text-stone-400" />
@@ -96,9 +95,9 @@ const AdminSettings = () => {
               </div>
             </div>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
           <Card className="bg-card-gradient border border-brown-300 p-6">
             <div className="flex items-center gap-3 mb-6">
               <ShieldIcon className="text-brown-600 dark:text-stone-400" />
@@ -153,9 +152,9 @@ const AdminSettings = () => {
               </div>
             </div>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
           <Card className="bg-card-gradient border border-brown-300 p-6">
             <div className="flex items-center gap-3 mb-6">
               <BellIcon className="text-brown-600 dark:text-stone-400" />
@@ -197,9 +196,9 @@ const AdminSettings = () => {
               </div>
             </div>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={300}>
+        <div>
           <Card className="bg-card-gradient border border-brown-300 p-6">
             <div className="flex items-center gap-3 mb-6">
               <DatabaseIcon className="text-brown-600 dark:text-stone-400" />
@@ -224,20 +223,18 @@ const AdminSettings = () => {
               </button>
             </div>
           </Card>
-        </AnimatedSection>
+        </div>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={400}>
-        <div className="mt-6 flex justify-end">
-          <button
-            onClick={handleSave}
-            className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-green-600 to-green-700 text-pearl-100 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300"
-          >
-            <SaveIcon />
-            <span>حفظ الإعدادات</span>
-          </button>
-        </div>
-      </AnimatedSection>
+      <div className="mt-6 flex justify-end">
+        <button
+          onClick={handleSave}
+          className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-green-600 to-green-700 text-pearl-100 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300"
+        >
+          <SaveIcon />
+          <span>حفظ الإعدادات</span>
+        </button>
+      </div>
     </div>
   );
 };

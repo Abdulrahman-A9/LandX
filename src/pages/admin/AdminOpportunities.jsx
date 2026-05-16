@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
 import { LeafIcon, EyeIcon, CheckIcon, XIcon, ShieldCheckIcon } from '../../components/ui/Icons';
 
 const AdminOpportunities = () => {
@@ -76,7 +75,7 @@ const AdminOpportunities = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الفرص</h3>
@@ -84,9 +83,9 @@ const AdminOpportunities = () => {
             </div>
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{opportunities.length}</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">موافق عليه</h3>
@@ -96,9 +95,9 @@ const AdminOpportunities = () => {
               {opportunities.filter(o => o.status === 'approved').length}
             </p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">قيد المراجعة</h3>
@@ -108,9 +107,9 @@ const AdminOpportunities = () => {
               {opportunities.filter(o => o.status === 'pending').length}
             </p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={300}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الطلبات</h3>
@@ -120,10 +119,10 @@ const AdminOpportunities = () => {
               {opportunities.reduce((sum, o) => sum + o.applications, 0)}
             </p>
           </Card>
-        </AnimatedSection>
+        </div>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={400}>
+      <div>
         <Card className="bg-card-gradient border border-brown-300">
           <div className="p-6 border-b border-brown-300 dark:border-stone-700">
             <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">قائمة الفرص</h2>
@@ -183,7 +182,7 @@ const AdminOpportunities = () => {
             </div>
           </div>
         </Card>
-      </AnimatedSection>
+      </div>
     </div>
   );
 };

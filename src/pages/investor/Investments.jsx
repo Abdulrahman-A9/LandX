@@ -40,11 +40,11 @@ const Investments = () => {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-brown-900 dark:text-stone-100">استثماراتي</h1>
-        <p className="text-brown-700 dark:text-stone-400 mt-2">تتبع جميع استثماراتك الحالية والسابقة</p>
+        <p className="text-brown-700 dark:text-stone-400 mt-2">إدارة ومتابعة استثماراتك الحالية</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الاستثمارات</h3>
@@ -53,9 +53,9 @@ const Investments = () => {
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{investments.length}</p>
             <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">استثمار</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">الاستثمارات النشطة</h3>
@@ -66,9 +66,9 @@ const Investments = () => {
             </p>
             <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">قيد التنفيذ</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي المبلغ المستثمر</h3>
@@ -79,10 +79,23 @@ const Investments = () => {
             </p>
             <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">ريال سعودي</p>
           </Card>
-        </AnimatedSection>
+        </div>
+
+        <div>
+          <Card className="p-6 bg-card-gradient border border-brown-300">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">الاستثمارات المكتملة</h3>
+              <CheckCircleIcon className="text-blue-600" />
+            </div>
+            <p className="text-3xl font-bold text-blue-600">
+              {investments.filter(i => i.status === 'completed').length}
+            </p>
+            <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">مكتملة</p>
+          </Card>
+        </div>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={300}>
+      <div>
         <Card className="bg-card-gradient border border-brown-300">
           <div className="p-6 border-b border-brown-300 dark:border-stone-700">
             <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">قائمة الاستثمارات</h2>
@@ -127,7 +140,7 @@ const Investments = () => {
             </div>
           </div>
         </Card>
-      </AnimatedSection>
+      </div>
     </div>
   );
 };

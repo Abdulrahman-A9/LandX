@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
-import { BuildingIcon, MailIcon, PhoneIcon, MapPinIcon, EditIcon, SaveIcon, XIcon } from '../../components/ui/Icons';
+import { UserIcon, MailIcon, PhoneIcon, MapPinIcon, EditIcon, SaveIcon, XIcon } from '../../components/ui/Icons';
 
 const MunicipalityProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -49,7 +48,7 @@ const MunicipalityProfile = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <AnimatedSection animation="fadeUp" delay={0} className="lg:col-span-1">
+        <div className="lg:col-span-1">
           <Card className="bg-card-gradient border border-brown-300 p-6 text-center">
             <div className="w-32 h-32 bg-gradient-to-br from-brown-400 to-brown-600 rounded-full mx-auto mb-4 flex items-center justify-center">
               <BuildingIcon className="text-5xl text-pearl-100" />
@@ -67,9 +66,9 @@ const MunicipalityProfile = () => {
               </div>
             </div>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100} className="lg:col-span-2">
+        <div className="lg:col-span-2">
           <Card className="bg-card-gradient border border-brown-300 p-6">
             <h3 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-6">معلومات البلدية</h3>
             <div className="space-y-4">
@@ -217,7 +216,7 @@ const MunicipalityProfile = () => {
               )}
             </div>
           </Card>
-        </AnimatedSection>
+        </div>
       </div>
     </div>
   );

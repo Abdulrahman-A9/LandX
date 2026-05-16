@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
 import { UsersIcon, EditIcon, TrashIcon, ShieldIcon, UserIcon } from '../../components/ui/Icons';
 
 const AdminUsers = () => {
@@ -78,7 +77,7 @@ const AdminUsers = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي المستخدمين</h3>
@@ -86,9 +85,9 @@ const AdminUsers = () => {
             </div>
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{users.length}</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">المستثمرين</h3>
@@ -98,9 +97,9 @@ const AdminUsers = () => {
               {users.filter(u => u.role === 'investor').length}
             </p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">البلديات</h3>
@@ -110,9 +109,9 @@ const AdminUsers = () => {
               {users.filter(u => u.role === 'municipality').length}
             </p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={300}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">الموقوفين</h3>
@@ -122,10 +121,10 @@ const AdminUsers = () => {
               {users.filter(u => u.status === 'suspended').length}
             </p>
           </Card>
-        </AnimatedSection>
+        </div>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={400}>
+      <div>
         <Card className="bg-card-gradient border border-brown-300">
           <div className="p-6 border-b border-brown-300 dark:border-stone-700">
             <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">قائمة المستخدمين</h2>
@@ -186,7 +185,7 @@ const AdminUsers = () => {
             </div>
           </div>
         </Card>
-      </AnimatedSection>
+      </div>
     </div>
   );
 };

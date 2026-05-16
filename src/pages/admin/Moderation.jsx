@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
 import { ShieldCheckIcon, CheckIcon, XIcon, EyeIcon, ClockIcon } from '../../components/ui/Icons';
 
 const AdminModeration = () => {
@@ -69,7 +68,7 @@ const AdminModeration = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">قيد المراجعة</h3>
@@ -77,9 +76,9 @@ const AdminModeration = () => {
             </div>
             <p className="text-3xl font-bold text-yellow-600">{pendingItems.length}</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">أولوية عالية</h3>
@@ -89,9 +88,9 @@ const AdminModeration = () => {
               {pendingItems.filter(i => i.priority === 'high').length}
             </p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">تمت المراجعة اليوم</h3>
@@ -99,10 +98,10 @@ const AdminModeration = () => {
             </div>
             <p className="text-3xl font-bold text-green-600">5</p>
           </Card>
-        </AnimatedSection>
+        </div>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={300}>
+      <div>
         <Card className="bg-card-gradient border border-brown-300">
           <div className="p-6 border-b border-brown-300 dark:border-stone-700">
             <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">المحتوى قيد المراجعة</h2>
@@ -153,7 +152,7 @@ const AdminModeration = () => {
             </div>
           </div>
         </Card>
-      </AnimatedSection>
+      </div>
     </div>
   );
 };

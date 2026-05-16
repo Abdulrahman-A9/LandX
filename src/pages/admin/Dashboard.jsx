@@ -1,8 +1,7 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
 import { mockDashboardStats } from '../../data/mock/dashboard';
-import { UsersIcon, BuildingIcon, LeafIcon, DollarSignIcon, ShieldCheckIcon } from '../../components/ui/Icons';
+import { UsersIcon, BuildingIcon, LeafIcon, DollarSignIcon, TrendingUpIcon, BarChartIcon, PieChartIcon, ShieldCheckIcon } from '../../components/ui/Icons';
 
 const AdminDashboard = () => {
   const stats = mockDashboardStats.admin;
@@ -18,8 +17,8 @@ const AdminDashboard = () => {
         <p className="text-brown-700 dark:text-stone-400 mt-2">نظرة عامة على أداء المنصة</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي المستخدمين</h3>
@@ -28,9 +27,9 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{stats.totalUsers}</p>
           <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">مستخدم مسجل</p>
         </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">البلديات</h3>
@@ -39,9 +38,9 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-brown-700 dark:text-stone-400">{stats.totalMunicipalities}</p>
           <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">جهة حكومية</p>
         </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">الفرص الاستثمارية</h3>
@@ -50,9 +49,9 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{stats.totalOpportunities}</p>
           <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">{stats.activeOpportunities} نشط</p>
         </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={300}>
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الاستثمار</h3>
@@ -61,11 +60,11 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-pearl-700">{formatCurrency(stats.totalInvestment)} ر.س</p>
           <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">ريال سعودي</p>
         </Card>
-        </AnimatedSection>
+        </div>
       </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">قيد المراجعة</h3>
@@ -74,9 +73,9 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold text-yellow-600">{stats.pendingModeration}</p>
           <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">بانتظار الموافقة</p>
         </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="slideRight" className="lg:col-span-2">
+        <div className="lg:col-span-2">
         <Card className="p-6 h-full bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-4">النشاط الحديث</h2>
           <div className="space-y-4">
@@ -103,11 +102,11 @@ const AdminDashboard = () => {
             </div>
           </div>
         </Card>
-        </AnimatedSection>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <AnimatedSection animation="slideLeft">
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-4">البلديات النشطة</h2>
           <div className="space-y-4">
@@ -128,9 +127,9 @@ const AdminDashboard = () => {
             ))}
           </div>
         </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="slideRight">
+        <div>
         <Card className="p-6 bg-card-gradient border border-brown-300">
           <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-4">المحتوى قيد المراجعة</h2>
           <div className="space-y-4">
@@ -152,7 +151,7 @@ const AdminDashboard = () => {
             ))}
           </div>
         </Card>
-        </AnimatedSection>
+        </div>
       </div>
     </div>
   );

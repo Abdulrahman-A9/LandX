@@ -1,8 +1,7 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
-import { mockOpportunities } from '../../data/mock/opportunities';
 import { HeartIcon, EyeIcon } from '../../components/ui/Icons';
+import { mockOpportunities } from '../../data/mock/opportunities';
 
 const InvestorOpportunities = () => {
   const opportunities = mockOpportunities;
@@ -18,9 +17,9 @@ const InvestorOpportunities = () => {
         <p className="text-brown-700 dark:text-stone-400 mt-2">تصفح واكتشف الفرص الاستثمارية المناسبة لك</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {opportunities.map((opportunity, index) => (
-          <AnimatedSection key={opportunity.id} animation="fadeUp" delay={index * 100}>
+          <div key={opportunity.id}>
             <Card className="bg-card-gradient border border-brown-300 overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <div className="h-48 bg-gradient-to-br from-brown-400 to-brown-600 relative">
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -64,7 +63,7 @@ const InvestorOpportunities = () => {
                 </button>
               </div>
             </Card>
-          </AnimatedSection>
+          </div>
         ))}
       </div>
     </div>

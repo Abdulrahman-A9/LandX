@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
-import AnimatedSection from '../../components/shared/AnimatedSection';
-import { MessageCircleIcon, ReplyIcon, CheckIcon } from '../../components/ui/Icons';
+import { MessageCircleIcon, ReplyIcon } from '../../components/ui/Icons';
 
 const MunicipalityInquiries = () => {
   const inquiries = [
@@ -59,7 +58,7 @@ const MunicipalityInquiries = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <AnimatedSection animation="fadeUp" delay={0}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الاستفسارات</h3>
@@ -68,9 +67,9 @@ const MunicipalityInquiries = () => {
             <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{inquiries.length}</p>
             <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">استفسار</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={100}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">جديد</h3>
@@ -81,9 +80,9 @@ const MunicipalityInquiries = () => {
             </p>
             <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">بانتظار الرد</p>
           </Card>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection animation="fadeUp" delay={200}>
+        <div>
           <Card className="p-6 bg-card-gradient border border-brown-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">تم الرد</h3>
@@ -94,10 +93,10 @@ const MunicipalityInquiries = () => {
             </p>
             <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">استفسار</p>
           </Card>
-        </AnimatedSection>
+        </div>
       </div>
 
-      <AnimatedSection animation="fadeUp" delay={300}>
+      <div>
         <Card className="bg-card-gradient border border-brown-300">
           <div className="p-6 border-b border-brown-300 dark:border-stone-700">
             <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">قائمة الاستفسارات</h2>
@@ -138,7 +137,7 @@ const MunicipalityInquiries = () => {
             </div>
           </div>
         </Card>
-      </AnimatedSection>
+      </div>
     </div>
   );
 };
