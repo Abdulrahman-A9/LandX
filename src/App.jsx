@@ -22,8 +22,24 @@ import Register from './pages/auth/Register';
 
 // Dashboard Pages
 import InvestorDashboard from './pages/investor/Dashboard';
+import InvestorOpportunities from './pages/investor/Opportunities';
+import InvestorInvestments from './pages/investor/Investments';
+import InvestorInquiries from './pages/investor/Inquiries';
+import InvestorProfile from './pages/investor/Profile';
 import MunicipalityDashboard from './pages/municipality/Dashboard';
+import MunicipalityOpportunities from './pages/municipality/Opportunities';
+import MunicipalityCreateOpportunity from './pages/municipality/CreateOpportunity';
+import MunicipalityInquiries from './pages/municipality/Inquiries';
+import MunicipalityAnnouncements from './pages/municipality/Announcements';
+import MunicipalityNews from './pages/municipality/MunicipalityNews';
+import MunicipalityProfile from './pages/municipality/Profile';
 import AdminDashboard from './pages/admin/Dashboard';
+import AdminUsers from './pages/admin/Users';
+import AdminMunicipalities from './pages/admin/Municipalities';
+import AdminOpportunities from './pages/admin/AdminOpportunities';
+import AdminAnalytics from './pages/admin/Analytics';
+import AdminModeration from './pages/admin/Moderation';
+import AdminSettings from './pages/admin/Settings';
 
 function App() {
   return (
@@ -49,18 +65,34 @@ function App() {
         {/* Investor Dashboard Routes */}
         <Route path="/investor/*" element={<DashboardLayout role="investor" />}>
           <Route path="dashboard" element={<InvestorDashboard />} />
+          <Route path="opportunities" element={<InvestorOpportunities />} />
+          <Route path="investments" element={<InvestorInvestments />} />
+          <Route path="inquiries" element={<InvestorInquiries />} />
+          <Route path="profile" element={<InvestorProfile />} />
           <Route index element={<Navigate to="/investor/dashboard" replace />} />
         </Route>
         
         {/* Municipality Dashboard Routes */}
         <Route path="/municipality/*" element={<DashboardLayout role="municipality" />}>
           <Route path="dashboard" element={<MunicipalityDashboard />} />
+          <Route path="opportunities" element={<MunicipalityOpportunities />} />
+          <Route path="opportunities/create" element={<MunicipalityCreateOpportunity />} />
+          <Route path="announcements" element={<MunicipalityAnnouncements />} />
+          <Route path="news" element={<MunicipalityNews />} />
+          <Route path="inquiries" element={<MunicipalityInquiries />} />
+          <Route path="profile" element={<MunicipalityProfile />} />
           <Route index element={<Navigate to="/municipality/dashboard" replace />} />
         </Route>
         
         {/* Admin Dashboard Routes */}
         <Route path="/admin/*" element={<DashboardLayout role="admin" />}>
           <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="municipalities" element={<AdminMunicipalities />} />
+          <Route path="opportunities" element={<AdminOpportunities />} />
+          <Route path="analytics" element={<AdminAnalytics />} />
+          <Route path="moderation" element={<AdminModeration />} />
+          <Route path="settings" element={<AdminSettings />} />
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
         </Route>
         
