@@ -46,12 +46,12 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 dark:from-[#1c1917] dark:via-[#292524] dark:to-[#44403c] text-brown-900 dark:text-stone-100">
+    <div className="min-h-screen bg-app-bg text-app-text">
       {/* Hero */}
-      <div className="bg-gradient-to-r from-brown-600/90 to-brown-700/90 border-b border-brown-400/20 backdrop-blur">
+      <div className="bg-gradient-to-r from-brand/90 to-brand-deep/90 border-b border-brand/20 backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold text-white mb-4">تواصل معنا</h1>
-          <p className="text-xl text-pearl-100 max-w-3xl">نحن هنا لمساعدتك. تواصل معنا لأي استفسار أو طلب</p>
+          <h1 className="text-4xl font-bold text-app-text mb-4">تواصل معنا</h1>
+          <p className="text-xl text-app-text-muted max-w-3xl">نحن هنا لمساعدتك. تواصل معنا لأي استفسار أو طلب</p>
         </div>
       </div>
 
@@ -60,70 +60,70 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           <AnimatedSection animation="slideLeft" className="space-y-8">
             {/* Contact Info */}
-            <Card className="p-8 bg-card-gradient border border-brown-300">
-              <h2 className="text-2xl font-bold text-brown-900 mb-6">معلومات التواصل</h2>
+            <Card className="p-8 bg-card-gradient border border-app-border">
+              <h2 className="text-2xl font-bold text-app-text mb-6">معلومات التواصل</h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-400">
-                    <MailIcon className="text-2xl text-brown-600" />
+                  <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brand">
+                    <MailIcon className="text-2xl text-brand" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-brown-900 mb-1">البريد الإلكتروني</h3>
-                    <p className="text-brown-700">info@landx.sa</p>
-                    <p className="text-brown-700">support@landx.sa</p>
+                    <h3 className="font-semibold text-app-text mb-1">البريد الإلكتروني</h3>
+                    <p className="text-app-text-muted">info@landx.sa</p>
+                    <p className="text-app-text-muted">support@landx.sa</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-400">
-                    <PhoneIcon className="text-2xl text-brown-600" />
+                  <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brand">
+                    <PhoneIcon className="text-2xl text-brand" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-brown-900 mb-1">الهاتف</h3>
-                    <p className="text-brown-700" dir="ltr">+966 11 234 5678</p>
-                    <p className="text-brown-700 text-sm">السبت - الخميس: 9 صباحاً - 5 مساءً</p>
+                    <h3 className="font-semibold text-app-text mb-1">الهاتف</h3>
+                    <p className="text-app-text-muted" dir="ltr">+966 11 234 5678</p>
+                    <p className="text-app-text-muted text-sm">السبت - الخميس: 9 صباحاً - 5 مساءً</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brown-400">
-                    <MapPinIcon className="text-2xl text-brown-600" />
+                  <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brand">
+                    <MapPinIcon className="text-2xl text-brand" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-brown-900 mb-1">العنوان</h3>
-                    <p className="text-brown-700">برج لاند إكس، طريق الملك فهد</p>
-                    <p className="text-brown-700">الرياض 12345، المملكة العربية السعودية</p>
+                    <h3 className="font-semibold text-app-text mb-1">العنوان</h3>
+                    <p className="text-app-text-muted">برج لاند إكس، طريق الملك فهد</p>
+                    <p className="text-app-text-muted">الرياض 12345، المملكة العربية السعودية</p>
                   </div>
                 </div>
               </div>
             </Card>
 
             {/* Working Hours */}
-            <Card className="p-8 bg-card-gradient border border-brown-300">
+            <Card className="p-8 bg-card-gradient border border-app-border">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-lg flex items-center justify-center border border-brown-400">
-                  <ClockIcon className="text-brown-600" />
+                <div className="w-10 h-10 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-lg flex items-center justify-center border border-brand">
+                  <ClockIcon className="text-brand" />
                 </div>
-                <h2 className="text-xl font-bold text-brown-900">أوقات العمل</h2>
+                <h2 className="text-xl font-bold text-app-text">أوقات العمل</h2>
               </div>
               <div className="space-y-3">
                 {workingHours.map((wh) => (
-                  <div key={wh.day} className="flex justify-between items-center py-2 border-b border-brown-200 last:border-0">
-                    <span className="text-brown-800 font-medium">{wh.day}</span>
-                    <span className={`font-semibold ${wh.hours === 'مغلق' ? 'text-red-600' : 'text-brown-700'}`}>{wh.hours}</span>
+                  <div key={wh.day} className="flex justify-between items-center py-2 border-b border-app-border last:border-0">
+                    <span className="text-app-text font-medium">{wh.day}</span>
+                    <span className={`font-semibold ${wh.hours === 'مغلق' ? 'text-danger' : 'text-app-text-muted'}`}>{wh.hours}</span>
                   </div>
                 ))}
               </div>
             </Card>
 
             {/* Social */}
-            <Card className="p-8 bg-gradient-to-r from-brown-200/10 to-brown-300/10 border border-brown-300">
-              <h2 className="text-xl font-bold text-brown-900 mb-4">تابعنا</h2>
-              <p className="text-brown-800 mb-6 text-sm">كن على اطلاع بآخر الفرص والأخبار عبر قنواتنا</p>
+            <Card className="p-8 bg-gradient-to-r from-brand/10 to-brand-deep/10 border border-app-border">
+              <h2 className="text-xl font-bold text-app-text mb-4">تابعنا</h2>
+              <p className="text-app-text-muted mb-6 text-sm">كن على اطلاع بآخر الفرص والأخبار عبر قنواتنا</p>
               <div className="flex gap-3">
                 {['تويتر / X', 'لينكدإن', 'يوتيوب'].map((platform) => (
                   <button
                     key={platform}
                     onClick={() => alert('سيتم توجيهك لصفحة ' + platform)}
-                    className="flex-1 py-2.5 px-3 bg-pearl-100/80 border border-brown-300 rounded-lg text-brown-800 text-sm font-medium hover:bg-brown-200/30 transition-colors flex items-center justify-center gap-2"
+                    className="flex-1 py-2.5 px-3 bg-app-surface border border-app-border rounded-lg text-app-text text-sm font-medium hover:bg-app-surface-strong transition-colors flex items-center justify-center gap-2"
                   >
                     <GlobeIcon className="w-4 h-4" />
                     {platform}
@@ -135,40 +135,40 @@ const Contact = () => {
 
           {/* Form */}
           <AnimatedSection animation="slideRight">
-            <Card className="p-8 bg-card-gradient border border-brown-300 h-full">
-              <h2 className="text-2xl font-bold text-brown-900 mb-6">أرسل لنا رسالة</h2>
+            <Card className="p-8 bg-card-gradient border border-app-border h-full">
+              <h2 className="text-2xl font-bold text-app-text mb-6">أرسل لنا رسالة</h2>
               {submitted ? (
                 <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/30">
-                    <MessageCircleIcon className="w-8 h-8 text-green-600" />
+                  <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-success/30">
+                    <MessageCircleIcon className="w-8 h-8 text-success" />
                   </div>
-                  <h3 className="text-xl font-bold text-brown-900 mb-2">تم الإرسال بنجاح!</h3>
-                  <p className="text-brown-700">شكراً لتواصلك معنا. سنرد عليك في أقرب وقت.</p>
+                  <h3 className="text-xl font-bold text-app-text mb-2">تم الإرسال بنجاح!</h3>
+                  <p className="text-app-text-muted">شكراً لتواصلك معنا. سنرد عليك في أقرب وقت.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label className="block text-sm font-medium text-brown-800 mb-2">الاسم الكامل</label>
+                    <label className="block text-sm font-medium text-app-text-muted mb-2">الاسم الكامل</label>
                     <input name="name" value={formData.name} onChange={handleChange} required
                       placeholder="أدخل اسمك الكامل"
-                      className="w-full px-3 py-2.5 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 text-sm" />
+                      className="w-full px-3 py-2.5 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-brown-800 mb-2">البريد الإلكتروني</label>
+                    <label className="block text-sm font-medium text-app-text-muted mb-2">البريد الإلكتروني</label>
                     <input name="email" type="email" value={formData.email} onChange={handleChange} required
                       placeholder="example@email.com"
-                      className="w-full px-3 py-2.5 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 text-sm" />
+                      className="w-full px-3 py-2.5 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-brown-800 mb-2">رقم الهاتف</label>
+                    <label className="block text-sm font-medium text-app-text-muted mb-2">رقم الهاتف</label>
                     <input name="phone" type="tel" value={formData.phone} onChange={handleChange}
                       placeholder="+966 XX XXX XXXX"
-                      className="w-full px-3 py-2.5 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 text-sm" />
+                      className="w-full px-3 py-2.5 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-brown-800 mb-2">الموضوع</label>
+                    <label className="block text-sm font-medium text-app-text-muted mb-2">الموضوع</label>
                     <select name="subject" value={formData.subject} onChange={handleChange} required
-                      className="w-full px-3 py-2.5 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 text-sm">
+                      className="w-full px-3 py-2.5 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm">
                       <option value="">اختر الموضوع</option>
                       <option value="investment">استفسار استثماري</option>
                       <option value="technical">مشكلة تقنية</option>
@@ -177,10 +177,10 @@ const Contact = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-brown-800 mb-2">الرسالة</label>
+                    <label className="block text-sm font-medium text-app-text-muted mb-2">الرسالة</label>
                     <textarea name="message" value={formData.message} onChange={handleChange} required rows={4}
                       placeholder="اكتب رسالتك هنا..."
-                      className="w-full px-3 py-2.5 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 resize-none text-sm" />
+                      className="w-full px-3 py-2.5 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand resize-none text-sm" />
                   </div>
                   <Button type="submit" size="lg" className="w-full">
                     إرسال الرسالة
@@ -193,14 +193,14 @@ const Contact = () => {
 
         {/* Map Placeholder */}
         <AnimatedSection animation="fadeUp">
-        <Card className="mb-16 overflow-hidden border border-brown-300">
-          <div className="h-80 bg-gradient-to-br from-pearl-200 to-brown-200 relative flex items-center justify-center">
+        <Card className="mb-16 overflow-hidden border border-app-border">
+          <div className="h-80 bg-gradient-to-br from-app-surface to-app-surface-strong relative flex items-center justify-center">
             <div className="text-center">
-              <MapPinIcon className="w-12 h-12 text-brown-500 mx-auto mb-3" />
-              <h3 className="text-lg font-bold text-brown-900 mb-1">الموقع على الخريطة</h3>
-              <p className="text-brown-700 text-sm">الرياض، المملكة العربية السعودية</p>
+              <MapPinIcon className="w-12 h-12 text-brand mx-auto mb-3" />
+              <h3 className="text-lg font-bold text-app-text mb-1">الموقع على الخريطة</h3>
+              <p className="text-app-text-muted text-sm">الرياض، المملكة العربية السعودية</p>
               <button onClick={() => alert('سيتم فتح الخريطة في تبويب جديد')}
-                className="mt-4 inline-flex items-center gap-2 text-brown-700 hover:text-brown-900 font-medium text-sm transition-colors">
+                className="mt-4 inline-flex items-center gap-2 text-app-text-muted hover:text-app-text font-medium text-sm transition-colors">
                 <ExternalLinkIcon className="w-4 h-4" />
                 فتح في خرائط Google
               </button>
@@ -211,22 +211,22 @@ const Contact = () => {
 
         {/* FAQ */}
         <AnimatedSection animation="fadeUp" className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-brown-900 mb-8 text-center flex items-center justify-center gap-3">
-            <HelpCircleIcon className="text-brown-600" />
+          <h2 className="text-2xl font-bold text-app-text mb-8 text-center flex items-center justify-center gap-3">
+            <HelpCircleIcon className="text-brand" />
             الأسئلة الشائعة
           </h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <Card key={i} className="border border-brown-300 overflow-hidden">
+              <Card key={i} className="border border-app-border overflow-hidden">
                 <button
                   onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
                   className="w-full text-right p-5 flex items-center justify-between gap-4"
                 >
-                  <span className="font-semibold text-brown-900">{faq.q}</span>
-                  <span className={`text-brown-600 transition-transform duration-300 ${expandedFaq === i ? 'rotate-180' : ''}`}>▼</span>
+                  <span className="font-semibold text-app-text">{faq.q}</span>
+                  <span className={`text-app-text-soft transition-transform duration-300 ${expandedFaq === i ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {expandedFaq === i && (
-                  <div className="px-5 pb-5 text-brown-700 text-sm leading-relaxed border-t border-brown-200 pt-4">
+                  <div className="px-5 pb-5 text-app-text-muted text-sm leading-relaxed border-t border-app-border pt-4">
                     {faq.a}
                   </div>
                 )}
@@ -237,9 +237,9 @@ const Contact = () => {
 
         {/* CTA */}
         <AnimatedSection animation="scaleIn" className="mt-16 text-center">
-          <Card className="p-8 bg-gradient-to-r from-brown-200/10 to-brown-300/10 border border-brown-300 inline-block w-full max-w-2xl">
-            <h2 className="text-xl font-bold text-brown-900 mb-3">هل تريد الاستثمار؟</h2>
-            <p className="text-brown-800 mb-6">تصفح الفرص الاستثمارية المتاحة والتحليل الاستثماري</p>
+          <Card className="p-8 bg-gradient-to-r from-brand/10 to-brand-deep/10 border border-app-border inline-block w-full max-w-2xl">
+            <h2 className="text-xl font-bold text-app-text mb-3">هل تريد الاستثمار؟</h2>
+            <p className="text-app-text-muted mb-6">تصفح الفرص الاستثمارية المتاحة والتحليل الاستثماري</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/opportunities">
                 <Button size="lg">تصفح الفرص</Button>

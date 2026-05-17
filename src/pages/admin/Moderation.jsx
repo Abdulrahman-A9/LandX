@@ -44,18 +44,18 @@ const AdminModeration = () => {
 
   const getTypeBadge = (type) => {
     const badges = {
-      opportunity: { label: 'فرصة استثمارية', className: 'bg-blue-500/20 text-blue-600 border-blue-500/30' },
-      news: { label: 'خبر', className: 'bg-purple-500/20 text-purple-600 border-purple-500/30' },
-      municipality: { label: 'بلدية', className: 'bg-green-500/20 text-green-600 border-green-500/30' },
+      opportunity: { label: 'فرصة استثمارية', className: 'bg-brand/20 text-brand border-brand/30' },
+      news: { label: 'خبر', className: 'bg-accent/20 text-accent border-accent/30' },
+      municipality: { label: 'بلدية', className: 'bg-success/20 text-success border-success/30' },
     };
     return badges[type] || badges.opportunity;
   };
 
   const getPriorityBadge = (priority) => {
     const badges = {
-      high: { label: 'عالية', className: 'bg-red-500/20 text-red-600 border-red-500/30' },
-      medium: { label: 'متوسطة', className: 'bg-yellow-500/20 text-yellow-600 border-yellow-500/30' },
-      low: { label: 'منخفضة', className: 'bg-gray-500/20 text-gray-600 border-gray-500/30' },
+      high: { label: 'عالية', className: 'bg-danger/20 text-danger border-danger/30' },
+      medium: { label: 'متوسطة', className: 'bg-warning/20 text-warning border-warning/30' },
+      low: { label: 'منخفضة', className: 'bg-muted/20 text-muted border-muted/30' },
     };
     return badges[priority] || badges.low;
   };
@@ -63,48 +63,48 @@ const AdminModeration = () => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-brown-900 dark:text-stone-100">المراجعة</h1>
-        <p className="text-brown-700 dark:text-stone-400 mt-2">مراجعة والموافقة على المحتوى المقدم</p>
+        <h1 className="text-3xl font-bold text-app-text">المراجعة</h1>
+        <p className="text-app-text-muted mt-2">مراجعة والموافقة على المحتوى المقدم</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">قيد المراجعة</h3>
-              <ClockIcon className="text-yellow-600" />
+              <h3 className="text-sm font-medium text-app-text-muted">قيد المراجعة</h3>
+              <ClockIcon className="text-warning" />
             </div>
-            <p className="text-3xl font-bold text-yellow-600">{pendingItems.length}</p>
+            <p className="text-3xl font-bold text-warning">{pendingItems.length}</p>
           </Card>
         </div>
 
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">أولوية عالية</h3>
-              <ShieldCheckIcon className="text-red-600" />
+              <h3 className="text-sm font-medium text-app-text-muted">أولوية عالية</h3>
+              <ShieldCheckIcon className="text-danger" />
             </div>
-            <p className="text-3xl font-bold text-red-600">
+            <p className="text-3xl font-bold text-danger">
               {pendingItems.filter(i => i.priority === 'high').length}
             </p>
           </Card>
         </div>
 
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">تمت المراجعة اليوم</h3>
-              <CheckIcon className="text-green-600" />
+              <h3 className="text-sm font-medium text-app-text-muted">تمت المراجعة اليوم</h3>
+              <CheckIcon className="text-success" />
             </div>
-            <p className="text-3xl font-bold text-green-600">5</p>
+            <p className="text-3xl font-bold text-success">5</p>
           </Card>
         </div>
       </div>
 
       <div>
-        <Card className="bg-card-gradient border border-brown-300">
-          <div className="p-6 border-b border-brown-300 dark:border-stone-700">
-            <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">المحتوى قيد المراجعة</h2>
+        <Card className="bg-card-gradient border border-app-border">
+          <div className="p-6 border-b border-app-border">
+            <h2 className="text-xl font-bold text-app-text">المحتوى قيد المراجعة</h2>
           </div>
           <div className="p-6">
             <div className="space-y-4">
@@ -114,12 +114,12 @@ const AdminModeration = () => {
                 return (
                   <div
                     key={item.id}
-                    className="p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg"
+                    className="p-4 bg-app-surface-soft border border-app-border rounded-lg"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-bold text-brown-900 dark:text-stone-100">{item.title}</h3>
+                          <h3 className="font-bold text-app-text">{item.title}</h3>
                           <span className={`px-3 py-1 rounded-full text-xs border ${typeBadge.className}`}>
                             {typeBadge.label}
                           </span>
@@ -127,22 +127,22 @@ const AdminModeration = () => {
                             {priorityBadge.label}
                           </span>
                         </div>
-                        <p className="text-sm text-brown-700 dark:text-stone-400">
+                        <p className="text-sm text-app-text-muted">
                           {item.municipality} • {item.submittedDate}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <p className="text-sm text-brown-600 dark:text-stone-400">قدم بواسطة: {item.submittedBy}</p>
+                      <p className="text-sm text-app-text-muted">قدم بواسطة: {item.submittedBy}</p>
                       <div className="flex gap-2">
-                        <button className="p-2 hover:bg-brown-100 dark:hover:bg-stone-700 rounded-lg transition-colors" title="عرض">
-                          <EyeIcon className="text-brown-600 dark:text-stone-400" />
+                        <button className="p-2 hover:bg-app-surface rounded-lg transition-colors" title="عرض">
+                          <EyeIcon className="text-brand" />
                         </button>
-                        <button className="p-2 hover:bg-green-100 dark:hover:bg-green-900/30 rounded-lg transition-colors" title="موافقة">
-                          <CheckIcon className="text-green-600" />
+                        <button className="p-2 hover:bg-success/10 rounded-lg transition-colors" title="موافقة">
+                          <CheckIcon className="text-success" />
                         </button>
-                        <button className="p-2 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors" title="رفض">
-                          <XIcon className="text-red-600" />
+                        <button className="p-2 hover:bg-danger/10 rounded-lg transition-colors" title="رفض">
+                          <XIcon className="text-danger" />
                         </button>
                       </div>
                     </div>

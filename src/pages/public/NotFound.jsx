@@ -6,21 +6,21 @@ import { SearchIcon, HomeIcon, ArrowRightIcon } from '../../components/ui/Icons'
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 text-brown-900 flex items-center justify-center px-4">
-      <Card className="text-center py-16 px-8 max-w-2xl w-full bg-card-gradient border border-brown-300 animate-fade-in">
-        <div className="w-24 h-24 bg-gradient-to-r from-brown-200/20 to-brown-300/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-brown-400">
-          <SearchIcon className="w-12 h-12 text-brown-600" />
+    <div className="min-h-screen bg-app-bg text-app-text flex items-center justify-center px-4">
+      <Card className="text-center py-16 px-8 max-w-2xl w-full bg-card-gradient border border-app-border animate-fade-in">
+        <div className="w-24 h-24 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-brand">
+          <SearchIcon className="w-12 h-12 text-brand" />
         </div>
         
-        <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brown-700 to-brown-500 mb-4">
+        <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep mb-4">
           404
         </h1>
         
-        <h2 className="text-2xl font-bold text-brown-900 mb-4">
+        <h2 className="text-2xl font-bold text-app-text mb-4">
           الصفحة غير موجودة
         </h2>
         
-        <p className="text-brown-700 mb-8 max-w-md mx-auto">
+        <p className="text-app-text-muted mb-8 max-w-md mx-auto">
           عذراً، الصفحة التي تبحث عنها غير موجودة أو قد تم نقلها. يمكنك العودة للصفحة الرئيسية أو تصفح الفرص الاستثمارية.
         </p>
         
@@ -40,18 +40,18 @@ const NotFound = () => {
           </Link>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-brown-300">
-          <p className="text-brown-600 text-sm mb-4">هل تحتاج مساعدة؟</p>
+        <div className="mt-8 pt-8 border-t border-app-border">
+          <p className="text-app-text-soft text-sm mb-4">هل تحتاج مساعدة؟</p>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
-            <Link to="/contact" className="text-brown-700 hover:text-brown-900 font-medium transition-colors">
+            <Link to="/contact" className="text-app-text-muted hover:text-app-text font-medium transition-colors">
               تواصل معنا
             </Link>
-            <span className="text-brown-400">|</span>
-            <Link to="/investment-analysis" className="text-brown-700 hover:text-brown-900 font-medium transition-colors">
+            <span className="text-muted">|</span>
+            <Link to="/investment-analysis" className="text-app-text-muted hover:text-app-text font-medium transition-colors">
               التحليل الاستثماري
             </Link>
-            <span className="text-brown-400">|</span>
-            <Link to="/investor-journey" className="text-brown-700 hover:text-brown-900 font-medium transition-colors">
+            <span className="text-muted">|</span>
+            <Link to="/investor-journey" className="text-app-text-muted hover:text-app-text font-medium transition-colors">
               رحلة المستثمر
             </Link>
           </div>

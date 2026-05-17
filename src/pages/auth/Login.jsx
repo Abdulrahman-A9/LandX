@@ -41,58 +41,58 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 dark:from-[#1c1917] dark:via-[#292524] dark:to-[#44403c] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-app-bg flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full animate-fade-in-up">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-br from-brown-200 to-brown-300 rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-brown-800 dark:text-stone-300 font-bold text-2xl">ل</span>
+            <div className="w-12 h-12 bg-gradient-to-br from-brand/30 to-brand-deep/30 rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-brand font-bold text-2xl">ل</span>
             </div>
-            <span className="text-3xl font-bold text-brown-900 dark:text-stone-100">LandX</span>
+            <span className="text-3xl font-bold text-app-text">LandX</span>
           </Link>
-          <h2 className="text-2xl font-bold text-brown-900 dark:text-stone-100 mb-2">تسجيل الدخول</h2>
-          <p className="text-brown-700 dark:text-stone-400">أدخل بياناتك للوصول إلى حسابك</p>
+          <h2 className="text-2xl font-bold text-app-text mb-2">تسجيل الدخول</h2>
+          <p className="text-app-text-muted">أدخل بياناتك للوصول إلى حسابك</p>
         </div>
 
-        <Card className="p-8 bg-card-gradient border border-brown-300 dark:border-stone-600 shadow-xl animate-scale-in">
+        <Card className="p-8 bg-card-gradient border border-app-border shadow-xl animate-scale-in">
           {error && (
-            <div className="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm">
+            <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-6 text-sm">
               {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-brown-800 dark:text-stone-300 mb-2">البريد الإلكتروني</label>
+              <label className="block text-sm font-semibold text-app-text-muted mb-2">البريد الإلكتروني</label>
               <div className="relative">
-                <MailIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+                <MailIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
                 <input
                   name="email" type="email" value={formData.email} onChange={handleChange} required
                   placeholder="investor@landx.sa"
-                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 dark:text-stone-100 border border-brown-300 dark:border-stone-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
+                  className="w-full pr-10 pl-4 py-3 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand placeholder-app-text-soft text-sm"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-brown-800 dark:text-stone-300 mb-2">كلمة المرور</label>
+              <label className="block text-sm font-semibold text-app-text-muted mb-2">كلمة المرور</label>
               <div className="relative">
-                <LockIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+                <LockIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
                 <input
                   name="password" type="password" value={formData.password} onChange={handleChange} required
                   placeholder="123456"
-                  className="w-full pr-10 pl-4 py-3 bg-pearl-100/80 text-brown-900 dark:text-stone-100 border border-brown-300 dark:border-stone-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 placeholder-brown-400 text-sm"
+                  className="w-full pr-10 pl-4 py-3 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand placeholder-app-text-soft text-sm"
                 />
               </div>
             </div>
 
             <div className="flex items-center justify-between text-sm">
-              <label className="flex items-center gap-2 text-brown-700 dark:text-stone-400 cursor-pointer">
-                <input type="checkbox" className="w-4 h-4 text-brown-600 border-brown-300 dark:border-stone-600 rounded focus:ring-brown-500" />
+              <label className="flex items-center gap-2 text-app-text-muted cursor-pointer">
+                <input type="checkbox" className="w-4 h-4 text-brand border-app-border rounded focus:ring-brand" />
                 تذكرني
               </label>
               <button type="button" onClick={() => alert('سيتم إرسال رابط إعادة التعيين')}
-                className="text-brown-700 dark:text-stone-300 hover:text-brown-900 dark:hover:text-stone-100 font-medium transition-colors">
+                className="text-app-text-muted hover:text-app-text font-medium transition-colors">
                 نسيت كلمة المرور؟
               </button>
             </div>
@@ -103,18 +103,18 @@ const Login = () => {
           </form>
 
           {/* Demo credentials helper */}
-          <div className="mt-6 p-4 bg-pearl-100/60 dark:bg-stone-800/60 border border-brown-300 dark:border-stone-600 rounded-lg text-sm text-brown-800 dark:text-stone-300">
-            <p className="font-semibold mb-2 text-brown-900 dark:text-stone-100">بيانات تجريبية للدخول:</p>
+          <div className="mt-6 p-4 bg-app-surface-soft border border-app-border rounded-lg text-sm text-app-text-muted">
+            <p className="font-semibold mb-2 text-app-text">بيانات تجريبية للدخول:</p>
             <div className="space-y-1">
               <p><span className="font-medium">مستثمر:</span> investor@landx.sa / 123456</p>
               <p><span className="font-medium">أمانة:</span> municipality@landx.sa / 123456</p>
             </div>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-brown-200 text-center">
-            <p className="text-brown-700 dark:text-stone-400 text-sm">
+          <div className="mt-6 pt-6 border-t border-app-border text-center">
+            <p className="text-app-text-muted text-sm">
               ليس لديك حساب؟{' '}
-              <Link to="/register" className="text-brown-900 dark:text-stone-200 hover:text-brown-700 dark:hover:text-stone-400 font-bold transition-colors">
+              <Link to="/register" className="text-app-text hover:text-brand font-bold transition-colors">
                 إنشاء حساب جديد
               </Link>
             </p>
@@ -122,7 +122,7 @@ const Login = () => {
         </Card>
 
         <div className="mt-6 text-center">
-          <Link to="/" className="text-brown-600 hover:text-brown-800 dark:text-stone-300 text-sm font-medium transition-colors">
+          <Link to="/" className="text-app-text-muted hover:text-app-text text-sm font-medium transition-colors">
             العودة للصفحة الرئيسية
           </Link>
         </div>

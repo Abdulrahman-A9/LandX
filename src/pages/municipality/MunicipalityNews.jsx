@@ -32,8 +32,8 @@ const MunicipalityNews = () => {
 
   const getStatusBadge = (status) => {
     const badges = {
-      published: { label: 'منشور', className: 'bg-green-500/20 text-green-600 border-green-500/30' },
-      draft: { label: 'مسودة', className: 'bg-gray-500/20 text-gray-600 border-gray-500/30' },
+      published: { label: 'منشور', className: 'bg-success/20 text-success border-success/30' },
+      draft: { label: 'مسودة', className: 'bg-muted/20 text-muted border-muted/30' },
     };
     return badges[status] || badges.draft;
   };
@@ -42,10 +42,10 @@ const MunicipalityNews = () => {
     <div>
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-brown-900 dark:text-stone-100">الأخبار</h1>
-          <p className="text-brown-700 dark:text-stone-400 mt-2">إدارة ونشر الأخبار والمستجدات</p>
+          <h1 className="text-3xl font-bold text-app-text">الأخبار</h1>
+          <p className="text-app-text-muted mt-2">إدارة ونشر الأخبار والمستجدات</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brown-600 to-brown-700 text-pearl-100 rounded-lg hover:from-brown-700 hover:to-brown-800 transition-all duration-300">
+        <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand to-brand-deep text-app-text rounded-lg hover:from-brand-deep hover:to-brand transition-all duration-300">
           <PlusIcon />
           <span>إضافة خبر جديد</span>
         </button>
@@ -53,34 +53,34 @@ const MunicipalityNews = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الأخبار</h3>
-              <NewspaperIcon className="text-brown-600 dark:text-stone-400" />
+              <h3 className="text-sm font-medium text-app-text-muted">إجمالي الأخبار</h3>
+              <NewspaperIcon className="text-brand" />
             </div>
-            <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{news.length}</p>
+            <p className="text-3xl font-bold text-app-text">{news.length}</p>
           </Card>
         </div>
 
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">منشور</h3>
-              <NewspaperIcon className="text-green-600" />
+              <h3 className="text-sm font-medium text-app-text-muted">منشور</h3>
+              <NewspaperIcon className="text-success" />
             </div>
-            <p className="text-3xl font-bold text-green-600">
+            <p className="text-3xl font-bold text-success">
               {news.filter(n => n.status === 'published').length}
             </p>
           </Card>
         </div>
 
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">مسودات</h3>
-              <NewspaperIcon className="text-gray-600" />
+              <h3 className="text-sm font-medium text-app-text-muted">مسودات</h3>
+              <NewspaperIcon className="text-muted" />
             </div>
-            <p className="text-3xl font-bold text-gray-600">
+            <p className="text-3xl font-bold text-muted">
               {news.filter(n => n.status === 'draft').length}
             </p>
           </Card>
@@ -88,9 +88,9 @@ const MunicipalityNews = () => {
       </div>
 
       <div>
-        <Card className="bg-card-gradient border border-brown-300">
-          <div className="p-6 border-b border-brown-300 dark:border-stone-700">
-            <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">قائمة الأخبار</h2>
+        <Card className="bg-card-gradient border border-app-border">
+          <div className="p-6 border-b border-app-border">
+            <h2 className="text-xl font-bold text-app-text">قائمة الأخبار</h2>
           </div>
           <div className="p-6">
             <div className="space-y-4">
@@ -99,30 +99,30 @@ const MunicipalityNews = () => {
                 return (
                   <div
                     key={item.id}
-                    className="p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg"
+                    className="p-4 bg-app-surface-soft border border-app-border rounded-lg"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-bold text-brown-900 dark:text-stone-100">{item.title}</h3>
+                          <h3 className="font-bold text-app-text">{item.title}</h3>
                           <span className={`px-3 py-1 rounded-full text-xs border ${badge.className}`}>
                             {badge.label}
                           </span>
                         </div>
-                        <p className="text-sm text-brown-700 dark:text-stone-400 mb-2">
+                        <p className="text-sm text-app-text-muted mb-2">
                           {item.category} • {item.date}
                         </p>
                       </div>
                       <div className="flex gap-2">
-                        <button className="p-2 hover:bg-brown-100 dark:hover:bg-stone-700 rounded-lg transition-colors" title="تعديل">
-                          <EditIcon className="text-brown-600 dark:text-stone-400" />
+                        <button className="p-2 hover:bg-app-surface rounded-lg transition-colors" title="تعديل">
+                          <EditIcon className="text-brand" />
                         </button>
-                        <button className="p-2 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-colors" title="حذف">
-                          <TrashIcon className="text-red-600" />
+                        <button className="p-2 hover:bg-danger/10 rounded-lg transition-colors" title="حذف">
+                          <TrashIcon className="text-danger" />
                         </button>
                       </div>
                     </div>
-                    <p className="text-brown-900 dark:text-stone-100">{item.summary}</p>
+                    <p className="text-app-text">{item.summary}</p>
                   </div>
                 );
               })}

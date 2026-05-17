@@ -32,75 +32,75 @@ const AdminAnalytics = () => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-brown-900 dark:text-stone-100">التقارير والتحليلات</h1>
-        <p className="text-brown-700 dark:text-stone-400 mt-2">نظرة شاملة على أداء المنصة والإحصائيات</p>
+        <h1 className="text-3xl font-bold text-app-text">التقارير والتحليلات</h1>
+        <p className="text-app-text-muted mt-2">نظرة شاملة على أداء المنصة والإحصائيات</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الاستثمار</h3>
-              <DollarSignIcon className="text-brown-600 dark:text-stone-400" />
+              <h3 className="text-sm font-medium text-app-text-muted">إجمالي الاستثمار</h3>
+              <DollarSignIcon className="text-brand" />
             </div>
-            <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{formatCurrency(stats.totalInvestment)} ر.س</p>
-            <p className="text-sm text-green-600 mt-2">+25% من الشهر الماضي</p>
+            <p className="text-3xl font-bold text-app-text">{formatCurrency(stats.totalInvestment)} ر.س</p>
+            <p className="text-sm text-success mt-2">+25% من الشهر الماضي</p>
           </Card>
         </div>
 
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">المستخدمين</h3>
-              <UsersIcon className="text-brown-600 dark:text-stone-400" />
+              <h3 className="text-sm font-medium text-app-text-muted">المستخدمين</h3>
+              <UsersIcon className="text-brand" />
             </div>
-            <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{stats.totalUsers}</p>
-            <p className="text-sm text-green-600 mt-2">+15 مستخدم جديد</p>
+            <p className="text-3xl font-bold text-app-text">{stats.totalUsers}</p>
+            <p className="text-sm text-success mt-2">+15 مستخدم جديد</p>
           </Card>
         </div>
 
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">الفرص الاستثمارية</h3>
-              <LeafIcon className="text-brown-600 dark:text-stone-400" />
+              <h3 className="text-sm font-medium text-app-text-muted">الفرص الاستثمارية</h3>
+              <LeafIcon className="text-brand" />
             </div>
-            <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{stats.totalOpportunities}</p>
-            <p className="text-sm text-green-600 mt-2">+3 فرص جديدة</p>
+            <p className="text-3xl font-bold text-app-text">{stats.totalOpportunities}</p>
+            <p className="text-sm text-success mt-2">+3 فرص جديدة</p>
           </Card>
         </div>
 
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">متوسط العائد</h3>
-              <TrendingUpIcon className="text-brown-600 dark:text-stone-400" />
+              <h3 className="text-sm font-medium text-app-text-muted">متوسط العائد</h3>
+              <TrendingUpIcon className="text-brand" />
             </div>
-            <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{stats.avgReturn}%</p>
-            <p className="text-sm text-green-600 mt-2">+2% من المعدل السابق</p>
+            <p className="text-3xl font-bold text-app-text">{stats.avgReturn}%</p>
+            <p className="text-sm text-success mt-2">+2% من المعدل السابق</p>
           </Card>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div>
-          <Card className="bg-card-gradient border border-brown-300 p-6">
+          <Card className="bg-card-gradient border border-app-border p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">توزيع الاستثمار حسب المنطقة</h2>
-              <PieChartIcon className="text-brown-600 dark:text-stone-400" />
+              <h2 className="text-xl font-bold text-app-text">توزيع الاستثمار حسب المنطقة</h2>
+              <PieChartIcon className="text-brand" />
             </div>
             <div className="space-y-4">
               {regionData.map((region, index) => (
                 <div key={index}>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-brown-900 dark:text-stone-100">{region.region}</span>
-                    <span className="text-sm text-brown-700 dark:text-stone-400">
+                    <span className="text-sm font-medium text-app-text">{region.region}</span>
+                    <span className="text-sm text-app-text-muted">
                       {formatCurrency(region.investment)} ر.س ({region.percentage}%)
                     </span>
                   </div>
-                  <div className="w-full bg-brown-200 dark:bg-stone-700 rounded-full h-2">
+                  <div className="w-full bg-app-border rounded-full h-2">
                     <div
-                      className="bg-gradient-to-r from-brown-600 to-brown-700 h-2 rounded-full transition-all duration-300"
+                      className="bg-gradient-to-r from-brand to-brand-deep h-2 rounded-full transition-all duration-300"
                       style={{ width: `${region.percentage}%` }}
                     ></div>
                   </div>
@@ -111,23 +111,23 @@ const AdminAnalytics = () => {
         </div>
 
         <div>
-          <Card className="bg-card-gradient border border-brown-300 p-6">
+          <Card className="bg-card-gradient border border-app-border p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">نمو الاستثمار الشهري</h2>
-              <BarChartIcon className="text-brown-600 dark:text-stone-400" />
+              <h2 className="text-xl font-bold text-app-text">نمو الاستثمار الشهري</h2>
+              <BarChartIcon className="text-brand" />
             </div>
             <div className="space-y-4">
               {monthlyData.map((data, index) => (
                 <div key={index}>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-brown-900 dark:text-stone-100">{data.month}</span>
-                    <span className="text-sm text-brown-700 dark:text-stone-400">
+                    <span className="text-sm font-medium text-app-text">{data.month}</span>
+                    <span className="text-sm text-app-text-muted">
                       {formatCurrency(data.investment)} ر.س ({data.users} مستخدم)
                     </span>
                   </div>
-                  <div className="w-full bg-brown-200 dark:bg-stone-700 rounded-full h-2">
+                  <div className="w-full bg-app-border rounded-full h-2">
                     <div
-                      className="bg-gradient-to-r from-green-600 to-green-700 h-2 rounded-full transition-all duration-300"
+                      className="bg-gradient-to-r from-success to-success/80 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${(data.investment / 900000) * 100}%` }}
                     ></div>
                   </div>
@@ -139,23 +139,23 @@ const AdminAnalytics = () => {
       </div>
 
       <div>
-        <Card className="bg-card-gradient border border-brown-300 p-6">
-          <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100 mb-6">أداء الفرص الاستثمارية</h2>
+        <Card className="bg-card-gradient border border-app-border p-6">
+          <h2 className="text-xl font-bold text-app-text mb-6">أداء الفرص الاستثمارية</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400 mb-2">أعلى عائد</h3>
-              <p className="text-2xl font-bold text-green-600">18%</p>
-              <p className="text-sm text-brown-900 dark:text-stone-100 mt-1">سهول القصيم</p>
+            <div className="p-4 bg-app-surface-soft border border-app-border rounded-lg">
+              <h3 className="text-sm font-medium text-app-text-muted mb-2">أعلى عائد</h3>
+              <p className="text-2xl font-bold text-success">18%</p>
+              <p className="text-sm text-app-text mt-1">سهول القصيم</p>
             </div>
-            <div className="p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400 mb-2">أكثر طلباً</h3>
-              <p className="text-2xl font-bold text-brown-900 dark:text-stone-100">23</p>
-              <p className="text-sm text-brown-900 dark:text-stone-100 mt-1">سهول القصيم</p>
+            <div className="p-4 bg-app-surface-soft border border-app-border rounded-lg">
+              <h3 className="text-sm font-medium text-app-text-muted mb-2">أكثر طلباً</h3>
+              <p className="text-2xl font-bold text-app-text">23</p>
+              <p className="text-sm text-app-text mt-1">سهول القصيم</p>
             </div>
-            <div className="p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400 mb-2">أكبر استثمار</h3>
-              <p className="text-2xl font-bold text-brown-900 dark:text-stone-100">{formatCurrency(1200000)} ر.س</p>
-              <p className="text-sm text-brown-900 dark:text-stone-100 mt-1">منطقة القصيم</p>
+            <div className="p-4 bg-app-surface-soft border border-app-border rounded-lg">
+              <h3 className="text-sm font-medium text-app-text-muted mb-2">أكبر استثمار</h3>
+              <p className="text-2xl font-bold text-app-text">{formatCurrency(1200000)} ر.س</p>
+              <p className="text-sm text-app-text mt-1">منطقة القصيم</p>
             </div>
           </div>
         </Card>

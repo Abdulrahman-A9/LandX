@@ -44,8 +44,8 @@ const MunicipalityInquiries = () => {
 
   const getStatusBadge = (status) => {
     const badges = {
-      pending: { label: 'جديد', className: 'bg-yellow-500/20 text-yellow-600 border-yellow-500/30' },
-      answered: { label: 'تم الرد', className: 'bg-green-500/20 text-green-600 border-green-500/30' },
+      pending: { label: 'جديد', className: 'bg-warning/10 text-warning border-warning/30' },
+      answered: { label: 'تم الرد', className: 'bg-success/10 text-success border-success/30' },
     };
     return badges[status] || badges.pending;
   };
@@ -53,53 +53,53 @@ const MunicipalityInquiries = () => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-brown-900 dark:text-stone-100">استفسارات المستثمرين</h1>
-        <p className="text-brown-700 dark:text-stone-400 mt-2">الرد على استفسارات المستثمرين وتوفير المعلومات</p>
+        <h1 className="text-3xl font-bold text-app-text">استفسارات المستثمرين</h1>
+        <p className="text-app-text-muted mt-2">الرد على استفسارات المستثمرين وتوفير المعلومات</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">إجمالي الاستفسارات</h3>
-              <MessageCircleIcon className="text-brown-600 dark:text-stone-400" />
+              <h3 className="text-sm font-medium text-app-text-muted">إجمالي الاستفسارات</h3>
+              <MessageCircleIcon className="text-app-text-soft" />
             </div>
-            <p className="text-3xl font-bold text-brown-900 dark:text-stone-100">{inquiries.length}</p>
-            <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">استفسار</p>
+            <p className="text-3xl font-bold text-app-text">{inquiries.length}</p>
+            <p className="text-sm text-app-text-soft mt-2">استفسار</p>
           </Card>
         </div>
 
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">جديد</h3>
-              <MessageCircleIcon className="text-yellow-600" />
+              <h3 className="text-sm font-medium text-app-text-muted">جديد</h3>
+              <MessageCircleIcon className="text-warning" />
             </div>
-            <p className="text-3xl font-bold text-yellow-600">
+            <p className="text-3xl font-bold text-warning">
               {inquiries.filter(i => i.status === 'pending').length}
             </p>
-            <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">بانتظار الرد</p>
+            <p className="text-sm text-app-text-soft mt-2">بانتظار الرد</p>
           </Card>
         </div>
 
         <div>
-          <Card className="p-6 bg-card-gradient border border-brown-300">
+          <Card className="p-6 bg-card-gradient border border-app-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-brown-700 dark:text-stone-400">تم الرد</h3>
-              <CheckIcon className="text-green-600" />
+              <h3 className="text-sm font-medium text-app-text-muted">تم الرد</h3>
+              <CheckIcon className="text-success" />
             </div>
-            <p className="text-3xl font-bold text-green-600">
+            <p className="text-3xl font-bold text-success">
               {inquiries.filter(i => i.status === 'answered').length}
             </p>
-            <p className="text-sm text-brown-600 dark:text-stone-400 mt-2">استفسار</p>
+            <p className="text-sm text-app-text-soft mt-2">استفسار</p>
           </Card>
         </div>
       </div>
 
       <div>
-        <Card className="bg-card-gradient border border-brown-300">
-          <div className="p-6 border-b border-brown-300 dark:border-stone-700">
-            <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">قائمة الاستفسارات</h2>
+        <Card className="bg-card-gradient border border-app-border">
+          <div className="p-6 border-b border-app-border">
+            <h2 className="text-xl font-bold text-app-text">قائمة الاستفسارات</h2>
           </div>
           <div className="p-6">
             <div className="space-y-4">
@@ -108,25 +108,24 @@ const MunicipalityInquiries = () => {
                 return (
                   <div
                     key={inquiry.id}
-                    className="p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg"
-                  >
+                    className="p-4 bg-app-surface-soft border border-app-border rounded-lg">
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-bold text-brown-900 dark:text-stone-100">{inquiry.investor}</h3>
+                          <h3 className="font-bold text-app-text">{inquiry.investor}</h3>
                           <span className={`px-3 py-1 rounded-full text-xs border ${badge.className}`}>
                             {badge.label}
                           </span>
                         </div>
-                        <p className="text-sm text-brown-700 dark:text-stone-400 mb-1">
+                        <p className="text-sm text-app-text-muted mb-1">
                           {inquiry.opportunity} • {inquiry.date}
                         </p>
-                        <p className="font-medium text-brown-900 dark:text-stone-100 mb-2">{inquiry.subject}</p>
+                        <p className="font-medium text-app-text mb-2">{inquiry.subject}</p>
                       </div>
                     </div>
-                    <p className="text-brown-900 dark:text-stone-100 mb-4">{inquiry.message}</p>
+                    <p className="text-app-text mb-4">{inquiry.message}</p>
                     {inquiry.status === 'pending' && (
-                      <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brown-600 to-brown-700 text-pearl-100 rounded-lg hover:from-brown-700 hover:to-brown-800 transition-all duration-300 text-sm">
+                      <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand to-brand-deep text-app-text rounded-lg hover:from-brand-deep hover:to-brand transition-all duration-300 text-sm">
                         <ReplyIcon />
                         <span>الرد على الاستفسار</span>
                       </button>

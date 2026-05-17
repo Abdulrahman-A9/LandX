@@ -30,20 +30,20 @@ const AdminSettings = () => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-brown-900 dark:text-stone-100">إعدادات المنصة</h1>
-        <p className="text-brown-700 dark:text-stone-400 mt-2">إدارة إعدادات المنصة العامة</p>
+        <h1 className="text-3xl font-bold text-app-text">إعدادات المنصة</h1>
+        <p className="text-app-text-muted mt-2">إدارة إعدادات المنصة العامة</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
-          <Card className="bg-card-gradient border border-brown-300 p-6">
+          <Card className="bg-card-gradient border border-app-border p-6">
             <div className="flex items-center gap-3 mb-6">
-              <PaletteIcon className="text-brown-600 dark:text-stone-400" />
-              <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">إعدادات الموقع</h2>
+              <PaletteIcon className="text-app-text-soft" />
+              <h2 className="text-xl font-bold text-app-text">إعدادات الموقع</h2>
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-brown-700 dark:text-stone-400 mb-2">
+                <label className="block text-sm font-medium text-app-text-muted mb-2">
                   اسم الموقع
                 </label>
                 <input
@@ -51,12 +51,12 @@ const AdminSettings = () => {
                   name="siteName"
                   value={settings.siteName}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-brown-300 rounded-lg bg-pearl-100 dark:bg-stone-800 text-brown-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-brown-500"
+                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-brown-700 dark:text-stone-400 mb-2">
+                <label className="block text-sm font-medium text-app-text-muted mb-2">
                   وصف الموقع
                 </label>
                 <textarea
@@ -64,12 +64,12 @@ const AdminSettings = () => {
                   value={settings.siteDescription}
                   onChange={handleChange}
                   rows="3"
-                  className="w-full px-4 py-2 border border-brown-300 rounded-lg bg-pearl-100 dark:bg-stone-800 text-brown-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-brown-500 resize-none"
+                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-brown-700 dark:text-stone-400 mb-2">
+                <label className="block text-sm font-medium text-app-text-muted mb-2">
                   البريد الإلكتروني للتواصل
                 </label>
                 <input
@@ -77,12 +77,12 @@ const AdminSettings = () => {
                   name="contactEmail"
                   value={settings.contactEmail}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-brown-300 rounded-lg bg-pearl-100 dark:bg-stone-800 text-brown-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-brown-500"
+                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-brown-700 dark:text-stone-400 mb-2">
+                <label className="block text-sm font-medium text-app-text-muted mb-2">
                   رقم الهاتف للتواصل
                 </label>
                 <input
@@ -90,7 +90,7 @@ const AdminSettings = () => {
                   name="contactPhone"
                   value={settings.contactPhone}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-brown-300 rounded-lg bg-pearl-100 dark:bg-stone-800 text-brown-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-brown-500"
+                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
                 />
               </div>
             </div>
@@ -98,16 +98,16 @@ const AdminSettings = () => {
         </div>
 
         <div>
-          <Card className="bg-card-gradient border border-brown-300 p-6">
+          <Card className="bg-card-gradient border border-app-border p-6">
             <div className="flex items-center gap-3 mb-6">
-              <ShieldIcon className="text-brown-600 dark:text-stone-400" />
-              <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">إعدادات النظام</h2>
+              <ShieldIcon className="text-app-text-soft" />
+              <h2 className="text-xl font-bold text-app-text">إعدادات النظام</h2>
             </div>
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg">
+              <div className="flex items-center justify-between p-4 bg-app-surface-soft border border-app-border rounded-lg">
                 <div>
-                  <p className="font-medium text-brown-900 dark:text-stone-100">وضع الصيانة</p>
-                  <p className="text-sm text-brown-700 dark:text-stone-400">إيقاف الموقع مؤقتاً للصيانة</p>
+                  <p className="font-medium text-app-text">وضع الصيانة</p>
+                  <p className="text-sm text-app-text-muted">إيقاف الموقع مؤقتاً للصيانة</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
@@ -117,14 +117,14 @@ const AdminSettings = () => {
                     onChange={handleChange}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-brown-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brown-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brown-600"></div>
+                  <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brand rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
                 </label>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg">
+              <div className="flex items-center justify-between p-4 bg-app-surface-soft border border-app-border rounded-lg">
                 <div>
-                  <p className="font-medium text-brown-900 dark:text-stone-100">التسجيل المفتوح</p>
-                  <p className="text-sm text-brown-700 dark:text-stone-400">السماح للمستخدمين الجدد بالتسجيل</p>
+                  <p className="font-medium text-app-text">التسجيل المفتوح</p>
+                  <p className="text-sm text-app-text-muted">السماح للمستخدمين الجدد بالتسجيل</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
@@ -134,12 +134,12 @@ const AdminSettings = () => {
                     onChange={handleChange}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-brown-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brown-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brown-600"></div>
+                  <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brand rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
                 </label>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-brown-700 dark:text-stone-400 mb-2">
+                <label className="block text-sm font-medium text-app-text-muted mb-2">
                   الحد الأقصى لحجم الملف (MB)
                 </label>
                 <input
@@ -147,7 +147,7 @@ const AdminSettings = () => {
                   name="maxFileSize"
                   value={settings.maxFileSize}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-brown-300 rounded-lg bg-pearl-100 dark:bg-stone-800 text-brown-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-brown-500"
+                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
                 />
               </div>
             </div>
@@ -155,16 +155,16 @@ const AdminSettings = () => {
         </div>
 
         <div>
-          <Card className="bg-card-gradient border border-brown-300 p-6">
+          <Card className="bg-card-gradient border border-app-border p-6">
             <div className="flex items-center gap-3 mb-6">
-              <BellIcon className="text-brown-600 dark:text-stone-400" />
-              <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">إعدادات الإشعارات</h2>
+              <BellIcon className="text-app-text-soft" />
+              <h2 className="text-xl font-bold text-app-text">إعدادات الإشعارات</h2>
             </div>
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg">
+              <div className="flex items-center justify-between p-4 bg-app-surface-soft border border-app-border rounded-lg">
                 <div>
-                  <p className="font-medium text-brown-900 dark:text-stone-100">إشعارات البريد الإلكتروني</p>
-                  <p className="text-sm text-brown-700 dark:text-stone-400">إرسال إشعارات عبر البريد الإلكتروني</p>
+                  <p className="font-medium text-app-text">إشعارات البريد الإلكتروني</p>
+                  <p className="text-sm text-app-text-muted">إرسال إشعارات عبر البريد الإلكتروني</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
@@ -174,14 +174,14 @@ const AdminSettings = () => {
                     onChange={handleChange}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-brown-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brown-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brown-600"></div>
+                  <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brand rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
                 </label>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg">
+              <div className="flex items-center justify-between p-4 bg-app-surface-soft border border-app-border rounded-lg">
                 <div>
-                  <p className="font-medium text-brown-900 dark:text-stone-100">إشعارات الرسائل النصية</p>
-                  <p className="text-sm text-brown-700 dark:text-stone-400">إرسال إشعارات عبر SMS</p>
+                  <p className="font-medium text-app-text">إشعارات الرسائل النصية</p>
+                  <p className="text-sm text-app-text-muted">إرسال إشعارات عبر SMS</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
@@ -191,7 +191,7 @@ const AdminSettings = () => {
                     onChange={handleChange}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-brown-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brown-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brown-600"></div>
+                  <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brand rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
                 </label>
               </div>
             </div>
@@ -199,26 +199,26 @@ const AdminSettings = () => {
         </div>
 
         <div>
-          <Card className="bg-card-gradient border border-brown-300 p-6">
+          <Card className="bg-card-gradient border border-app-border p-6">
             <div className="flex items-center gap-3 mb-6">
-              <DatabaseIcon className="text-brown-600 dark:text-stone-400" />
-              <h2 className="text-xl font-bold text-brown-900 dark:text-stone-100">إعدادات قاعدة البيانات</h2>
+              <DatabaseIcon className="text-app-text-soft" />
+              <h2 className="text-xl font-bold text-app-text">إعدادات قاعدة البيانات</h2>
             </div>
             <div className="space-y-4">
-              <div className="p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg">
-                <p className="font-medium text-brown-900 dark:text-stone-100 mb-2">حجم قاعدة البيانات</p>
-                <p className="text-sm text-brown-700 dark:text-stone-400">125 MB من 1 GB</p>
-                <div className="w-full bg-brown-200 dark:bg-stone-700 rounded-full h-2 mt-2">
-                  <div className="bg-gradient-to-r from-brown-600 to-brown-700 h-2 rounded-full" style={{ width: '12.5%' }}></div>
+              <div className="p-4 bg-app-surface-soft border border-app-border rounded-lg">
+                <p className="font-medium text-app-text mb-2">حجم قاعدة البيانات</p>
+                <p className="text-sm text-app-text-muted">125 MB من 1 GB</p>
+                <div className="w-full bg-muted rounded-full h-2 mt-2">
+                  <div className="bg-gradient-to-r from-brand to-brand-deep h-2 rounded-full" style={{ width: '12.5%' }}></div>
                 </div>
               </div>
 
-              <div className="p-4 bg-pearl-100/50 dark:bg-stone-800/50 border border-brown-300 dark:border-stone-700 rounded-lg">
-                <p className="font-medium text-brown-900 dark:text-stone-100 mb-2">آخر نسخة احتياطية</p>
-                <p className="text-sm text-brown-700 dark:text-stone-400">2024-05-15 02:00 AM</p>
+              <div className="p-4 bg-app-surface-soft border border-app-border rounded-lg">
+                <p className="font-medium text-app-text mb-2">آخر نسخة احتياطية</p>
+                <p className="text-sm text-app-text-muted">2024-05-15 02:00 AM</p>
               </div>
 
-              <button className="w-full py-2 bg-gradient-to-r from-brown-600 to-brown-700 text-pearl-100 rounded-lg hover:from-brown-700 hover:to-brown-800 transition-all duration-300">
+              <button className="w-full py-2 bg-gradient-to-r from-brand to-brand-deep text-app-text rounded-lg hover:from-brand-deep hover:to-brand transition-all duration-300">
                 إنشاء نسخة احتياطية الآن
               </button>
             </div>
@@ -229,7 +229,7 @@ const AdminSettings = () => {
       <div className="mt-6 flex justify-end">
         <button
           onClick={handleSave}
-          className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-green-600 to-green-700 text-pearl-100 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300"
+          className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-success to-success/90 text-app-text rounded-lg hover:from-success/90 hover:to-success transition-all duration-300"
         >
           <SaveIcon />
           <span>حفظ الإعدادات</span>

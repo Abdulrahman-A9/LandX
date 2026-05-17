@@ -39,14 +39,14 @@ const News = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 dark:from-[#1c1917] dark:via-[#292524] dark:to-[#44403c] text-brown-900 dark:text-stone-100">
+    <div className="min-h-screen bg-app-bg text-app-text">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-brown-600/90 to-brown-700/90 border-b border-brown-400/20 backdrop-blur">
+      <div className="bg-gradient-to-r from-brand/90 to-brand-deep/90 border-b border-brand/20 backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold text-white mb-4">
+          <h1 className="text-4xl font-bold text-app-text mb-4">
             الأخبار والإعلانات
           </h1>
-          <p className="text-xl text-pearl-100 max-w-3xl">
+          <p className="text-xl text-app-text-muted max-w-3xl">
             تابع آخر الأخبار والتحديثات من البلديات الشريكة والمنصة
           </p>
         </div>
@@ -55,7 +55,7 @@ const News = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <AnimatedSection animation="fadeUp">
         {/* Tabs */}
-        <div className="flex gap-2 mb-6 border-b border-brown-300 pb-1">
+        <div className="flex gap-2 mb-6 border-b border-app-border pb-1">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -65,13 +65,13 @@ const News = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-6 py-3 font-semibold text-sm transition-all duration-300 rounded-t-lg ${
                   isActive
-                    ? 'bg-gradient-to-r from-brown-600 to-brown-500 text-white shadow-md'
-                    : 'text-brown-700 hover:text-brown-900 hover:bg-brown-200/30'
+                    ? 'bg-gradient-to-r from-brand to-brand-deep text-app-text shadow-md'
+                    : 'text-app-text-muted hover:text-app-text hover:bg-app-surface-soft'
                 }`}
               >
                 <Icon className="w-4 h-4" />
                 {tab.label}
-                <span className={`mr-1 text-xs px-2 py-0.5 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-brown-200 text-brown-700'}`}>
+                <span className={`mr-1 text-xs px-2 py-0.5 rounded-full ${isActive ? 'bg-app-surface/20 text-app-text' : 'bg-app-surface text-app-text-muted'}`}>
                   {tab.id === 'news' ? mockNews.length : mockAnnouncements.length}
                 </span>
               </button>
@@ -82,24 +82,24 @@ const News = () => {
 
         {/* Search & Filters */}
         <AnimatedSection animation="fadeUp">
-        <Card className="p-4 mb-8 bg-card-gradient border border-brown-300">
+        <Card className="p-4 mb-8 bg-card-gradient border border-app-border">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
-              <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+              <SearchIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
               <input
                 type="text"
                 placeholder="ابحث في العناوين أو المحتوى..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pr-10 pl-4 py-2.5 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 text-sm"
+                className="w-full pr-10 pl-4 py-2.5 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm"
               />
             </div>
             <div className="md:w-64 relative">
-              <FilterIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-500" />
+              <FilterIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
               <select
                 value={selectedMunicipality}
                 onChange={(e) => setSelectedMunicipality(e.target.value)}
-                className="w-full pr-10 pl-4 py-2.5 bg-pearl-100/80 text-brown-900 border border-brown-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-500 text-sm appearance-none"
+                className="w-full pr-10 pl-4 py-2.5 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm appearance-none"
               >
                 {municipalities.map((m) => (
                   <option key={m} value={m}>
@@ -120,8 +120,8 @@ const News = () => {
 
         {/* Results Count */}
         <div className="flex items-center justify-between mb-6">
-          <p className="text-brown-700 text-sm">
-            <span className="font-bold text-brown-900">{filteredData.length}</span> نتيجة
+          <p className="text-app-text-muted text-sm">
+            <span className="font-bold text-app-text">{filteredData.length}</span> نتيجة
           </p>
         </div>
 
@@ -136,10 +136,10 @@ const News = () => {
           </div>
         ) : (
           <AnimatedSection animation="scaleIn">
-            <Card className="text-center py-16 bg-card-gradient border border-brown-300">
-              <SearchIcon className="w-16 h-16 text-brown-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-brown-900 mb-2">لا توجد نتائج</h3>
-              <p className="text-brown-700 mb-6">جرّب تغيير كلمات البحث أو الفلاتر</p>
+            <Card className="text-center py-16 bg-card-gradient border border-app-border">
+              <SearchIcon className="w-16 h-16 text-app-text-soft mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-app-text mb-2">لا توجد نتائج</h3>
+              <p className="text-app-text-muted mb-6">جرّب تغيير كلمات البحث أو الفلاتر</p>
               <Button variant="outline" onClick={clearFilters}>
                 مسح الفلاتر
               </Button>

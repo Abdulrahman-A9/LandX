@@ -39,19 +39,19 @@ const DashboardLayout = ({ role = 'investor' }) => {
   const { isDark, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 dark:from-[#1c1917] dark:via-[#292524] dark:to-[#44403c] text-brown-900 dark:text-stone-100">
-      <aside className="w-full md:w-64 bg-gradient-to-b from-brown-600 to-brown-700 dark:from-stone-800 dark:to-stone-900 border-r border-brown-400/20 dark:border-stone-700/40 flex-shrink-0">
-        <div className="p-6 border-b border-brown-400/20">
+    <div className="min-h-screen flex flex-col md:flex-row bg-app-bg text-app-text">
+      <aside className="w-full md:w-64 bg-gradient-to-b from-brand to-brand-deep border-r border-app-border flex-shrink-0">
+        <div className="p-6 border-b border-app-border">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-pearl-200 to-pearl-300 rounded-lg flex items-center justify-center">
-              <span className="text-brown-700 font-bold text-lg">ل</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-brand/30 to-brand-deep/30 rounded-lg flex items-center justify-center">
+              <span className="text-brand font-bold text-lg">ل</span>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-pearl-100 to-pearl-200 bg-clip-text text-transparent">LandX</span>
+            <span className="text-xl font-bold bg-gradient-to-r from-brand/50 to-brand-deep/50 bg-clip-text text-transparent">LandX</span>
           </Link>
         </div>
         
         <nav className="p-4">
-          <p className="text-xs font-semibold text-pearl-100 uppercase tracking-wider mb-4">
+          <p className="text-xs font-semibold text-app-text-muted uppercase tracking-wider mb-4">
             {roleTitle}
           </p>
           <ul className="space-y-1">
@@ -61,11 +61,11 @@ const DashboardLayout = ({ role = 'investor' }) => {
                   to={item.path}
                   className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 ${
                     location.pathname === item.path
-                      ? 'bg-gradient-to-r from-pearl-200/20 to-pearl-300/20 text-pearl-100 border border-pearl-400/30 font-medium'
-                      : 'text-pearl-100 hover:bg-pearl-300/30 hover:text-white'
+                      ? 'bg-gradient-to-r from-brand/20 to-brand-deep/20 text-app-text border border-brand/30 font-medium'
+                      : 'text-app-text-muted hover:bg-brand/10 hover:text-app-text'
                   }`}
                 >
-                  <span className="text-lg text-pearl-100">{item.icon}</span>
+                  <span className="text-lg text-app-text-muted">{item.icon}</span>
                   <span>{item.label}</span>
                 </Link>
               </li>
@@ -73,10 +73,10 @@ const DashboardLayout = ({ role = 'investor' }) => {
           </ul>
         </nav>
         
-        <div className="p-4 border-t border-brown-400/20 dark:border-stone-700/40">
+        <div className="p-4 border-t border-app-border">
           <button
             onClick={toggleTheme}
-            className="flex items-center gap-3 px-3 py-2 text-pearl-100 hover:bg-pearl-300/30 hover:text-white rounded-lg transition-all duration-300 w-full"
+            className="flex items-center gap-3 px-3 py-2 text-app-text-muted hover:bg-brand/10 hover:text-app-text rounded-lg transition-all duration-300 w-full"
             title={isDark ? 'الوضع الفاتح' : 'الوضع الداكن'}
             aria-label="Toggle theme"
           >
@@ -85,22 +85,22 @@ const DashboardLayout = ({ role = 'investor' }) => {
           </button>
           <Link
             to="/"
-            className="flex items-center gap-3 px-3 py-2 text-pearl-100 hover:bg-pearl-300/30 hover:text-white rounded-lg transition-all duration-300 mt-2"
+            className="flex items-center gap-3 px-3 py-2 text-app-text-muted hover:bg-brand/10 hover:text-app-text rounded-lg transition-all duration-300 mt-2"
           >
-            <HomeIcon className="text-lg text-pearl-100" />
+            <HomeIcon className="text-lg text-app-text-muted" />
             <span>العودة للرئيسية</span>
           </Link>
           <Link
             to="/logout"
-            className="flex items-center gap-3 px-3 py-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-300 mt-2"
+            className="flex items-center gap-3 px-3 py-2 text-danger hover:bg-danger/10 rounded-lg transition-all duration-300 mt-2"
           >
-            <LogOutIcon className="text-lg text-pearl-100" />
+            <LogOutIcon className="text-lg text-app-text-muted" />
             <span>تسجيل الخروج</span>
           </Link>
         </div>
       </aside>
       
-      <main className="flex-1 overflow-auto bg-gradient-to-br from-pearl-50 via-pearl-100 to-brown-200 dark:from-[#1c1917] dark:via-[#292524] dark:to-[#44403c]">
+      <main className="flex-1 overflow-auto bg-app-bg">
         <div className="p-6">
           <Outlet />
         </div>
