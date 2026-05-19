@@ -16,9 +16,9 @@ const AnimatedSection = ({
       className={className}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(18px)',
-        filter: isVisible ? 'blur(0)' : 'blur(6px)',
-        transition: 'opacity 700ms ease, transform 700ms ease, filter 700ms ease',
+        transform: isVisible ? 'translateY(0)' : 'translateY(12px)',
+        filter: isVisible ? 'blur(0)' : 'blur(3px)',
+        transition: 'opacity 650ms ease, transform 650ms ease, filter 650ms ease',
         transitionDelay: isVisible && delay > 0 ? `${delay}ms` : undefined,
         willChange: 'opacity, transform, filter',
       }}

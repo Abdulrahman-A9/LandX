@@ -172,36 +172,44 @@ const Home = () => {
 
             <AnimatedSection className="lg:pl-4" delay={120}>
               <div className="grid gap-4">
-                <Card className="bg-card-gradient border border-app-border p-6 rounded-3xl shadow-2xl shadow-black/10">
-                  <div className="flex items-start justify-between gap-4 mb-6">
-                    <div>
-                      <p className="text-app-text-soft text-sm font-semibold mb-2">لوحة رؤية</p>
-                      <h3 className="text-2xl font-bold text-app-text">الفرص ملخصة بوضوح</h3>
-                    </div>
-                    <div className="w-12 h-12 rounded-2xl bg-brand/15 border border-brand/30 flex items-center justify-center text-brand">
-                      <BuildingIcon className="w-6 h-6" />
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3">
-                    {insightItems.map((item) => (
-                      <div key={item.label} className="rounded-2xl border border-app-border bg-app-surface-soft/80 p-4 flex items-center justify-between gap-4">
-                        <div>
-                          <div className="text-sm text-app-text-soft">{item.label}</div>
-                          <div className="text-lg font-semibold text-app-text mt-1">{item.value}</div>
-                        </div>
-                        <div className="text-sm text-app-text-muted max-w-[16rem] text-left">
-                          {item.detail}
-                        </div>
+                <Card className="relative overflow-hidden rounded-[2rem] border border-app-border bg-gradient-to-br from-app-surface via-app-surface-strong to-app-bg px-6 py-6 shadow-2xl shadow-black/20 backdrop-blur-xl">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(197,123,69,0.08),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(130,65,35,0.12),transparent_40%)]" />
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between gap-4 mb-6">
+                      <div className="flex items-center gap-2 pt-2">
+                        <span className="w-3 h-3 rounded-full bg-app-text-soft/35" />
+                        <span className="w-3 h-3 rounded-full bg-app-text-soft/35" />
+                        <span className="w-3 h-3 rounded-full bg-app-text-soft/35" />
                       </div>
-                    ))}
+                      <div className="text-right">
+                        <p className="text-app-text-soft text-sm font-semibold mb-2">لوحة رؤية</p>
+                        <h3 className="text-2xl md:text-3xl font-black text-app-text">الفرص ملخصة بوضوح</h3>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-3">
+                      {insightItems.map((item) => (
+                        <div
+                          key={item.label}
+                          className="rounded-[1.35rem] border border-app-border/70 bg-app-bg/35 px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+                        >
+                          <div className="flex items-center justify-between gap-4">
+                            <div className="text-right">
+                              <div className="text-base font-semibold text-app-text">{item.label}</div>
+                              <div className="text-sm text-app-text-muted mt-1">{item.detail}</div>
+                            </div>
+                            <div className="shrink-0 text-2xl md:text-3xl font-black text-app-text">{item.value}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </Card>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Card className="bg-card-gradient border border-app-border p-5 rounded-3xl">
+                  <Card className="bg-app-surface/80 border border-app-border p-5 rounded-[1.75rem] shadow-lg shadow-black/10 backdrop-blur-sm">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="w-10 h-10 rounded-2xl bg-brand/15 border border-brand/25 flex items-center justify-center text-brand">
+                      <span className="w-10 h-10 rounded-2xl bg-app-bg/35 border border-app-border/70 flex items-center justify-center text-accent">
                         <TargetIcon className="w-5 h-5" />
                       </span>
                       <h4 className="font-semibold text-app-text">الأولوية</h4>
@@ -209,9 +217,9 @@ const Home = () => {
                     <p className="text-app-text-muted text-sm leading-7">تحليل هادئ ومختصر للفرص التي تستحق أن تكمل معها بدون ضوضاء.</p>
                   </Card>
 
-                  <Card className="bg-card-gradient border border-app-border p-5 rounded-3xl">
+                  <Card className="bg-app-surface/80 border border-app-border p-5 rounded-[1.75rem] shadow-lg shadow-black/10 backdrop-blur-sm">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="w-10 h-10 rounded-2xl bg-success/15 border border-success/25 flex items-center justify-center text-success">
+                      <span className="w-10 h-10 rounded-2xl bg-app-bg/35 border border-app-border/70 flex items-center justify-center text-app-text-soft">
                         <HandshakeIcon className="w-5 h-5" />
                       </span>
                       <h4 className="font-semibold text-app-text">الشراكة</h4>
