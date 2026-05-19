@@ -171,61 +171,62 @@ const Home = () => {
             </AnimatedSection>
 
             <AnimatedSection className="lg:pl-4" delay={120}>
-              <div className="grid gap-4">
-                <Card className="relative overflow-hidden rounded-[2rem] border border-app-border bg-gradient-to-br from-app-surface via-app-surface-strong to-app-bg px-6 py-6 shadow-2xl shadow-black/20 backdrop-blur-xl">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(197,123,69,0.08),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(130,65,35,0.12),transparent_40%)]" />
-                  <div className="relative z-10">
-                    <div className="flex items-start justify-between gap-4 mb-6">
-                      <div className="flex items-center gap-2 pt-2">
-                        <span className="w-3 h-3 rounded-full bg-app-text-soft/35" />
-                        <span className="w-3 h-3 rounded-full bg-app-text-soft/35" />
-                        <span className="w-3 h-3 rounded-full bg-app-text-soft/35" />
-                      </div>
-                      <div className="text-right">
-                        <p className="text-app-text-soft text-sm font-semibold mb-2">لوحة رؤية</p>
-                        <h3 className="text-2xl md:text-3xl font-black text-app-text">الفرص ملخصة بوضوح</h3>
-                      </div>
+              <div
+                dir="ltr"
+                className="rounded-[2.5rem] border border-app-border/80 bg-[#2f1c14]/95 p-5 sm:p-6 lg:p-7 shadow-[0_28px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+              >
+                <div className="flex items-start justify-between gap-4 mb-8">
+                  <div className="flex items-center gap-2 pt-1.5">
+                    <span className="w-3.5 h-3.5 rounded-full bg-app-text-soft/45" />
+                    <span className="w-3.5 h-3.5 rounded-full bg-app-text-soft/45" />
+                    <span className="w-3.5 h-3.5 rounded-full bg-app-text-soft/45" />
+                  </div>
+                  <div className="text-right">
+                    <p className="text-app-text-soft text-sm md:text-base font-medium">LandX</p>
+                    <h3 className="mt-3 text-2xl md:text-3xl font-black text-app-text">لوحة رؤية</h3>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 lg:grid-cols-[0.95fr_1.15fr]">
+                  <div className="grid gap-4">
+                    <div className="rounded-[2rem] border border-app-border/70 bg-gradient-to-br from-[#4a2a1d]/90 to-[#3d2419]/90 p-6 min-h-[10rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+                      <p className="text-app-text-soft text-sm md:text-base">الأولوية</p>
+                      <span className="self-end text-5xl md:text-6xl font-black text-app-text leading-none">21</span>
                     </div>
 
-                    <div className="grid gap-3">
-                      {insightItems.map((item) => (
-                        <div
-                          key={item.label}
-                          className="rounded-[1.35rem] border border-app-border/70 bg-app-bg/35 px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
-                        >
-                          <div className="flex items-center justify-between gap-4">
-                            <div className="text-right">
-                              <div className="text-base font-semibold text-app-text">{item.label}</div>
-                              <div className="text-sm text-app-text-muted mt-1">{item.detail}</div>
-                            </div>
-                            <div className="shrink-0 text-2xl md:text-3xl font-black text-app-text">{item.value}</div>
-                          </div>
-                        </div>
-                      ))}
+                    <div className="rounded-[2rem] border border-app-border/70 bg-gradient-to-br from-[#4a2a1d]/85 to-[#3a2318]/90 p-6 min-h-[10rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+                      <p className="text-app-text-soft text-sm md:text-base">الشراكة</p>
+                      <span className="self-end text-5xl md:text-6xl font-black text-app-text leading-none">06</span>
                     </div>
                   </div>
-                </Card>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Card className="bg-app-surface/80 border border-app-border p-5 rounded-[1.75rem] shadow-lg shadow-black/10 backdrop-blur-sm">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="w-10 h-10 rounded-2xl bg-app-bg/35 border border-app-border/70 flex items-center justify-center text-accent">
-                        <TargetIcon className="w-5 h-5" />
-                      </span>
-                      <h4 className="font-semibold text-app-text">الأولوية</h4>
-                    </div>
-                    <p className="text-app-text-muted text-sm leading-7">تحليل هادئ ومختصر للفرص التي تستحق أن تكمل معها بدون ضوضاء.</p>
-                  </Card>
+                  <div className="rounded-[2rem] border border-app-border/70 bg-gradient-to-br from-[#4a2a1d]/90 to-[#3b2318]/95 p-6 min-h-[21.25rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+                    <p className="text-app-text-soft text-sm md:text-base">مؤشر التهيئة</p>
+                    <div className="self-end text-5xl md:text-6xl font-black text-app-text leading-none">72%</div>
+                  </div>
+                </div>
 
-                  <Card className="bg-app-surface/80 border border-app-border p-5 rounded-[1.75rem] shadow-lg shadow-black/10 backdrop-blur-sm">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="w-10 h-10 rounded-2xl bg-app-bg/35 border border-app-border/70 flex items-center justify-center text-app-text-soft">
-                        <HandshakeIcon className="w-5 h-5" />
-                      </span>
-                      <h4 className="font-semibold text-app-text">الشراكة</h4>
+                <div className="mt-4 grid gap-4">
+                  <div className="rounded-[1.5rem] border border-app-border/70 bg-[#40271b]/88 px-5 py-4 flex items-center justify-between gap-6">
+                    <div className="text-left text-app-text-soft font-semibold text-base sm:text-lg">تنبيه</div>
+                    <div className="text-right text-app-text text-sm sm:text-lg leading-8">
+                      مؤشر يختصر جاهزية الفرص
                     </div>
-                    <p className="text-app-text-muted text-sm leading-7">مسار قصير من الفكرة إلى الإجراء بدل الدوران بين طبقات معقدة.</p>
-                  </Card>
+                  </div>
+
+                  <div className="rounded-[1.5rem] border border-app-border/70 bg-[#40271b]/88 px-5 py-4 flex items-center justify-between gap-6">
+                    <div className="text-left text-app-text-soft font-semibold text-base sm:text-lg">إجراء</div>
+                    <div className="text-right text-app-text text-sm sm:text-lg leading-8">
+                      متوسط — تلخيص هادئ للمسار
+                    </div>
+                  </div>
+
+                  <div className="rounded-[1.5rem] border border-app-border/70 bg-[#40271b]/88 px-5 py-4 flex items-center justify-between gap-6">
+                    <div className="text-left text-app-text-soft font-semibold text-base sm:text-lg">جاهز</div>
+                    <div className="text-right text-app-text text-sm sm:text-lg leading-8">
+                      عالي — تخطية سريعة بدون ضغط
+                    </div>
+                  </div>
                 </div>
               </div>
             </AnimatedSection>
