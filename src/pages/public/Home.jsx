@@ -173,56 +173,56 @@ const Home = () => {
             <AnimatedSection className="lg:pl-4" delay={120}>
               <div
                 dir="ltr"
-                className="rounded-[2.15rem] border border-app-border/60 bg-[#2f1c14]/94 p-4 sm:p-5 lg:p-6 shadow-[0_22px_64px_rgba(0,0,0,0.28)] backdrop-blur-xl"
+                className="rounded-[2.15rem] border border-app-border/50 bg-[#29170f]/96 p-4 sm:p-5 lg:p-6 shadow-[0_22px_64px_rgba(0,0,0,0.32)] backdrop-blur-xl"
               >
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div className="flex items-center gap-2 pt-1.5">
-                    <span className="w-3 h-3 rounded-full bg-app-text-soft/40" />
-                    <span className="w-3 h-3 rounded-full bg-app-text-soft/40" />
-                    <span className="w-3 h-3 rounded-full bg-app-text-soft/40" />
+                    <span className="w-3 h-3 rounded-full bg-app-text-soft/35" />
+                    <span className="w-3 h-3 rounded-full bg-app-text-soft/35" />
+                    <span className="w-3 h-3 rounded-full bg-app-text-soft/35" />
                   </div>
                   <div className="text-right">
                     <p className="text-app-text-soft text-sm md:text-base font-medium font-body">LandX</p>
-                    <h3 className="mt-3 text-2xl md:text-[2.05rem] font-bold tracking-tight text-app-text font-heading">لوحة رؤية</h3>
+                    <h3 className="mt-3 text-2xl md:text-[2.05rem] font-semibold tracking-tight text-app-text font-heading">لوحة رؤية</h3>
                   </div>
                 </div>
 
                 <div className="grid gap-4 lg:grid-cols-[0.95fr_1.08fr]">
                   <div className="grid gap-4">
-                    <div className="rounded-[1.85rem] border border-app-border/55 bg-gradient-to-br from-[#4a2a1d]/88 to-[#3d2419]/88 p-5 min-h-[9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.025)]">
-                      <p className="text-app-text-soft text-sm md:text-base font-medium font-body">الأولوية</p>
-                      <span className="self-end text-4xl md:text-5xl font-bold tracking-tight text-app-text leading-none font-heading">21</span>
+                    <div className="rounded-[1.85rem] border border-app-border/45 bg-gradient-to-br from-[#4b2a1c]/85 to-[#3b2418]/86 p-5 min-h-[9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                      <p className="text-app-text-soft text-sm md:text-base font-normal font-body">الأولوية</p>
+                      <span className="self-end text-4xl md:text-5xl font-semibold tracking-tight text-app-text leading-none font-heading">21</span>
                     </div>
 
-                    <div className="rounded-[1.85rem] border border-app-border/55 bg-gradient-to-br from-[#4a2a1d]/84 to-[#3a2318]/88 p-5 min-h-[9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.025)]">
-                      <p className="text-app-text-soft text-sm md:text-base font-medium font-body">الشراكة</p>
-                      <span className="self-end text-4xl md:text-5xl font-bold tracking-tight text-app-text leading-none font-heading">06</span>
+                    <div className="rounded-[1.85rem] border border-app-border/45 bg-gradient-to-br from-[#4a291b]/82 to-[#392216]/86 p-5 min-h-[9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                      <p className="text-app-text-soft text-sm md:text-base font-normal font-body">الشراكة</p>
+                      <span className="self-end text-4xl md:text-5xl font-semibold tracking-tight text-app-text leading-none font-heading">06</span>
                     </div>
                   </div>
 
-                  <div className="rounded-[1.85rem] border border-app-border/55 bg-gradient-to-br from-[#4a2a1d]/88 to-[#3b2318]/92 p-5 min-h-[18.75rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.025)]">
-                    <p className="text-app-text-soft text-sm md:text-base font-medium font-body">مؤشر التهيئة</p>
-                    <div className="self-end text-4xl md:text-5xl font-bold tracking-tight text-app-text leading-none font-heading">72%</div>
+                  <div className="rounded-[1.85rem] border border-app-border/45 bg-gradient-to-br from-[#4b2a1c]/84 to-[#392216]/89 p-5 min-h-[18.75rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                    <p className="text-app-text-soft text-sm md:text-base font-normal font-body">مؤشر التهيئة</p>
+                    <div className="self-end text-4xl md:text-5xl font-semibold tracking-tight text-app-text leading-none font-heading">72%</div>
                   </div>
                 </div>
 
                 <div className="mt-4 grid gap-4">
-                  <div className="rounded-[1.45rem] border border-app-border/55 bg-[#40271b]/86 px-5 py-4 flex items-center justify-between gap-6">
-                    <div className="text-left text-app-text-soft font-medium text-base sm:text-lg font-body">تنبيه</div>
+                  <div className="rounded-[1.45rem] border border-app-border/45 bg-[#3d251a]/84 px-5 py-4 flex items-center justify-between gap-6">
+                    <div className="text-left text-app-text-soft font-normal text-base sm:text-lg font-body">تنبيه</div>
                     <div className="text-right text-app-text text-sm sm:text-lg leading-8 font-body">
                       مؤشر يختصر جاهزية الفرص
                     </div>
                   </div>
 
-                  <div className="rounded-[1.45rem] border border-app-border/55 bg-[#40271b]/86 px-5 py-4 flex items-center justify-between gap-6">
-                    <div className="text-left text-app-text-soft font-medium text-base sm:text-lg font-body">إجراء</div>
+                  <div className="rounded-[1.45rem] border border-app-border/45 bg-[#3d251a]/84 px-5 py-4 flex items-center justify-between gap-6">
+                    <div className="text-left text-app-text-soft font-normal text-base sm:text-lg font-body">إجراء</div>
                     <div className="text-right text-app-text text-sm sm:text-lg leading-8 font-body">
                       متوسط — تلخيص هادئ للمسار
                     </div>
                   </div>
 
-                  <div className="rounded-[1.45rem] border border-app-border/55 bg-[#40271b]/86 px-5 py-4 flex items-center justify-between gap-6">
-                    <div className="text-left text-app-text-soft font-medium text-base sm:text-lg font-body">جاهز</div>
+                  <div className="rounded-[1.45rem] border border-app-border/45 bg-[#3d251a]/84 px-5 py-4 flex items-center justify-between gap-6">
+                    <div className="text-left text-app-text-soft font-normal text-base sm:text-lg font-body">جاهز</div>
                     <div className="text-right text-app-text text-sm sm:text-lg leading-8 font-body">
                       عالي — تخطية سريعة بدون ضغط
                     </div>
