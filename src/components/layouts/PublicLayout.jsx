@@ -171,7 +171,7 @@ const PublicLayout = ({ children }) => {
 
       <main className="flex-1">{children}</main>
 
-      <footer className="border-t border-app-border bg-gradient-to-r from-brand/90 via-brand-deep to-brand-deep text-app-text">
+      <footer className="border-t border-app-border bg-app-surface/95 text-app-text">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -215,7 +215,7 @@ const PublicLayout = ({ children }) => {
             </div>
           </div>
 
-          <div className="border-t border-white/10 mt-8 pt-8 text-center text-app-text-muted text-sm">
+          <div className="border-t border-app-border mt-8 pt-8 text-center text-app-text-muted text-sm">
             <p>© 2024 LandX. جميع الحقوق محفوظة.</p>
           </div>
         </div>

@@ -385,14 +385,14 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-16 lg:py-20">
+      <section className="py-16 lg:py-20 bg-app-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <Card className="relative overflow-hidden rounded-[2rem] border border-brand/20 bg-gradient-to-r from-brand via-brand-deep to-brand-deep p-8 lg:p-12">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_28%)]" />
+            <Card className="relative overflow-hidden rounded-[2rem] border border-app-border bg-app-surface/90 p-8 lg:p-12 shadow-2xl shadow-black/20 backdrop-blur-xl">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(197,123,69,0.08),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(130,65,35,0.10),transparent_32%)]" />
               <div className="relative z-10 grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-center">
                 <div className="space-y-4 text-right">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-app-text text-sm font-semibold border border-white/10 w-fit">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-app-bg/35 text-app-text text-sm font-semibold border border-app-border/70 w-fit">
                     <MessageCircleIcon className="w-4 h-4" />
                     جاهز لبداية أوضح
                   </div>
@@ -405,11 +405,11 @@ const Home = () => {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <Link to="/register" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-app-surface text-app-text font-semibold hover:bg-app-surface-strong transition-colors">
+                  <Link to="/register" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-brand/20 text-app-text font-semibold border border-brand/20 hover:bg-brand/25 transition-colors">
                     إنشاء حساب
                     <ArrowRightIcon className="w-4 h-4" />
                   </Link>
-                  <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl border border-white/15 text-app-text font-semibold hover:bg-white/10 transition-colors">
+                  <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl border border-app-border/70 text-app-text font-semibold hover:bg-app-bg/25 transition-colors">
                     تواصل معنا
                     <MessageCircleIcon className="w-4 h-4" />
                   </Link>
