@@ -10,19 +10,19 @@ const InvestorJourney = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep mb-4 animate-fade-in">
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep mb-4 ">
             رحلة المستثمر
           </h1>
-          <p className="text-app-text-muted text-xl max-w-3xl mx-auto animate-slide-up">
+          <p className="text-app-text-muted text-xl max-w-3xl mx-auto ">
             رحلة واضحة من الدخول حتى القرار
           </p>
-          <p className="text-app-text-soft max-w-4xl mx-auto mt-4 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-app-text-soft max-w-4xl mx-auto mt-4 ">
             هذه الصفحة تجيب على السؤال الذي يخاف منه أي مستثمر: من أين أبدأ، ما الذي سأراه، متى أتعّمق، ومتى أخرج إلى القرار أو التقديم؟ المنصة هنا ليست متاهة خدمات، بل مسار قرار مبني على خطوات قصيرة ومفهومة.
           </p>
         </div>
 
         {/* Visual Journey Map */}
-        <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <div className="mb-16 ">
           <Card className="bg-card-gradient border border-app-border p-8">
             <h2 className="text-2xl font-bold text-app-text mb-2 text-center">المخطط البصري للرحلة</h2>
             <p className="text-app-text-muted text-center mb-8">خط واحد واضح يختصر للمستثمر كيف يدخل، كيف يفهم، وكيف يخرج بقرار</p>
@@ -64,7 +64,7 @@ const InvestorJourney = () => {
         </div>
 
         {/* Core Principle */}
-        <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+        <div className="mb-16 ">
           <Card className="bg-gradient-to-r from-brand/10 to-brand-deep/10 border border-app-border p-8">
             <div className="flex items-start gap-6">
               <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brand">
@@ -83,7 +83,7 @@ const InvestorJourney = () => {
         {/* Stages */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {/* Stage 01 */}
-          <Card className="bg-card-gradient border border-app-border p-6 hover:border-brand transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <Card className="bg-card-gradient border border-app-border p-6 hover:border-brand transition-all duration-300 ">
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brand">
                 <span className="text-xl font-bold text-brand">01</span>
@@ -110,7 +110,7 @@ const InvestorJourney = () => {
           </Card>
 
           {/* Stage 02 */}
-          <Card className="bg-card-gradient border border-accent p-6 hover:border-accent-deep transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          <Card className="bg-card-gradient border border-accent p-6 hover:border-accent-deep transition-all duration-300 ">
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 bg-gradient-to-r from-accent/20 to-accent-deep/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-accent">
                 <span className="text-xl font-bold text-accent">02</span>
@@ -137,7 +137,7 @@ const InvestorJourney = () => {
           </Card>
 
           {/* Stage 03 */}
-          <Card className="bg-card-gradient border border-brand-deep p-6 hover:border-brand transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <Card className="bg-card-gradient border border-brand-deep p-6 hover:border-brand transition-all duration-300 ">
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 bg-gradient-to-r from-brand-deep/20 to-brand/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brand-deep">
                 <span className="text-xl font-bold text-brand-deep">03</span>
@@ -164,7 +164,7 @@ const InvestorJourney = () => {
           </Card>
 
           {/* Stage 04 */}
-          <Card className="bg-card-gradient border border-app-border p-6 hover:border-brand transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.7s' }}>
+          <Card className="bg-card-gradient border border-app-border p-6 hover:border-brand transition-all duration-300 ">
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brand">
                 <span className="text-xl font-bold text-brand">04</span>
@@ -192,7 +192,7 @@ const InvestorJourney = () => {
         </div>
 
         {/* Real Scenarios */}
-        <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+        <div className="mb-16 ">
           <h2 className="text-2xl font-bold text-app-text mb-6 text-center">ابدأ من المسار الاستشاري</h2>
           <p className="text-app-text-muted text-center mb-8 max-w-3xl mx-auto">السيناريوهات الواقعية داخل المنصة - ليست رحلة واحدة فقط، بل عدة بدايات تنتهي كلها إلى قرار واضح</p>
           
@@ -284,7 +284,7 @@ const InvestorJourney = () => {
         </div>
 
         {/* Process Steps */}
-        <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.9s' }}>
+        <div className="mb-16 ">
           <Card className="bg-card-gradient border border-app-border p-8">
             <h2 className="text-2xl font-bold text-app-text mb-6 text-center">الإجراءات التي يمر بها المستثمر فعلياً</h2>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -307,7 +307,7 @@ const InvestorJourney = () => {
         </div>
 
         {/* Journey Endings */}
-        <div className="animate-fade-in" style={{ animationDelay: '1s' }}>
+        <div className="">
           <h2 className="text-2xl font-bold text-app-text mb-6 text-center">كيف تنتهي الرحلة؟</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="bg-gradient-to-r from-success/10 to-success/20 border border-success/30 p-6 hover:border-success/50 transition-all duration-300">

@@ -1,32 +1,26 @@
 import React from 'react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
-const animations = {
-  fadeUp: 'animate-fade-in-up',
-  fadeIn: 'animate-fade-in',
-  slideUp: 'animate-slide-up',
-  slideLeft: 'animate-slide-in-left',
-  slideRight: 'animate-slide-in-right',
-  scaleIn: 'animate-scale-in',
-  blurIn: 'animate-blur-in',
-};
-
 const AnimatedSection = ({
   children,
-  animation = 'fadeUp',
   delay = 0,
   className = '',
   threshold = 0.1,
+  rootMargin,
 }) => {
-  const { ref, isVisible } = useScrollAnimation(threshold);
+  const { ref, isVisible } = useScrollAnimation(threshold, rootMargin);
 
   return (
     <div
       ref={ref}
-      className={`${className} ${isVisible ? animations[animation] : 'opacity-0'}`}
+      className={className}
       style={{
-        animationDelay: isVisible && delay > 0 ? `${delay}ms` : undefined,
-        willChange: isVisible ? 'transform, opacity' : 'auto',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(18px)',
+        filter: isVisible ? 'blur(0)' : 'blur(6px)',
+        transition: 'opacity 700ms ease, transform 700ms ease, filter 700ms ease',
+        transitionDelay: isVisible && delay > 0 ? `${delay}ms` : undefined,
+        willChange: 'opacity, transform, filter',
       }}
     >
       {children}

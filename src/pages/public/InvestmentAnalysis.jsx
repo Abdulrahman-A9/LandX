@@ -425,7 +425,7 @@ const InvestmentAnalysis = () => {
         <Card className="bg-card-gradient border border-app-border p-6 md:p-8">
           {/* Project Data Tab */}
           {activeTab === 'project' && (
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6 ">
               <div className="flex items-center gap-3 mb-6">
                 <BriefcaseIcon className="text-brand" />
                 <h2 className="text-xl font-bold text-app-text">بيانات المشروع</h2>
@@ -502,7 +502,7 @@ const InvestmentAnalysis = () => {
 
           {/* Location Tab */}
           {activeTab === 'location' && (
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6 ">
               <div className="flex items-center gap-3 mb-6">
                 <MapIcon className="text-brand" />
                 <h2 className="text-xl font-bold text-app-text">بيانات الموقع</h2>
@@ -631,7 +631,7 @@ const InvestmentAnalysis = () => {
 
           {/* Financial Tab */}
           {activeTab === 'financial' && (
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6 ">
               <div className="flex items-center gap-3 mb-6">
                 <DollarSignIcon className="text-brand" />
                 <h2 className="text-xl font-bold text-app-text">المدخلات المالية</h2>
@@ -714,7 +714,7 @@ const InvestmentAnalysis = () => {
 
           {/* Review Tab */}
           {activeTab === 'review' && (
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6 ">
               <div className="flex items-center gap-3 mb-6">
                 <FileTextIcon className="text-brand" />
                 <h2 className="text-xl font-bold text-app-text">المراجعة والإرسال</h2>
@@ -809,7 +809,7 @@ const InvestmentAnalysis = () => {
                 >
                   {loading ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-app-text border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-5 h-5 border-2 border-app-text border-t-transparent rounded-full "></div>
                       جاري التحليل...
                     </>
                   ) : (

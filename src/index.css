@@ -15,7 +15,7 @@
     direction: rtl;
   }
   body {
-    @apply bg-app-bg text-app-bg;
+    @apply bg-app-bg text-app-text;
     color-scheme: dark;
   }
 }

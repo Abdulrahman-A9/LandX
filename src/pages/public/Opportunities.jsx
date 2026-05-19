@@ -18,12 +18,12 @@ const Opportunities = () => {
   
   return (
     <div className="min-h-screen bg-app-bg text-app-text">
-      <div className="bg-gradient-to-r from-brand/90 to-brand-deep/90 border-b border-brand/20 backdrop-blur animate-fade-in">
+      <div className="bg-gradient-to-r from-brand/90 to-brand-deep/90 border-b border-brand/20 backdrop-blur ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-3xl font-bold text-app-text mb-2 animate-fade-in-down">
+          <h1 className="text-3xl font-bold text-app-text mb-2 ">
             الفرص الاستثمارية
           </h1>
-          <p className="text-app-text-muted animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-app-text-muted ">
             استكشف جميع الفرص الاستثمارية المتاحة في الأراضي الزراعية الموسمية
           </p>
         </div>

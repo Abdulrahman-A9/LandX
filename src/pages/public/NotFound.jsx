@@ -7,7 +7,7 @@ import { SearchIcon, HomeIcon, ArrowRightIcon } from '../../components/ui/Icons'
 const NotFound = () => {
   return (
     <div className="min-h-screen bg-app-bg text-app-text flex items-center justify-center px-4">
-      <Card className="text-center py-16 px-8 max-w-2xl w-full bg-card-gradient border border-app-border animate-fade-in">
+      <Card className="text-center py-16 px-8 max-w-2xl w-full bg-card-gradient border border-app-border ">
         <div className="w-24 h-24 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-brand">
           <SearchIcon className="w-12 h-12 text-brand" />
         </div>

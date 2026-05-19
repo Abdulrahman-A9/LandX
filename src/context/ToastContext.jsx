@@ -43,7 +43,7 @@ export const ToastProvider = ({ children }) => {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`flex items-start gap-3 p-4 rounded-lg border shadow-lg backdrop-blur animate-fade-in ${styles[toast.type] || styles.info}`}
+            className={`flex items-start gap-3 p-4 rounded-lg border shadow-lg backdrop-blur  ${styles[toast.type] || styles.info}`}
           >
             <div className="flex-shrink-0 mt-0.5">{icons[toast.type] || icons.info}</div>
             <p className="text-sm font-medium text-app-text flex-1">{toast.message}</p>

@@ -7,445 +7,409 @@ import AnimatedSection from '../../components/shared/AnimatedSection';
 import { mockOpportunities } from '../../data/mock/opportunities';
 import { mockNews } from '../../data/mock/news';
 import {
-  TargetIcon, UsersIcon, BuildingIcon, DollarSignIcon,
-  SearchIcon, EyeIcon, PieChartIcon, HandshakeIcon,
-  ShieldCheckIcon, ZapIcon, GlobeIcon, AwardIcon,
-  NewspaperIcon, ArrowRightIcon, ChevronLeftIcon, MessageCircleIcon,
+  TargetIcon,
+  UsersIcon,
+  BuildingIcon,
+  DollarSignIcon,
+  SearchIcon,
+  EyeIcon,
+  PieChartIcon,
+  HandshakeIcon,
+  ShieldCheckIcon,
+  ZapIcon,
+  GlobeIcon,
+  AwardIcon,
+  ArrowRightIcon,
+  ChevronLeftIcon,
+  MessageCircleIcon,
   SparklesIcon
 } from '../../components/ui/Icons';
 
-const Home = () => {
-  const featuredOpportunities = mockOpportunities.slice(0, 3);
-  const featuredNews = mockNews.slice(0, 3);
+const featuredOpportunities = mockOpportunities.slice(0, 3);
+const featuredNews = mockNews.slice(0, 3);
 
-  const stats = [
-    { icon: <TargetIcon />, value: '+120', label: 'فرصة استثمارية', color: 'text-brand' },
-    { icon: <UsersIcon />, value: '+350', label: 'مستثمر مسجل', color: 'text-brand' },
-    { icon: <BuildingIcon />, value: '15', label: 'بلدية شريكة', color: 'text-brand' },
-    { icon: <DollarSignIcon />, value: '85M', label: 'ريال إجمالي الاستثمار', color: 'text-brand' },
-  ];
+const stats = [
+  { icon: <TargetIcon />, value: '+120', label: 'فرصة استثمارية موثقة' },
+  { icon: <UsersIcon />, value: '+350', label: 'مستثمر مسجل' },
+  { icon: <BuildingIcon />, value: '15', label: 'بلدية شريكة' },
+  { icon: <DollarSignIcon />, value: '85M', label: 'ريال إجمالي الاستثمار' }
+];
 
-  const steps = [
-    {
-      icon: <SearchIcon />,
-      title: 'استكشف الفرص',
-      description: 'تصفح الفرص الاستثمارية المتاحة في مختلف المناطق والمواسم الزراعية',
-      step: '01'
-    },
-    {
-      icon: <EyeIcon />,
-      title: 'حلل وقارن',
-      description: 'اطلع على التحليلات التفصيلية للفرص، المخاطر، والعوائد المتوقعة',
-      step: '02'
-    },
-    {
-      icon: <PieChartIcon />,
-      title: 'خذ قرارك',
-      description: 'استخدم الأدوات التحليلية لاتخاذ قرار استثماري مبني على بيانات دقيقة',
-      step: '03'
-    },
-    {
-      icon: <HandshakeIcon />,
-      title: 'ابدأ الاستثمار',
-      description: 'تواصل مع البلدية وابدأ رحلتك الاستثمارية بخطوات رسمية واضحة',
-      step: '04'
-    }
-  ];
+const steps = [
+  {
+    icon: <SearchIcon />,
+    title: 'استكشف الفرص',
+    description: 'تصفح الفرص الاستثمارية المتاحة في مختلف المناطق والمواسم الزراعية.',
+    step: '01'
+  },
+  {
+    icon: <EyeIcon />,
+    title: 'حلل وقارن',
+    description: 'اطلع على التحليلات التفصيلية للفرص، المخاطر، والعوائد المتوقعة.',
+    step: '02'
+  },
+  {
+    icon: <PieChartIcon />,
+    title: 'خذ قرارك',
+    description: 'استخدم الأدوات التحليلية لاتخاذ قرار استثماري مبني على بيانات دقيقة.',
+    step: '03'
+  },
+  {
+    icon: <HandshakeIcon />,
+    title: 'ابدأ الاستثمار',
+    description: 'تواصل مع البلدية وابدأ رحلتك الاستثمارية بخطوات رسمية واضحة.',
+    step: '04'
+  }
+];
 
-  const features = [
-    {
-      icon: <ShieldCheckIcon />,
-      title: 'فرص موثقة رسمياً',
-      description: 'جميع الفرص مقدمة من بلديات حكومية معتمدة ومرخصة'
-    },
-    {
-      icon: <ZapIcon />,
-      title: 'تحليل فوري ذكي',
-      description: 'أدوات تحليلية متقدمة توفر لك قراءة واضحة للمخاطر والعوائد'
-    },
-    {
-      icon: <GlobeIcon />,
-      title: 'تغطية جغرافية واسعة',
-      description: 'فرص استثمارية في مختلف مناطق المملكة من شمالها إلى جنوبها'
-    },
-    {
-      icon: <AwardIcon />,
-      title: 'دعم كامل للمستثمر',
-      description: 'فريق متخصص لتوجيهك وإرشادك في كل مرحلة من مراحل الاستثمار'
-    }
-  ];
+const features = [
+  {
+    icon: <ShieldCheckIcon />,
+    title: 'فرص موثقة رسمياً',
+    description: 'جميع الفرص مقدمة من بلديات حكومية معتمدة ومرخصة.'
+  },
+  {
+    icon: <ZapIcon />,
+    title: 'تحليل فوري ذكي',
+    description: 'أدوات تحليلية متقدمة توفر لك قراءة واضحة للمخاطر والعوائد.'
+  },
+  {
+    icon: <GlobeIcon />,
+    title: 'تغطية جغرافية واسعة',
+    description: 'فرص استثمارية في مختلف مناطق المملكة من شمالها إلى جنوبها.'
+  },
+  {
+    icon: <AwardIcon />,
+    title: 'دعم كامل للمستثمر',
+    description: 'فريق متخصص لتوجيهك وإرشادك في كل مرحلة من مراحل الاستثمار.'
+  }
+];
+
+const insightItems = [
+  {
+    label: 'مؤشر التهيئة',
+    value: '72%',
+    detail: 'مؤشر يختصر جاهزية الفرص'
+  },
+  {
+    label: 'المخاطر',
+    value: 'متوسط',
+    detail: 'تلخيص هادئ للمسار'
+  },
+  {
+    label: 'وضوح القرار',
+    value: 'عالي',
+    detail: 'تخطية سريعة بدون ضغط'
+  }
+];
+
+function SectionTitle({ eyebrow, title, description, align = 'center' }) {
+  const alignClass = align === 'left' ? 'text-right lg:text-right' : 'text-center';
 
   return (
-    <div className="min-h-screen bg-app-bg">
-      {/* Hero Section */}
-      <div className="min-h-screen bg-gradient-to-br from-app-bg via-app-surface-soft to-app-surface relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-brand/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-deep/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand/5 rounded-full blur-3xl animate-pulse-slow"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-200px)]">
-            {/* Right Section - Hero Content */}
-            <div className="text-right space-y-6 animate-slide-in-left">
-              <div className="space-y-2">
-                <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep animate-fade-in">
-                  LandX
-                </h1>
-                <p className="text-app-text-muted text-xl animate-fade-in" style={{ animationDelay: '0.1s' }}>في LandX نقدم</p>
-              </div>
-              
-              <h2 className="text-3xl md:text-4xl font-bold text-app-text leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
-                تحليلاً أوضح للفرص قبل التقديم على المسارات الرسمية.
-              </h2>
-              
-              <p className="text-app-text-muted text-lg leading-relaxed animate-slide-up" style={{ animationDelay: '0.3s' }}>
-                منصة استدلالية لدعم القرار الاستثماري في منطقة حائل، تقدم للمستثمرين والجهات التنظيمية قراءة أوضح للفرص والأحياء والمخاطر والعوائد قبل التقديم الرسمي.
-              </p>
-              
-              <div className="space-y-4 pt-4">
-                <Link to="/register" className="group flex items-center justify-end gap-3 text-app-text-muted hover:text-app-text transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                  <span className="text-lg font-semibold">ابدأ طلب استشاري</span>
-                  <span className="w-10 h-10 rounded-full bg-gradient-to-r from-brand/30 to-brand-deep/30 flex items-center justify-center group-hover:from-brand/40 group-hover:to-brand-deep/40 transition-all duration-300 group-hover:scale-110">
-                    ←
-                  </span>
-                </Link>
-                
-                <Link to="/opportunities" className="group flex items-center justify-end gap-3 text-app-text-muted hover:text-app-text transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                  <span className="text-lg font-semibold">استعرض الفرص</span>
-                  <span className="w-10 h-10 rounded-full bg-gradient-to-r from-brand/30 to-brand-deep/30 flex items-center justify-center group-hover:from-brand/40 group-hover:to-brand-deep/40 transition-all duration-300 group-hover:scale-110">
-                    ←
-                  </span>
-                </Link>
-                
-                <Link to="/opportunities" className="group flex items-center justify-end gap-3 text-app-text-muted hover:text-app-text transition-all duration-300 hover:translate-x-2 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                  <span className="text-lg font-semibold">استعرض الأراضي المتاحة</span>
-                  <span className="w-10 h-10 rounded-full bg-gradient-to-r from-brand/30 to-brand-deep/30 flex items-center justify-center group-hover:from-brand/40 group-hover:to-brand-deep/40 transition-all duration-300 group-hover:scale-110">
-                    ←
-                  </span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Left Section - Cards */}
-            <div className="space-y-6 animate-slide-in-right">
-              <div className="bg-gradient-to-r from-brand/20 to-brand-deep/20 border border-app-border rounded-lg p-4 backdrop-blur-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <span className="text-app-text-muted text-sm font-medium">رؤية ٢٠٣٠: استثمار مستدام</span>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <Card className="bg-card-gradient backdrop-blur border border-app-border p-5 hover:border-brand transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                  <h3 className="text-app-text-muted text-sm mb-2">الأحياء ذات الأولوية</h3>
-                  <p className="text-app-text font-semibold">النقرة، مشار</p>
-                </Card>
-                
-                <Card className="bg-card-gradient backdrop-blur border border-app-border p-5 hover:border-brand transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                  <h3 className="text-app-text-muted text-sm mb-2">التحويل إلى فرص</h3>
-                  <span className="inline-block px-3 py-1 bg-brand/20 text-app-text rounded-full text-sm animate-pulse">جاهز</span>
-                </Card>
-              </div>
-              
-              <div className="bg-card-gradient backdrop-blur border border-app-border rounded-lg p-6 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                <h3 className="text-app-text-muted font-semibold mb-4">مركز القرار الاستثماري</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <Card className="bg-app-surface-soft border border-app-border p-4 hover:border-brand transition-all duration-300">
-                    <h4 className="text-app-text-muted text-xs mb-1">الطلب الموسمي</h4>
-                    <p className="text-app-text font-semibold">مرتفع</p>
-                  </Card>
-                  <Card className="bg-app-surface-soft border border-app-border p-4 hover:border-brand transition-all duration-300">
-                    <h4 className="text-app-text-muted text-xs mb-1">المخاطر القابلة للإدارة</h4>
-                    <p className="text-app-text font-semibold">7 فرص</p>
-                  </Card>
-                </div>
-              </div>
-              
-              <Card className="bg-card-gradient backdrop-blur border border-app-border p-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                <h3 className="text-app-text-muted font-semibold mb-3">لماذا هذا مهم؟</h3>
-                <p className="text-app-text-muted text-sm leading-relaxed">
-                  منصة LandX تقدم تحليلاً أوضح للفرص الاستثمارية في الأراضي الموسمية، مما يوفر للمستثمرين والجهات التنظيمية قراءة أوضح للفرص والأحياء والمخاطر والعوائد قبل التقديم عبر المسارات الرسمية.
-                </p>
-              </Card>
-            </div>
-          </div>
-        </div>
+    <AnimatedSection className={`space-y-4 ${alignClass}`}>
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-app-border bg-app-surface-soft text-app-text-muted text-sm font-semibold">
+        {eyebrow}
       </div>
-      
-      {/* Statistics Section */}
-      <section className="bg-gradient-to-r from-brand to-brand-deep py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <AnimatedSection key={index} animation="fadeIn" delay={index * 100} className="text-center">
-                <div className="w-16 h-16 bg-app-surface/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-app-border/30">
-                  <span className="text-app-text">{stat.icon}</span>
-                </div>
-                <div className="text-3xl md:text-4xl font-bold text-app-text mb-2">{stat.value}</div>
-                <div className="text-app-text-muted text-sm">{stat.label}</div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep">
+        {title}
+      </h2>
+      <p className="text-app-text-muted max-w-3xl mx-auto leading-8">{description}</p>
+    </AnimatedSection>
+  );
+}
 
-      {/* How It Works Section */}
-      <section className="py-20 bg-gradient-to-b from-app-surface-soft to-app-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeUp" className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep mb-4">
-              كيف تعمل المنصة
-            </h2>
-            <p className="text-app-text-muted max-w-2xl mx-auto">
-              رحلة استثمارية واضحة من الاستكشاف حتى تنفيذ المشروع
-            </p>
-          </AnimatedSection>
+const Home = () => {
+  return (
+    <div className="min-h-screen bg-app-bg text-app-text overflow-hidden">
+      <section className="relative isolate overflow-hidden border-b border-app-border/70">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(197,123,69,0.16),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(130,65,35,0.14),transparent_28%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-            {/* Connection Line */}
-            <div className="hidden lg:block absolute top-1/2 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-app-border via-brand to-app-border transform -translate-y-1/2 z-0"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <AnimatedSection className="space-y-8" delay={0}>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand/25 bg-brand/10 text-brand text-sm font-semibold w-fit">
+                <SparklesIcon className="w-4 h-4" />
+                واجهة استثمارية أهدأ وأوضح
+              </div>
 
-            {steps.map((step, index) => (
-              <AnimatedSection key={index} animation="scaleIn" delay={index * 150} className="relative z-10">
-                <Card className="bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105 hover:shadow-xl p-6 h-full text-center">
-                  <div className="w-14 h-14 bg-gradient-to-br from-brand/30 to-brand-deep/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand">
-                    <span className="text-brand">{step.icon}</span>
-                  </div>
-                  <div className="text-xs font-bold text-app-text-muted mb-2 tracking-wider">خطوة {step.step}</div>
-                  <h3 className="text-lg font-bold text-app-text mb-3">{step.title}</h3>
-                  <p className="text-app-text-muted text-sm leading-relaxed">{step.description}</p>
-                </Card>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+              <div className="space-y-5">
+                <h1 className="text-5xl md:text-6xl font-black leading-tight text-transparent bg-clip-text bg-gradient-to-r from-brand via-accent to-brand-deep">
+                  قرارك الاستثماري يبدأ من هنا
+                </h1>
+                <p className="text-xl md:text-2xl text-app-text-muted leading-10 max-w-2xl">
+                  منصة تجمع بين وضوح الدخول السريع والتعمق التحليلي عند الحاجة، بدون ضوضاء بصرية أو خطوات مربكة.
+                </p>
+                <p className="text-app-text-soft text-lg leading-9 max-w-2xl">
+                  LandX تمنح المستثمر مسارًا مرئيًا بسيطًا: استكشاف أولي، ثم تحليل أعمق، ثم قرار واضح أو انتقال مباشر إلى التنفيذ.
+                </p>
+              </div>
 
-      {/* Why LandX Section */}
-      <section className="py-20 bg-gradient-to-b from-app-surface-soft to-app-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <AnimatedSection animation="slideLeft" className="order-2 lg:order-1">
-              <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep mb-6">
-                لماذا LandX؟
-              </h2>
-              <p className="text-app-text-muted text-lg leading-relaxed mb-8">
-                نحن نقدم تجربة استثمارية فريدة تجمع بين البيانات الدقيقة، التحليل الذكي، والشراكات الرسمية مع الجهات الحكومية
-              </p>
-              <div className="space-y-4">
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-start gap-4 animate-slide-up" style={{ animationDelay: `${0.1 * index}s` }}>
-                    <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-lg flex items-center justify-center flex-shrink-0 border border-brand">
-                      <span className="text-brand">{feature.icon}</span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-app-text mb-1">{feature.title}</h3>
-                      <p className="text-app-text-muted text-sm">{feature.description}</p>
-                    </div>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Link to="/register" className="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-brand to-brand-deep text-app-text font-semibold shadow-lg shadow-brand/20 hover:shadow-brand/30 transition-all duration-300 hover:-translate-y-0.5">
+                  ابدأ طلبك
+                  <ArrowRightIcon className="w-4 h-4" />
+                </Link>
+                <Link to="/opportunities" className="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-2xl border border-app-border bg-app-surface-soft text-app-text-muted font-semibold hover:bg-app-surface hover:text-app-text transition-all duration-300">
+                  استعرض الفرص
+                  <ChevronLeftIcon className="w-4 h-4" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                {[
+                  'تدفق معلومات واضح',
+                  'تجربة عربية هادئة',
+                  'قرارات أسرع'
+                ].map((item) => (
+                  <div key={item} className="rounded-2xl border border-app-border bg-app-surface/70 px-4 py-3 text-sm text-app-text-muted shadow-sm">
+                    {item}
                   </div>
                 ))}
               </div>
             </AnimatedSection>
-            <AnimatedSection animation="slideRight" className="order-1 lg:order-2">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-brand/30 to-brand-deep/30 rounded-2xl transform rotate-3"></div>
-                <Card className="relative bg-card-gradient border border-app-border p-8">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-app-surface-soft rounded-lg p-4 text-center border border-app-border">
-                      <div className="text-2xl font-bold text-app-text mb-1">98%</div>
-                      <div className="text-xs text-app-text-muted">نسبة رضا المستثمرين</div>
+
+            <AnimatedSection className="lg:pl-4" delay={120}>
+              <div className="grid gap-4">
+                <Card className="bg-card-gradient border border-app-border p-6 rounded-3xl shadow-2xl shadow-black/10">
+                  <div className="flex items-start justify-between gap-4 mb-6">
+                    <div>
+                      <p className="text-app-text-soft text-sm font-semibold mb-2">لوحة رؤية</p>
+                      <h3 className="text-2xl font-bold text-app-text">الفرص ملخصة بوضوح</h3>
                     </div>
-                    <div className="bg-app-surface-soft rounded-lg p-4 text-center border border-app-border">
-                      <div className="text-2xl font-bold text-app-text mb-1">24/7</div>
-                      <div className="text-xs text-app-text-muted">دعم فني متواصل</div>
-                    </div>
-                    <div className="bg-app-surface-soft rounded-lg p-4 text-center border border-app-border">
-                      <div className="text-2xl font-bold text-app-text mb-1">+40%</div>
-                      <div className="text-xs text-app-text-muted">متوسط العائد السنوي</div>
-                    </div>
-                    <div className="bg-app-surface-soft rounded-lg p-4 text-center border border-app-border">
-                      <div className="text-2xl font-bold text-app-text mb-1">&lt;24h</div>
-                      <div className="text-xs text-app-text-muted">وقت الرد على الاستفسارات</div>
+                    <div className="w-12 h-12 rounded-2xl bg-brand/15 border border-brand/30 flex items-center justify-center text-brand">
+                      <BuildingIcon className="w-6 h-6" />
                     </div>
                   </div>
+
+                  <div className="grid gap-3">
+                    {insightItems.map((item) => (
+                      <div key={item.label} className="rounded-2xl border border-app-border bg-app-surface-soft/80 p-4 flex items-center justify-between gap-4">
+                        <div>
+                          <div className="text-sm text-app-text-soft">{item.label}</div>
+                          <div className="text-lg font-semibold text-app-text mt-1">{item.value}</div>
+                        </div>
+                        <div className="text-sm text-app-text-muted max-w-[16rem] text-left">
+                          {item.detail}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </Card>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Card className="bg-card-gradient border border-app-border p-5 rounded-3xl">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="w-10 h-10 rounded-2xl bg-brand/15 border border-brand/25 flex items-center justify-center text-brand">
+                        <TargetIcon className="w-5 h-5" />
+                      </span>
+                      <h4 className="font-semibold text-app-text">الأولوية</h4>
+                    </div>
+                    <p className="text-app-text-muted text-sm leading-7">تحليل هادئ ومختصر للفرص التي تستحق أن تكمل معها بدون ضوضاء.</p>
+                  </Card>
+
+                  <Card className="bg-card-gradient border border-app-border p-5 rounded-3xl">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="w-10 h-10 rounded-2xl bg-success/15 border border-success/25 flex items-center justify-center text-success">
+                        <HandshakeIcon className="w-5 h-5" />
+                      </span>
+                      <h4 className="font-semibold text-app-text">الشراكة</h4>
+                    </div>
+                    <p className="text-app-text-muted text-sm leading-7">مسار قصير من الفكرة إلى الإجراء بدل الدوران بين طبقات معقدة.</p>
+                  </Card>
+                </div>
               </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-20 bg-gradient-to-b from-app-surface-soft to-app-bg">
+      <section className="py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeUp" className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full border border-brand text-app-text-muted text-sm font-semibold mb-4">
-              <SparklesIcon className="w-4 h-4" />
-              خدمات مميزة
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep mb-4">
-              خدمات المنصة
-            </h2>
-            <p className="text-app-text-muted max-w-2xl mx-auto text-lg">
-              أدوات ذكية وخدمات تحليلية شاملة تدعم قرارك الاستثماري من البداية للنهاية
-            </p>
-          </AnimatedSection>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Service 1: AI Analysis */}
-            <AnimatedSection animation="fadeUp" delay={0}>
-            <Card className="bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105 hover:shadow-xl p-8 text-center group">
-              <div className="w-20 h-20 bg-gradient-to-br from-warning/30 to-warning/20 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-warning group-hover:scale-110 transition-transform duration-300">
-                <SparklesIcon className="text-warning w-8 h-8" />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            {stats.map((stat, index) => (
+              <AnimatedSection key={stat.label} delay={index * 90}>
+                <Card className="h-full bg-card-gradient border border-app-border p-5 rounded-3xl text-right">
+                  <div className="w-12 h-12 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand mb-4">
+                    {stat.icon}
+                  </div>
+                  <div className="text-3xl font-black text-app-text">{stat.value}</div>
+                  <div className="mt-2 text-sm text-app-text-muted leading-6">{stat.label}</div>
+                </Card>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle
+            eyebrow="خريطة التفاعل"
+            title="كيف تعمل المنصة"
+            description="تجربة مصممة لتناسب سرعة القرار مع وضوح الطريق."
+          />
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
+            {steps.map((step, index) => (
+              <AnimatedSection key={step.step} delay={index * 110}>
+                <Card className="h-full bg-card-gradient border border-app-border p-6 rounded-3xl">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand/15 to-brand-deep/15 border border-brand/25 flex items-center justify-center mb-5 text-brand">
+                    {step.icon}
+                  </div>
+                  <div className="text-xs font-bold tracking-[0.24em] text-app-text-soft mb-3">خطوة {step.step}</div>
+                  <h3 className="text-xl font-bold text-app-text mb-3">{step.title}</h3>
+                  <p className="text-sm text-app-text-muted leading-7">{step.description}</p>
+                </Card>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+            <AnimatedSection className="space-y-5" threshold={0.12}>
+              <SectionTitle
+                align="left"
+                eyebrow="لماذا LandX"
+                title="لماذا تبدأ منها"
+                description="نموذج مختصر يدعم القرار بدون أن يغرق الزائر في تفاصيل مبكرة لا تفيده."
+              />
+
+              <div className="grid gap-4 pt-2">
+                {features.map((feature, index) => (
+                  <AnimatedSection key={feature.title} delay={index * 80}>
+                    <div className="flex items-start gap-4 rounded-3xl border border-app-border bg-app-surface/70 p-5">
+                      <div className="w-12 h-12 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand flex-shrink-0">
+                        {feature.icon}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-app-text mb-2">{feature.title}</h3>
+                        <p className="text-sm text-app-text-muted leading-7">{feature.description}</p>
+                      </div>
+                    </div>
+                  </AnimatedSection>
+                ))}
               </div>
-              <h3 className="text-xl font-bold text-app-text mb-3">التحليل الاستثماري الذكي</h3>
-              <p className="text-app-text-muted text-sm mb-6 leading-relaxed">
-                أدخل بيانات مشروعك ويقوم الذكاء الاصطناعي بتحليل الجدوى وتقدير التكاليف والعوائد وإصدار تقرير احترافي
-              </p>
-              <Link
-                to="/investment-analysis"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-brand to-brand-deep text-app-text font-bold rounded-lg hover:from-brand-deep hover:to-brand transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center"
-              >
-                <SparklesIcon className="w-4 h-4" />
-                جرب الخدمة الآن
-              </Link>
-            </Card>
             </AnimatedSection>
 
-            {/* Service 2: Browse Opportunities */}
-            <AnimatedSection animation="fadeUp" delay={150}>
-            <Card className="bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105 hover:shadow-xl p-8 text-center group">
-              <div className="w-20 h-20 bg-gradient-to-br from-success/30 to-success/20 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-success group-hover:scale-110 transition-transform duration-300">
-                <SearchIcon className="text-success w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-app-text mb-3">استكشاف الفرص</h3>
-              <p className="text-app-text-muted text-sm mb-6 leading-relaxed">
-                تصفح فرص استثمارية موثقة من بلديات حكومية في مختلف المناطق مع تفاصيل شاملة لكل فرصة
-              </p>
-              <Link
-                to="/opportunities"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-success to-success/80 text-app-text font-bold rounded-lg hover:from-success/80 hover:to-success transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center"
-              >
-                <SearchIcon className="w-4 h-4" />
-                استعرض الفرص
-              </Link>
-            </Card>
-            </AnimatedSection>
+            <AnimatedSection delay={120}>
+              <Card className="rounded-[2rem] border border-app-border bg-card-gradient p-8 lg:p-10">
+                <div className="flex items-center gap-3 mb-8">
+                  <span className="w-12 h-12 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand">
+                    <PieChartIcon className="w-6 h-6" />
+                  </span>
+                  <div>
+                    <p className="text-sm text-app-text-soft">لحظة قرار</p>
+                    <h3 className="text-2xl font-bold text-app-text">مؤشرات مختصرة تساعد على التمييز</h3>
+                  </div>
+                </div>
 
-            {/* Service 3: Consulting */}
-            <AnimatedSection animation="fadeUp" delay={300}>
-            <Card className="bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105 hover:shadow-xl p-8 text-center group">
-              <div className="w-20 h-20 bg-gradient-to-br from-accent/30 to-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-5 border-2 border-accent group-hover:scale-110 transition-transform duration-300">
-                <HandshakeIcon className="text-accent w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold text-app-text mb-3">الاستشارات المخصصة</h3>
-              <p className="text-app-text-muted text-sm mb-6 leading-relaxed">
-                تواصل مع فريق المتخصصين للحصول على مراجعة بشرية عميقة لمشروعك وتوصيات مخصصة
-              </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent to-accent/80 text-app-text font-bold rounded-lg hover:from-accent/80 hover:to-accent transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center"
-              >
-                <HandshakeIcon className="w-4 h-4" />
-                تواصل معنا
-              </Link>
-            </Card>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    { label: 'الطلب الموسمي', value: 'مرتفع', tone: 'text-success' },
+                    { label: 'جاهزية الفرص', value: '72%', tone: 'text-brand' },
+                    { label: 'المخاطر', value: 'مضبوطة', tone: 'text-accent' },
+                    { label: 'مسار الخروج', value: 'واضح', tone: 'text-warning' }
+                  ].map((item) => (
+                    <div key={item.label} className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                      <div className="text-sm text-app-text-soft">{item.label}</div>
+                      <div className={`mt-2 text-2xl font-black ${item.tone}`}>{item.value}</div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Featured Opportunities Section */}
-      <section className="py-20 bg-gradient-to-b from-app-bg to-app-surface-soft">
+      <section className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeUp" className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep mb-4">
-              فرص استثمارية مميزة
-            </h2>
-            <p className="text-app-text-muted max-w-2xl mx-auto">
-              استكشف أحدث الفرص الاستثمارية في الأراضي الزراعية الموسمية
-            </p>
-          </AnimatedSection>
+          <SectionTitle
+            eyebrow="أبرز الفرص"
+            title="فرص استثمارية مميزة"
+            description="أكثر الفرص حضوراً للتعرف السريع والمقارنة البصرية."
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredOpportunities.map((opportunity, index) => (
-              <AnimatedSection key={opportunity.id} animation="scaleIn" delay={index * 100}>
+              <AnimatedSection key={opportunity.id} delay={index * 100}>
                 <OpportunityCard opportunity={opportunity} />
               </AnimatedSection>
             ))}
           </div>
 
-          <div className="text-center mt-8">
-            <Link to="/opportunities" className="inline-flex items-center gap-2 text-app-text-muted hover:text-app-text font-semibold transition-all duration-300 hover:translate-x-2">
-              عرض جميع الفرص الاستثمارية
-              <ChevronLeftIcon />
+          <AnimatedSection className="mt-8 text-center">
+            <Link to="/opportunities" className="inline-flex items-center gap-2 text-app-text-muted font-semibold hover:text-app-text transition-colors">
+              عرض جميع الفرص
+              <ChevronLeftIcon className="w-4 h-4" />
             </Link>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* News Section */}
-      <section className="py-20 bg-gradient-to-b from-app-surface-soft to-app-bg">
+      <section className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fadeUp" className="flex items-center justify-between mb-12">
-            <div>
-              <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep mb-2">
-                آخر الأخبار والإعلانات
-              </h2>
-              <p className="text-app-text-muted">تابع آخر مستجدات الفرص والمشاريع الاستثمارية</p>
-            </div>
-            <Link to="/news" className="hidden md:inline-flex items-center gap-2 text-app-text-muted hover:text-app-text font-semibold transition-all duration-300 hover:translate-x-1">
-              عرض الكل
-              <ChevronLeftIcon />
-            </Link>
-          </AnimatedSection>
+          <SectionTitle
+            eyebrow="الأخبار"
+            title="آخر الأخبار والإعلانات"
+            description="تابع أحدث التطورات والمستجدات بتصميم سهل ومستقر."
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredNews.map((news, index) => (
-              <AnimatedSection key={news.id} animation="fadeUp" delay={index * 100}>
+              <AnimatedSection key={news.id} delay={index * 100}>
                 <NewsCard news={news} />
               </AnimatedSection>
             ))}
           </div>
 
-          <div className="text-center mt-8 md:hidden">
-            <Link to="/news" className="inline-flex items-center gap-2 text-app-text-muted hover:text-app-text font-semibold transition-all duration-300">
+          <AnimatedSection className="mt-8 text-center">
+            <Link to="/news" className="inline-flex items-center gap-2 text-app-text-muted font-semibold hover:text-app-text transition-colors">
               عرض الكل
-              <ChevronLeftIcon />
+              <ChevronLeftIcon className="w-4 h-4" />
             </Link>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-brand via-brand-deep to-brand py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-72 h-72 bg-brand/10 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-deep/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
+      <section className="py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection>
+            <Card className="relative overflow-hidden rounded-[2rem] border border-brand/20 bg-gradient-to-r from-brand via-brand-deep to-brand-deep p-8 lg:p-12">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_28%)]" />
+              <div className="relative z-10 grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-center">
+                <div className="space-y-4 text-right">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-app-text text-sm font-semibold border border-white/10 w-fit">
+                    <MessageCircleIcon className="w-4 h-4" />
+                    جاهز لبداية أوضح
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-black text-app-text leading-tight">
+                    ابدأ رحلتك بطريقة أكثر هدوءًا ووضوحًا
+                  </h2>
+                  <p className="text-app-text-muted text-lg leading-8 max-w-2xl">
+                    اختر المسار الذي يناسبك اليوم، وابدأ من نقطة مختصرة تبطئ الضغط وترفع وضوح القرار.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <Link to="/register" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-app-surface text-app-text font-semibold hover:bg-app-surface-strong transition-colors">
+                    إنشاء حساب
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </Link>
+                  <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl border border-white/15 text-app-text font-semibold hover:bg-white/10 transition-colors">
+                    تواصل معنا
+                    <MessageCircleIcon className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </Card>
+          </AnimatedSection>
         </div>
-        <AnimatedSection animation="scaleIn" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-app-text mb-6">
-            جاهز لبدء رحلتك الاستثمارية؟
-          </h2>
-          <p className="text-app-text-muted text-lg mb-10 max-w-2xl mx-auto">
-            انضم إلى مئات المستثمرين الذين يثقون بـ LandX لاتخاذ قرارات استثمارية ذكية ومبنية على بيانات دقيقة
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/register"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-app-surface text-app-text font-bold rounded-lg hover:bg-app-surface-soft transition-all duration-300 hover:scale-105 shadow-lg"
-            >
-              سجل الآن مجاناً
-              <ArrowRightIcon />
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-app-border text-app-text font-bold rounded-lg hover:bg-app-surface/10 transition-all duration-300"
-            >
-              تواصل معنا
-              <MessageCircleIcon />
-            </Link>
-          </div>
-        </AnimatedSection>
       </section>
     </div>
   );

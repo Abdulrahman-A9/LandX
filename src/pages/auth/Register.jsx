@@ -52,7 +52,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-app-bg flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full animate-fade-in-up">
+      <div className="max-w-md w-full ">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-6">
             <div className="w-12 h-12 bg-gradient-to-br from-brand/30 to-brand-deep/30 rounded-xl flex items-center justify-center shadow-lg">
@@ -64,7 +64,7 @@ const Register = () => {
           <p className="text-app-text-muted">انضم إلى منصة لاند إكس وابدأ رحلتك الاستثمارية</p>
         </div>
 
-        <Card className="p-8 bg-card-gradient border border-app-border shadow-xl animate-scale-in">
+        <Card className="p-8 bg-card-gradient border border-app-border shadow-xl ">
           {error && (
             <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-6 text-sm">
               {error}

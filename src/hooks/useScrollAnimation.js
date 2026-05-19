@@ -1,27 +1,42 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useScrollAnimation = (threshold = 0.1) => {
+export const useScrollAnimation = (threshold = 0.15, rootMargin = '0px 0px -8% 0px') => {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const current = ref.current;
+    if (!current) {
+      return undefined;
+    }
+
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      setIsVisible(true);
+      return undefined;
+    }
+
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+          observer.disconnect();
         }
       },
-      { threshold }
+      { threshold, rootMargin }
     );
 
-    const current = ref.current;
-    if (current) observer.observe(current);
+    observer.observe(current);
 
     return () => {
-      if (current) observer.unobserve(current);
+      observer.disconnect();
     };
-  }, [threshold]);
+  }, [threshold, rootMargin]);
 
   return { ref, isVisible };
 };
