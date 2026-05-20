@@ -12,23 +12,32 @@ const OpportunityCard = ({ opportunity }) => {
   };
   
   return (
-    <Card hover className="overflow-hidden">
-      <div className="aspect-video bg-app-surface-soft relative overflow-hidden">
+    <Card hover className="overflow-hidden border border-app-border/80 bg-card-gradient shadow-lg shadow-black/10">
+      <div className="aspect-[16/10] bg-app-surface-soft relative overflow-hidden">
         {images && images.length > 0 ? (
           <img 
             src={images[0]} 
             alt={title}
-            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-cover scale-[1.01] hover:scale-105 transition-transform duration-700"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-app-surface-soft to-app-surface">
             <LeafIcon className="w-16 h-16 text-muted" />
           </div>
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f0a]/55 via-transparent to-transparent" />
         <div className="absolute top-3 right-3">
           <Badge variant={status === 'active' ? 'success' : 'warning'}>
             {status === 'active' ? 'نشط' : 'قيد المراجعة'}
           </Badge>
+        </div>
+        <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3">
+          <div className="rounded-2xl border border-white/10 bg-black/20 backdrop-blur-md px-3 py-2 text-xs text-white/90 shadow-lg">
+            {location}
+          </div>
+          <div className="rounded-2xl border border-brand/20 bg-brand/10 backdrop-blur-md px-3 py-2 text-xs font-medium text-app-text">
+            {season === 'winter' ? 'شتوي' : season === 'summer' ? 'صيفي' : season === 'spring' ? 'ربيعي' : 'خريفي'}
+          </div>
         </div>
       </div>
       

@@ -8,11 +8,10 @@ import { SearchIcon } from '../../components/ui/Icons';
 
 const Opportunities = () => {
   const [filterSeason, setFilterSeason] = useState('all');
-  const [filterRegion, setFilterRegion] = useState('all');
   
   const filteredOpportunities = mockOpportunities.filter((opportunity) => {
     const seasonMatch = filterSeason === 'all' || opportunity.season === filterSeason;
-    const regionMatch = filterRegion === 'all' || opportunity.municipality.includes(filterRegion);
+    const regionMatch = opportunity.municipality.includes('حائل');
     return seasonMatch && regionMatch;
   });
   
@@ -21,10 +20,10 @@ const Opportunities = () => {
       <div className="bg-gradient-to-r from-brand/90 to-brand-deep/90 border-b border-brand/20 backdrop-blur ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <h1 className="text-3xl font-bold text-app-text mb-2 ">
-            الفرص الاستثمارية
+            الفرص الاستثمارية في حائل
           </h1>
           <p className="text-app-text-muted ">
-            استكشف جميع الفرص الاستثمارية المتاحة في الأراضي الزراعية الموسمية
+            استكشف فرص حائل الاستثمارية فقط مع صور أوضح وتجربة أكثر احترافية
           </p>
         </div>
       </div>
@@ -54,16 +53,9 @@ const Opportunities = () => {
               <label className="block text-sm font-medium text-app-text-muted mb-2">
                 المنطقة
               </label>
-              <select
-                value={filterRegion}
-                onChange={(e) => setFilterRegion(e.target.value)}
-                className="w-full px-3 py-2 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
-              >
-                <option value="all">جميع المناطق</option>
-                <option value="حائل">منطقة حائل</option>
-                <option value="القصيم">منطقة القصيم</option>
-                <option value="تبوك">منطقة تبوك</option>
-              </select>
+              <div className="w-full px-3 py-2 bg-app-surface text-app-text border border-app-border rounded-lg">
+                منطقة حائل
+              </div>
             </div>
             
             <div className="flex items-end">
@@ -71,7 +63,6 @@ const Opportunities = () => {
                 variant="outline"
                 onClick={() => {
                   setFilterSeason('all');
-                  setFilterRegion('all');
                 }}
                 className="w-full"
               >
