@@ -189,7 +189,7 @@ const Home = () => {
 
                 <div className="grid gap-4 lg:grid-cols-[0.95fr_1.08fr]">
                   <div className="grid gap-4">
-                    <div className="rounded-[1.75rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 p-4 min-h-[7.9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                    <div className="rounded-[1.75rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 p-4 min-h-[7.9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
                       <p className="text-app-text-soft text-sm md:text-[0.95rem] font-normal font-body">الأولوية</p>
                       <span className="self-end text-3xl md:text-[3.15rem] font-medium tracking-tight text-app-text leading-none font-heading">21</span>
                     </div>
@@ -200,7 +200,7 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <div className="rounded-[1.75rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 p-4 min-h-[16.5rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                  <div className="rounded-[1.75rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 p-4 min-h-[16.5rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
                     <p className="text-app-text-soft text-sm md:text-[0.95rem] font-normal font-body">مؤشر التهيئة</p>
                     <div className="self-end text-3xl md:text-[3.15rem] font-medium tracking-tight text-app-text leading-none font-heading">72%</div>
                   </div>
