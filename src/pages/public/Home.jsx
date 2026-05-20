@@ -189,39 +189,39 @@ const Home = () => {
 
                 <div className="grid gap-4 lg:grid-cols-[0.95fr_1.08fr]">
                   <div className="grid gap-4">
-                    <div className="rounded-[1.75rem] border border-[#8b5a3a]/35 bg-gradient-to-br from-[#4f2d1f]/82 via-[#472818]/82 to-[#2d1b12]/88 p-4 min-h-[7.9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                    <div className="rounded-[1.75rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 p-4 min-h-[7.9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                       <p className="text-app-text-soft text-sm md:text-[0.95rem] font-normal font-body">الأولوية</p>
                       <span className="self-end text-3xl md:text-[3.15rem] font-medium tracking-tight text-app-text leading-none font-heading">21</span>
                     </div>
 
-                    <div className="rounded-[1.75rem] border border-[#8b5a3a]/35 bg-gradient-to-br from-[#4d2b1d]/80 via-[#432617]/82 to-[#2d1b12]/88 p-4 min-h-[7.9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                    <div className="rounded-[1.75rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 p-4 min-h-[7.9rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                       <p className="text-app-text-soft text-sm md:text-[0.95rem] font-normal font-body">الشراكة</p>
                       <span className="self-end text-3xl md:text-[3.15rem] font-medium tracking-tight text-app-text leading-none font-heading">06</span>
                     </div>
                   </div>
 
-                  <div className="rounded-[1.75rem] border border-[#8b5a3a]/35 bg-gradient-to-br from-[#4f2d1f]/82 via-[#472818]/84 to-[#2c1a11]/90 p-4 min-h-[16.5rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                  <div className="rounded-[1.75rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 p-4 min-h-[16.5rem] flex flex-col justify-between text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                     <p className="text-app-text-soft text-sm md:text-[0.95rem] font-normal font-body">مؤشر التهيئة</p>
                     <div className="self-end text-3xl md:text-[3.15rem] font-medium tracking-tight text-app-text leading-none font-heading">72%</div>
                   </div>
                 </div>
 
                 <div className="mt-4 grid gap-4">
-                  <div className="rounded-[1.45rem] border border-[#8b5a3a]/28 bg-[#3a2318]/84 px-5 py-4 flex items-center justify-between gap-6">
+                  <div className="rounded-[1.45rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 px-5 py-4 flex items-center justify-between gap-6">
                     <div className="text-left text-app-text-soft font-normal text-base sm:text-[1.05rem] font-body">تنبيه</div>
                     <div className="text-right text-app-text text-sm sm:text-[1.05rem] leading-8 font-body">
                       مؤشر يختصر جاهزية الفرص
                     </div>
                   </div>
 
-                  <div className="rounded-[1.45rem] border border-[#8b5a3a]/28 bg-[#3a2318]/84 px-5 py-4 flex items-center justify-between gap-6">
+                  <div className="rounded-[1.45rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 px-5 py-4 flex items-center justify-between gap-6">
                     <div className="text-left text-app-text-soft font-normal text-base sm:text-[1.05rem] font-body">إجراء</div>
                     <div className="text-right text-app-text text-sm sm:text-[1.05rem] leading-8 font-body">
                       متوسط — تلخيص هادئ للمسار
                     </div>
                   </div>
 
-                  <div className="rounded-[1.45rem] border border-[#8b5a3a]/28 bg-[#3a2318]/84 px-5 py-4 flex items-center justify-between gap-6">
+                  <div className="rounded-[1.45rem] border border-[#8b5a3a]/30 bg-gradient-to-br from-[#4d2b1d]/82 via-[#432617]/84 to-[#2d1b12]/90 px-5 py-4 flex items-center justify-between gap-6">
                     <div className="text-left text-app-text-soft font-normal text-base sm:text-[1.05rem] font-body">جاهز</div>
                     <div className="text-right text-app-text text-sm sm:text-[1.05rem] leading-8 font-body">
                       عالي — تخطية سريعة بدون ضغط
