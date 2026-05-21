@@ -3,7 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
 import { useToast } from '../../context/ToastContext';
-import { UserIcon, MailIcon, LockIcon, PhoneIcon, BuildingIcon } from '../../components/ui/Icons';
+import {
+  ArrowRightIcon,
+  BuildingIcon,
+  LockIcon,
+  MailIcon,
+  PhoneIcon,
+  ShieldCheckIcon,
+  UserIcon,
+} from '../../components/ui/Icons';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -18,168 +26,195 @@ const Register = () => {
   });
   const [error, setError] = useState('');
 
-  const roleOptions = [
-    { value: 'investor', label: 'مستثمر' },
-    { value: 'municipality', label: 'بلدية / جهة حكومية' },
-  ];
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setError('');
 
     if (!formData.name || !formData.email || !formData.password) {
-      setError('يرجى ملء جميع الحقول المطلوبة');
+      setError('يرجى تعبئة الحقول الأساسية لإكمال التسجيل.');
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setError('كلمة المرور وتأكيدها غير متطابقتين');
+      setError('كلمتا المرور غير متطابقتين.');
       return;
     }
 
     if (formData.password.length < 6) {
-      setError('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+      setError('كلمة المرور يجب أن تكون 6 أحرف على الأقل.');
       return;
     }
 
-    addToast('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.', 'success');
+    addToast('تم إنشاء الحساب بنجاح. يمكنك الآن تسجيل الدخول.', 'success');
     navigate('/login');
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
-    <div className="min-h-screen bg-app-bg flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full ">
-        <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-br from-brand/30 to-brand-deep/30 rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-brand font-bold text-2xl">ل</span>
-            </div>
-            <span className="text-3xl font-bold text-app-text">LandX</span>
-          </Link>
-          <h2 className="text-2xl font-bold text-app-text mb-2">إنشاء حساب جديد</h2>
-          <p className="text-app-text-muted">انضم إلى منصة لاند إكس وابدأ رحلتك الاستثمارية</p>
-        </div>
+    <div className="min-h-screen bg-app-bg px-4 py-10">
+      <div className="landx-shell">
+        <div className="grid min-h-[calc(100vh-5rem)] gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <Card className="order-2 p-6 lg:order-1 lg:p-8">
+            <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-app-text-muted hover:text-app-text">
+              <ArrowRightIcon className="h-4 w-4" />
+              العودة إلى الموقع
+            </Link>
 
-        <Card className="p-8 bg-card-gradient border border-app-border shadow-xl ">
-          {error && (
-            <div className="bg-danger/10 border border-danger/30 text-danger px-4 py-3 rounded-lg mb-6 text-sm">
-              {error}
+            <div className="mt-6">
+              <h2 className="text-3xl font-black text-app-text">إنشاء حساب جديد</h2>
+              <p className="mt-2 text-sm leading-7 text-app-text-muted">
+                ابدأ كـ مستثمر أو جهة معلنة في نموذج قصير وواضح.
+              </p>
             </div>
-          )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-semibold text-app-text-muted mb-2">الاسم الكامل</label>
-              <div className="relative">
-                <UserIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
-                <input
-                  name="name" value={formData.name} onChange={handleChange} required
-                  placeholder="أدخل اسمك الكامل"
-                  className="w-full pr-10 pl-4 py-3 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand placeholder-app-text-soft text-sm"
-                />
+            {error ? (
+              <div className="mt-5 rounded-2xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
+                {error}
               </div>
-            </div>
+            ) : null}
 
-            <div>
-              <label className="block text-sm font-semibold text-app-text-muted mb-2">البريد الإلكتروني</label>
-              <div className="relative">
-                <MailIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
-                <input
-                  name="email" type="email" value={formData.email} onChange={handleChange} required
-                  placeholder="example@email.com"
-                  className="w-full pr-10 pl-4 py-3 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand placeholder-app-text-soft text-sm"
-                />
+            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="md:col-span-2">
+                  <label className="mb-2 block text-sm font-semibold text-app-text-muted">الاسم الكامل</label>
+                  <div className="relative">
+                    <UserIcon className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-app-text-soft" />
+                    <input
+                      value={formData.name}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+                      required
+                      placeholder="أدخل الاسم الكامل"
+                      className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 pr-12 text-sm text-app-text placeholder:text-app-text-soft"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-app-text-muted">البريد الإلكتروني</label>
+                  <div className="relative">
+                    <MailIcon className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-app-text-soft" />
+                    <input
+                      value={formData.email}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                      required
+                      type="email"
+                      placeholder="name@email.com"
+                      className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 pr-12 text-sm text-app-text placeholder:text-app-text-soft"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-app-text-muted">رقم الجوال</label>
+                  <div className="relative">
+                    <PhoneIcon className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-app-text-soft" />
+                    <input
+                      value={formData.phone}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
+                      placeholder="+966 XX XXX XXXX"
+                      className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 pr-12 text-sm text-app-text placeholder:text-app-text-soft"
+                    />
+                  </div>
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="mb-2 block text-sm font-semibold text-app-text-muted">نوع الحساب</label>
+                  <div className="relative">
+                    <BuildingIcon className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-app-text-soft" />
+                    <select
+                      value={formData.role}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, role: e.target.value }))}
+                      className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 pr-12 text-sm text-app-text"
+                    >
+                      <option value="investor">مستثمر</option>
+                      <option value="municipality">بلدية / جهة معلنة</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-app-text-muted">كلمة المرور</label>
+                  <div className="relative">
+                    <LockIcon className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-app-text-soft" />
+                    <input
+                      value={formData.password}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
+                      required
+                      type="password"
+                      placeholder="6 أحرف على الأقل"
+                      className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 pr-12 text-sm text-app-text placeholder:text-app-text-soft"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-app-text-muted">تأكيد كلمة المرور</label>
+                  <div className="relative">
+                    <LockIcon className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-app-text-soft" />
+                    <input
+                      value={formData.confirmPassword}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
+                      required
+                      type="password"
+                      placeholder="أعد كتابة كلمة المرور"
+                      className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 pr-12 text-sm text-app-text placeholder:text-app-text-soft"
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-app-text-muted mb-2">رقم الهاتف</label>
-              <div className="relative">
-                <PhoneIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
-                <input
-                  name="phone" type="tel" value={formData.phone} onChange={handleChange}
-                  placeholder="+966 XX XXX XXXX"
-                  className="w-full pr-10 pl-4 py-3 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand placeholder-app-text-soft text-sm"
-                />
+              <div className="rounded-2xl border border-app-border bg-app-surface-soft/60 p-4 text-sm leading-7 text-app-text-muted">
+                بالتسجيل فأنت توافق على استخدام المنصة وفق معايير الاستخدام وسياسة الخصوصية الداخلية الحالية.
               </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-app-text-muted mb-2">نوع الحساب</label>
-              <div className="relative">
-                <BuildingIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
-                <select
-                  name="role" value={formData.role} onChange={handleChange}
-                  className="w-full pr-10 pl-4 py-3 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm appearance-none"
-                >
-                  {roleOptions.map((opt) => (
-                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
+              <Button type="submit" size="lg" className="w-full">
+                إنشاء الحساب
+              </Button>
+            </form>
 
-            <div>
-              <label className="block text-sm font-semibold text-app-text-muted mb-2">كلمة المرور</label>
-              <div className="relative">
-                <LockIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
-                <input
-                  name="password" type="password" value={formData.password} onChange={handleChange} required
-                  placeholder="••••••••"
-                  className="w-full pr-10 pl-4 py-3 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand placeholder-app-text-soft text-sm"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-app-text-muted mb-2">تأكيد كلمة المرور</label>
-              <div className="relative">
-                <LockIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-app-text-soft" />
-                <input
-                  name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} required
-                  placeholder="••••••••"
-                  className="w-full pr-10 pl-4 py-3 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand placeholder-app-text-soft text-sm"
-                />
-              </div>
-            </div>
-
-            <label className="flex items-start gap-2 text-app-text-muted text-sm cursor-pointer pt-1">
-              <input type="checkbox" required className="w-4 h-4 text-brand border-app-border rounded focus:ring-brand mt-0.5" />
-              <span>
-                أوافق على{' '}
-                <button type="button" onClick={() => alert('الشروط والأحكام ستعرض هنا')} className="text-app-text font-bold hover:underline">
-                  الشروط والأحكام
-                </button>
-                {' '}و{' '}
-                <button type="button" onClick={() => alert('سياسة الخصوصية ستعرض هنا')} className="text-app-text font-bold hover:underline">
-                  سياسة الخصوصية
-                </button>
-              </span>
-            </label>
-
-            <Button type="submit" size="lg" className="w-full">
-              إنشاء الحساب
-            </Button>
-          </form>
-
-          <div className="mt-6 pt-6 border-t border-app-border text-center">
-            <p className="text-app-text-muted text-sm">
+            <div className="mt-6 text-center text-sm text-app-text-muted">
               لديك حساب بالفعل؟{' '}
-              <Link to="/login" className="text-app-text hover:text-brand font-bold transition-colors">
+              <Link to="/login" className="font-bold text-app-text hover:text-brand">
                 تسجيل الدخول
               </Link>
-            </p>
-          </div>
-        </Card>
+            </div>
+          </Card>
 
-        <div className="mt-6 text-center">
-          <Link to="/" className="text-app-text-muted hover:text-app-text text-sm font-medium transition-colors">
-            العودة للصفحة الرئيسية
-          </Link>
+          <div className="order-1 space-y-8 lg:order-2">
+            <div className="landx-kicker">بداية منظمة</div>
+            <div>
+              <h1 className="text-4xl font-black leading-tight text-app-text md:text-5xl">
+                أنشئ حسابك وادخل إلى مسار استثماري أو تشغيلي أكثر وضوحاً.
+              </h1>
+              <p className="mt-4 max-w-2xl text-lg leading-9 text-app-text-muted">
+                التسجيل هنا لا يضيف خطوات غير ضرورية. نطلب فقط ما يلزم لبدء التجربة، ثم تتوسع
+                البيانات لاحقاً داخل لوحة العمل.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {[
+                'للمستثمر: اكتشاف الفرص وفهم الجدوى.',
+                'للبلدية: تنظيم النشر وإدارة الطلبات.',
+                'للمنصة: نفس الهوية ونفس اللغة البصرية في كل المسارات.',
+              ].map((item) => (
+                <div key={item} className="rounded-2xl border border-app-border bg-app-surface-soft p-4 text-sm leading-7 text-app-text-muted">
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-[2rem] border border-app-border bg-card-gradient p-6">
+              <div className="flex items-center gap-2 text-app-text">
+                <ShieldCheckIcon className="h-5 w-5 text-brand" />
+                <span className="font-semibold">ماذا يحدث بعد التسجيل؟</span>
+              </div>
+              <div className="mt-4 space-y-3 text-sm leading-7 text-app-text-muted">
+                <p>1. تدخل إلى الواجهة المناسبة حسب نوع الحساب.</p>
+                <p>2. تكمل بياناتك التشغيلية عند الحاجة داخل لوحة العمل.</p>
+                <p>3. تبدأ مباشرة في استعراض الفرص أو إدارتها دون تعقيد.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

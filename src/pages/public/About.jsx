@@ -1,192 +1,153 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../../components/ui/Card';
 import AnimatedSection from '../../components/shared/AnimatedSection';
-import { ShieldCheckIcon, BarChartIcon, HandshakeIcon, LightbulbIcon, BuildingIcon } from '../../components/ui/Icons';
+import PageHero from '../../components/shared/PageHero';
+import SectionIntro from '../../components/shared/SectionIntro';
+import Card from '../../components/ui/Card';
+import {
+  BarChartIcon,
+  BuildingIcon,
+  HandshakeIcon,
+  LightbulbIcon,
+  ShieldCheckIcon,
+  UsersIcon,
+} from '../../components/ui/Icons';
+
+const values = [
+  {
+    title: 'وضوح القرار',
+    description: 'نصمم التجربة لتكشف ما يحتاجه المستخدم أولاً، ثم تسمح له بالتعمق عند الحاجة.',
+    icon: <BarChartIcon />,
+  },
+  {
+    title: 'الثقة التنظيمية',
+    description: 'المنصة تبني جسراً أكثر وضوحاً بين المستثمر والجهات المنظمة.',
+    icon: <ShieldCheckIcon />,
+  },
+  {
+    title: 'شراكة عملية',
+    description: 'البلديات لا تظهر كمصدر للمحتوى فقط، بل كطرف واضح في مسار الاستثمار.',
+    icon: <HandshakeIcon />,
+  },
+  {
+    title: 'ابتكار منضبط',
+    description: 'نستخدم التحليل والتصميم لخدمة الهدف، لا لإضافة ضوضاء بصرية أو وظيفية.',
+    icon: <LightbulbIcon />,
+  },
+];
+
+const highlights = [
+  'منصة عربية أولاً للفرص الزراعية الموسمية.',
+  'تدفق واضح من الاكتشاف إلى التقييم ثم التنفيذ.',
+  'تصميم منخفض التشتت للمستثمر والفريق التشغيلي.',
+];
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-app-bg text-app-text py-16">
-      <div className="bg-gradient-to-r from-brand/90 to-brand-deep/90 border-b border-brand/20 backdrop-blur">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold text-app-text mb-4">
-            عن منصة لاند إكس
-          </h1>
-          <p className="text-xl text-app-text-muted max-w-3xl">
-            منصة وطنية لاستثمارات الأراضي الموسمية، تهدف إلى تمكين المستثمرين من الوصول إلى فرص استثمارية آمنة وموثوقة في القطاع الزراعي
-          </p>
-        </div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <AnimatedSection animation="slideLeft">
-            <h2 className="text-2xl font-bold text-app-text mb-4">
-              رؤيتنا
-            </h2>
-            <p className="text-app-text-muted leading-relaxed mb-6">
-              أن نكون المنصة الرائدة في المملكة لتمكين الاستثمارات الزراعية الموسمية، من خلال توفير بيئة استثمارية شفافة وآمنة تربط بين المستثمرين والجهات الحكومية المختصة.
-            </p>
-            
-            <h2 className="text-2xl font-bold text-app-text mb-4">
-              رسالتنا
-            </h2>
-            <p className="text-app-text-muted leading-relaxed">
-              تسهيل الوصول إلى الفرص الاستثمارية في الأراضي الزراعية الموسمية عبر منصة رقمية موثوقة، مع ضمان الشفافية والامتثال للأنظمة واللوائح الحكومية، وتوفير تجربة استثمارية سلسة للمستثمرين.
-            </p>
+    <div>
+      <PageHero
+        eyebrow="عن LandX"
+        title="منصة صممت لتجعل قرار الاستثمار أوضح، لا فقط لتعرض فرصاً أكثر."
+        description="الفكرة الأساسية وراء LandX هي أن المستثمر لا يحتاج إلى صفحات أكثر بقدر ما يحتاج إلى مسار أوضح. لذلك بُنيت المنصة على الجمع بين العرض، التحليل، والتنظيم في تجربة واحدة هادئة."
+      />
+
+      <section className="py-16 lg:py-20">
+        <div className="landx-shell grid gap-10 lg:grid-cols-2">
+          <AnimatedSection>
+            <Card className="h-full p-7 lg:p-8">
+              <SectionIntro
+                align="start"
+                eyebrow="الرؤية"
+                title="أن تصبح تجربة فهم الفرصة الاستثمارية أسهل من مجرد الوصول إليها."
+                description="نريد رفع جودة القرار نفسه: كيف يقرأ المستخدم الفرصة، كيف يفهم الجاهزية، وكيف ينتقل إلى الإجراء المناسب دون فوضى."
+              />
+            </Card>
           </AnimatedSection>
 
-          <AnimatedSection animation="slideRight">
-            <h2 className="text-2xl font-bold text-app-text mb-4">
-              قيمنا
-            </h2>
-            <div className="space-y-4">
-              <Card className="p-4 flex items-start gap-4 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300">
-                <ShieldCheckIcon className="text-3xl text-brand" />
-                <div>
-                  <h3 className="font-semibold text-app-text mb-1">الأمان والموثوقية</h3>
-                  <p className="text-app-text-muted text-sm">
-                    نضمن بيئة استثمارية آمنة مع شراكات رسمية مع الجهات الحكومية
-                  </p>
-                </div>
-              </Card>
-              
-              <Card className="p-4 flex items-start gap-4 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300">
-                <BarChartIcon className="text-3xl text-brand" />
-                <div>
-                  <h3 className="font-semibold text-app-text mb-1">الشفافية</h3>
-                  <p className="text-app-text-muted text-sm">
-                    نقدم معلومات دقيقة ومفصلة عن كل فرصة استثمارية
-                  </p>
-                </div>
-              </Card>
-              
-              <Card className="p-4 flex items-start gap-4 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300">
-                <HandshakeIcon className="text-3xl text-brand" />
-                <div>
-                  <h3 className="font-semibold text-app-text mb-1">الشراكة</h3>
-                  <p className="text-app-text-muted text-sm">
-                    نعمل مع البلديات والجهات الحكومية لتوفير أفضل الفرص
-                  </p>
-                </div>
-              </Card>
-              
-              <Card className="p-4 flex items-start gap-4 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300">
-                <LightbulbIcon className="text-3xl text-brand" />
-                <div>
-                  <h3 className="font-semibold text-app-text mb-1">الابتكار</h3>
-                  <p className="text-app-text-muted text-sm">
-                    نستخدم أحدث التقنيات لتحسين تجربة المستثمرين
-                  </p>
-                </div>
-              </Card>
+          <AnimatedSection delay={100}>
+            <Card className="h-full p-7 lg:p-8">
+              <SectionIntro
+                align="start"
+                eyebrow="الرسالة"
+                title="بناء واجهة عمل مشتركة بين المستثمر والجهات المعلنة."
+                description="المنصة تجمع البيانات، ترتبها، وتعرضها بسياق يسهل قراءته. هذا يخدم المستثمر في اتخاذ القرار ويخدم البلدية في تقديم الفرصة بشكل أكثر مهنية."
+              />
+            </Card>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20">
+        <div className="landx-shell space-y-12">
+          <AnimatedSection>
+            <SectionIntro
+              eyebrow="قيم العمل"
+              title="نظام قيم واضح ينعكس على التصميم والتجربة، لا على النصوص فقط."
+              description="كل قيمة هنا مرتبطة بقرار تصميمي وتجربة استخدام واضحة داخل المنصة."
+            />
+          </AnimatedSection>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {values.map((item, index) => (
+              <AnimatedSection key={item.title} delay={index * 80}>
+                <Card className="h-full p-6">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+                    {item.icon}
+                  </div>
+                  <h3 className="mt-5 text-xl font-bold text-app-text">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-8 text-app-text-muted">{item.description}</p>
+                </Card>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20">
+        <div className="landx-shell">
+          <Card className="p-8 lg:p-10">
+            <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+              <div>
+                <div className="landx-kicker">ما الذي يميز النظام؟</div>
+                <h2 className="mt-4 text-3xl font-black leading-tight text-app-text md:text-4xl">
+                  نفس الهوية تخدم الواجهة العامة ولوحات العمل الداخلية.
+                </h2>
+              </div>
+              <div className="grid gap-4">
+                {highlights.map((item) => (
+                  <div key={item} className="flex items-start gap-3 rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                    <UsersIcon className="mt-1 h-5 w-5 shrink-0 text-brand" />
+                    <p className="text-sm leading-7 text-app-text-muted">{item}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </AnimatedSection>
+          </Card>
         </div>
+      </section>
 
-        <AnimatedSection animation="fadeUp" className="mb-16">
-          <h2 className="text-2xl font-bold text-app-text mb-8 text-center">
-            كيف نعمل؟
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card className="text-center p-6 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105">
-              <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand">
-                <span className="text-brand font-bold text-xl">1</span>
-              </div>
-              <h3 className="font-semibold text-app-text mb-2">التسجيل</h3>
-              <p className="text-app-text-muted text-sm">
-                أنشئ حسابك المجاني في دقائق
-              </p>
-            </Card>
-            
-            <Card className="text-center p-6 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105">
-              <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand">
-                <span className="text-brand font-bold text-xl">2</span>
-              </div>
-              <h3 className="font-semibold text-app-text mb-2">استكشاف الفرص</h3>
-              <p className="text-app-text-muted text-sm">
-                تصفح الفرص الاستثمارية المتاحة
-              </p>
-            </Card>
-            
-            <Card className="text-center p-6 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105">
-              <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand">
-                <span className="text-brand font-bold text-xl">3</span>
-              </div>
-              <h3 className="font-semibold text-app-text mb-2">طلب الاستثمار</h3>
-              <p className="text-app-text-muted text-sm">
-                قدم طلب استثمارك للفرصة المناسبة
-              </p>
-            </Card>
-            
-            <Card className="text-center p-6 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105">
-              <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand">
-                <span className="text-brand font-bold text-xl">4</span>
-              </div>
-              <h3 className="font-semibold text-app-text mb-2">بدء الاستثمار</h3>
-              <p className="text-app-text-muted text-sm">
-                ابدأ رحلتك الاستثمارية معنا
-              </p>
-            </Card>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection animation="fadeUp">
-          <h2 className="text-2xl font-bold text-app-text mb-8 text-center">
-            شركاؤنا
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="text-center p-6 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105">
-              <div className="w-16 h-16 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand">
-                <BuildingIcon className="text-3xl text-brand" />
-              </div>
-              <h3 className="font-semibold text-app-text mb-2">أمانة منطقة حائل</h3>
-              <p className="text-app-text-muted text-sm">
-                الجهة الحكومية المسؤولة عن منطقة حائل
-              </p>
-            </Card>
-            
-            <Card className="text-center p-6 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105">
-              <div className="w-16 h-16 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand">
-                <BuildingIcon className="text-3xl text-brand" />
-              </div>
-              <h3 className="font-semibold text-app-text mb-2">أمانة منطقة القصيم</h3>
-              <p className="text-app-text-muted text-sm">
-                الجهة الحكومية المسؤولة عن منطقة القصيم
-              </p>
-            </Card>
-            
-            <Card className="text-center p-6 bg-card-gradient border border-app-border hover:border-brand transition-all duration-300 hover:scale-105">
-              <div className="w-16 h-16 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand">
-                <BuildingIcon className="text-3xl text-brand" />
-              </div>
-              <h3 className="font-semibold text-app-text mb-2">أمانة منطقة تبوك</h3>
-              <p className="text-app-text-muted text-sm">
-                الجهة الحكومية المسؤولة عن منطقة تبوك
-              </p>
-            </Card>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection animation="scaleIn" className="mt-16 bg-gradient-to-r from-brand/90 to-brand-deep/90 rounded-2xl p-8 md:p-12 text-center border border-brand/20 backdrop-blur">
-          <h2 className="text-2xl md:text-3xl font-bold text-app-text mb-4">
-            ابدأ رحلتك الاستثمارية اليوم
-          </h2>
-          <p className="text-app-text-muted mb-8 max-w-2xl mx-auto">
-            انضم إلى آلاف المستثمرين واستفد من الفرص الاستثمارية المتاحة في الأراضي الزراعية الموسمية
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/opportunities" className="inline-flex items-center gap-2 bg-app-surface text-app-text px-8 py-3 rounded-lg font-bold hover:bg-app-surface-strong transition-all duration-300 shadow-lg">
-              استكشف الفرص
-            </Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 border border-app-border text-app-text px-8 py-3 rounded-lg font-medium hover:bg-app-surface transition-all duration-300">
-              تواصل معنا
-            </Link>
-          </div>
-        </AnimatedSection>
-      </div>
+      <section className="pb-16 lg:pb-20">
+        <div className="landx-shell">
+          <Card className="p-8 text-center lg:p-10">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+              <BuildingIcon className="h-6 w-6" />
+            </div>
+            <h2 className="mt-5 text-3xl font-black text-app-text">ابدأ من التجربة الأنسب لك.</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-8 text-app-text-muted">
+              إن كنت مستثمراً ابدأ بالفرص أو التحليل، وإن كنت جهة معلنة فالتواصل معنا هو أفضل بداية
+              لتشكيل العرض المناسب.
+            </p>
+            <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link to="/opportunities" className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-5 py-3 text-sm font-semibold text-app-text">
+                استعرض الفرص
+              </Link>
+              <Link to="/contact" className="rounded-2xl border border-app-border bg-app-surface-soft px-5 py-3 text-sm font-semibold text-app-text">
+                تواصل معنا
+              </Link>
+            </div>
+          </Card>
+        </div>
+      </section>
     </div>
   );
 };

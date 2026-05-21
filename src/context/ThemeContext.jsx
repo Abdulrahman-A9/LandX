@@ -9,23 +9,15 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    const stored = localStorage.getItem('landx_theme');
-    if (stored) return stored;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
+  const [theme] = useState('dark');
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    localStorage.setItem('landx_theme', theme);
+    root.classList.add('dark');
+    localStorage.setItem('landx_theme', 'dark');
   }, [theme]);
 
-  const toggleTheme = () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  const toggleTheme = () => {};
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, isDark: theme === 'dark' }}>

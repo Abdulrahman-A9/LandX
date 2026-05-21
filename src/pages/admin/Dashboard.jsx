@@ -1,158 +1,95 @@
 import React from 'react';
 import Card from '../../components/ui/Card';
 import { mockDashboardStats } from '../../data/mock/dashboard';
-import { UsersIcon, BuildingIcon, LeafIcon, DollarSignIcon, TrendingUpIcon, BarChartIcon, PieChartIcon, ShieldCheckIcon } from '../../components/ui/Icons';
+import {
+  BuildingIcon,
+  DollarSignIcon,
+  LeafIcon,
+  ShieldCheckIcon,
+  TrendingUpIcon,
+  UsersIcon,
+} from '../../components/ui/Icons';
+import { formatCurrency } from '../../lib/formatters';
 
 const AdminDashboard = () => {
   const stats = mockDashboardStats.admin;
-  
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('ar-SA').format(amount);
-  };
-  
+
   return (
-    <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-app-text">لوحة إدارة المنصة</h1>
-        <p className="text-app-text-muted mt-2">نظرة عامة على أداء المنصة</p>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div>
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-app-text-muted">إجمالي المستخدمين</h3>
-            <UsersIcon className="text-app-text-soft" />
-          </div>
-          <p className="text-3xl font-bold text-app-text">{stats.totalUsers}</p>
-          <p className="text-sm text-app-text-soft mt-2">مستخدم مسجل</p>
+    <div className="space-y-8">
+      <section className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+        <Card className="p-7">
+          <div className="landx-kicker">إدارة المنصة</div>
+          <h1 className="mt-5 text-4xl font-black text-app-text">لوحة الإدارة</h1>
+          <p className="mt-3 max-w-2xl text-sm leading-8 text-app-text-muted">
+            رؤية تشغيلية موحدة عن حجم الاستخدام، البلديات، المحتوى المنشور، والعناصر التي تحتاج إشرافاً فورياً.
+          </p>
         </Card>
-        </div>
-
-        <div>
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-app-text-muted">البلديات</h3>
-            <BuildingIcon className="text-app-text-soft" />
-          </div>
-          <p className="text-3xl font-bold text-brand">{stats.totalMunicipalities}</p>
-          <p className="text-sm text-app-text-soft mt-2">جهة حكومية</p>
-        </Card>
-        </div>
-
-        <div>
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-app-text-muted">الفرص الاستثمارية</h3>
-            <LeafIcon className="text-app-text-soft" />
-          </div>
-          <p className="text-3xl font-bold text-app-text">{stats.totalOpportunities}</p>
-          <p className="text-sm text-app-text-soft mt-2">{stats.activeOpportunities} نشط</p>
-        </Card>
-        </div>
-
-        <div>
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-app-text-muted">إجمالي الاستثمار</h3>
-            <DollarSignIcon className="text-app-text-soft" />
-          </div>
-          <p className="text-3xl font-bold text-brand">{formatCurrency(stats.totalInvestment)} ر.س</p>
-          <p className="text-sm text-app-text-soft mt-2">ريال سعودي</p>
-        </Card>
-        </div>
-      </div>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div>
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-app-text-muted">قيد المراجعة</h3>
-            <ShieldCheckIcon className="text-app-text-soft" />
-          </div>
-          <p className="text-3xl font-bold text-warning">{stats.pendingModeration}</p>
-          <p className="text-sm text-app-text-soft mt-2">بانتظار الموافقة</p>
-        </Card>
-        </div>
-
-        <div className="lg:col-span-2">
-        <Card className="p-6 h-full bg-card-gradient border border-app-border">
-          <h2 className="text-xl font-bold text-app-text mb-4">النشاط الحديث</h2>
-          <div className="space-y-4">
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-brand rounded-full mt-2"></div>
-              <div>
-                <p className="text-app-text">تم تسجيل مستثمر جديد: أحمد محمد</p>
-                <p className="text-sm text-app-text-soft">منذ 10 دقائق</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-success rounded-full mt-2"></div>
-              <div>
-                <p className="text-app-text">تم نشر فرصة استثمارية جديدة في القصيم</p>
-                <p className="text-sm text-app-text-soft">منذ ساعة</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-warning rounded-full mt-2"></div>
-              <div>
-                <p className="text-app-text">فرصة استثمارية جديدة تحتاج مراجعة</p>
-                <p className="text-sm text-app-text-soft">منذ ساعتين</p>
-              </div>
+        <Card className="p-7">
+          <div className="text-sm text-app-text-soft">أولوية الإشراف</div>
+          <div className="mt-4 rounded-2xl border border-danger/20 bg-danger/10 p-5">
+            <div className="text-3xl font-black text-danger">{stats.pendingModeration}</div>
+            <div className="mt-2 text-sm leading-7 text-app-text-muted">
+              عناصر قيد المراجعة تتطلب اعتماداً أو قراراً قبل اكتمال النشر.
             </div>
           </div>
         </Card>
-        </div>
-      </div>
+      </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div>
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <h2 className="text-xl font-bold text-app-text mb-4">البلديات النشطة</h2>
-          <div className="space-y-4">
+      <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {[
+          { label: 'المستخدمون', value: stats.totalUsers, helper: 'إجمالي الحسابات', icon: <UsersIcon className="h-5 w-5" />, tone: 'text-app-text' },
+          { label: 'البلديات', value: stats.totalMunicipalities, helper: 'جهات مفعلة', icon: <BuildingIcon className="h-5 w-5" />, tone: 'text-brand' },
+          { label: 'الفرص', value: stats.totalOpportunities, helper: `${stats.activeOpportunities} نشطة حالياً`, icon: <LeafIcon className="h-5 w-5" />, tone: 'text-success' },
+          { label: 'حجم الاستثمار', value: formatCurrency(stats.totalInvestment), helper: 'قيمة تقديرية إجمالية', icon: <DollarSignIcon className="h-5 w-5" />, tone: 'text-warning' },
+        ].map((item) => (
+          <Card key={item.label} className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-app-text-muted">{item.label}</div>
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+                {item.icon}
+              </div>
+            </div>
+            <div className={`mt-6 text-3xl font-black ${item.tone}`}>{item.value}</div>
+            <div className="mt-2 text-sm text-app-text-soft">{item.helper}</div>
+          </Card>
+        ))}
+      </section>
+
+      <section className="grid gap-6 xl:grid-cols-2">
+        <Card className="p-6">
+          <h2 className="text-2xl font-bold text-app-text">نقاط انتباه إدارية</h2>
+          <div className="mt-5 space-y-4">
             {[
-              { name: 'أمانة منطقة حائل', opportunities: 8 },
-              { name: 'أمانة منطقة القصيم', opportunities: 12 },
-              { name: 'أمانة منطقة تبوك', opportunities: 6 },
-            ].map((municipality, i) => (
-              <div key={i} className="flex items-center justify-between p-4 bg-app-surface-soft border border-app-border rounded-lg">
-                <div>
-                  <p className="font-medium text-app-text">{municipality.name}</p>
-                  <p className="text-sm text-app-text-muted">{municipality.opportunities} فرصة استثمارية</p>
-                </div>
-                <span className="px-3 py-1 bg-success/10 text-success rounded-full text-sm border border-success/30">
-                  نشط
-                </span>
+              'مراجعة الفرص الجديدة قبل النشر النهائي.',
+              'متابعة البلديات الأقل نشاطاً وتحفيز تحديث المحتوى.',
+              'مراقبة توازن تجربة المستثمر بين الاستكشاف والتواصل.',
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-app-border bg-app-surface-soft p-4 text-sm leading-7 text-app-text-muted">
+                {item}
               </div>
             ))}
           </div>
         </Card>
-        </div>
 
-        <div>
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <h2 className="text-xl font-bold text-app-text mb-4">المحتوى قيد المراجعة</h2>
-          <div className="space-y-4">
-            {[1, 2].map((i) => (
-              <div key={i} className="flex items-center justify-between p-4 bg-app-surface-soft border border-app-border rounded-lg">
-                <div>
-                  <p className="font-medium text-app-text">فرصة استثمارية جديدة {i}</p>
-                  <p className="text-sm text-app-text-muted">من أمانة منطقة حائل</p>
+        <Card className="p-6">
+          <h2 className="text-2xl font-bold text-app-text">إشارة الأداء</h2>
+          <div className="mt-5 grid gap-4">
+            {[
+              { label: 'مستوى النشاط العام', value: 'مرتفع', icon: <TrendingUpIcon className="h-5 w-5 text-success" /> },
+              { label: 'مستوى الإشراف المطلوب', value: 'متوسط', icon: <ShieldCheckIcon className="h-5 w-5 text-warning" /> },
+              { label: 'وضوح مسار المحتوى', value: 'جيد', icon: <BuildingIcon className="h-5 w-5 text-brand" /> },
+            ].map((item) => (
+              <div key={item.label} className="flex items-center justify-between rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                <div className="flex items-center gap-3">
+                  {item.icon}
+                  <span className="text-sm font-semibold text-app-text">{item.label}</span>
                 </div>
-                <div className="flex gap-2">
-                  <button className="px-3 py-1 bg-success/10 text-success rounded-lg text-sm border border-success/30 hover:bg-success/20">
-                    قبول
-                  </button>
-                  <button className="px-3 py-1 bg-danger/10 text-danger rounded-lg text-sm border border-danger/30 hover:bg-danger/20">
-                    رفض
-                  </button>
-                </div>
+                <span className="font-bold text-app-text">{item.value}</span>
               </div>
             ))}
           </div>
         </Card>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };

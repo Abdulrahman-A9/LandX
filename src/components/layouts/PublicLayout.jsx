@@ -1,22 +1,43 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { useTheme } from '../../context/ThemeContext';
-import { MenuIcon, XIcon, LogOutIcon, UserIcon, MoonIcon, SunIcon } from '../ui/Icons';
+import {
+  ArrowRightIcon,
+  BuildingIcon,
+  LogOutIcon,
+  MenuIcon,
+  MessageCircleIcon,
+  SearchIcon,
+  TargetIcon,
+  UserIcon,
+  XIcon,
+} from '../ui/Icons';
 
 const navLinks = [
   { to: '/', label: 'الرئيسية' },
   { to: '/opportunities', label: 'الفرص' },
+  { to: '/investment-analysis', label: 'تحليل الفكرة' },
   { to: '/investor-journey', label: 'رحلة المستثمر' },
-  { to: '/investment-analysis', label: 'التحليل الاستثماري' },
   { to: '/news', label: 'الأخبار' },
-  { to: '/contact', label: 'تواصل معنا' }
+  { to: '/about', label: 'عن المنصة' },
+  { to: '/contact', label: 'تواصل معنا' },
 ];
+
+const quickStats = [
+  { label: 'فرص منشورة', value: '120+' },
+  { label: 'بلديات شريكة', value: '15' },
+  { label: 'مؤشر وضوح القرار', value: '72%' },
+];
+
+const roleHome = {
+  investor: '/investor/dashboard',
+  municipality: '/municipality/dashboard',
+  admin: '/admin/dashboard',
+};
 
 const PublicLayout = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
-  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -24,30 +45,32 @@ const PublicLayout = ({ children }) => {
     navigate('/');
   };
 
+  const closeMobileMenu = () => setMobileOpen(false);
+
   const navClass = ({ isActive }) =>
     [
-      'rounded-full px-4 py-2 text-sm font-medium transition-all duration-300',
+      'rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300',
       isActive
-        ? 'bg-brand/15 text-app-text border border-brand/20 shadow-sm'
-        : 'text-app-text-muted hover:text-app-text hover:bg-app-surface-soft/60'
+        ? 'bg-brand/15 text-app-text shadow-[0_8px_20px_rgba(0,0,0,0.12)]'
+        : 'text-app-text-muted hover:bg-app-surface-soft hover:text-app-text',
     ].join(' ');
 
   return (
-    <div className="min-h-screen flex flex-col bg-app-bg text-app-text transition-colors duration-300">
-      <header className="sticky top-0 z-50 border-b border-app-border bg-app-surface/90 backdrop-blur-xl shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4 py-3">
-            <Link to="/" className="flex items-center gap-3 group shrink-0">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand/30 to-brand-deep/30 border border-brand/20 flex items-center justify-center shadow-lg shadow-brand/10 group-hover:scale-105 transition-transform duration-300">
-                <span className="text-brand font-bold text-lg">ل</span>
+    <div className="min-h-screen bg-app-bg text-app-text">
+      <div className="sticky top-0 z-50 border-b border-app-border/80 bg-app-bg/70 backdrop-blur-2xl">
+        <header className="landx-shell">
+          <div className="flex items-center justify-between gap-4 py-4">
+            <Link to="/" className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-gradient-to-br from-brand/25 to-brand-deep/25 shadow-lg shadow-brand/10">
+                <span className="text-xl font-black text-brand">ل</span>
               </div>
               <div className="leading-tight">
-                <div className="text-xl font-bold bg-gradient-to-r from-brand to-brand-deep bg-clip-text text-transparent">LandX</div>
-                <div className="text-xs text-app-text-soft">منصة استثمار الأراضي الموسمية</div>
+                <div className="font-heading text-2xl font-black tracking-tight">LandX</div>
+                <div className="text-sm text-app-text-soft">منصة قرار استثماري أوضح وأكثر هدوءاً</div>
               </div>
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden items-center gap-1 xl:flex">
               {navLinks.map((link) => (
                 <NavLink key={link.to} to={link.to} className={navClass}>
                   {link.label}
@@ -55,91 +78,94 @@ const PublicLayout = ({ children }) => {
               ))}
             </nav>
 
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="hidden items-center gap-3 lg:flex">
               {isAuthenticated ? (
                 <>
-                  <div className="hidden md:flex items-center gap-2 rounded-full border border-app-border bg-app-surface-soft/70 px-3 py-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-brand to-brand-deep flex items-center justify-center text-app-text text-sm font-bold">
-                      {user?.name?.charAt(0) || 'م'}
-                    </div>
-                    <div className="text-sm leading-tight">
-                      <div className="font-semibold text-app-text">{user?.name}</div>
-                      <div className="text-app-text-soft text-xs">مرحباً بك</div>
-                    </div>
-                  </div>
+                  <Link
+                    to={roleHome[user?.role] || '/investor/dashboard'}
+                    className="inline-flex items-center gap-2 rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm font-semibold text-app-text hover:border-brand/30 hover:bg-app-surface"
+                  >
+                    <BuildingIcon className="h-4 w-4" />
+                    لوحة التحكم
+                  </Link>
                   <button
                     onClick={handleLogout}
-                    className="hidden sm:inline-flex items-center gap-2 rounded-full border border-app-border bg-app-surface-soft/70 px-4 py-2 text-sm font-medium text-app-text-muted hover:text-danger hover:bg-danger/10 transition-all duration-300"
-                    title="تسجيل الخروج"
+                    className="inline-flex items-center gap-2 rounded-full border border-danger/20 bg-danger/10 px-4 py-2 text-sm font-semibold text-danger transition-colors hover:bg-danger/15"
                   >
-                    <LogOutIcon className="w-4 h-4" />
-                    خروج
+                    <LogOutIcon className="h-4 w-4" />
+                    تسجيل الخروج
                   </button>
                 </>
               ) : (
                 <>
-                  <Link to="/login" className="hidden sm:inline-flex items-center gap-2 rounded-full border border-app-border bg-app-surface-soft/70 px-4 py-2 text-sm font-medium text-app-text-muted hover:text-app-text hover:bg-app-surface transition-all duration-300">
-                    تسجيل الدخول
+                  <Link
+                    to="/login"
+                    className="inline-flex items-center gap-2 rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm font-semibold text-app-text hover:border-brand/30 hover:bg-app-surface"
+                  >
+                    دخول
                   </Link>
-                  <Link to="/register" className="hidden md:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand to-brand-deep px-4 py-2 text-sm font-semibold text-app-text shadow-lg shadow-brand/15 hover:shadow-brand/25 hover:-translate-y-0.5 transition-all duration-300">
-                    <UserIcon className="w-4 h-4" />
-                    حساب جديد
+                  <Link
+                    to="/register"
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand to-brand-deep px-4 py-2 text-sm font-semibold text-app-text shadow-lg shadow-brand/20 hover:-translate-y-0.5"
+                  >
+                    ابدأ الآن
+                    <ArrowRightIcon className="h-4 w-4" />
                   </Link>
                 </>
               )}
-
-              <button
-                onClick={toggleTheme}
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-app-border bg-app-surface-soft/70 text-app-text-muted hover:text-app-text hover:bg-app-surface transition-all duration-300"
-                title={isDark ? 'الوضع الفاتح' : 'الوضع الداكن'}
-                aria-label="Toggle theme"
-              >
-                {isDark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
-              </button>
-
-              <button
-                onClick={() => setMobileOpen((value) => !value)}
-                className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-app-border bg-app-surface-soft/70 text-app-text-muted hover:text-app-text hover:bg-app-surface transition-all duration-300"
-                aria-label="Toggle menu"
-              >
-                {mobileOpen ? <XIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
-              </button>
             </div>
+
+            <button
+              onClick={() => setMobileOpen((value) => !value)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-app-border bg-app-surface-soft text-app-text xl:hidden"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
+            </button>
           </div>
 
           {mobileOpen ? (
-            <div className="lg:hidden pb-4">
-              <div className="grid gap-2 rounded-3xl border border-app-border bg-app-surface/95 p-3 shadow-xl shadow-black/10">
-                {navLinks.map((link) => (
-                  <NavLink
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => setMobileOpen(false)}
-                    className={({ isActive }) =>
-                      [
-                        'rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-300',
-                        isActive
-                          ? 'bg-brand/15 text-app-text border border-brand/20'
-                          : 'text-app-text-muted hover:text-app-text hover:bg-app-surface-soft/70'
-                      ].join(' ')
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
-                ))}
+            <div className="pb-4 xl:hidden">
+              <div className="landx-panel rounded-[1.75rem] p-3">
+                <div className="grid gap-2">
+                  {navLinks.map((link) => (
+                    <NavLink
+                      key={link.to}
+                      to={link.to}
+                      onClick={closeMobileMenu}
+                      className={({ isActive }) =>
+                        [
+                          'rounded-2xl px-4 py-3 text-sm font-semibold transition-colors',
+                          isActive
+                            ? 'bg-brand/15 text-app-text'
+                            : 'text-app-text-muted hover:bg-app-surface-soft hover:text-app-text',
+                        ].join(' ')
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  ))}
+                </div>
 
-                <div className="mt-2 grid gap-2 border-t border-app-border pt-3">
+                <div className="mt-3 grid gap-2 border-t border-app-border/70 pt-3">
                   {isAuthenticated ? (
                     <>
-                      <div className="rounded-2xl bg-app-surface-soft/70 px-4 py-3 text-sm text-app-text-muted">
+                      <div className="rounded-2xl bg-app-surface-soft px-4 py-3 text-sm text-app-text-muted">
                         مرحباً، <span className="font-semibold text-app-text">{user?.name}</span>
                       </div>
+                      <Link
+                        to={roleHome[user?.role] || '/investor/dashboard'}
+                        onClick={closeMobileMenu}
+                        className="rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm font-semibold text-app-text"
+                      >
+                        الذهاب إلى لوحة التحكم
+                      </Link>
                       <button
                         onClick={() => {
                           handleLogout();
-                          setMobileOpen(false);
+                          closeMobileMenu();
                         }}
-                        className="rounded-2xl border border-danger/20 bg-danger/10 px-4 py-3 text-right text-sm font-medium text-danger transition-colors"
+                        className="rounded-2xl border border-danger/20 bg-danger/10 px-4 py-3 text-right text-sm font-semibold text-danger"
                       >
                         تسجيل الخروج
                       </button>
@@ -148,15 +174,15 @@ const PublicLayout = ({ children }) => {
                     <>
                       <Link
                         to="/login"
-                        onClick={() => setMobileOpen(false)}
-                        className="rounded-2xl bg-app-surface-soft/70 px-4 py-3 text-sm font-medium text-app-text-muted hover:text-app-text transition-colors"
+                        onClick={closeMobileMenu}
+                        className="rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm font-semibold text-app-text"
                       >
                         تسجيل الدخول
                       </Link>
                       <Link
                         to="/register"
-                        onClick={() => setMobileOpen(false)}
-                        className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-4 py-3 text-sm font-semibold text-app-text shadow-lg shadow-brand/15"
+                        onClick={closeMobileMenu}
+                        className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-4 py-3 text-sm font-semibold text-app-text"
                       >
                         إنشاء حساب
                       </Link>
@@ -166,57 +192,91 @@ const PublicLayout = ({ children }) => {
               </div>
             </div>
           ) : null}
-        </div>
-      </header>
+        </header>
+      </div>
 
-      <main className="flex-1">{children}</main>
+      <main>{children}</main>
 
-      <footer className="border-t border-app-border bg-app-surface/95 text-app-text">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10">
-                  <span className="text-app-text font-bold text-lg">ل</span>
+      <footer className="mt-20 border-t border-app-border/70 bg-[#160d09]/90">
+        <div className="landx-shell py-14">
+          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr_0.85fr_1fr]">
+            <div className="space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10">
+                  <span className="text-xl font-black text-brand">ل</span>
                 </div>
-                <span className="text-xl font-bold">LandX</span>
+                <div>
+                  <div className="font-heading text-2xl font-black">LandX</div>
+                  <div className="text-sm text-app-text-soft">تجربة استثمار عربية أكثر تركيزاً</div>
+                </div>
               </div>
-              <p className="text-app-text-muted text-sm leading-7">
-                منصة استثمارات الأراضي الموسمية - بوابتك لقرارات أوضح وشراكات أكثر موثوقية.
+              <p className="max-w-md text-sm leading-8 text-app-text-muted">
+                المنصة تجمع بين اكتشاف الفرص، قراءة الجدوى، وفهم المسار التنفيذي بلغة واضحة
+                وواجهة هادئة تخفف التشتت أثناء اتخاذ القرار.
               </p>
+              <div className="grid grid-cols-3 gap-3">
+                {quickStats.map((item) => (
+                  <div key={item.label} className="rounded-2xl border border-app-border bg-app-surface-soft/60 p-4">
+                    <div className="text-lg font-black text-app-text">{item.value}</div>
+                    <div className="mt-1 text-xs leading-6 text-app-text-soft">{item.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4 text-app-text">روابط سريعة</h3>
-              <ul className="space-y-2 text-app-text-muted text-sm">
-                <li><Link to="/opportunities" className="hover:text-app-text transition-colors">الفرص الاستثمارية</Link></li>
-                <li><Link to="/news" className="hover:text-app-text transition-colors">الأخبار</Link></li>
-                <li><Link to="/about" className="hover:text-app-text transition-colors">عن المنصة</Link></li>
-                <li><Link to="/contact" className="hover:text-app-text transition-colors">تواصل معنا</Link></li>
+              <div className="mb-4 text-sm font-bold text-app-text">اكتشف</div>
+              <ul className="space-y-3 text-sm text-app-text-muted">
+                <li><Link to="/opportunities" className="hover:text-app-text">الفرص الاستثمارية</Link></li>
+                <li><Link to="/investment-analysis" className="hover:text-app-text">تحليل الفكرة</Link></li>
+                <li><Link to="/investor-journey" className="hover:text-app-text">رحلة المستثمر</Link></li>
+                <li><Link to="/news" className="hover:text-app-text">الأخبار والإعلانات</Link></li>
               </ul>
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4 text-app-text">المناطق</h3>
-              <ul className="space-y-2 text-app-text-muted text-sm">
-                <li><Link to="/opportunities?region=hail" className="hover:text-app-text transition-colors">منطقة حائل</Link></li>
-                <li><Link to="/opportunities?region=qassim" className="hover:text-app-text transition-colors">منطقة القصيم</Link></li>
-                <li><Link to="/opportunities?region=tabuk" className="hover:text-app-text transition-colors">منطقة تبوك</Link></li>
+              <div className="mb-4 text-sm font-bold text-app-text">المسارات</div>
+              <ul className="space-y-3 text-sm text-app-text-muted">
+                <li className="flex items-start gap-2"><TargetIcon className="mt-1 h-4 w-4 text-brand" /> للمستثمر الباحث عن قرار أسرع</li>
+                <li className="flex items-start gap-2"><SearchIcon className="mt-1 h-4 w-4 text-brand" /> للبلدية التي تريد عرضاً أوضح للفرص</li>
+                <li className="flex items-start gap-2"><MessageCircleIcon className="mt-1 h-4 w-4 text-brand" /> للفريق الذي يدير الاستفسارات والطلبات</li>
               </ul>
             </div>
 
-            <div>
-              <h3 className="font-semibold mb-4 text-app-text">تواصل معنا</h3>
-              <ul className="space-y-2 text-app-text-muted text-sm">
-                <li>info@landx.sa</li>
-                <li>+966 XX XXX XXXX</li>
-                <li>الرياض، المملكة العربية السعودية</li>
-              </ul>
+            <div className="space-y-4">
+              <div className="mb-4 text-sm font-bold text-app-text">ابدأ الآن</div>
+              {isAuthenticated ? (
+                <Link
+                  to={roleHome[user?.role] || '/investor/dashboard'}
+                  className="flex items-center justify-between rounded-[1.5rem] border border-app-border bg-app-surface-soft px-5 py-4"
+                >
+                  <div>
+                    <div className="text-sm text-app-text-soft">حسابك الحالي</div>
+                    <div className="mt-1 font-semibold text-app-text">{user?.name}</div>
+                  </div>
+                  <UserIcon className="h-5 w-5 text-brand" />
+                </Link>
+              ) : (
+                <div className="landx-panel rounded-[1.5rem] p-5">
+                  <div className="text-sm leading-7 text-app-text-muted">
+                    جرّب المنصة من خلال تسجيل حساب جديد أو الدخول بالحسابات التجريبية.
+                  </div>
+                  <div className="mt-4 grid gap-3">
+                    <Link to="/register" className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-4 py-3 text-center text-sm font-semibold text-app-text">
+                      إنشاء حساب جديد
+                    </Link>
+                    <Link to="/login" className="rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-center text-sm font-semibold text-app-text">
+                      تسجيل الدخول
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
-          <div className="border-t border-app-border mt-8 pt-8 text-center text-app-text-muted text-sm">
+          <div className="mt-10 flex flex-col gap-3 border-t border-app-border/70 pt-6 text-sm text-app-text-soft md:flex-row md:items-center md:justify-between">
             <p>© 2024 LandX. جميع الحقوق محفوظة.</p>
+            <p>واجهة عربية أولاً مبنية لتقليل الفوضى وتسريع الفهم.</p>
           </div>
         </div>
       </footer>

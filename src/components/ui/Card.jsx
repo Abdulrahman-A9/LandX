@@ -3,7 +3,11 @@ import React from 'react';
 const Card = ({ children, className = '', hover = false, ...props }) => {
   return (
     <div
-      className={`bg-card-gradient backdrop-blur rounded-lg shadow-lg border border-app-border transition-all duration-300 ${hover ? 'hover:shadow-xl hover:scale-105 hover:border-brand' : 'hover:shadow-md hover:border-muted'} ${className}`}
+      className={`rounded-[1.75rem] border border-app-border/80 bg-card-gradient shadow-[0_18px_44px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-all duration-300 ${
+        hover
+          ? 'hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_26px_56px_rgba(0,0,0,0.28)]'
+          : 'hover:border-app-border'
+      } ${className}`}
       {...props}
     >
       {children}
@@ -13,7 +17,7 @@ const Card = ({ children, className = '', hover = false, ...props }) => {
 
 const CardHeader = ({ children, className = '' }) => {
   return (
-    <div className={`px-6 py-4 border-b border-app-border ${className}`}>
+    <div className={`border-b border-app-border/70 px-6 py-5 ${className}`}>
       {children}
     </div>
   );
@@ -21,7 +25,7 @@ const CardHeader = ({ children, className = '' }) => {
 
 const CardBody = ({ children, className = '' }) => {
   return (
-    <div className={`px-6 py-4 ${className}`}>
+    <div className={`px-6 py-5 ${className}`}>
       {children}
     </div>
   );
@@ -29,7 +33,7 @@ const CardBody = ({ children, className = '' }) => {
 
 const CardFooter = ({ children, className = '' }) => {
   return (
-    <div className={`px-6 py-4 border-t border-app-border ${className}`}>
+    <div className={`border-t border-app-border/70 px-6 py-5 ${className}`}>
       {children}
     </div>
   );

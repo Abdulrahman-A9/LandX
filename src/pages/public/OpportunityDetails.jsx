@@ -1,266 +1,325 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import Button from '../../components/ui/Button';
+import React, { useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Card from '../../components/ui/Card';
+import Button from '../../components/ui/Button';
 import Badge from '../../components/ui/Badge';
+import OpportunityCard from '../../components/shared/OpportunityCard';
 import { useToast } from '../../context/ToastContext';
 import { mockOpportunities } from '../../data/mock/opportunities';
 import {
-  SearchIcon, LeafIcon, BuildingIcon, MailIcon,
-  FileTextIcon, ChevronDownIcon, ChevronUpIcon,
-  CheckCircleIcon, AlertTriangleIcon, ClockIcon,
-  MapPinIcon, ExternalLinkIcon, XIcon
+  ArrowRightIcon,
+  BuildingIcon,
+  CalendarIcon,
+  CheckCircleIcon,
+  FileTextIcon,
+  LeafIcon,
+  MapPinIcon,
+  MessageCircleIcon,
+  PercentIcon,
+  SearchIcon,
 } from '../../components/ui/Icons';
-
-const timeline = [
-  { step: 1, title: 'التسجيل', desc: 'إنشاء حساب على المنصة' },
-  { step: 2, title: 'تقديم الطلب', desc: 'ملء نموذج الاستثمار' },
-  { step: 3, title: 'المراجعة', desc: 'مراجعة الجهة المصدرة' },
-  { step: 4, title: 'التوقيع', desc: 'إبرام العقد الرسمي' },
-  { step: 5, title: 'بدء المشروع', desc: 'استلام الأرض والبدء' },
-];
-
-const documents = [
-  { name: 'كراسة الشروط والأحكام', size: '2.4 MB', type: 'PDF' },
-  { name: 'المخطط الهندسي للأرض', size: '5.1 MB', type: 'PDF' },
-  { name: 'التقرير البيئي', size: '1.8 MB', type: 'PDF' },
-];
-
-const faqs = [
-  { q: 'ما هي شروط الاستثمار في هذه الفرصة؟', a: 'يجب أن يكون المستثمر سعودي الجنسية أو شركة مسجلة في السعودية، وأن يكون رأس المال المتاح يغطي الاستثمار المطلوب.' },
-  { q: 'هل يمكن الاستثمار الجزئي؟', a: 'نعم، يمكن الاستثمار الجزئي من خلال نظام الشراكات المتاح في المنصة.' },
-  { q: 'ما هي مدة العقد؟', a: 'مدة العقد تعتمد على نوع المشروع والموسم، وعادة ما تتراوح بين 1 إلى 3 سنوات.' },
-];
+import { formatCurrency, seasonLabel, statusLabel } from '../../lib/formatters';
 
 const OpportunityDetails = () => {
   const { id } = useParams();
   const { addToast } = useToast();
-  const opportunity = mockOpportunities.find((op) => op.id === parseInt(id));
-  const [showModal, setShowModal] = useState(false);
-  const [expandedFaq, setExpandedFaq] = useState(null);
-  const [modalSubmitted, setModalSubmitted] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const opportunity = mockOpportunities.find((item) => item.id === Number(id));
 
-  const related = mockOpportunities.filter((op) => op.id !== parseInt(id) && op.status === 'active').slice(0, 3);
+  const related = useMemo(() => {
+    return mockOpportunities.filter((item) => item.id !== Number(id)).slice(0, 3);
+  }, [id]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSubmitted(true);
+    addToast('تم إرسال طلب الاهتمام بنجاح. سيصلك تواصل خلال وقت قصير.', 'success');
+    setTimeout(() => {
+      setShowForm(false);
+      setSubmitted(false);
+    }, 2200);
+  };
 
   if (!opportunity) {
     return (
-      <div className="min-h-screen bg-app-bg flex items-center justify-center px-4">
-        <Card className="text-center py-12 px-6 max-w-xl w-full bg-card-gradient border border-app-border">
-          <SearchIcon className="w-16 h-16 text-app-text-soft mb-4" />
-          <h2 className="text-2xl font-bold text-app-text mb-2">الفرصة غير موجودة</h2>
-          <p className="text-app-text-muted mb-6">عذراً، الفرصة الاستثمارية التي تبحث عنها غير موجودة</p>
-          <Link to="/opportunities"><Button>العودة للفرص الاستثمارية</Button></Link>
+      <div className="landx-shell py-20">
+        <Card className="mx-auto max-w-2xl p-10 text-center">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-app-border bg-app-surface-soft text-app-text-soft">
+            <SearchIcon className="h-8 w-8" />
+          </div>
+          <h1 className="mt-5 text-3xl font-black text-app-text">الفرصة غير موجودة</h1>
+          <p className="mt-3 text-sm leading-8 text-app-text-muted">
+            لم نتمكن من العثور على هذه الفرصة. يمكنك العودة إلى قائمة الفرص واستعراض الفرص المتاحة.
+          </p>
+          <Link
+            to="/opportunities"
+            className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-5 py-3 text-sm font-semibold text-app-text"
+          >
+            العودة إلى الفرص
+            <ArrowRightIcon className="h-4 w-4" />
+          </Link>
         </Card>
       </div>
     );
   }
 
-  const { title, municipality, location, season, area, areaUnit, expectedReturn, investmentRequired, currency, status, images, description, features } = opportunity;
+  const {
+    title,
+    municipality,
+    location,
+    season,
+    area,
+    areaUnit,
+    expectedReturn,
+    investmentRequired,
+    currency,
+    status,
+    images,
+    description,
+    features,
+  } = opportunity;
 
-  const formatCurrency = (amount) => new Intl.NumberFormat('ar-SA').format(amount);
-
-  const seasonLabels = { winter: 'شتوي', summer: 'صيفي', spring: 'ربيعي', autumn: 'خريفي' };
-
-  const handleModalSubmit = (e) => {
-    e.preventDefault();
-    setModalSubmitted(true);
-    addToast('تم إرسال طلب الاستثمار بنجاح! سنتواصل معك قريباً.', 'success');
-    setTimeout(() => { setModalSubmitted(false); setShowModal(false); }, 2000);
-  };
+  const statusVariant = status === 'active' ? 'success' : 'warning';
 
   return (
-    <div className="min-h-screen bg-app-bg text-app-text">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-brand/90 to-brand-deep/90 border-b border-brand/20 backdrop-blur">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <Link to="/opportunities" className="text-app-text-muted hover:text-app-text font-medium mb-4 inline-block transition-colors">← العودة للفرص الاستثمارية</Link>
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-4">
-            <div>
-              <Badge variant={status === 'active' ? 'success' : 'warning'} className="mb-2">{status === 'active' ? 'نشط' : 'قيد المراجعة'}</Badge>
-              <h1 className="text-3xl font-bold text-app-text">{title}</h1>
-              <p className="text-app-text-muted mt-2">{municipality}</p>
+    <div>
+      <section className="relative overflow-hidden border-b border-app-border/70">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(197,123,69,0.18),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(125,47,54,0.12),transparent_26%)]" />
+        <div className="landx-shell relative py-14 lg:py-16">
+          <Link to="/opportunities" className="inline-flex items-center gap-2 text-sm font-semibold text-app-text-muted hover:text-app-text">
+            <ArrowRightIcon className="h-4 w-4" />
+            العودة إلى كل الفرص
+          </Link>
+
+          <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div className="space-y-5">
+              <Badge variant={statusVariant}>{statusLabel(status)}</Badge>
+              <h1 className="max-w-4xl text-4xl font-black leading-tight text-app-text md:text-5xl">
+                {title}
+              </h1>
+              <p className="max-w-3xl text-lg leading-9 text-app-text-muted">
+                فرصة تعرض مؤشرات الدخول الأساسية بوضوح: الجهة، الموقع، العائد، والمسار المتوقع
+                قبل التقديم أو الاستفسار.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">
+                  {municipality}
+                </div>
+                <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">
+                  {location}
+                </div>
+                <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">
+                  موسم {seasonLabel(season)}
+                </div>
+              </div>
             </div>
-            <Button size="lg" onClick={() => setShowModal(true)}>طلب استثمار</Button>
+
+            <Card className="p-6">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-success/20 bg-success/10 p-4">
+                  <div className="flex items-center gap-2 text-xs text-app-text-soft">
+                    <PercentIcon className="h-4 w-4 text-success" />
+                    العائد المتوقع
+                  </div>
+                  <div className="mt-3 text-3xl font-black text-success">{expectedReturn}%</div>
+                </div>
+                <div className="rounded-2xl border border-brand/20 bg-brand/10 p-4">
+                  <div className="flex items-center gap-2 text-xs text-app-text-soft">
+                    <LeafIcon className="h-4 w-4 text-brand" />
+                    الاستثمار المطلوب
+                  </div>
+                  <div className="mt-3 text-lg font-bold leading-7 text-app-text">
+                    {formatCurrency(investmentRequired, currency)}
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                  <div className="flex items-center gap-2 text-xs text-app-text-soft">
+                    <MapPinIcon className="h-4 w-4 text-brand" />
+                    المساحة
+                  </div>
+                  <div className="mt-3 text-lg font-bold text-app-text">
+                    {area} {areaUnit}
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                  <div className="flex items-center gap-2 text-xs text-app-text-soft">
+                    <CalendarIcon className="h-4 w-4 text-brand" />
+                    حالة النشر
+                  </div>
+                  <div className="mt-3 text-lg font-bold text-app-text">{statusLabel(status)}</div>
+                </div>
+              </div>
+              <div className="mt-5 grid gap-3">
+                <Button size="lg" onClick={() => setShowForm(true)}>
+                  أبدِ اهتمامك بهذه الفرصة
+                </Button>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-app-border bg-app-surface-soft px-5 py-3 text-sm font-semibold text-app-text"
+                >
+                  تواصل مع الفريق
+                  <MessageCircleIcon className="h-4 w-4" />
+                </Link>
+              </div>
+            </Card>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Images */}
-            <Card>
-              <div className="aspect-video bg-app-surface-strong rounded-lg overflow-hidden border border-app-border">
-                {images?.length > 0 ? <img src={images[0]} alt={title} className="w-full h-full object-cover" /> : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-app-surface to-app-surface-strong"><LeafIcon className="w-16 h-16 text-app-text-soft" /></div>
+      <section className="py-12 lg:py-16">
+        <div className="landx-shell grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="space-y-8">
+            <Card className="overflow-hidden">
+              <div className="aspect-[16/9] overflow-hidden bg-app-surface-soft">
+                {images?.length ? (
+                  <img src={images[0]} alt={title} className="h-full w-full object-cover" />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center">
+                    <LeafIcon className="h-16 w-16 text-app-text-soft" />
+                  </div>
                 )}
               </div>
-              {images?.length > 1 && (
-                <div className="grid grid-cols-3 gap-2 mt-4">
-                  {images.slice(1).map((img, i) => (
-                    <div key={i} className="aspect-video bg-app-surface-strong rounded-lg overflow-hidden border border-app-border"><img src={img} alt={`${title} ${i + 2}`} className="w-full h-full object-cover" /></div>
-                  ))}
-                </div>
-              )}
             </Card>
 
-            {/* Description */}
-            <Card className="p-6">
-              <h2 className="text-xl font-bold text-app-text mb-4">وصف الفرصة</h2>
-              <p className="text-app-text-muted leading-relaxed">{description}</p>
+            <Card className="p-6 lg:p-7">
+              <h2 className="text-2xl font-bold text-app-text">وصف الفرصة</h2>
+              <p className="mt-4 text-sm leading-8 text-app-text-muted">{description}</p>
             </Card>
 
-            {/* Features */}
-            <Card className="p-6">
-              <h2 className="text-xl font-bold text-app-text mb-4">المميزات</h2>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-2"><CheckCircleIcon className="w-4 h-4 text-success flex-shrink-0" /><span className="text-app-text-muted">{feature}</span></li>
-                ))}
-              </ul>
-            </Card>
-
-            {/* Timeline */}
-            <Card className="p-6">
-              <h2 className="text-xl font-bold text-app-text mb-6">مراحل الاستثمار</h2>
-              <div className="relative">
-                <div className="absolute right-5 top-0 bottom-0 w-0.5 bg-app-border" />
-                <div className="space-y-6">
-                  {timeline.map((t) => (
-                    <div key={t.step} className="flex items-start gap-4 relative pr-12">
-                      <div className="absolute right-0 w-10 h-10 bg-gradient-to-r from-brand to-brand-deep rounded-full flex items-center justify-center text-app-text font-bold text-sm border-4 border-app-bg z-10">{t.step}</div>
-                      <div className="bg-app-surface-soft rounded-lg p-4 flex-1 border border-app-border">
-                        <h3 className="font-bold text-app-text mb-1">{t.title}</h3>
-                        <p className="text-sm text-app-text-muted">{t.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Card>
-
-            {/* Documents */}
-            <Card className="p-6">
-              <h2 className="text-xl font-bold text-app-text mb-4">المستندات المتاحة</h2>
-              <div className="space-y-3">
-                {documents.map((doc, i) => (
-                  <div key={i} className="flex items-center justify-between p-4 bg-app-surface-soft rounded-lg border border-app-border hover:border-brand transition-colors">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-lg flex items-center justify-center border border-brand"><FileTextIcon className="text-brand" /></div>
-                      <div><p className="font-semibold text-app-text text-sm">{doc.name}</p><p className="text-xs text-app-text-soft">{doc.size} • {doc.type}</p></div>
-                    </div>
-                    <button onClick={() => alert(`سيتم تحميل: ${doc.name}`)} className="text-app-text-muted hover:text-app-text font-medium text-sm flex items-center gap-1"><ExternalLinkIcon className="w-4 h-4" /> تحميل</button>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            {/* FAQ */}
-            <Card className="p-6">
-              <h2 className="text-xl font-bold text-app-text mb-4">أسئلة شائعة</h2>
-              <div className="space-y-3">
-                {faqs.map((faq, i) => (
-                  <div key={i} className="border border-app-border rounded-lg overflow-hidden">
-                    <button onClick={() => setExpandedFaq(expandedFaq === i ? null : i)} className="w-full text-right p-4 flex items-center justify-between gap-4 bg-app-surface-soft hover:bg-app-surface transition-colors">
-                      <span className="font-semibold text-app-text text-sm">{faq.q}</span>
-                      {expandedFaq === i ? <ChevronUpIcon className="w-4 h-4 text-app-text-soft" /> : <ChevronDownIcon className="w-4 h-4 text-app-text-soft" />}
-                    </button>
-                    {expandedFaq === i && <div className="px-4 pb-4 text-app-text-muted text-sm leading-relaxed">{faq.a}</div>}
+            <Card className="p-6 lg:p-7">
+              <h2 className="text-2xl font-bold text-app-text">ما الذي يميزها؟</h2>
+              <div className="mt-5 grid gap-3 md:grid-cols-2">
+                {features.map((feature) => (
+                  <div key={feature} className="flex items-start gap-3 rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                    <CheckCircleIcon className="mt-1 h-5 w-5 shrink-0 text-success" />
+                    <span className="text-sm leading-7 text-app-text-muted">{feature}</span>
                   </div>
                 ))}
               </div>
             </Card>
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-6">
             <Card className="p-6">
-              <h2 className="text-xl font-bold text-app-text mb-4">معلومات الاستثمار</h2>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center py-3 border-b border-app-border"><span className="text-app-text-muted">الموسم</span><span className="font-semibold text-app-text">{seasonLabels[season]}</span></div>
-                <div className="flex justify-between items-center py-3 border-b border-app-border"><span className="text-app-text-muted">المساحة</span><span className="font-semibold text-app-text">{area} {areaUnit}</span></div>
-                <div className="flex justify-between items-center py-3 border-b border-app-border"><span className="text-app-text-muted">العائد المتوقع</span><span className="font-semibold text-success text-lg">{expectedReturn}%</span></div>
-                <div className="flex justify-between items-center py-3 border-b border-app-border"><span className="text-app-text-muted">الاستثمار المطلوب</span><span className="font-semibold text-app-text text-lg">{formatCurrency(investmentRequired)} {currency}</span></div>
-                <div className="flex justify-between items-center py-3"><span className="text-app-text-muted">الموقع</span><span className="font-semibold text-app-text text-right">{location}</span></div>
+              <h2 className="text-xl font-bold text-app-text">ملخص سريع للقرار</h2>
+              <div className="mt-5 space-y-4">
+                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                  <div className="text-sm text-app-text-soft">نوع القراءة الحالية</div>
+                  <div className="mt-2 font-bold text-app-text">قراءة أولية منظمة قبل التواصل</div>
+                </div>
+                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                  <div className="text-sm text-app-text-soft">الجهة المعلنة</div>
+                  <div className="mt-2 flex items-center gap-2 font-bold text-app-text">
+                    <BuildingIcon className="h-4 w-4 text-brand" />
+                    {municipality}
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                  <div className="text-sm text-app-text-soft">أفضل خطوة تالية</div>
+                  <div className="mt-2 font-bold text-app-text">مراجعة التفاصيل ثم إرسال اهتمام أو استفسار محدد</div>
+                </div>
               </div>
             </Card>
 
             <Card className="p-6">
-              <h2 className="text-xl font-bold text-app-text mb-4">الجهة المصدرة</h2>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-r from-brand/20 to-brand-deep/20 rounded-full border border-brand flex items-center justify-center"><BuildingIcon className="text-3xl text-brand" /></div>
-                <div><p className="font-semibold text-app-text">{municipality}</p><p className="text-sm text-app-text-muted">جهة حكومية معتمدة</p></div>
+              <h2 className="text-xl font-bold text-app-text">المسار المقترح</h2>
+              <div className="mt-5 space-y-4">
+                {[
+                  'راجع الوصف والمزايا لتكوين تصور أولي.',
+                  'قارن مؤشرات الدخول مع فرص مشابهة داخل المنصة.',
+                  'إذا كانت مناسبة، أرسل اهتمامك أو تواصل مع الفريق لاستكمال الإجراء.',
+                ].map((item, index) => (
+                  <div key={item} className="flex gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/10 text-sm font-bold text-brand">
+                      {index + 1}
+                    </div>
+                    <p className="text-sm leading-7 text-app-text-muted">{item}</p>
+                  </div>
+                ))}
               </div>
-            </Card>
-
-            <Card className="p-6 bg-gradient-to-r from-brand/10 to-brand-deep/10 border border-app-border">
-              <h2 className="text-xl font-bold text-app-text mb-4">هل لديك استفسار؟</h2>
-              <p className="text-app-text-muted mb-4">يمكنك التواصل معنا مباشرة للحصول على مزيد من المعلومات</p>
-              <Link to="/contact"><Button className="w-full">تواصل معنا</Button></Link>
             </Card>
           </div>
         </div>
+      </section>
 
-        {/* Related Opportunities */}
-        {related.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-app-text mb-6">فرص مشابهة</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {related.map((op) => (
-                <Link key={op.id} to={`/opportunities/${op.id}`} className="block group">
-                  <Card className="overflow-hidden border border-app-border hover:border-brand transition-all duration-300 hover:shadow-lg h-full">
-                    <div className="aspect-video bg-app-surface-strong relative overflow-hidden">
-                      {op.images?.[0] ? <img src={op.images[0]} alt={op.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /> : <div className="w-full h-full flex items-center justify-center"><LeafIcon className="w-12 h-12 text-app-text-soft" /></div>}
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-bold text-app-text mb-1 group-hover:text-brand transition-colors">{op.title}</h3>
-                      <p className="text-sm text-app-text-soft mb-2">{op.municipality}</p>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-success font-semibold">{op.expectedReturn}% عائد</span>
-                        <span className="text-app-text-muted">{formatCurrency(op.investmentRequired)} {op.currency}</span>
-                      </div>
-                    </div>
-                  </Card>
-                </Link>
+      {related.length ? (
+        <section className="pb-16 lg:pb-20">
+          <div className="landx-shell space-y-8">
+            <div>
+              <div className="landx-kicker">فرص مشابهة</div>
+              <h2 className="mt-4 text-3xl font-black text-app-text">نفس مستوى القراءة، خيارات أخرى للمقارنة.</h2>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {related.map((item) => (
+                <OpportunityCard key={item.id} opportunity={item} />
               ))}
             </div>
           </div>
-        )}
-      </div>
+        </section>
+      ) : null}
 
-      {/* Investment Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={() => setShowModal(false)}>
-          <Card className="w-full max-w-lg bg-card-gradient border border-app-border shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-app-text">طلب استثمار</h2>
-                <button onClick={() => setShowModal(false)} className="text-app-text-soft hover:text-app-text transition-colors"><XIcon className="w-6 h-6" /></button>
+      {showForm ? (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/55 p-4 backdrop-blur-sm">
+          <Card className="w-full max-w-xl p-6">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-bold text-app-text">إبداء اهتمام بالفرصة</h2>
+                <p className="mt-1 text-sm text-app-text-muted">أدخل بيانات مختصرة ليتم توجيه الطلب للفريق.</p>
               </div>
-              {modalSubmitted ? (
-                <div className="text-center py-8">
-                  <CheckCircleIcon className="w-12 h-12 text-success mx-auto mb-3" />
-                  <h3 className="text-lg font-bold text-app-text mb-2">تم إرسال الطلب!</h3>
-                  <p className="text-app-text-muted text-sm">سنتواصل معك قريباً لاستكمال الإجراءات.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleModalSubmit} className="space-y-4">
-                  <div><label className="block text-sm font-medium text-app-text-muted mb-1">الاسم الكامل</label><input required className="w-full px-3 py-2 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm" placeholder="أدخل اسمك" /></div>
-                  <div><label className="block text-sm font-medium text-app-text-muted mb-1">البريد الإلكتروني</label><input type="email" required className="w-full px-3 py-2 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm" placeholder="example@email.com" /></div>
-                  <div><label className="block text-sm font-medium text-app-text-muted mb-1">رقم الهاتف</label><input type="tel" required className="w-full px-3 py-2 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm" placeholder="+966 XX XXX XXXX" /></div>
-                  <div><label className="block text-sm font-medium text-app-text-muted mb-1">مبلغ الاستثمار المقترح</label><input type="number" required className="w-full px-3 py-2 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand text-sm" placeholder="500000" /></div>
-                  <div><label className="block text-sm font-medium text-app-text-muted mb-1">ملاحظات</label><textarea rows={3} className="w-full px-3 py-2 bg-app-surface text-app-text border border-app-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand resize-none text-sm" placeholder="أي ملاحظات إضافية..."></textarea></div>
-                  <div className="flex gap-3 pt-2">
-                    <Button type="submit" className="flex-1">إرسال الطلب</Button>
-                    <Button type="button" variant="outline" onClick={() => setShowModal(false)}>إلغاء</Button>
-                  </div>
-                </form>
-              )}
+              <button
+                onClick={() => setShowForm(false)}
+                className="rounded-full border border-app-border bg-app-surface-soft px-3 py-2 text-sm font-semibold text-app-text-muted"
+              >
+                إغلاق
+              </button>
             </div>
+
+            {submitted ? (
+              <div className="py-12 text-center">
+                <CheckCircleIcon className="mx-auto h-12 w-12 text-success" />
+                <h3 className="mt-4 text-xl font-bold text-app-text">تم الإرسال بنجاح</h3>
+                <p className="mt-2 text-sm leading-7 text-app-text-muted">
+                  سيقوم الفريق بمراجعة الطلب والتواصل معك في أقرب وقت.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                <input
+                  required
+                  placeholder="الاسم الكامل"
+                  className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
+                />
+                <input
+                  required
+                  type="email"
+                  placeholder="البريد الإلكتروني"
+                  className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
+                />
+                <input
+                  required
+                  type="tel"
+                  placeholder="رقم الجوال"
+                  className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
+                />
+                <textarea
+                  rows={4}
+                  placeholder="ماذا تريد أن تعرف قبل المتابعة؟"
+                  className="w-full resize-none rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
+                />
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Button type="submit" size="lg" className="flex-1">
+                    إرسال الطلب
+                  </Button>
+                  <Button type="button" variant="outline" size="lg" className="flex-1" onClick={() => setShowForm(false)}>
+                    إلغاء
+                  </Button>
+                </div>
+              </form>
+            )}
           </Card>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };
