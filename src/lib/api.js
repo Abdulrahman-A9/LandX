@@ -37,6 +37,12 @@ export const authApi = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     }),
+  updateMe: (token, payload) =>
+    request('/auth/me', {
+      method: 'PATCH',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload),
+    }),
 };
 
 export const opportunitiesApi = {
@@ -68,6 +74,16 @@ export const municipalityApi = {
   list: (token) =>
     request('/admin/municipalities', {
       headers: authHeaders(token),
+    }),
+  getProfile: (token) =>
+    request('/municipality/profile', {
+      headers: authHeaders(token),
+    }),
+  updateProfile: (token, payload) =>
+    request('/municipality/profile', {
+      method: 'PUT',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload),
     }),
 };
 

@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.config import get_settings
-from app.routers import admin, analysis, auth, inquiries, interest_requests, news, opportunities
+from app.routers import admin, analysis, auth, inquiries, interest_requests, municipality, news, opportunities
 
 settings = get_settings()
 
@@ -28,6 +28,7 @@ app.include_router(inquiries.municipality_router, prefix=api_prefix)
 app.include_router(interest_requests.router, prefix=api_prefix)
 app.include_router(analysis.router, prefix=api_prefix)
 app.include_router(admin.router, prefix=api_prefix)
+app.include_router(municipality.router, prefix=api_prefix)
 
 uploads_dir = Path(__file__).resolve().parents[1] / settings.upload_dir
 uploads_dir.mkdir(parents=True, exist_ok=True)

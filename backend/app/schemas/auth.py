@@ -16,6 +16,11 @@ class RegisterRequest(BaseModel):
     password: str
 
 
+class UserMeUpdate(BaseModel):
+    full_name: str
+    phone: str | None = None
+
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"

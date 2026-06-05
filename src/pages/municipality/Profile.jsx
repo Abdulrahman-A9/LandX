@@ -1,222 +1,105 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../../components/ui/Card';
-import { BuildingIcon, MailIcon, PhoneIcon, MapPinIcon, EditIcon, SaveIcon, XIcon } from '../../components/ui/Icons';
+import Button from '../../components/ui/Button';
+import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
+import { municipalityApi } from '../../lib/api';
+import { BuildingIcon, MailIcon, PhoneIcon } from '../../components/ui/Icons';
 
 const MunicipalityProfile = () => {
+  const { token } = useAuth();
+  const { addToast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
-    name: 'أمانة منطقة حائل',
-    email: 'hail@municipality.gov.sa',
-    phone: '+966 16 534 5678',
-    location: 'حائل، المملكة العربية السعودية',
-    description: 'أمانة منطقة حائل مسؤولة عن إدارة وتطوير الفرص الاستثمارية الزراعية في المنطقة.',
-    contactPerson: 'محمد العلي',
-    contactPhone: '+966 50 123 4567',
+    name: '',
+    region: '',
+    description: '',
+    contact_email: '',
+    contact_phone: '',
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+  useEffect(() => {
+    municipalityApi.getProfile(token).then((profile) => {
+      setFormData({
+        name: profile.name || '',
+        region: profile.region || '',
+        description: profile.description || '',
+        contact_email: profile.contact_email || '',
+        contact_phone: profile.contact_phone || '',
+      });
+      setLoading(false);
     });
+  }, [token]);
+
+  const handleSave = async () => {
+    try {
+      await municipalityApi.updateProfile(token, formData);
+      addToast('تم تحديث بيانات البلدية.', 'success');
+      setIsEditing(false);
+    } catch (error) {
+      addToast(error.message || 'تعذر تحديث البيانات.', 'error');
+    }
   };
 
-  const handleSave = () => {
-    setIsEditing(false);
-  };
-
-  const handleCancel = () => {
-    setIsEditing(false);
-  };
+  if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل بيانات البلدية...</Card>;
 
   return (
     <div>
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-app-text">إعدادات البلدية</h1>
-          <p className="text-app-text-muted mt-2">إدارة معلومات البلدية والإعدادات</p>
+          <p className="mt-2 text-app-text-muted">عرض وتحديث بيانات البلدية المرتبطة بالحساب الحالي.</p>
         </div>
-        {!isEditing && (
-          <button
-            onClick={() => setIsEditing(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand to-brand-deep text-app-text rounded-lg hover:from-brand-deep hover:to-brand transition-all duration-300"
-          >
-            <EditIcon />
-            <span>تعديل</span>
-          </button>
-        )}
+        {!isEditing ? <Button onClick={() => setIsEditing(true)}>تعديل</Button> : null}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-1">
-          <Card className="bg-card-gradient border border-app-border p-6 text-center">
-            <div className="w-32 h-32 bg-gradient-to-br from-brand to-brand-deep rounded-full mx-auto mb-4 flex items-center justify-center">
-              <BuildingIcon className="text-5xl text-app-text" />
-            </div>
-            <h2 className="text-xl font-bold text-app-text mb-2">{formData.name}</h2>
-            <p className="text-app-text-muted text-sm mb-4">جهة حكومية</p>
-            <div className="space-y-2 text-sm text-app-text-muted">
-              <div className="flex items-center justify-center gap-2">
-                <MailIcon className="text-app-text-soft" />
-                <span>{formData.email}</span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <PhoneIcon className="text-app-text-soft" />
-                <span>{formData.phone}</span>
-              </div>
-            </div>
-          </Card>
-        </div>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <Card className="bg-card-gradient border border-app-border p-6 text-center">
+          <div className="mx-auto mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-brand to-brand-deep">
+            <BuildingIcon className="text-5xl text-app-text" />
+          </div>
+          <h2 className="mb-2 text-xl font-bold text-app-text">{formData.name}</h2>
+          <div className="space-y-2 text-sm text-app-text-muted">
+            <div className="flex items-center justify-center gap-2"><MailIcon className="text-app-text-soft" /> <span>{formData.contact_email || '-'}</span></div>
+            <div className="flex items-center justify-center gap-2"><PhoneIcon className="text-app-text-soft" /> <span>{formData.contact_phone || '-'}</span></div>
+          </div>
+        </Card>
 
-        <div className="lg:col-span-2">
-          <Card className="bg-card-gradient border border-app-border p-6">
-            <h3 className="text-xl font-bold text-app-text mb-6">معلومات البلدية</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  اسم البلدية
-                </label>
+        <Card className="bg-card-gradient border border-app-border p-6 lg:col-span-2">
+          <h3 className="mb-6 text-xl font-bold text-app-text">معلومات البلدية</h3>
+          <div className="space-y-4">
+            {[
+              ['name', 'اسم البلدية'],
+              ['region', 'المنطقة'],
+              ['contact_email', 'البريد الإلكتروني'],
+              ['contact_phone', 'رقم الهاتف'],
+            ].map(([key, label]) => (
+              <div key={key}>
+                <label className="mb-2 block text-sm font-medium text-app-text-muted">{label}</label>
                 {isEditing ? (
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                  />
+                  <input value={formData[key]} onChange={(e) => setFormData((p) => ({ ...p, [key]: e.target.value }))} className="w-full rounded-lg border border-app-border bg-app-surface px-4 py-3 text-app-text" />
                 ) : (
-                  <p className="text-app-text">{formData.name}</p>
+                  <p className="text-app-text">{formData[key] || '-'}</p>
                 )}
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  البريد الإلكتروني
-                </label>
-                {isEditing ? (
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                  />
-                ) : (
-                  <p className="text-app-text">{formData.email}</p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  رقم الهاتف
-                </label>
-                {isEditing ? (
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                  />
-                ) : (
-                  <p className="text-app-text">{formData.phone}</p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  الموقع
-                </label>
-                {isEditing ? (
-                  <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                  />
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <MapPinIcon className="text-app-text-soft" />
-                    <p className="text-app-text">{formData.location}</p>
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  الوصف
-                </label>
-                {isEditing ? (
-                  <textarea
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    rows="3"
-                    className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand resize-none"
-                  />
-                ) : (
-                  <p className="text-app-text">{formData.description}</p>
-                )}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-app-text-muted mb-2">
-                    شخص الاتصال
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      name="contactPerson"
-                      value={formData.contactPerson}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                    />
-                  ) : (
-                    <p className="text-app-text">{formData.contactPerson}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-app-text-muted mb-2">
-                    هاتف شخص الاتصال
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="tel"
-                      name="contactPhone"
-                      value={formData.contactPhone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                    />
-                  ) : (
-                    <p className="text-app-text">{formData.contactPhone}</p>
-                  )}
-                </div>
-              </div>
-
-              {isEditing && (
-                <div className="flex gap-3 pt-4">
-                  <button
-                    onClick={handleSave}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-success to-success/90 text-app-text rounded-lg hover:from-success/90 hover:to-success transition-all duration-300"
-                  >
-                    <SaveIcon />
-                    <span>حفظ التغييرات</span>
-                  </button>
-                  <button
-                    onClick={handleCancel}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-danger to-danger/90 text-app-text rounded-lg hover:from-danger/90 hover:to-danger transition-all duration-300"
-                  >
-                    <XIcon />
-                    <span>إلغاء</span>
-                  </button>
-                </div>
+            ))}
+            <div>
+              <label className="mb-2 block text-sm font-medium text-app-text-muted">الوصف</label>
+              {isEditing ? (
+                <textarea value={formData.description} onChange={(e) => setFormData((p) => ({ ...p, description: e.target.value }))} rows={4} className="w-full resize-none rounded-lg border border-app-border bg-app-surface px-4 py-3 text-app-text" />
+              ) : (
+                <p className="text-app-text">{formData.description || '-'}</p>
               )}
             </div>
-          </Card>
-        </div>
+            {isEditing ? (
+              <div className="flex gap-3 pt-4">
+                <Button onClick={handleSave}>حفظ التغييرات</Button>
+                <Button variant="outline" onClick={() => setIsEditing(false)}>إلغاء</Button>
+              </div>
+            ) : null}
+          </div>
+        </Card>
       </div>
     </div>
   );

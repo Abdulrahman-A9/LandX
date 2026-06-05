@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.models import User, UserRole
-from app.schemas.auth import LoginRequest, RegisterRequest, TokenResponse, UserMe
+from app.schemas.auth import LoginRequest, RegisterRequest, TokenResponse, UserMe, UserMeUpdate
 from app.services.deps import get_current_user
 from app.utils.security import create_access_token, hash_password, verify_password
 
@@ -42,4 +42,17 @@ def register(payload: RegisterRequest, db: Session = Depends(get_db)) -> UserMe:
 
 @router.get("/me", response_model=UserMe)
 def me(user: User = Depends(get_current_user)) -> UserMe:
+    return UserMe.model_validate(user)
+
+
+@router.patch("/me", response_model=UserMe)
+def update_me(
+    payload: UserMeUpdate,
+    db: Session = Depends(get_db),
+    user: User = Depends(get_current_user),
+) -> UserMe:
+    user.full_name = payload.full_name
+    user.phone = payload.phone
+    db.commit()
+    db.refresh(user)
     return UserMe.model_validate(user)
