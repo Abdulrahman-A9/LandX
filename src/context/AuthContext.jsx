@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { authApi } from '../lib/api';
 
 const AuthContext = createContext(null);
 
@@ -8,37 +10,81 @@ export const useAuth = () => {
   return ctx;
 };
 
-const MOCK_USERS = [
-  { email: 'investor@landx.sa', password: '123456', role: 'investor', name: 'أحمد المستثمر' },
-  { email: 'municipality@landx.sa', password: '123456', role: 'municipality', name: 'فهد المسؤول' },
-  { email: 'admin@landx.sa', password: '123456', role: 'admin', name: 'عبدالرحمن المشرف' },
-];
+const normalizeUser = (profile) => ({
+  id: profile.id,
+  email: profile.email,
+  role: profile.role,
+  name: profile.full_name,
+  full_name: profile.full_name,
+  phone: profile.phone,
+  municipality_id: profile.municipality_id,
+});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem('landx_user');
     return stored ? JSON.parse(stored) : null;
   });
+  const [token, setToken] = useState(() => localStorage.getItem('landx_token'));
+  const [loading, setLoading] = useState(Boolean(localStorage.getItem('landx_token')));
 
-  const login = useCallback((email, password) => {
-    const found = MOCK_USERS.find((u) => u.email === email && u.password === password);
-    if (!found) return { success: false, message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة' };
-    const userData = { email: found.email, role: found.role, name: found.name };
-    setUser(userData);
-    localStorage.setItem('landx_user', JSON.stringify(userData));
-    return { success: true, message: 'تم تسجيل الدخول بنجاح', role: found.role };
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+
+    let active = true;
+    authApi
+      .me(token)
+      .then((profile) => {
+        if (!active) return;
+        const normalizedUser = normalizeUser(profile);
+        setUser(normalizedUser);
+        localStorage.setItem('landx_user', JSON.stringify(normalizedUser));
+      })
+      .catch(() => {
+        if (!active) return;
+        setUser(null);
+        setToken(null);
+        localStorage.removeItem('landx_user');
+        localStorage.removeItem('landx_token');
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [token]);
+
+  const login = useCallback(async (email, password) => {
+    try {
+      const auth = await authApi.login(email, password);
+      const profile = await authApi.me(auth.access_token);
+      const normalizedUser = normalizeUser(profile);
+      setToken(auth.access_token);
+      setUser(normalizedUser);
+      localStorage.setItem('landx_token', auth.access_token);
+      localStorage.setItem('landx_user', JSON.stringify(normalizedUser));
+      return { success: true, message: 'تم تسجيل الدخول بنجاح', role: normalizedUser.role };
+    } catch (error) {
+      return { success: false, message: error.message || 'فشل تسجيل الدخول' };
+    }
   }, []);
 
   const logout = useCallback(() => {
     setUser(null);
+    setToken(null);
     localStorage.removeItem('landx_user');
+    localStorage.removeItem('landx_token');
   }, []);
 
   const isAuthenticated = !!user;
   const isRole = useCallback((role) => user?.role === role, [user]);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, isRole }}>
+    <AuthContext.Provider value={{ user, token, loading, login, logout, isAuthenticated, isRole }}>
       {children}
     </AuthContext.Provider>
   );

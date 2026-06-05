@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   BarChartIcon,
@@ -53,17 +53,17 @@ const adminNav = [
 const roleMeta = {
   investor: {
     title: 'لوحة المستثمر',
-    subtitle: 'متابعة الفرص، الاستثمارات، والاستفسارات في مسار واحد واضح.',
+    subtitle: 'متابعة الفرص والاستثمارات والاستفسارات في مسار واحد واضح.',
     nav: investorNav,
   },
   municipality: {
     title: 'لوحة البلدية',
-    subtitle: 'إدارة النشر، الاستفسارات، ومحتوى الفرص دون تشتيت تشغيلي.',
+    subtitle: 'إدارة النشر والاستفسارات ومحتوى الفرص دون تشتيت تشغيلي.',
     nav: municipalityNav,
   },
   admin: {
     title: 'لوحة الإدارة',
-    subtitle: 'رؤية تشغيلية موحدة عن المستخدمين، البلديات، والمحتوى.',
+    subtitle: 'رؤية تشغيلية موحدة عن المستخدمين والبلديات والمحتوى.',
     nav: adminNav,
   },
 };
@@ -72,13 +72,33 @@ const DashboardLayout = ({ role = 'investor' }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user, logout, loading } = useAuth();
   const meta = roleMeta[role] || roleMeta.investor;
+
+  useEffect(() => {
+    if (!loading && user && user.role !== role) {
+      navigate(`/${user.role}/dashboard`, { replace: true });
+    }
+  }, [loading, navigate, role, user]);
 
   const handleLogout = () => {
     logout();
     navigate('/');
   };
+
+  if (loading) {
+    return <div className="landx-shell py-20 text-center text-app-text-muted">جاري تحميل الجلسة...</div>;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (user.role !== role) {
+    return null;
+  }
+
+  const displayName = user.full_name || user.name || 'مستخدم المنصة';
 
   return (
     <div className="min-h-screen bg-app-bg text-app-text">
@@ -100,7 +120,7 @@ const DashboardLayout = ({ role = 'investor' }) => {
             <div className="p-6">
               <div className="rounded-[1.75rem] border border-app-border bg-app-surface-soft/60 p-5">
                 <div className="text-sm text-app-text-soft">الحساب النشط</div>
-                <div className="mt-2 text-lg font-bold text-app-text">{user?.name || 'مستخدم المنصة'}</div>
+                <div className="mt-2 text-lg font-bold text-app-text">{displayName}</div>
                 <div className="mt-1 text-sm text-app-text-muted">{meta.subtitle}</div>
               </div>
             </div>
@@ -167,14 +187,14 @@ const DashboardLayout = ({ role = 'investor' }) => {
                 <div className="flex items-center gap-3">
                   <div className="hidden rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted md:flex md:items-center md:gap-2">
                     <BellIcon className="h-4 w-4 text-brand" />
-                    3 تحديثات جديدة
+                    بيانات مباشرة من النظام
                   </div>
                   <div className="hidden h-11 items-center gap-3 rounded-full border border-app-border bg-app-surface-soft px-3 md:flex">
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand/15 text-sm font-bold text-brand">
-                      {user?.name?.charAt(0) || 'ل'}
+                      {displayName.charAt(0)}
                     </div>
                     <div className="text-sm">
-                      <div className="font-semibold text-app-text">{user?.name || 'مستخدم المنصة'}</div>
+                      <div className="font-semibold text-app-text">{displayName}</div>
                       <div className="text-app-text-soft">جلسة عمل نشطة</div>
                     </div>
                   </div>

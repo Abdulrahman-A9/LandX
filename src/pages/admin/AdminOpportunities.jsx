@@ -63,10 +63,6 @@ const AdminOpportunities = () => {
     return badges[status] || badges.pending;
   };
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('ar-SA').format(amount);
-  };
-
   return (
     <div>
       <div className="mb-8">

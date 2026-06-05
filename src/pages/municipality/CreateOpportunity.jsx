@@ -1,225 +1,135 @@
 import React, { useState } from 'react';
 import Card from '../../components/ui/Card';
-import { SaveIcon, XIcon, UploadIcon, LeafIcon, MapPinIcon, DollarSignIcon, CalendarIcon } from '../../components/ui/Icons';
+import Button from '../../components/ui/Button';
+import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
+import { opportunitiesApi } from '../../lib/api';
 
 const CreateOpportunity = () => {
+  const { token } = useAuth();
+  const { addToast } = useToast();
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     location: '',
     season: '',
     area: '',
-    minInvestment: '',
+    investmentRequired: '',
     expectedReturn: '',
     description: '',
-    features: '',
-    requirements: '',
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = (event) => {
+    setFormData((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
-
-  const handleCancel = () => {
-    setFormData({
-      title: '',
-      location: '',
-      season: '',
-      area: '',
-      minInvestment: '',
-      expectedReturn: '',
-      description: '',
-      features: '',
-      requirements: '',
-    });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      setSubmitting(true);
+      await opportunitiesApi.create(token, {
+        title: formData.title,
+        location: formData.location,
+        season: formData.season,
+        area: Number(formData.area || 0),
+        area_unit: 'متر مربع',
+        investment_required: Number(formData.investmentRequired || 0),
+        expected_return: Number(formData.expectedReturn || 0),
+        description: formData.description,
+        status: 'pending',
+      });
+      addToast('تم إنشاء الفرصة وربطها ببلديتك بنجاح.', 'success');
+      setFormData({
+        title: '',
+        location: '',
+        season: '',
+        area: '',
+        investmentRequired: '',
+        expectedReturn: '',
+        description: '',
+      });
+    } catch (error) {
+      addToast(error.message || 'تعذر إنشاء الفرصة.', 'error');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-app-text">إضافة فرصة استثمارية جديدة</h1>
-        <p className="text-app-text-muted mt-2">أدخل تفاصيل الفرصة الاستثمارية</p>
+        <p className="mt-2 text-app-text-muted">هذا النموذج ينشئ الفرصة مباشرة داخل قاعدة البيانات.</p>
       </div>
 
-      <div>
-        <Card className="bg-card-gradient border border-app-border p-6">
-          <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  عنوان الفرصة *
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                  placeholder="مثال: وادي حائل الزراعي"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  الموقع *
-                </label>
-                <input
-                  type="text"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                  placeholder="مثال: حائل"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  الموسم *
-                </label>
-                <select
-                  name="season"
-                  value={formData.season}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                >
-                  <option value="">اختر الموسم</option>
-                  <option value="الموسم الشتوي 2024">الموسم الشتوي 2024</option>
-                  <option value="الموسم الصيفي 2024">الموسم الصيفي 2024</option>
-                  <option value="الموسم الخريفي 2024">الموسم الخريفي 2024</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  المساحة *
-                </label>
-                <input
-                  type="text"
-                  name="area"
-                  value={formData.area}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                  placeholder="مثال: 500 هكتار"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  الحد الأدنى للاستثمار (ر.س) *
-                </label>
-                <input
-                  type="number"
-                  name="minInvestment"
-                  value={formData.minInvestment}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                  placeholder="مثال: 50000"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-app-text-muted mb-2">
-                  العائد المتوقع (%) *
-                </label>
-                <input
-                  type="number"
-                  name="expectedReturn"
-                  value={formData.expectedReturn}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand"
-                  placeholder="مثال: 15"
-                />
-              </div>
+      <Card className="bg-card-gradient border border-app-border p-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <label className="mb-2 block text-sm font-medium text-app-text-muted">عنوان الفرصة</label>
+              <input name="title" value={formData.title} onChange={handleChange} required className="w-full rounded-lg border border-app-border bg-app-surface px-4 py-3 text-app-text" />
             </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-app-text-muted mb-2">
-                الوصف *
-              </label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                required
-                rows="4"
-                className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand resize-none"
-                placeholder="اكتب وصفاً تفصيلياً للفرصة الاستثمارية"
-              />
+            <div>
+              <label className="mb-2 block text-sm font-medium text-app-text-muted">الموقع</label>
+              <input name="location" value={formData.location} onChange={handleChange} required className="w-full rounded-lg border border-app-border bg-app-surface px-4 py-3 text-app-text" />
             </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-app-text-muted mb-2">
-                المميزات
-              </label>
-              <textarea
-                name="features"
-                value={formData.features}
-                onChange={handleChange}
-                rows="3"
-                className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand resize-none"
-                placeholder="اكتب المميزات الرئيسية للفرصة"
-              />
+            <div>
+              <label className="mb-2 block text-sm font-medium text-app-text-muted">الموسم</label>
+              <input name="season" value={formData.season} onChange={handleChange} className="w-full rounded-lg border border-app-border bg-app-surface px-4 py-3 text-app-text" />
             </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-app-text-muted mb-2">
-                المتطلبات
-              </label>
-              <textarea
-                name="requirements"
-                value={formData.requirements}
-                onChange={handleChange}
-                rows="3"
-                className="w-full px-4 py-2 border border-app-border rounded-lg bg-app-surface text-app-text focus:outline-none focus:ring-2 focus:ring-brand resize-none"
-                placeholder="اكتب المتطلبات اللازمة للاستثمار"
-              />
+            <div>
+              <label className="mb-2 block text-sm font-medium text-app-text-muted">المساحة</label>
+              <input name="area" type="number" value={formData.area} onChange={handleChange} className="w-full rounded-lg border border-app-border bg-app-surface px-4 py-3 text-app-text" />
             </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-app-text-muted mb-2">
-                الصور
-              </label>
-              <div className="border-2 border-dashed border-app-border rounded-lg p-8 text-center hover:border-brand transition-colors cursor-pointer">
-                <UploadIcon className="mx-auto text-4xl text-app-text-soft mb-4" />
-                <p className="text-app-text-muted">اسحب الصور هنا أو انقر للاختيار</p>
-                <p className="text-sm text-app-text-soft mt-2">PNG, JPG حتى 5MB</p>
-              </div>
+            <div>
+              <label className="mb-2 block text-sm font-medium text-app-text-muted">قيمة الاستثمار المطلوبة</label>
+              <input name="investmentRequired" type="number" value={formData.investmentRequired} onChange={handleChange} className="w-full rounded-lg border border-app-border bg-app-surface px-4 py-3 text-app-text" />
             </div>
-
-            <div className="flex gap-3">
-              <button
-                type="submit"
-                className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-success to-success/90 text-app-text rounded-lg hover:from-success/90 hover:to-success transition-all duration-300"
-              >
-                <SaveIcon />
-                <span>حفظ الفرصة</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleCancel}
-                className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-danger to-danger/90 text-app-text rounded-lg hover:from-danger/90 hover:to-danger transition-all duration-300"
-              >
-                <XIcon />
-                <span>إلغاء</span>
-              </button>
+            <div>
+              <label className="mb-2 block text-sm font-medium text-app-text-muted">العائد المتوقع %</label>
+              <input name="expectedReturn" type="number" value={formData.expectedReturn} onChange={handleChange} className="w-full rounded-lg border border-app-border bg-app-surface px-4 py-3 text-app-text" />
             </div>
-          </form>
-        </Card>
-      </div>
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-medium text-app-text-muted">الوصف</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              rows="5"
+              required
+              className="w-full resize-none rounded-lg border border-app-border bg-app-surface px-4 py-3 text-app-text"
+            />
+          </div>
+
+          <div className="flex gap-3">
+            <Button type="submit" disabled={submitting}>
+              {submitting ? 'جاري الحفظ...' : 'حفظ الفرصة'}
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() =>
+                setFormData({
+                  title: '',
+                  location: '',
+                  season: '',
+                  area: '',
+                  investmentRequired: '',
+                  expectedReturn: '',
+                  description: '',
+                })
+              }
+            >
+              إعادة تعيين
+            </Button>
+          </div>
+        </form>
+      </Card>
     </div>
   );
 };

@@ -19,7 +19,7 @@ export default {
         'muted-dark': '#d1b59c',
         brand: '#9f5a31',
         'brand-deep': '#552816',
-        accent: '#e3c2a1',
+        'accent-base': '#e3c2a1',
         success: '#7f9b63',
         warning: '#d29456',
         danger: '#7d2f36',

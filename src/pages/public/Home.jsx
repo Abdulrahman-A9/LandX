@@ -6,6 +6,9 @@ import OpportunityCard from '../../components/shared/OpportunityCard';
 import PageHero from '../../components/shared/PageHero';
 import SectionIntro from '../../components/shared/SectionIntro';
 import Card from '../../components/ui/Card';
+import { useAsyncData } from '../../hooks/useAsyncData';
+import { mapNewsItem, mapOpportunity } from '../../lib/adapters';
+import { newsApi, opportunitiesApi } from '../../lib/api';
 import {
   ArrowRightIcon,
   BarChartIcon,
@@ -24,59 +27,26 @@ import {
   TargetIcon,
   UsersIcon,
 } from '../../components/ui/Icons';
-import { mockNews } from '../../data/mock/news';
-import { mockOpportunities } from '../../data/mock/opportunities';
 import { formatCompactNumber } from '../../lib/formatters';
 
-const featuredOpportunities = mockOpportunities.slice(0, 3);
-const latestNews = mockNews.slice(0, 3);
-
-const stats = [
-  { label: 'فرصة موثقة', value: 120, icon: <LeafIcon /> },
-  { label: 'مستثمر نشط', value: 350, icon: <UsersIcon /> },
-  { label: 'بلدية شريكة', value: 15, icon: <BuildingIcon /> },
-  { label: 'تحليل مكتمل', value: 980, icon: <BarChartIcon /> },
+const statsBase = [
+  { label: 'فرصة موثقة', icon: <LeafIcon /> },
+  { label: 'مستثمر نشط', icon: <UsersIcon /> },
+  { label: 'بلدية شريكة', icon: <BuildingIcon /> },
+  { label: 'تحليل مكتمل', icon: <BarChartIcon /> },
 ];
 
 const journey = [
-  {
-    title: 'اكتشف بسرعة',
-    description: 'واجهة الفرص تعطيك قراءة أولية واضحة عن العائد، النطاق، وحالة الجاهزية قبل الدخول في التفاصيل.',
-    icon: <SearchIcon />,
-  },
-  {
-    title: 'افهم الجدوى',
-    description: 'صفحات التفاصيل والتحليل تبني القرار على مؤشرات مختصرة ومنطقية بدلاً من فوضى البيانات.',
-    icon: <EyeIcon />,
-  },
-  {
-    title: 'قارن وقرر',
-    description: 'المسار يوضح أين تكمل، متى تتواصل، ومتى يكون الوقت مناسباً للانتقال إلى التنفيذ.',
-    icon: <PieChartIcon />,
-  },
-  {
-    title: 'ابدأ التواصل',
-    description: 'التقديم أو الاستفسار يأتي في نهاية المسار بشكل طبيعي دون مقاطعة أو إرباك أثناء الاستكشاف.',
-    icon: <HandshakeIcon />,
-  },
+  { title: 'اكتشف بسرعة', description: 'واجهة الفرص تعطيك قراءة أولية واضحة عن العائد والنطاق قبل الدخول في التفاصيل.', icon: <SearchIcon /> },
+  { title: 'افهم الجدوى', description: 'التحليل يضع مؤشرات مبسطة تدعم القرار بدل أن تربك المستخدم.', icon: <EyeIcon /> },
+  { title: 'قارن وقرر', description: 'المسار يوضح متى تكمل ومتى تتواصل ومتى يكون الوقت مناسباً للتنفيذ.', icon: <PieChartIcon /> },
+  { title: 'ابدأ التواصل', description: 'إرسال الاستفسار أو الاهتمام يأتي في نهاية المسار بشكل طبيعي وواضح.', icon: <HandshakeIcon /> },
 ];
 
 const strengths = [
-  {
-    title: 'هوية عربية عملية',
-    description: 'المحتوى، الاتجاه، والتسلسل البصري مبني من البداية على قراءة عربية سلسة.',
-    icon: <CompassIcon />,
-  },
-  {
-    title: 'فرص موثقة ومنظمة',
-    description: 'كل فرصة تعرض الحالة، الجهة، ومؤشرات الدخول بلغة واضحة وسريعة الفهم.',
-    icon: <ShieldCheckIcon />,
-  },
-  {
-    title: 'تحليل يساند القرار',
-    description: 'المنصة لا تعرض فرصاً فقط، بل تمنح المستخدم إطاراً عملياً لقراءة الجدوى.',
-    icon: <TargetIcon />,
-  },
+  { title: 'هوية عربية عملية', description: 'المحتوى والتسلسل البصري مبني من البداية على قراءة عربية واضحة.', icon: <CompassIcon /> },
+  { title: 'فرص موثقة ومنظمة', description: 'كل فرصة تعرض الجهة والحالة ومؤشرات الدخول بشكل مختصر ومباشر.', icon: <ShieldCheckIcon /> },
+  { title: 'تحليل يساند القرار', description: 'المنصة لا تكتفي بالعرض بل تحفظ التحليل وتولد تقريراً يمكن الرجوع له.', icon: <TargetIcon /> },
 ];
 
 const heroAside = (
@@ -93,17 +63,13 @@ const heroAside = (
             <CheckCircleIcon className="h-4 w-4 text-success" />
             المسار الواضح
           </div>
-          <div className="mt-3 text-sm leading-7 text-app-text-muted">
-            من الاستكشاف إلى التحليل ثم التواصل في واجهة واحدة متدرجة وواضحة.
-          </div>
+          <div className="mt-3 text-sm leading-7 text-app-text-muted">من الاستكشاف إلى التحليل ثم التواصل في واجهة متدرجة وواضحة.</div>
         </div>
       </div>
 
       <div className="rounded-[1.75rem] border border-brand/20 bg-gradient-to-br from-brand/15 via-app-surface-soft/80 to-app-surface p-6">
         <div className="flex items-center justify-between">
-          <div className="rounded-full border border-brand/20 bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">
-            لوحة الرؤية
-          </div>
+          <div className="rounded-full border border-brand/20 bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">لوحة الرؤية</div>
           <SparklesIcon className="h-5 w-5 text-brand" />
         </div>
         <div className="mt-6 space-y-4">
@@ -126,12 +92,29 @@ const heroAside = (
 );
 
 const Home = () => {
+  const { data, loading } = useAsyncData(async () => {
+    const [opportunities, news] = await Promise.all([opportunitiesApi.list(), newsApi.list()]);
+    return {
+      opportunities: opportunities.map(mapOpportunity),
+      news: news.map(mapNewsItem),
+    };
+  }, []);
+
+  const featuredOpportunities = (data.opportunities || []).slice(0, 3);
+  const latestNews = (data.news || []).slice(0, 3);
+  const stats = [
+    { ...statsBase[0], value: data.opportunities?.length || 0 },
+    { ...statsBase[1], value: 350 },
+    { ...statsBase[2], value: new Set((data.opportunities || []).map((item) => item.municipality)).size },
+    { ...statsBase[3], value: 980 },
+  ];
+
   return (
     <div className="overflow-hidden">
       <PageHero
         eyebrow="منصة قرار استثماري أوضح"
         title="كل ما يحتاجه المستثمر لفهم الفرصة قبل أن يدخل في أي فوضى تشغيلية."
-        description="LandX تعيد ترتيب تجربة الاستثمار الزراعي الموسمي في مسار واحد واضح: استكشاف سريع، تحليل مفهوم، ثم انتقال طبيعي إلى الاستفسار أو التنفيذ."
+        description="LandX تعيد ترتيب تجربة الاستثمار في مسار واحد واضح: استكشاف سريع، تحليل مفهوم، ثم انتقال طبيعي إلى الاستفسار أو التنفيذ."
         actions={
           <>
             <Link to="/opportunities" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-6 py-3.5 text-base font-semibold text-app-text shadow-lg shadow-brand/20">
@@ -153,9 +136,7 @@ const Home = () => {
             {stats.map((item, index) => (
               <AnimatedSection key={item.label} delay={index * 80}>
                 <Card className="h-full p-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
-                    {item.icon}
-                  </div>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">{item.icon}</div>
                   <div className="mt-5 text-3xl font-black text-app-text">{formatCompactNumber(item.value)}</div>
                   <div className="mt-2 text-sm text-app-text-muted">{item.label}</div>
                 </Card>
@@ -168,20 +149,13 @@ const Home = () => {
       <section className="py-16 lg:py-20">
         <div className="landx-shell space-y-12">
           <AnimatedSection>
-            <SectionIntro
-              eyebrow="التدفق الصحيح"
-              title="تجربة مبنية على تسلسل منطقي، لا على تراكم عناصر."
-              description="كل خطوة داخل المنصة تقود لما بعدها بوضوح: من اكتشاف الفرصة إلى فهمها ثم اتخاذ الإجراء المناسب دون ازدحام بصري أو تشتيت."
-            />
+            <SectionIntro eyebrow="التدفق الصحيح" title="تجربة مبنية على تسلسل منطقي، لا على تراكم عناصر." description="كل خطوة داخل المنصة تقود لما بعدها بوضوح دون ازدحام بصري أو تشتيت." />
           </AnimatedSection>
-
           <div className="grid gap-5 lg:grid-cols-4">
             {journey.map((item, index) => (
               <AnimatedSection key={item.title} delay={index * 90}>
                 <Card className="h-full p-6">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
-                    {item.icon}
-                  </div>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">{item.icon}</div>
                   <h3 className="mt-5 text-xl font-bold text-app-text">{item.title}</h3>
                   <p className="mt-3 text-sm leading-8 text-app-text-muted">{item.description}</p>
                 </Card>
@@ -195,21 +169,13 @@ const Home = () => {
         <div className="landx-shell">
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <AnimatedSection>
-              <SectionIntro
-                align="start"
-                eyebrow="لماذا تبدو أوضح"
-                title="المنصة تختصر القرار دون أن تبسّطه بشكل مخل."
-                description="المستخدم يرى ما يحتاجه أولاً، ثم يتدرج إلى تفاصيل أعمق عند الحاجة. هذا هو الفرق بين واجهة جميلة وواجهة تخدم قراراً حقيقياً."
-              />
+              <SectionIntro align="start" eyebrow="لماذا تبدو أوضح" title="المنصة تختصر القرار دون أن تبسطه بشكل مخل." description="المستخدم يرى ما يحتاجه أولاً، ثم يتدرج إلى تفاصيل أعمق عند الحاجة." />
             </AnimatedSection>
-
             <div className="grid gap-4">
               {strengths.map((item, index) => (
                 <AnimatedSection key={item.title} delay={index * 100}>
                   <Card className="flex items-start gap-4 p-5">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
-                      {item.icon}
-                    </div>
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">{item.icon}</div>
                     <div>
                       <h3 className="text-lg font-bold text-app-text">{item.title}</h3>
                       <p className="mt-2 text-sm leading-8 text-app-text-muted">{item.description}</p>
@@ -225,33 +191,27 @@ const Home = () => {
       <section className="py-16 lg:py-20">
         <div className="landx-shell space-y-12">
           <AnimatedSection>
-            <SectionIntro
-              eyebrow="فرص مختارة"
-              title="أفضل نقطة للدخول السريع إلى المنصة."
-              description="هذه المجموعة تعرض فرصاً ذات قراءة مباشرة وواضحة لتبدأ المقارنة دون مجهود إضافي."
-            />
+            <SectionIntro eyebrow="فرص مختارة" title="أفضل نقطة للدخول السريع إلى المنصة." description="هذه المجموعة تعرض فرصاً حقيقية قادمة من قاعدة البيانات." />
           </AnimatedSection>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {featuredOpportunities.map((opportunity, index) => (
-              <AnimatedSection key={opportunity.id} delay={index * 90}>
-                <OpportunityCard opportunity={opportunity} />
-              </AnimatedSection>
-            ))}
-          </div>
+          {loading ? (
+            <Card className="p-10 text-center text-app-text-muted">جاري تحميل المحتوى...</Card>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {featuredOpportunities.map((opportunity, index) => (
+                <AnimatedSection key={opportunity.id} delay={index * 90}>
+                  <OpportunityCard opportunity={opportunity} />
+                </AnimatedSection>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       <section className="py-16 lg:py-20">
         <div className="landx-shell space-y-12">
           <AnimatedSection>
-            <SectionIntro
-              eyebrow="المستجدات"
-              title="آخر الأخبار والإعلانات في نفس اللغة البصرية الهادئة."
-              description="المعلومات المتغيرة لا يجب أن تكون مشتتة. لذلك تأتي الأخبار هنا بشكل منظم وقابل للمسح السريع."
-            />
+            <SectionIntro eyebrow="المستجدات" title="آخر الأخبار والإعلانات في نفس اللغة البصرية الهادئة." description="المعلومات المتغيرة تأتي هنا من السجلات الفعلية المحفوظة داخل النظام." />
           </AnimatedSection>
-
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {latestNews.map((item, index) => (
               <AnimatedSection key={item.id} delay={index * 90}>
@@ -275,22 +235,11 @@ const Home = () => {
                   <h2 className="mt-5 text-3xl font-black leading-tight text-app-text md:text-4xl">
                     إذا كانت لديك فكرة استثمارية أو فرصة تريد فهمها، ابدأ من المسار الصحيح.
                   </h2>
-                  <p className="mt-4 max-w-2xl text-lg leading-9 text-app-text-muted">
-                    اختر بين استعراض الفرص المنشورة أو تحليل فكرة مشروعك مباشرة. كلا المسارين مصمم
-                    ليقودك إلى قرار أوضح لا إلى واجهة أكثر ازدحاماً.
-                  </p>
                 </div>
-
                 <div className="grid gap-3">
-                  <Link to="/opportunities" className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-5 py-4 text-center text-sm font-semibold text-app-text">
-                    تصفح الفرص
-                  </Link>
-                  <Link to="/investment-analysis" className="rounded-2xl border border-app-border bg-app-surface-soft px-5 py-4 text-center text-sm font-semibold text-app-text">
-                    تحليل فكرة جديدة
-                  </Link>
-                  <Link to="/contact" className="rounded-2xl border border-app-border bg-transparent px-5 py-4 text-center text-sm font-semibold text-app-text-muted">
-                    تواصل مع الفريق
-                  </Link>
+                  <Link to="/opportunities" className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-5 py-4 text-center text-sm font-semibold text-app-text">تصفح الفرص</Link>
+                  <Link to="/investment-analysis" className="rounded-2xl border border-app-border bg-app-surface-soft px-5 py-4 text-center text-sm font-semibold text-app-text">تحليل فكرة جديدة</Link>
+                  <Link to="/contact" className="rounded-2xl border border-app-border bg-transparent px-5 py-4 text-center text-sm font-semibold text-app-text-muted">تواصل مع الفريق</Link>
                 </div>
               </div>
             </Card>

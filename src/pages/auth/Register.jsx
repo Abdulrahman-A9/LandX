@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
 import { useToast } from '../../context/ToastContext';
+import { authApi } from '../../lib/api';
 import {
   ArrowRightIcon,
   BuildingIcon,
@@ -25,8 +26,9 @@ const Register = () => {
     confirmPassword: '',
   });
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
 
@@ -45,8 +47,23 @@ const Register = () => {
       return;
     }
 
-    addToast('تم إنشاء الحساب بنجاح. يمكنك الآن تسجيل الدخول.', 'success');
-    navigate('/login');
+    try {
+      setSubmitting(true);
+      await authApi.register({
+        full_name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        role: formData.role,
+        password: formData.password,
+      });
+      addToast('تم إنشاء الحساب بنجاح. يمكنك الآن تسجيل الدخول.', 'success');
+      navigate('/login');
+    } catch (err) {
+      setError(err.message || 'تعذر إنشاء الحساب.');
+      addToast(err.message || 'تعذر إنشاء الحساب.', 'error');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -62,7 +79,7 @@ const Register = () => {
             <div className="mt-6">
               <h2 className="text-3xl font-black text-app-text">إنشاء حساب جديد</h2>
               <p className="mt-2 text-sm leading-7 text-app-text-muted">
-                ابدأ كـ مستثمر أو جهة معلنة في نموذج قصير وواضح.
+                التسجيل هنا مرتبط مباشرة بالباك اند ويضيف الحساب فعلياً إلى قاعدة البيانات.
               </p>
             </div>
 
@@ -163,11 +180,11 @@ const Register = () => {
               </div>
 
               <div className="rounded-2xl border border-app-border bg-app-surface-soft/60 p-4 text-sm leading-7 text-app-text-muted">
-                بالتسجيل فأنت توافق على استخدام المنصة وفق معايير الاستخدام وسياسة الخصوصية الداخلية الحالية.
+                بالتسجيل فأنت تضيف حساباً فعلياً داخل النظام يمكن عرضه مباشرة لاحقاً من لوحة الإدارة أو من قاعدة البيانات.
               </div>
 
-              <Button type="submit" size="lg" className="w-full">
-                إنشاء الحساب
+              <Button type="submit" size="lg" className="w-full" disabled={submitting}>
+                {submitting ? 'جاري إنشاء الحساب...' : 'إنشاء الحساب'}
               </Button>
             </form>
 
@@ -186,8 +203,7 @@ const Register = () => {
                 أنشئ حسابك وادخل إلى مسار استثماري أو تشغيلي أكثر وضوحاً.
               </h1>
               <p className="mt-4 max-w-2xl text-lg leading-9 text-app-text-muted">
-                التسجيل هنا لا يضيف خطوات غير ضرورية. نطلب فقط ما يلزم لبدء التجربة، ثم تتوسع
-                البيانات لاحقاً داخل لوحة العمل.
+                التسجيل يطلب الحد الأدنى فقط، ثم يكمل المستخدم ما يحتاجه لاحقاً داخل لوحته بدون تعقيد أو ضوضاء.
               </p>
             </div>
 
@@ -195,7 +211,7 @@ const Register = () => {
               {[
                 'للمستثمر: اكتشاف الفرص وفهم الجدوى.',
                 'للبلدية: تنظيم النشر وإدارة الطلبات.',
-                'للمنصة: نفس الهوية ونفس اللغة البصرية في كل المسارات.',
+                'للجنة: بيانات فعلية يمكن عرضها من القاعدة.',
               ].map((item) => (
                 <div key={item} className="rounded-2xl border border-app-border bg-app-surface-soft p-4 text-sm leading-7 text-app-text-muted">
                   {item}
@@ -209,9 +225,9 @@ const Register = () => {
                 <span className="font-semibold">ماذا يحدث بعد التسجيل؟</span>
               </div>
               <div className="mt-4 space-y-3 text-sm leading-7 text-app-text-muted">
-                <p>1. تدخل إلى الواجهة المناسبة حسب نوع الحساب.</p>
-                <p>2. تكمل بياناتك التشغيلية عند الحاجة داخل لوحة العمل.</p>
-                <p>3. تبدأ مباشرة في استعراض الفرص أو إدارتها دون تعقيد.</p>
+                <p>1. يضاف الحساب إلى قاعدة البيانات مباشرة.</p>
+                <p>2. يمكن تسجيل الدخول بالحساب الجديد فوراً.</p>
+                <p>3. تظهر الصلاحية المناسبة حسب نوع الحساب.</p>
               </div>
             </div>
           </div>

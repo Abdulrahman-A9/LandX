@@ -1,17 +1,18 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import Badge from '../../components/ui/Badge';
 import OpportunityCard from '../../components/shared/OpportunityCard';
 import { useToast } from '../../context/ToastContext';
-import { mockOpportunities } from '../../data/mock/opportunities';
+import { useAuth } from '../../context/AuthContext';
+import { mapOpportunity } from '../../lib/adapters';
+import { inquiryApi, interestRequestApi, opportunitiesApi } from '../../lib/api';
 import {
   ArrowRightIcon,
   BuildingIcon,
   CalendarIcon,
   CheckCircleIcon,
-  FileTextIcon,
   LeafIcon,
   MapPinIcon,
   MessageCircleIcon,
@@ -23,35 +24,87 @@ import { formatCurrency, seasonLabel, statusLabel } from '../../lib/formatters';
 const OpportunityDetails = () => {
   const { id } = useParams();
   const { addToast } = useToast();
+  const { token, user } = useAuth();
   const [showForm, setShowForm] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const opportunity = mockOpportunities.find((item) => item.id === Number(id));
+  const [submitting, setSubmitting] = useState(false);
+  const [opportunity, setOpportunity] = useState(null);
+  const [related, setRelated] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  const related = useMemo(() => {
-    return mockOpportunities.filter((item) => item.id !== Number(id)).slice(0, 3);
+  useEffect(() => {
+    let active = true;
+    const run = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        const [detail, list] = await Promise.all([
+          opportunitiesApi.getById(id),
+          opportunitiesApi.list(),
+        ]);
+        if (!active) return;
+        setOpportunity(mapOpportunity(detail));
+        setRelated(list.map(mapOpportunity).filter((item) => item.id !== Number(id)).slice(0, 3));
+      } catch (err) {
+        if (active) setError(err.message || 'تعذر تحميل تفاصيل الفرصة');
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+
+    run();
+    return () => {
+      active = false;
+    };
   }, [id]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitted(true);
-    addToast('تم إرسال طلب الاهتمام بنجاح. سيصلك تواصل خلال وقت قصير.', 'success');
-    setTimeout(() => {
+    if (!token || user?.role !== 'investor') {
+      addToast('سجل الدخول بحساب مستثمر لإرسال طلب اهتمام أو استفسار.', 'error');
+      return;
+    }
+
+    const formData = new FormData(event.currentTarget);
+    const notes = formData.get('notes')?.toString() || '';
+
+    try {
+      setSubmitting(true);
+      await Promise.all([
+        interestRequestApi.create(token, {
+          opportunity_id: Number(id),
+          notes,
+        }),
+        inquiryApi.create(token, {
+          opportunity_id: Number(id),
+          subject: `استفسار بخصوص ${opportunity.title}`,
+          message: notes || 'أرغب بالحصول على معلومات إضافية حول هذه الفرصة.',
+        }),
+      ]);
+      addToast('تم تسجيل اهتمامك وإرسال استفسار أولي بنجاح.', 'success');
       setShowForm(false);
-      setSubmitted(false);
-    }, 2200);
+    } catch (err) {
+      addToast(err.message || 'تعذر إرسال الطلب.', 'error');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  if (!opportunity) {
+  const statusVariant = opportunity?.status === 'active' ? 'success' : 'warning';
+
+  if (loading) {
+    return <div className="landx-shell py-20 text-center text-app-text-muted">جاري تحميل تفاصيل الفرصة...</div>;
+  }
+
+  if (error || !opportunity) {
     return (
       <div className="landx-shell py-20">
         <Card className="mx-auto max-w-2xl p-10 text-center">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-app-border bg-app-surface-soft text-app-text-soft">
             <SearchIcon className="h-8 w-8" />
           </div>
-          <h1 className="mt-5 text-3xl font-black text-app-text">الفرصة غير موجودة</h1>
-          <p className="mt-3 text-sm leading-8 text-app-text-muted">
-            لم نتمكن من العثور على هذه الفرصة. يمكنك العودة إلى قائمة الفرص واستعراض الفرص المتاحة.
-          </p>
+          <h1 className="mt-5 text-3xl font-black text-app-text">الفرصة غير متاحة</h1>
+          <p className="mt-3 text-sm leading-8 text-app-text-muted">{error || 'لم نتمكن من العثور على هذه الفرصة.'}</p>
           <Link
             to="/opportunities"
             className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-5 py-3 text-sm font-semibold text-app-text"
@@ -63,24 +116,6 @@ const OpportunityDetails = () => {
       </div>
     );
   }
-
-  const {
-    title,
-    municipality,
-    location,
-    season,
-    area,
-    areaUnit,
-    expectedReturn,
-    investmentRequired,
-    currency,
-    status,
-    images,
-    description,
-    features,
-  } = opportunity;
-
-  const statusVariant = status === 'active' ? 'success' : 'warning';
 
   return (
     <div>
@@ -94,23 +129,18 @@ const OpportunityDetails = () => {
 
           <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div className="space-y-5">
-              <Badge variant={statusVariant}>{statusLabel(status)}</Badge>
-              <h1 className="max-w-4xl text-4xl font-black leading-tight text-app-text md:text-5xl">
-                {title}
-              </h1>
-              <p className="max-w-3xl text-lg leading-9 text-app-text-muted">
-                فرصة تعرض مؤشرات الدخول الأساسية بوضوح: الجهة، الموقع، العائد، والمسار المتوقع
-                قبل التقديم أو الاستفسار.
-              </p>
+              <Badge variant={statusVariant}>{statusLabel(opportunity.status)}</Badge>
+              <h1 className="max-w-4xl text-4xl font-black leading-tight text-app-text md:text-5xl">{opportunity.title}</h1>
+              <p className="max-w-3xl text-lg leading-9 text-app-text-muted">{opportunity.description}</p>
               <div className="flex flex-wrap gap-3">
                 <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">
-                  {municipality}
+                  {opportunity.municipality}
                 </div>
                 <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">
-                  {location}
+                  {opportunity.location}
                 </div>
                 <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">
-                  موسم {seasonLabel(season)}
+                  موسم {seasonLabel(opportunity.season)}
                 </div>
               </div>
             </div>
@@ -122,7 +152,7 @@ const OpportunityDetails = () => {
                     <PercentIcon className="h-4 w-4 text-success" />
                     العائد المتوقع
                   </div>
-                  <div className="mt-3 text-3xl font-black text-success">{expectedReturn}%</div>
+                  <div className="mt-3 text-3xl font-black text-success">{opportunity.expectedReturn}%</div>
                 </div>
                 <div className="rounded-2xl border border-brand/20 bg-brand/10 p-4">
                   <div className="flex items-center gap-2 text-xs text-app-text-soft">
@@ -130,7 +160,7 @@ const OpportunityDetails = () => {
                     الاستثمار المطلوب
                   </div>
                   <div className="mt-3 text-lg font-bold leading-7 text-app-text">
-                    {formatCurrency(investmentRequired, currency)}
+                    {formatCurrency(opportunity.investmentRequired, opportunity.currency)}
                   </div>
                 </div>
                 <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
@@ -139,7 +169,7 @@ const OpportunityDetails = () => {
                     المساحة
                   </div>
                   <div className="mt-3 text-lg font-bold text-app-text">
-                    {area} {areaUnit}
+                    {opportunity.area} {opportunity.areaUnit}
                   </div>
                 </div>
                 <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
@@ -147,7 +177,7 @@ const OpportunityDetails = () => {
                     <CalendarIcon className="h-4 w-4 text-brand" />
                     حالة النشر
                   </div>
-                  <div className="mt-3 text-lg font-bold text-app-text">{statusLabel(status)}</div>
+                  <div className="mt-3 text-lg font-bold text-app-text">{statusLabel(opportunity.status)}</div>
                 </div>
               </div>
               <div className="mt-5 grid gap-3">
@@ -172,8 +202,8 @@ const OpportunityDetails = () => {
           <div className="space-y-8">
             <Card className="overflow-hidden">
               <div className="aspect-[16/9] overflow-hidden bg-app-surface-soft">
-                {images?.length ? (
-                  <img src={images[0]} alt={title} className="h-full w-full object-cover" />
+                {opportunity.images?.length ? (
+                  <img src={opportunity.images[0]} alt={opportunity.title} className="h-full w-full object-cover" />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
                     <LeafIcon className="h-16 w-16 text-app-text-soft" />
@@ -184,13 +214,13 @@ const OpportunityDetails = () => {
 
             <Card className="p-6 lg:p-7">
               <h2 className="text-2xl font-bold text-app-text">وصف الفرصة</h2>
-              <p className="mt-4 text-sm leading-8 text-app-text-muted">{description}</p>
+              <p className="mt-4 text-sm leading-8 text-app-text-muted">{opportunity.description}</p>
             </Card>
 
             <Card className="p-6 lg:p-7">
               <h2 className="text-2xl font-bold text-app-text">ما الذي يميزها؟</h2>
               <div className="mt-5 grid gap-3 md:grid-cols-2">
-                {features.map((feature) => (
+                {opportunity.features.map((feature) => (
                   <div key={feature} className="flex items-start gap-3 rounded-2xl border border-app-border bg-app-surface-soft p-4">
                     <CheckCircleIcon className="mt-1 h-5 w-5 shrink-0 text-success" />
                     <span className="text-sm leading-7 text-app-text-muted">{feature}</span>
@@ -205,38 +235,16 @@ const OpportunityDetails = () => {
               <h2 className="text-xl font-bold text-app-text">ملخص سريع للقرار</h2>
               <div className="mt-5 space-y-4">
                 <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
-                  <div className="text-sm text-app-text-soft">نوع القراءة الحالية</div>
-                  <div className="mt-2 font-bold text-app-text">قراءة أولية منظمة قبل التواصل</div>
-                </div>
-                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
                   <div className="text-sm text-app-text-soft">الجهة المعلنة</div>
                   <div className="mt-2 flex items-center gap-2 font-bold text-app-text">
                     <BuildingIcon className="h-4 w-4 text-brand" />
-                    {municipality}
+                    {opportunity.municipality}
                   </div>
                 </div>
                 <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
                   <div className="text-sm text-app-text-soft">أفضل خطوة تالية</div>
-                  <div className="mt-2 font-bold text-app-text">مراجعة التفاصيل ثم إرسال اهتمام أو استفسار محدد</div>
+                  <div className="mt-2 font-bold text-app-text">راجع التفاصيل ثم أرسل اهتمامك أو استفسارك المباشر.</div>
                 </div>
-              </div>
-            </Card>
-
-            <Card className="p-6">
-              <h2 className="text-xl font-bold text-app-text">المسار المقترح</h2>
-              <div className="mt-5 space-y-4">
-                {[
-                  'راجع الوصف والمزايا لتكوين تصور أولي.',
-                  'قارن مؤشرات الدخول مع فرص مشابهة داخل المنصة.',
-                  'إذا كانت مناسبة، أرسل اهتمامك أو تواصل مع الفريق لاستكمال الإجراء.',
-                ].map((item, index) => (
-                  <div key={item} className="flex gap-3">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/10 text-sm font-bold text-brand">
-                      {index + 1}
-                    </div>
-                    <p className="text-sm leading-7 text-app-text-muted">{item}</p>
-                  </div>
-                ))}
               </div>
             </Card>
           </div>
@@ -248,7 +256,7 @@ const OpportunityDetails = () => {
           <div className="landx-shell space-y-8">
             <div>
               <div className="landx-kicker">فرص مشابهة</div>
-              <h2 className="mt-4 text-3xl font-black text-app-text">نفس مستوى القراءة، خيارات أخرى للمقارنة.</h2>
+              <h2 className="mt-4 text-3xl font-black text-app-text">خيارات أخرى للمقارنة.</h2>
             </div>
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {related.map((item) => (
@@ -265,7 +273,7 @@ const OpportunityDetails = () => {
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h2 className="text-2xl font-bold text-app-text">إبداء اهتمام بالفرصة</h2>
-                <p className="mt-1 text-sm text-app-text-muted">أدخل بيانات مختصرة ليتم توجيه الطلب للفريق.</p>
+                <p className="mt-1 text-sm text-app-text-muted">سيتم تسجيل طلب اهتمام واستفسار أولي في النظام.</p>
               </div>
               <button
                 onClick={() => setShowForm(false)}
@@ -275,48 +283,22 @@ const OpportunityDetails = () => {
               </button>
             </div>
 
-            {submitted ? (
-              <div className="py-12 text-center">
-                <CheckCircleIcon className="mx-auto h-12 w-12 text-success" />
-                <h3 className="mt-4 text-xl font-bold text-app-text">تم الإرسال بنجاح</h3>
-                <p className="mt-2 text-sm leading-7 text-app-text-muted">
-                  سيقوم الفريق بمراجعة الطلب والتواصل معك في أقرب وقت.
-                </p>
+            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+              <textarea
+                rows={4}
+                name="notes"
+                placeholder="اكتب ما الذي تريد معرفته أو نوع اهتمامك بهذه الفرصة"
+                className="w-full resize-none rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
+              />
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button type="submit" size="lg" className="flex-1" disabled={submitting}>
+                  {submitting ? 'جاري الإرسال...' : 'إرسال الطلب'}
+                </Button>
+                <Button type="button" variant="outline" size="lg" className="flex-1" onClick={() => setShowForm(false)}>
+                  إلغاء
+                </Button>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                <input
-                  required
-                  placeholder="الاسم الكامل"
-                  className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
-                />
-                <input
-                  required
-                  type="email"
-                  placeholder="البريد الإلكتروني"
-                  className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
-                />
-                <input
-                  required
-                  type="tel"
-                  placeholder="رقم الجوال"
-                  className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
-                />
-                <textarea
-                  rows={4}
-                  placeholder="ماذا تريد أن تعرف قبل المتابعة؟"
-                  className="w-full resize-none rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
-                />
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Button type="submit" size="lg" className="flex-1">
-                    إرسال الطلب
-                  </Button>
-                  <Button type="button" variant="outline" size="lg" className="flex-1" onClick={() => setShowForm(false)}>
-                    إلغاء
-                  </Button>
-                </div>
-              </form>
-            )}
+            </form>
           </Card>
         </div>
       ) : null}

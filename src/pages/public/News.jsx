@@ -5,21 +5,29 @@ import PageHero from '../../components/shared/PageHero';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import { FilterIcon, NewspaperIcon, SearchIcon, XIcon } from '../../components/ui/Icons';
-import { mockAnnouncements, mockNews } from '../../data/mock/news';
+import { useAsyncData } from '../../hooks/useAsyncData';
+import { mapNewsItem } from '../../lib/adapters';
+import { newsApi } from '../../lib/api';
 
 const tabs = [
-  { id: 'news', label: 'الأخبار', count: mockNews.length },
-  { id: 'announcements', label: 'الإعلانات', count: mockAnnouncements.length },
+  { id: 'news', label: 'الأخبار' },
+  { id: 'announcement', label: 'الإعلانات' },
 ];
-
-const municipalities = ['الكل', ...new Set([...mockNews, ...mockAnnouncements].map((item) => item.municipality))];
 
 const News = () => {
   const [activeTab, setActiveTab] = useState('news');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedMunicipality, setSelectedMunicipality] = useState('الكل');
+  const [selectedMunicipality, setSelectedMunicipality] = useState('all');
+  const { data, loading, error } = useAsyncData(async () => {
+    const result = await newsApi.list();
+    return result.map(mapNewsItem);
+  }, []);
 
-  const source = activeTab === 'news' ? mockNews : mockAnnouncements;
+  const source = useMemo(() => data.filter((item) => item.type === activeTab), [activeTab, data]);
+  const municipalities = useMemo(
+    () => ['all', ...new Set(source.map((item) => item.municipality))],
+    [source],
+  );
 
   const filteredData = useMemo(() => {
     return source.filter((item) => {
@@ -29,7 +37,7 @@ const News = () => {
         item.content.includes(searchQuery) ||
         item.municipality.includes(searchQuery);
       const matchesMunicipality =
-        selectedMunicipality === 'الكل' || item.municipality === selectedMunicipality;
+        selectedMunicipality === 'all' || item.municipality === selectedMunicipality;
 
       return matchesSearch && matchesMunicipality;
     });
@@ -37,7 +45,7 @@ const News = () => {
 
   const clearFilters = () => {
     setSearchQuery('');
-    setSelectedMunicipality('الكل');
+    setSelectedMunicipality('all');
   };
 
   return (
@@ -45,7 +53,7 @@ const News = () => {
       <PageHero
         eyebrow="الأخبار والإعلانات"
         title="تحديثات المنصة والجهات الشريكة في شاشة واحدة قابلة للمسح السريع."
-        description="صممنا صفحة الأخبار لتكون واضحة ومباشرة: تبويب واضح، فلترة بسيطة، وبطاقات تقرأ بسرعة دون ازدحام."
+        description="هذه الصفحة تعرض الأخبار والإعلانات الحقيقية المحفوظة في قاعدة البيانات بدل البيانات التجريبية."
       />
 
       <section className="py-12 lg:py-16">
@@ -54,6 +62,7 @@ const News = () => {
             <div className="flex flex-wrap gap-3">
               {tabs.map((tab) => {
                 const isActive = activeTab === tab.id;
+                const count = data.filter((item) => item.type === tab.id).length;
                 return (
                   <button
                     key={tab.id}
@@ -67,7 +76,7 @@ const News = () => {
                     <NewspaperIcon className="h-4 w-4" />
                     {tab.label}
                     <span className={`rounded-full px-2 py-0.5 text-xs ${isActive ? 'bg-white/10' : 'bg-app-bg/50 text-app-text-soft'}`}>
-                      {tab.count}
+                      {count}
                     </span>
                   </button>
                 );
@@ -97,7 +106,7 @@ const News = () => {
                   >
                     {municipalities.map((item) => (
                       <option key={item} value={item}>
-                        {item}
+                        {item === 'all' ? 'الكل' : item}
                       </option>
                     ))}
                   </select>
@@ -111,30 +120,35 @@ const News = () => {
             </Card>
           </AnimatedSection>
 
-          <div className="text-sm text-app-text-muted">
-            <span className="font-bold text-app-text">{filteredData.length}</span> نتيجة معروضة
-          </div>
-
-          {filteredData.length ? (
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {filteredData.map((item, index) => (
-                <AnimatedSection key={item.id} delay={index * 80}>
-                  <NewsCard news={item} type={activeTab} />
-                </AnimatedSection>
-              ))}
-            </div>
+          {loading ? (
+            <Card className="p-10 text-center text-app-text-muted">جاري تحميل الأخبار...</Card>
+          ) : error ? (
+            <Card className="p-10 text-center text-danger">{error}</Card>
           ) : (
-            <AnimatedSection>
-              <Card className="p-10 text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-app-border bg-app-surface-soft text-app-text-soft">
-                  <SearchIcon className="h-8 w-8" />
+            <>
+              <div className="text-sm text-app-text-muted">
+                <span className="font-bold text-app-text">{filteredData.length}</span> نتيجة معروضة
+              </div>
+
+              {filteredData.length ? (
+                <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                  {filteredData.map((item, index) => (
+                    <AnimatedSection key={item.id} delay={index * 80}>
+                      <NewsCard news={item} type={activeTab === 'announcement' ? 'announcements' : 'news'} />
+                    </AnimatedSection>
+                  ))}
                 </div>
-                <h2 className="mt-5 text-2xl font-bold text-app-text">لا توجد نتائج حالياً</h2>
-                <p className="mx-auto mt-3 max-w-xl text-sm leading-8 text-app-text-muted">
-                  غيّر كلمات البحث أو عد إلى عرض الكل للوصول إلى الأخبار والإعلانات المتاحة.
-                </p>
-              </Card>
-            </AnimatedSection>
+              ) : (
+                <AnimatedSection>
+                  <Card className="p-10 text-center">
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-app-border bg-app-surface-soft text-app-text-soft">
+                      <SearchIcon className="h-8 w-8" />
+                    </div>
+                    <h2 className="mt-5 text-2xl font-bold text-app-text">لا توجد نتائج حالياً</h2>
+                  </Card>
+                </AnimatedSection>
+              )}
+            </>
           )}
         </div>
       </section>

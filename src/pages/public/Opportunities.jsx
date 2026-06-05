@@ -4,47 +4,45 @@ import OpportunityCard from '../../components/shared/OpportunityCard';
 import PageHero from '../../components/shared/PageHero';
 import Card from '../../components/ui/Card';
 import { FilterIcon, LeafIcon, SearchIcon } from '../../components/ui/Icons';
-import { mockOpportunities } from '../../data/mock/opportunities';
-
-const seasons = [
-  { value: 'all', label: 'جميع المواسم' },
-  { value: 'winter', label: 'شتوي' },
-  { value: 'spring', label: 'ربيعي' },
-  { value: 'summer', label: 'صيفي' },
-  { value: 'autumn', label: 'خريفي' },
-];
-
-const municipalities = ['الكل', ...new Set(mockOpportunities.map((item) => item.municipality))];
+import { useAsyncData } from '../../hooks/useAsyncData';
+import { mapOpportunity } from '../../lib/adapters';
+import { opportunitiesApi } from '../../lib/api';
 
 const Opportunities = () => {
   const [filters, setFilters] = useState({
-    season: 'all',
-    municipality: 'الكل',
+    municipality: 'all',
     status: 'all',
     query: '',
   });
+  const { data, loading, error } = useAsyncData(async () => {
+    const result = await opportunitiesApi.list();
+    return result.map(mapOpportunity);
+  }, []);
+
+  const municipalities = useMemo(
+    () => ['all', ...new Set(data.map((item) => item.municipality))],
+    [data],
+  );
 
   const filteredOpportunities = useMemo(() => {
-    return mockOpportunities.filter((opportunity) => {
-      const matchesSeason = filters.season === 'all' || opportunity.season === filters.season;
+    return data.filter((opportunity) => {
       const matchesMunicipality =
-        filters.municipality === 'الكل' || opportunity.municipality === filters.municipality;
+        filters.municipality === 'all' || opportunity.municipality === filters.municipality;
       const matchesStatus = filters.status === 'all' || opportunity.status === filters.status;
-      const query = filters.query.trim();
+      const query = filters.query.trim().toLowerCase();
       const matchesQuery =
         !query ||
-        opportunity.title.includes(query) ||
-        opportunity.description.includes(query) ||
-        opportunity.location.includes(query);
+        opportunity.title.toLowerCase().includes(query) ||
+        opportunity.description.toLowerCase().includes(query) ||
+        opportunity.location.toLowerCase().includes(query);
 
-      return matchesSeason && matchesMunicipality && matchesStatus && matchesQuery;
+      return matchesMunicipality && matchesStatus && matchesQuery;
     });
-  }, [filters]);
+  }, [data, filters]);
 
   const resetFilters = () =>
     setFilters({
-      season: 'all',
-      municipality: 'الكل',
+      municipality: 'all',
       status: 'all',
       query: '',
     });
@@ -54,14 +52,14 @@ const Opportunities = () => {
       <PageHero
         eyebrow="قاعدة الفرص"
         title="كل فرصة هنا تعرض ما تحتاجه لتفهمها بسرعة قبل أن تقرر التعمق."
-        description="التصفية في هذه الصفحة مبنية لتقليل الضوضاء: اختر الموسم، الجهة، وحالة النشر ثم ابدأ المقارنة على نفس مستوى القراءة."
+        description="البيانات الآن قادمة مباشرة من الباك اند، لذلك النتائج والفلاتر هنا تعكس المحتوى الفعلي المنشور داخل النظام."
       />
 
       <section className="py-12 lg:py-16">
         <div className="landx-shell space-y-8">
           <AnimatedSection>
             <Card className="p-5 lg:p-6">
-              <div className="grid gap-4 lg:grid-cols-[1.2fr_0.7fr_0.7fr_0.6fr]">
+              <div className="grid gap-4 lg:grid-cols-[1.2fr_0.7fr_0.6fr]">
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-app-text-muted">بحث مباشر</label>
                   <div className="relative">
@@ -76,21 +74,6 @@ const Opportunities = () => {
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-app-text-muted">الموسم</label>
-                  <select
-                    value={filters.season}
-                    onChange={(e) => setFilters((prev) => ({ ...prev, season: e.target.value }))}
-                    className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text"
-                  >
-                    {seasons.map((season) => (
-                      <option key={season.value} value={season.value}>
-                        {season.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
                   <label className="mb-2 block text-sm font-semibold text-app-text-muted">الجهة</label>
                   <select
                     value={filters.municipality}
@@ -99,7 +82,7 @@ const Opportunities = () => {
                   >
                     {municipalities.map((item) => (
                       <option key={item} value={item}>
-                        {item}
+                        {item === 'all' ? 'الكل' : item}
                       </option>
                     ))}
                   </select>
@@ -115,6 +98,7 @@ const Opportunities = () => {
                     <option value="all">الكل</option>
                     <option value="active">نشطة</option>
                     <option value="pending">قيد المراجعة</option>
+                    <option value="closed">مغلقة</option>
                   </select>
                 </div>
               </div>
@@ -124,7 +108,6 @@ const Opportunities = () => {
                   <FilterIcon className="h-4 w-4 text-brand" />
                   <span>
                     <span className="font-bold text-app-text">{filteredOpportunities.length}</span> نتيجة
-                    من أصل <span className="font-bold text-app-text">{mockOpportunities.length}</span>
                   </span>
                 </div>
                 <button
@@ -137,7 +120,11 @@ const Opportunities = () => {
             </Card>
           </AnimatedSection>
 
-          {filteredOpportunities.length ? (
+          {loading ? (
+            <Card className="p-10 text-center text-app-text-muted">جاري تحميل الفرص...</Card>
+          ) : error ? (
+            <Card className="p-10 text-center text-danger">{error}</Card>
+          ) : filteredOpportunities.length ? (
             <div className="grid gap-6 md:grid-cols-2 2xl:grid-cols-3">
               {filteredOpportunities.map((opportunity, index) => (
                 <AnimatedSection key={opportunity.id} delay={index * 70}>

@@ -1,142 +1,138 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '../../components/ui/Card';
-import { MessageCircleIcon, ReplyIcon } from '../../components/ui/Icons';
+import Button from '../../components/ui/Button';
+import { MessageCircleIcon, ReplyIcon, CheckIcon } from '../../components/ui/Icons';
+import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
+import { useAsyncData } from '../../hooks/useAsyncData';
+import { inquiryApi } from '../../lib/api';
+import { formatArabicDate } from '../../lib/formatters';
 
 const MunicipalityInquiries = () => {
-  const inquiries = [
-    {
-      id: 1,
-      investor: 'أحمد محمد',
-      opportunity: 'وادي حائل الزراعي',
-      subject: 'استفسار عن البنية التحتية',
-      message: 'ما هي البنية التحتية المتاحة في المنطقة؟ هل هناك طرق معبدة ومصادر مياه؟',
-      status: 'pending',
-      date: '2024-05-15',
-    },
-    {
-      id: 2,
-      investor: 'خالد العتيبي',
-      opportunity: 'سهول القصيم',
-      subject: 'تفاصيل العائد المتوقع',
-      message: 'كيف يتم حساب العائد المتوقع؟ هل هناك ضمانات؟',
-      status: 'answered',
-      date: '2024-05-10',
-    },
-    {
-      id: 3,
-      investor: 'سعيد الدوسري',
-      opportunity: 'وادي تبوك',
-      subject: 'المواعيد النهائية',
-      message: 'ما هو الموعد النهائي للتقديم؟',
-      status: 'pending',
-      date: '2024-05-08',
-    },
-    {
-      id: 4,
-      investor: 'محمد الشمري',
-      opportunity: 'وادي الجوف',
-      subject: 'الوثائق المطلوبة',
-      message: 'ما هي الوثائق المطلوبة للتقديم؟',
-      status: 'pending',
-      date: '2024-05-05',
-    },
-  ];
+  const { token } = useAuth();
+  const { addToast } = useToast();
+  const [replyingId, setReplyingId] = useState(null);
+  const [replyText, setReplyText] = useState('');
+  const { data: inquiries, loading, error, setData } = useAsyncData(() => inquiryApi.municipality(token), [token]);
+
+  const handleReply = async (inquiryId) => {
+    if (!replyText.trim()) return;
+    try {
+      const updated = await inquiryApi.reply(token, inquiryId, { message: replyText });
+      setData((prev) => prev.map((item) => (item.id === inquiryId ? updated : item)));
+      setReplyingId(null);
+      setReplyText('');
+      addToast('تم إرسال الرد بنجاح.', 'success');
+    } catch (err) {
+      addToast(err.message || 'تعذر إرسال الرد.', 'error');
+    }
+  };
 
   const getStatusBadge = (status) => {
     const badges = {
       pending: { label: 'جديد', className: 'bg-warning/10 text-warning border-warning/30' },
       answered: { label: 'تم الرد', className: 'bg-success/10 text-success border-success/30' },
+      closed: { label: 'مغلق', className: 'bg-app-surface-soft text-app-text border-app-border' },
     };
     return badges[status] || badges.pending;
   };
+
+  if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل الاستفسارات...</Card>;
+  if (error) return <Card className="p-10 text-center text-danger">{error}</Card>;
 
   return (
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-app-text">استفسارات المستثمرين</h1>
-        <p className="text-app-text-muted mt-2">الرد على استفسارات المستثمرين وتوفير المعلومات</p>
+        <p className="mt-2 text-app-text-muted">يمكنك الرد هنا مباشرة، وسيظهر الرد للمستثمر في حسابه.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div>
-          <Card className="p-6 bg-card-gradient border border-app-border">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-app-text-muted">إجمالي الاستفسارات</h3>
-              <MessageCircleIcon className="text-app-text-soft" />
-            </div>
-            <p className="text-3xl font-bold text-app-text">{inquiries.length}</p>
-            <p className="text-sm text-app-text-soft mt-2">استفسار</p>
-          </Card>
-        </div>
-
-        <div>
-          <Card className="p-6 bg-card-gradient border border-app-border">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-app-text-muted">جديد</h3>
-              <MessageCircleIcon className="text-warning" />
-            </div>
-            <p className="text-3xl font-bold text-warning">
-              {inquiries.filter(i => i.status === 'pending').length}
-            </p>
-            <p className="text-sm text-app-text-soft mt-2">بانتظار الرد</p>
-          </Card>
-        </div>
-
-        <div>
-          <Card className="p-6 bg-card-gradient border border-app-border">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-app-text-muted">تم الرد</h3>
-              <CheckIcon className="text-success" />
-            </div>
-            <p className="text-3xl font-bold text-success">
-              {inquiries.filter(i => i.status === 'answered').length}
-            </p>
-            <p className="text-sm text-app-text-soft mt-2">استفسار</p>
-          </Card>
-        </div>
-      </div>
-
-      <div>
-        <Card className="bg-card-gradient border border-app-border">
-          <div className="p-6 border-b border-app-border">
-            <h2 className="text-xl font-bold text-app-text">قائمة الاستفسارات</h2>
+      <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">
+        <Card className="p-6 bg-card-gradient border border-app-border">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-app-text-muted">إجمالي الاستفسارات</h3>
+            <MessageCircleIcon className="text-app-text-soft" />
           </div>
-          <div className="p-6">
-            <div className="space-y-4">
-              {inquiries.map((inquiry) => {
-                const badge = getStatusBadge(inquiry.status);
-                return (
-                  <div
-                    key={inquiry.id}
-                    className="p-4 bg-app-surface-soft border border-app-border rounded-lg">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-bold text-app-text">{inquiry.investor}</h3>
-                          <span className={`px-3 py-1 rounded-full text-xs border ${badge.className}`}>
-                            {badge.label}
-                          </span>
-                        </div>
-                        <p className="text-sm text-app-text-muted mb-1">
-                          {inquiry.opportunity} • {inquiry.date}
-                        </p>
-                        <p className="font-medium text-app-text mb-2">{inquiry.subject}</p>
-                      </div>
-                    </div>
-                    <p className="text-app-text mb-4">{inquiry.message}</p>
-                    {inquiry.status === 'pending' && (
-                      <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand to-brand-deep text-app-text rounded-lg hover:from-brand-deep hover:to-brand transition-all duration-300 text-sm">
-                        <ReplyIcon />
-                        <span>الرد على الاستفسار</span>
-                      </button>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+          <p className="text-3xl font-bold text-app-text">{inquiries.length}</p>
+        </Card>
+
+        <Card className="p-6 bg-card-gradient border border-app-border">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-app-text-muted">جديد</h3>
+            <MessageCircleIcon className="text-warning" />
           </div>
+          <p className="text-3xl font-bold text-warning">{inquiries.filter((i) => i.status === 'pending').length}</p>
+        </Card>
+
+        <Card className="p-6 bg-card-gradient border border-app-border">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-medium text-app-text-muted">تم الرد</h3>
+            <CheckIcon className="text-success" />
+          </div>
+          <p className="text-3xl font-bold text-success">{inquiries.filter((i) => i.status === 'answered').length}</p>
         </Card>
       </div>
+
+      <Card className="bg-card-gradient border border-app-border">
+        <div className="p-6 border-b border-app-border">
+          <h2 className="text-xl font-bold text-app-text">قائمة الاستفسارات</h2>
+        </div>
+        <div className="p-6 space-y-4">
+          {inquiries.map((inquiry) => {
+            const badge = getStatusBadge(inquiry.status);
+            return (
+              <div key={inquiry.id} className="rounded-lg border border-app-border bg-app-surface-soft p-4">
+                <div className="mb-3 flex items-start justify-between">
+                  <div>
+                    <div className="mb-2 flex items-center gap-3">
+                      <h3 className="font-bold text-app-text">{inquiry.subject}</h3>
+                      <span className={`px-3 py-1 rounded-full text-xs border ${badge.className}`}>{badge.label}</span>
+                    </div>
+                    <p className="text-sm text-app-text-muted mb-1">الفرصة رقم #{inquiry.opportunity_id}</p>
+                    <p className="text-xs text-app-text-soft">{formatArabicDate(inquiry.created_at)}</p>
+                  </div>
+                </div>
+                <p className="mb-4 text-app-text">{inquiry.message}</p>
+
+                {inquiry.replies?.length ? (
+                  <div className="mb-4 space-y-2 border-t border-app-border pt-3">
+                    {inquiry.replies.map((reply) => (
+                      <div key={reply.id} className="rounded-lg bg-app-surface p-3">
+                        <p className="text-sm text-app-text-muted">{reply.message}</p>
+                        <p className="mt-1 text-xs text-app-text-soft">{formatArabicDate(reply.created_at)}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+
+                {replyingId === inquiry.id ? (
+                  <div className="space-y-3">
+                    <textarea
+                      value={replyText}
+                      onChange={(e) => setReplyText(e.target.value)}
+                      rows={4}
+                      className="w-full resize-none rounded-2xl border border-app-border bg-app-surface px-4 py-3 text-sm text-app-text"
+                      placeholder="اكتب ردك هنا"
+                    />
+                    <div className="flex gap-3">
+                      <Button onClick={() => handleReply(inquiry.id)}>إرسال الرد</Button>
+                      <Button variant="outline" onClick={() => { setReplyingId(null); setReplyText(''); }}>إلغاء</Button>
+                    </div>
+                  </div>
+                ) : inquiry.status === 'pending' ? (
+                  <button
+                    onClick={() => setReplyingId(inquiry.id)}
+                    className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-deep px-4 py-2 text-sm text-app-text"
+                  >
+                    <ReplyIcon />
+                    <span>الرد على الاستفسار</span>
+                  </button>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      </Card>
     </div>
   );
 };

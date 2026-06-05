@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 
 export const useScrollAnimation = (threshold = 0.15, rootMargin = '0px 0px -8% 0px') => {
   const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      return true;
+    }
+    return window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches || false;
+  });
 
   useEffect(() => {
     const current = ref.current;
@@ -11,13 +16,6 @@ export const useScrollAnimation = (threshold = 0.15, rootMargin = '0px 0px -8% 0
     }
 
     if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
-      setIsVisible(true);
-      return undefined;
-    }
-
-    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-    if (prefersReducedMotion) {
-      setIsVisible(true);
       return undefined;
     }
 

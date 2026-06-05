@@ -12,8 +12,9 @@ const Login = () => {
   const { addToast } = useToast();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
 
@@ -22,7 +23,9 @@ const Login = () => {
       return;
     }
 
-    const result = login(formData.email, formData.password);
+    setSubmitting(true);
+    const result = await login(formData.email, formData.password);
+    setSubmitting(false);
 
     if (!result.success) {
       setError(result.message);
@@ -52,7 +55,7 @@ const Login = () => {
                 ادخل إلى حسابك واستكمل العمل من حيث توقفت.
               </h1>
               <p className="mt-4 max-w-2xl text-lg leading-9 text-app-text-muted">
-                صفحة الدخول مبنية لتكون مباشرة: حقول أساسية، توجيه واضح، ومساعدة سريعة للوصول إلى لوحة العمل المناسبة.
+                صفحة الدخول أصبحت مرتبطة مباشرة بواجهة API الحقيقية، لذلك ما تشوفه هنا يعكس حالة الحساب والصلاحيات الفعلية داخل النظام.
               </p>
             </div>
 
@@ -78,7 +81,7 @@ const Login = () => {
             <div className="mt-6">
               <h2 className="text-3xl font-black text-app-text">تسجيل الدخول</h2>
               <p className="mt-2 text-sm leading-7 text-app-text-muted">
-                أدخل بياناتك للوصول إلى لوحة العمل المناسبة حسب دورك.
+                أدخل بياناتك للوصول إلى لوحة المستثمر أو البلدية أو الإدارة حسب نوع الحساب.
               </p>
             </div>
 
@@ -124,8 +127,8 @@ const Login = () => {
                 <span className="font-semibold text-app-text">تواصل مع الدعم حالياً</span>
               </div>
 
-              <Button type="submit" size="lg" className="w-full">
-                تسجيل الدخول
+              <Button type="submit" size="lg" className="w-full" disabled={submitting}>
+                {submitting ? 'جاري التحقق...' : 'تسجيل الدخول'}
               </Button>
             </form>
 
@@ -135,7 +138,7 @@ const Login = () => {
                 ملاحظة
               </div>
               <p className="mt-2">
-                بعد الدخول سيتم توجيهك تلقائياً إلى لوحة المستثمر أو البلدية أو الإدارة حسب الحساب المستخدم.
+                بعد الدخول سيتم توجيهك تلقائياً إلى اللوحة المناسبة حسب الصلاحية الفعلية القادمة من الباك اند.
               </p>
             </div>
 

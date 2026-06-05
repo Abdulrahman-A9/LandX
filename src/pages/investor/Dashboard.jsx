@@ -1,17 +1,38 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Card from '../../components/ui/Card';
-import { mockDashboardStats } from '../../data/mock/dashboard';
-import {
-  DollarSignIcon,
-  FileTextIcon,
-  LeafIcon,
-  TrendingUpIcon,
-  WalletIcon,
-} from '../../components/ui/Icons';
+import { useAuth } from '../../context/AuthContext';
+import { useAsyncData } from '../../hooks/useAsyncData';
+import { analysisApi, inquiryApi, interestRequestApi } from '../../lib/api';
+import { DollarSignIcon, FileTextIcon, TrendingUpIcon, WalletIcon } from '../../components/ui/Icons';
 import { formatCurrency } from '../../lib/formatters';
 
 const InvestorDashboard = () => {
-  const stats = mockDashboardStats.investor;
+  const { token } = useAuth();
+  const { data, loading, error } = useAsyncData(async () => {
+    const [inquiries, interests, analyses] = await Promise.all([
+      inquiryApi.my(token),
+      interestRequestApi.my(token),
+      analysisApi.list(token),
+    ]);
+    return { inquiries, interests, analyses };
+  }, [token]);
+
+  const stats = useMemo(() => {
+    const interests = data.interests || [];
+    const inquiries = data.inquiries || [];
+    const analyses = data.analyses || [];
+    const totalInvested = interests.reduce((sum, item) => sum + Number(item.proposed_amount || 0), 0);
+    return {
+      totalInvestments: interests.length,
+      totalInvested,
+      pendingInquiries: inquiries.filter((item) => item.status === 'pending').length,
+      activeInvestments: interests.filter((item) => item.status === 'under_review' || item.status === 'approved').length,
+      analyses: analyses.length,
+    };
+  }, [data]);
+
+  if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل لوحة المستثمر...</Card>;
+  if (error) return <Card className="p-10 text-center text-danger">{error}</Card>;
 
   return (
     <div className="space-y-8">
@@ -20,8 +41,7 @@ const InvestorDashboard = () => {
           <div className="landx-kicker">نظرة عامة</div>
           <h1 className="mt-5 text-4xl font-black text-app-text">لوحة المستثمر</h1>
           <p className="mt-3 max-w-2xl text-sm leading-8 text-app-text-muted">
-            هذه الشاشة تجمع ما تحتاجه في نقطة واحدة: أداء الاستثمارات، الفرص المفتوحة،
-            والاستفسارات التي تحتاج متابعة.
+            هذه اللوحة مرتبطة ببياناتك الحقيقية داخل النظام: طلبات الاهتمام، الاستفسارات، وتقارير التحليل المحفوظة.
           </p>
         </Card>
 
@@ -29,11 +49,11 @@ const InvestorDashboard = () => {
           <div className="text-sm text-app-text-soft">ملخص الجلسة</div>
           <div className="mt-5 grid grid-cols-2 gap-4">
             <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
-              <div className="text-xs text-app-text-soft">الاستثمارات النشطة</div>
-              <div className="mt-2 text-3xl font-black text-success">{stats.activeInvestments}</div>
+              <div className="text-xs text-app-text-soft">طلبات الاهتمام</div>
+              <div className="mt-2 text-3xl font-black text-success">{stats.totalInvestments}</div>
             </div>
             <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
-              <div className="text-xs text-app-text-soft">الطلبات المفتوحة</div>
+              <div className="text-xs text-app-text-soft">استفسارات معلقة</div>
               <div className="mt-2 text-3xl font-black text-warning">{stats.pendingInquiries}</div>
             </div>
           </div>
@@ -42,10 +62,10 @@ const InvestorDashboard = () => {
 
       <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {[
-          { label: 'إجمالي الاستثمارات', value: stats.totalInvestments, helper: 'فرص استثمارية', icon: <WalletIcon className="h-5 w-5" />, tone: 'text-app-text' },
-          { label: 'الاستثمارات النشطة', value: stats.activeInvestments, helper: 'قيد التنفيذ', icon: <TrendingUpIcon className="h-5 w-5" />, tone: 'text-success' },
-          { label: 'إجمالي المبالغ', value: formatCurrency(stats.totalInvested), helper: 'ريال سعودي', icon: <DollarSignIcon className="h-5 w-5" />, tone: 'text-brand' },
-          { label: 'الاستفسارات المفتوحة', value: stats.pendingInquiries, helper: 'تحتاج متابعة', icon: <FileTextIcon className="h-5 w-5" />, tone: 'text-warning' },
+          { label: 'إجمالي الطلبات', value: stats.totalInvestments, helper: 'طلبات اهتمام مسجلة', icon: <WalletIcon className="h-5 w-5" />, tone: 'text-app-text' },
+          { label: 'قيد المتابعة', value: stats.activeInvestments, helper: 'تحت المراجعة أو معتمدة', icon: <TrendingUpIcon className="h-5 w-5" />, tone: 'text-success' },
+          { label: 'قيمة مقترحة', value: formatCurrency(stats.totalInvested), helper: 'إجمالي المبالغ المسجلة', icon: <DollarSignIcon className="h-5 w-5" />, tone: 'text-brand' },
+          { label: 'تقارير التحليل', value: stats.analyses, helper: 'تحليلات محفوظة في القاعدة', icon: <FileTextIcon className="h-5 w-5" />, tone: 'text-warning' },
         ].map((item) => (
           <Card key={item.label} className="p-6">
             <div className="flex items-center justify-between">
@@ -58,47 +78,6 @@ const InvestorDashboard = () => {
             <div className="mt-2 text-sm text-app-text-soft">{item.helper}</div>
           </Card>
         ))}
-      </section>
-
-      <section className="grid gap-6 xl:grid-cols-2">
-        <Card className="p-6">
-          <h2 className="text-2xl font-bold text-app-text">المسار الحالي</h2>
-          <div className="mt-5 space-y-4">
-            {[
-              'استكشاف فرص ذات عائد واضح ونطاق دخول مناسب.',
-              'متابعة الاستثمارات الجارية ومؤشرات الأداء الأولية.',
-              'إرسال الاستفسارات عند الحاجة دون الخروج من المسار.',
-            ].map((item, index) => (
-              <div key={item} className="flex gap-3">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/10 text-sm font-bold text-brand">
-                  {index + 1}
-                </div>
-                <p className="text-sm leading-7 text-app-text-muted">{item}</p>
-              </div>
-            ))}
-          </div>
-        </Card>
-
-        <Card className="p-6">
-          <h2 className="text-2xl font-bold text-app-text">نشاط حديث</h2>
-          <div className="mt-5 space-y-4">
-            {[
-              { title: 'تم قبول طلب اهتمامك في وادي حائل الزراعي', time: 'منذ ساعتين' },
-              { title: 'أُضيفت فرصة جديدة مشابهة لاهتماماتك', time: 'منذ 6 ساعات' },
-              { title: 'تم الرد على أحد استفساراتك التشغيلية', time: 'أمس' },
-            ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
-                <div className="flex items-start gap-3">
-                  <LeafIcon className="mt-1 h-5 w-5 shrink-0 text-brand" />
-                  <div>
-                    <div className="font-semibold text-app-text">{item.title}</div>
-                    <div className="mt-1 text-sm text-app-text-soft">{item.time}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
       </section>
     </div>
   );
