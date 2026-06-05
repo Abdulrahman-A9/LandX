@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr
 
 from app.models.enums import UserRole
+from app.schemas.common import ORMModel
 
 
 class LoginRequest(BaseModel):
@@ -26,7 +27,7 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 
-class UserMe(BaseModel):
+class UserMe(ORMModel):
     id: int
     full_name: str
     email: EmailStr
