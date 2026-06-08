@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useMemo, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
+import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { authApi } from '../../lib/api';
+import { buildAuthRoute, resolvePostAuthRoute, serviceIntentCopy } from '../../lib/flow';
 import {
   ArrowRightIcon,
   BuildingIcon,
@@ -16,7 +18,14 @@ import {
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
   const { addToast } = useToast();
+  const search = new URLSearchParams(location.search);
+  const next = search.get('next');
+  const intent = search.get('intent') || 'default';
+  const intentCopy = useMemo(() => serviceIntentCopy[intent] || serviceIntentCopy.default, [intent]);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -56,8 +65,14 @@ const Register = () => {
         role: formData.role,
         password: formData.password,
       });
-      addToast('تم إنشاء الحساب بنجاح. يمكنك الآن تسجيل الدخول.', 'success');
-      navigate('/login');
+
+      const authResult = await login(formData.email, formData.password);
+      if (!authResult.success) {
+        throw new Error(authResult.message || 'تم إنشاء الحساب لكن تعذر تسجيل الدخول التلقائي.');
+      }
+
+      addToast('تم إنشاء الحساب وتسجيل الدخول بنجاح.', 'success');
+      navigate(resolvePostAuthRoute({ role: authResult.role, next }));
     } catch (err) {
       setError(err.message || 'تعذر إنشاء الحساب.');
       addToast(err.message || 'تعذر إنشاء الحساب.', 'error');
@@ -79,9 +94,15 @@ const Register = () => {
             <div className="mt-6">
               <h2 className="text-3xl font-black text-app-text">إنشاء حساب جديد</h2>
               <p className="mt-2 text-sm leading-7 text-app-text-muted">
-                التسجيل هنا مرتبط مباشرة بالباك اند ويضيف الحساب فعلياً إلى قاعدة البيانات.
+                التسجيل هنا مرتبط مباشرة بالباك اند ويضيف الحساب فعليًا إلى قاعدة البيانات.
               </p>
             </div>
+
+            {next ? (
+              <div className="mt-5 rounded-2xl border border-brand/20 bg-brand/10 px-4 py-3 text-sm text-app-text-muted">
+                بعد التسجيل سندخلك مباشرة وننقلك إلى الإجراء الذي بدأت منه.
+              </div>
+            ) : null}
 
             {error ? (
               <div className="mt-5 rounded-2xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
@@ -180,7 +201,7 @@ const Register = () => {
               </div>
 
               <div className="rounded-2xl border border-app-border bg-app-surface-soft/60 p-4 text-sm leading-7 text-app-text-muted">
-                بالتسجيل فأنت تضيف حساباً فعلياً داخل النظام يمكن عرضه مباشرة لاحقاً من لوحة الإدارة أو من قاعدة البيانات.
+                بالتسجيل فأنت تضيف حسابًا فعليًا داخل النظام ويمكن عرضه مباشرة لاحقًا من لوحة الإدارة أو من قاعدة البيانات.
               </div>
 
               <Button type="submit" size="lg" className="w-full" disabled={submitting}>
@@ -190,26 +211,26 @@ const Register = () => {
 
             <div className="mt-6 text-center text-sm text-app-text-muted">
               لديك حساب بالفعل؟{' '}
-              <Link to="/login" className="font-bold text-app-text hover:text-brand">
+              <Link to={buildAuthRoute('/login', { next, intent })} className="font-bold text-app-text hover:text-brand">
                 تسجيل الدخول
               </Link>
             </div>
           </Card>
 
           <div className="order-1 space-y-8 lg:order-2">
-            <div className="landx-kicker">بداية منظمة</div>
+            <div className="landx-kicker">{intentCopy.badge}</div>
             <div>
               <h1 className="text-4xl font-black leading-tight text-app-text md:text-5xl">
-                أنشئ حسابك وادخل إلى مسار استثماري أو تشغيلي أكثر وضوحاً.
+                أنشئ حسابك وادخل مباشرة إلى الخدمة التي تريدها.
               </h1>
               <p className="mt-4 max-w-2xl text-lg leading-9 text-app-text-muted">
-                التسجيل يطلب الحد الأدنى فقط، ثم يكمل المستخدم ما يحتاجه لاحقاً داخل لوحته بدون تعقيد أو ضوضاء.
+                {intentCopy.description}
               </p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-3">
               {[
-                'للمستثمر: اكتشاف الفرص وفهم الجدوى.',
+                'للمستثمر: استكشاف الفرص وفهم الجدوى.',
                 'للبلدية: تنظيم النشر وإدارة الطلبات.',
                 'للجنة: بيانات فعلية يمكن عرضها من القاعدة.',
               ].map((item) => (
@@ -222,12 +243,12 @@ const Register = () => {
             <div className="rounded-[2rem] border border-app-border bg-card-gradient p-6">
               <div className="flex items-center gap-2 text-app-text">
                 <ShieldCheckIcon className="h-5 w-5 text-brand" />
-                <span className="font-semibold">ماذا يحدث بعد التسجيل؟</span>
+                <span className="font-semibold">ما الذي يحدث بعد التسجيل؟</span>
               </div>
               <div className="mt-4 space-y-3 text-sm leading-7 text-app-text-muted">
-                <p>1. يضاف الحساب إلى قاعدة البيانات مباشرة.</p>
-                <p>2. يمكن تسجيل الدخول بالحساب الجديد فوراً.</p>
-                <p>3. تظهر الصلاحية المناسبة حسب نوع الحساب.</p>
+                <p>1. يُنشأ الحساب داخل قاعدة البيانات مباشرة.</p>
+                <p>2. يتم تسجيل الدخول تلقائيًا بالحساب الجديد.</p>
+                <p>3. يتم نقلك إلى الصفحة التالية المناسبة بدل إيقافك عند شاشة الدخول.</p>
               </div>
             </div>
           </div>

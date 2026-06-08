@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../components/ui/Card';
 import { useAuth } from '../../context/AuthContext';
 import { useAsyncData } from '../../hooks/useAsyncData';
@@ -8,6 +9,24 @@ import { BuildingIcon, LeafIcon, ShieldCheckIcon, UsersIcon } from '../../compon
 const AdminDashboard = () => {
   const { token } = useAuth();
   const { data, loading, error } = useAsyncData(() => adminApi.stats(token), [token]);
+
+  const nextSteps = [
+    {
+      title: 'مراجعة المستخدمين',
+      description: 'تحقق من حالة الحسابات الجديدة والنشطة، خصوصًا إذا كنت ستعرض النظام أمام اللجنة.',
+      to: '/admin/users',
+    },
+    {
+      title: 'مراجعة البلديات والفرص',
+      description: 'تأكد أن الجهات والفرص الظاهرة في الواجهة العامة تعكس البيانات التي تريد عرضها.',
+      to: '/admin/opportunities',
+    },
+    {
+      title: 'فحص الإحصاءات والتحليلات',
+      description: 'راجع التقارير العامة والتحليلات المخزنة لتكون جاهزة للإجابة أثناء العرض.',
+      to: '/admin/analytics',
+    },
+  ];
 
   if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل لوحة الإدارة...</Card>;
   if (error) return <Card className="p-10 text-center text-danger">{error}</Card>;
@@ -35,7 +54,7 @@ const AdminDashboard = () => {
         {[
           { label: 'المستخدمون', value: data.users, helper: 'إجمالي الحسابات', icon: <UsersIcon className="h-5 w-5" />, tone: 'text-app-text' },
           { label: 'البلديات', value: data.municipalities, helper: 'جهات مفعلة', icon: <BuildingIcon className="h-5 w-5" />, tone: 'text-brand' },
-          { label: 'الفرص', value: data.opportunities, helper: `${data.active_opportunities} نشطة حالياً`, icon: <LeafIcon className="h-5 w-5" />, tone: 'text-success' },
+          { label: 'الفرص', value: data.opportunities, helper: `${data.active_opportunities} نشطة حاليًا`, icon: <LeafIcon className="h-5 w-5" />, tone: 'text-success' },
           { label: 'التحليلات', value: data.analyses, helper: 'تقارير محفوظة في النظام', icon: <ShieldCheckIcon className="h-5 w-5" />, tone: 'text-warning' },
         ].map((item) => (
           <Card key={item.label} className="p-6">
@@ -49,6 +68,24 @@ const AdminDashboard = () => {
             <div className="mt-2 text-sm text-app-text-soft">{item.helper}</div>
           </Card>
         ))}
+      </section>
+
+      <section>
+        <div className="mb-4">
+          <h2 className="text-2xl font-bold text-app-text">الخطوات المقترحة الآن</h2>
+          <p className="mt-2 text-sm leading-7 text-app-text-muted">هذه الخطوات ترتب مراجعة النظام إداريًا قبل العرض أو التشغيل النهائي.</p>
+        </div>
+        <div className="grid gap-5 xl:grid-cols-3">
+          {nextSteps.map((item) => (
+            <Card key={item.title} className="p-6">
+              <h3 className="text-xl font-bold text-app-text">{item.title}</h3>
+              <p className="mt-3 text-sm leading-8 text-app-text-muted">{item.description}</p>
+              <Link to={item.to} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+                الانتقال الآن
+              </Link>
+            </Card>
+          ))}
+        </div>
       </section>
     </div>
   );

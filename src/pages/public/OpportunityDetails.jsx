@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
@@ -8,6 +8,7 @@ import { useToast } from '../../context/ToastContext';
 import { useAuth } from '../../context/AuthContext';
 import { mapOpportunity } from '../../lib/adapters';
 import { inquiryApi, interestRequestApi, opportunitiesApi } from '../../lib/api';
+import { buildAuthRoute } from '../../lib/flow';
 import {
   ArrowRightIcon,
   BuildingIcon,
@@ -32,16 +33,18 @@ const OpportunityDetails = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
+  const interestAuthLink = useMemo(
+    () => buildAuthRoute('/register', { next: `/opportunities/${id}`, intent: 'interest' }),
+    [id],
+  );
+
   useEffect(() => {
     let active = true;
     const run = async () => {
       try {
         setLoading(true);
         setError('');
-        const [detail, list] = await Promise.all([
-          opportunitiesApi.getById(id),
-          opportunitiesApi.list(),
-        ]);
+        const [detail, list] = await Promise.all([opportunitiesApi.getById(id), opportunitiesApi.list()]);
         if (!active) return;
         setOpportunity(mapOpportunity(detail));
         setRelated(list.map(mapOpportunity).filter((item) => item.id !== Number(id)).slice(0, 3));
@@ -57,6 +60,15 @@ const OpportunityDetails = () => {
       active = false;
     };
   }, [id]);
+
+  const handlePrimaryAction = () => {
+    if (!token || user?.role !== 'investor') {
+      addToast('أنشئ حساب مستثمر أو سجل الدخول أولًا لإكمال الطلب.', 'error');
+      return;
+    }
+
+    setShowForm(true);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -90,8 +102,6 @@ const OpportunityDetails = () => {
     }
   };
 
-  const statusVariant = opportunity?.status === 'active' ? 'success' : 'warning';
-
   if (loading) {
     return <div className="landx-shell py-20 text-center text-app-text-muted">جاري تحميل تفاصيل الفرصة...</div>;
   }
@@ -117,6 +127,8 @@ const OpportunityDetails = () => {
     );
   }
 
+  const statusVariant = opportunity.status === 'active' ? 'success' : 'warning';
+
   return (
     <div>
       <section className="relative overflow-hidden border-b border-app-border/70">
@@ -133,15 +145,9 @@ const OpportunityDetails = () => {
               <h1 className="max-w-4xl text-4xl font-black leading-tight text-app-text md:text-5xl">{opportunity.title}</h1>
               <p className="max-w-3xl text-lg leading-9 text-app-text-muted">{opportunity.description}</p>
               <div className="flex flex-wrap gap-3">
-                <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">
-                  {opportunity.municipality}
-                </div>
-                <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">
-                  {opportunity.location}
-                </div>
-                <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">
-                  موسم {seasonLabel(opportunity.season)}
-                </div>
+                <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">{opportunity.municipality}</div>
+                <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">{opportunity.location}</div>
+                <div className="rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted">موسم {seasonLabel(opportunity.season)}</div>
               </div>
             </div>
 
@@ -180,17 +186,30 @@ const OpportunityDetails = () => {
                   <div className="mt-3 text-lg font-bold text-app-text">{statusLabel(opportunity.status)}</div>
                 </div>
               </div>
+              <div className="mt-5 rounded-2xl border border-app-border bg-app-surface-soft p-4 text-sm leading-7 text-app-text-muted">
+                المسار الصحيح هنا: راجع الملخص أولًا، ثم قرر إن كنت تريد إرسال اهتمام واستفسار ليُحفظا معًا داخل النظام.
+              </div>
               <div className="mt-5 grid gap-3">
-                <Button size="lg" onClick={() => setShowForm(true)}>
-                  أبدِ اهتمامك بهذه الفرصة
+                <Button size="lg" onClick={handlePrimaryAction}>
+                  أبدأ طلب الاهتمام الآن
                 </Button>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-app-border bg-app-surface-soft px-5 py-3 text-sm font-semibold text-app-text"
-                >
-                  تواصل مع الفريق
-                  <MessageCircleIcon className="h-4 w-4" />
-                </Link>
+                {!token || user?.role !== 'investor' ? (
+                  <Link
+                    to={interestAuthLink}
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-app-border bg-app-surface-soft px-5 py-3 text-sm font-semibold text-app-text"
+                  >
+                    أنشئ حساب مستثمر وأكمل الطلب
+                    <ArrowRightIcon className="h-4 w-4" />
+                  </Link>
+                ) : (
+                  <Link
+                    to="/investor/inquiries"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-app-border bg-app-surface-soft px-5 py-3 text-sm font-semibold text-app-text"
+                  >
+                    متابعة استفساراتي
+                    <MessageCircleIcon className="h-4 w-4" />
+                  </Link>
+                )}
               </div>
             </Card>
           </div>
@@ -243,7 +262,10 @@ const OpportunityDetails = () => {
                 </div>
                 <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
                   <div className="text-sm text-app-text-soft">أفضل خطوة تالية</div>
-                  <div className="mt-2 font-bold text-app-text">راجع التفاصيل ثم أرسل اهتمامك أو استفسارك المباشر.</div>
+                  <div className="mt-2 font-bold text-app-text">إذا كانت المؤشرات مناسبة، أرسل اهتمامك الآن ليبدأ مسار المتابعة داخل حسابك.</div>
+                </div>
+                <div className="rounded-2xl border border-brand/20 bg-brand/10 p-4 text-sm leading-7 text-app-text-muted">
+                  عند الإرسال يتم حفظ طلب الاهتمام والاستفسار داخل قاعدة البيانات ويمكن مراجعتهما من لوحة المستثمر.
                 </div>
               </div>
             </Card>

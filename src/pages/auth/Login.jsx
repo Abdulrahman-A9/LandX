@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useMemo, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { ArrowRightIcon, LockIcon, MailIcon, ShieldCheckIcon } from '../../components/ui/Icons';
+import { buildAuthRoute, resolvePostAuthRoute, serviceIntentCopy } from '../../lib/flow';
+
+const demoAccounts = [
+  'مستثمر: investor@landx.sa / 123456',
+  'بلدية: municipality@landx.sa / 123456',
+  'إدارة: admin@landx.sa / 123456',
+];
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
   const { addToast } = useToast();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  const search = new URLSearchParams(location.search);
+  const next = search.get('next');
+  const intent = search.get('intent') || 'default';
+  const intentCopy = useMemo(() => serviceIntentCopy[intent] || serviceIntentCopy.default, [intent]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,14 +47,7 @@ const Login = () => {
     }
 
     addToast(result.message, 'success');
-    const destination =
-      result.role === 'admin'
-        ? '/admin/dashboard'
-        : result.role === 'municipality'
-          ? '/municipality/dashboard'
-          : '/investor/dashboard';
-
-    navigate(destination);
+    navigate(resolvePostAuthRoute({ role: result.role, next }));
   };
 
   return (
@@ -49,26 +55,34 @@ const Login = () => {
       <div className="landx-shell">
         <div className="grid min-h-[calc(100vh-5rem)] gap-8 lg:grid-cols-[1fr_0.95fr] lg:items-center">
           <div className="space-y-8">
-            <div className="landx-kicker">دخول آمن وواضح</div>
+            <div className="landx-kicker">{intentCopy.badge}</div>
             <div>
               <h1 className="text-4xl font-black leading-tight text-app-text md:text-5xl">
-                ادخل إلى حسابك واستكمل العمل من حيث توقفت.
+                {intentCopy.title}
               </h1>
               <p className="mt-4 max-w-2xl text-lg leading-9 text-app-text-muted">
-                صفحة الدخول أصبحت مرتبطة مباشرة بواجهة API الحقيقية، لذلك ما تشوفه هنا يعكس حالة الحساب والصلاحيات الفعلية داخل النظام.
+                {intentCopy.description}
               </p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-3">
-              {[
-                'مستثمر: investor@landx.sa / 123456',
-                'بلدية: municipality@landx.sa / 123456',
-                'إدارة: admin@landx.sa / 123456',
-              ].map((item) => (
+              {demoAccounts.map((item) => (
                 <div key={item} className="rounded-2xl border border-app-border bg-app-surface-soft p-4 text-sm leading-7 text-app-text-muted">
                   {item}
                 </div>
               ))}
+            </div>
+
+            <div className="rounded-[2rem] border border-app-border bg-card-gradient p-6">
+              <div className="flex items-center gap-2 text-app-text">
+                <ShieldCheckIcon className="h-5 w-5 text-brand" />
+                <span className="font-semibold">ما الذي سيحدث بعد الدخول؟</span>
+              </div>
+              <div className="mt-4 space-y-3 text-sm leading-7 text-app-text-muted">
+                <p>1. يتم التحقق من الحساب الحقيقي من الباك اند.</p>
+                <p>2. يتم توجيهك مباشرة إلى الصفحة المطلوبة أو لوحتك المناسبة.</p>
+                <p>3. تكمل الخدمة من نفس النقطة دون إعادة الخطوات.</p>
+              </div>
             </div>
           </div>
 
@@ -84,6 +98,12 @@ const Login = () => {
                 أدخل بياناتك للوصول إلى لوحة المستثمر أو البلدية أو الإدارة حسب نوع الحساب.
               </p>
             </div>
+
+            {next ? (
+              <div className="mt-5 rounded-2xl border border-brand/20 bg-brand/10 px-4 py-3 text-sm text-app-text-muted">
+                بعد الدخول سيتم تحويلك مباشرة إلى الإجراء الذي بدأت منه.
+              </div>
+            ) : null}
 
             {error ? (
               <div className="mt-5 rounded-2xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
@@ -124,7 +144,7 @@ const Login = () => {
 
               <div className="flex items-center justify-between rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text-muted">
                 <span>نسيت كلمة المرور؟</span>
-                <span className="font-semibold text-app-text">تواصل مع الدعم حالياً</span>
+                <span className="font-semibold text-app-text">تواصل مع الدعم حاليًا</span>
               </div>
 
               <Button type="submit" size="lg" className="w-full" disabled={submitting}>
@@ -138,13 +158,13 @@ const Login = () => {
                 ملاحظة
               </div>
               <p className="mt-2">
-                بعد الدخول سيتم توجيهك تلقائياً إلى اللوحة المناسبة حسب الصلاحية الفعلية القادمة من الباك اند.
+                بعد الدخول سيتم توجيهك تلقائيًا إلى اللوحة المناسبة حسب الصلاحية الفعلية القادمة من الباك اند.
               </p>
             </div>
 
             <div className="mt-6 text-center text-sm text-app-text-muted">
               ليس لديك حساب؟{' '}
-              <Link to="/register" className="font-bold text-app-text hover:text-brand">
+              <Link to={buildAuthRoute('/register', { next, intent })} className="font-bold text-app-text hover:text-brand">
                 إنشاء حساب جديد
               </Link>
             </div>
