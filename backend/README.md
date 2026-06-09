@@ -37,3 +37,4 @@ postgresql+psycopg://postgres:password@127.0.0.1:5432/landx
 ```
 
 - On Render, use the PostgreSQL connection details provided by your database service and place the final value in `DATABASE_URL`.
+- If you cannot access a shell on Render, set `AUTO_SEED_ON_STARTUP=true` once to create tables and inject demo data automatically on deploy.

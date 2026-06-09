@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.config import get_settings
 from app.routers import admin, analysis, auth, inquiries, interest_requests, municipality, news, opportunities
+from app.seed import seed
 
 settings = get_settings()
 
@@ -33,6 +34,12 @@ app.include_router(municipality.router, prefix=api_prefix)
 uploads_dir = Path(__file__).resolve().parents[1] / settings.upload_dir
 uploads_dir.mkdir(parents=True, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
+
+
+@app.on_event("startup")
+def startup_tasks() -> None:
+    if settings.auto_seed_on_startup:
+        seed()
 
 
 @app.get("/")
