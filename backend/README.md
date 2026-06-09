@@ -2,7 +2,7 @@
 
 ## Quick start
 
-1. Create a MySQL database named `landx`.
+1. Create a PostgreSQL database named `landx`.
 2. Copy `.env.example` to `.env` and update credentials.
 3. Install dependencies:
 
@@ -27,3 +27,13 @@ uvicorn app.main:app --reload
 - `admin@landx.sa` / `123456`
 - `municipality@landx.sa` / `123456`
 - `investor@landx.sa` / `123456`
+
+## PostgreSQL notes
+
+- Example local `DATABASE_URL`:
+
+```text
+postgresql+psycopg://postgres:password@127.0.0.1:5432/landx
+```
+
+- On Render, use the PostgreSQL connection details provided by your database service and place the final value in `DATABASE_URL`.

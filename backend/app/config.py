@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    database_url: str = "mysql+pymysql://root:password@127.0.0.1:3306/landx"
+    database_url: str = "postgresql+psycopg://postgres:password@127.0.0.1:5432/landx"
     secret_key: str = "change-this-secret-key"
     access_token_expire_minutes: int = 120
     api_prefix: str = "/api"
