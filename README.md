@@ -54,12 +54,12 @@ npm run dev
 
 - `.env.example`: يربط الفرونت مع `http://127.0.0.1:8000/api`
 - `.env.render.example`: يربط الفرونت مع باك اند منشور على Render
-- في حال النشر بدون `VITE_API_BASE_URL`، سيحاول الفرونت استخدام `https://landx.onrender.com/api` كـ fallback إنتاجي
+- في حال النشر بدون `VITE_API_BASE_URL`، سيحاول الفرونت استخدام `https://landx-backend.onrender.com/api` كـ fallback إنتاجي
 
 قيمة Render النهائية تكون بهذا الشكل:
 
 ```env
-VITE_API_BASE_URL=https://YOUR-RENDER-BACKEND.onrender.com/api
+VITE_API_BASE_URL=https://landx-backend.onrender.com/api
 ```
 
 ## Build

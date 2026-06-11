@@ -6,7 +6,7 @@ const isLocalHost =
 
 const fallbackApiBaseUrl = isLocalHost
   ? 'http://127.0.0.1:8000/api'
-  : 'https://landx.onrender.com/api';
+  : 'https://landx-backend.onrender.com/api';
 
 const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL || fallbackApiBaseUrl;
 const API_BASE_URL = rawApiBaseUrl.replace(/\/+$/, '');
