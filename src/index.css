@@ -114,4 +114,33 @@
     @apply rounded-[1.8rem] border border-[#946446]/25 bg-gradient-to-br from-[#6b3d23] via-[#875130] to-[#b16f45] text-[#fff8f0];
     box-shadow: 0 28px 60px rgba(103, 56, 28, 0.24);
   }
+
+  .landx-orbit {
+    position: absolute;
+    inset: auto;
+    border-radius: 999px;
+    pointer-events: none;
+    opacity: 0.55;
+    filter: blur(0.2px);
+    background: radial-gradient(circle, rgba(173, 108, 68, 0.22) 0%, rgba(173, 108, 68, 0.08) 45%, transparent 72%);
+    animation: floatDrift 12s ease-in-out infinite;
+  }
+
+  .landx-line {
+    position: absolute;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent 0%, rgba(153, 94, 58, 0.18) 22%, rgba(214, 156, 116, 0.45) 50%, rgba(153, 94, 58, 0.18) 78%, transparent 100%);
+    animation: lineGlow 8s ease-in-out infinite;
+  }
+}
+
+@keyframes floatDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.42; }
+  50% { transform: translate3d(0, -16px, 0) scale(1.08); opacity: 0.68; }
+}
+
+@keyframes lineGlow {
+  0%, 100% { opacity: 0.22; transform: scaleX(0.96); }
+  50% { opacity: 0.58; transform: scaleX(1.04); }
 }

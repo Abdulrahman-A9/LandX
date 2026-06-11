@@ -69,13 +69,13 @@ const News = () => {
                     onClick={() => setActiveTab(tab.id)}
                     className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300 ${
                       isActive
-                        ? 'bg-gradient-to-r from-brand to-brand-deep text-app-text shadow-lg shadow-brand/20'
-                        : 'border border-app-border bg-app-surface-soft text-app-text-muted hover:text-app-text'
+                        ? 'bg-gradient-to-r from-[#8f4f2d] via-[#aa653c] to-[#c38256] text-[#fff8f0] shadow-lg shadow-brand/20'
+                        : 'border border-[#dfc4ac] bg-white/60 text-app-text-muted hover:text-app-text'
                     }`}
                   >
                     <NewspaperIcon className="h-4 w-4" />
                     {tab.label}
-                    <span className={`rounded-full px-2 py-0.5 text-xs ${isActive ? 'bg-white/10' : 'bg-app-bg/50 text-app-text-soft'}`}>
+                    <span className={`rounded-full px-2 py-0.5 text-xs ${isActive ? 'bg-white/10' : 'bg-[#f0e1d2] text-app-text-soft'}`}>
                       {count}
                     </span>
                   </button>
@@ -93,7 +93,7 @@ const News = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="ابحث في العنوان أو المحتوى أو الجهة"
-                    className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 pr-12 text-sm text-app-text placeholder:text-app-text-soft"
+                    className="w-full rounded-2xl border border-[#e5cfba] bg-white/75 px-4 py-3 pr-12 text-sm text-app-text placeholder:text-app-text-soft"
                   />
                 </div>
 
@@ -102,7 +102,7 @@ const News = () => {
                   <select
                     value={selectedMunicipality}
                     onChange={(e) => setSelectedMunicipality(e.target.value)}
-                    className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 pr-12 text-sm text-app-text"
+                    className="w-full rounded-2xl border border-[#e5cfba] bg-white/75 px-4 py-3 pr-12 text-sm text-app-text"
                   >
                     {municipalities.map((item) => (
                       <option key={item} value={item}>

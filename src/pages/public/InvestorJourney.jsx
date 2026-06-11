@@ -60,7 +60,7 @@ const scenarios = [
 
 const InvestorJourney = () => {
   return (
-    <div className="min-h-screen bg-app-bg py-16 text-app-text">
+    <div className="min-h-screen py-16 text-app-text">
       <div className="landx-shell space-y-16">
         <section className="text-center">
           <div className="landx-kicker">رحلة المستثمر</div>
@@ -77,7 +77,7 @@ const InvestorJourney = () => {
             <div className="mt-8 grid gap-6 md:grid-cols-4">
               {stages.map((stage) => (
                 <div key={stage.number} className="text-center">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-brand bg-gradient-to-r from-brand/20 to-brand-deep/20 text-2xl font-bold text-brand">
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-brand/40 bg-gradient-to-r from-[#fff5ea] to-[#efd3b7] text-2xl font-bold text-brand">
                     {stage.number}
                   </div>
                   <h3 className="text-lg font-bold text-app-text">{stage.title}</h3>
@@ -100,7 +100,7 @@ const InvestorJourney = () => {
                   <p className="mt-3 text-sm leading-8 text-app-text-muted">{stage.description}</p>
                   <div className="mt-4 space-y-2">
                     {stage.points.map((point) => (
-                      <div key={point} className="rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text-muted">
+                      <div key={point} className="rounded-2xl border border-[#ead9c7] bg-white/55 px-4 py-3 text-sm text-app-text-muted">
                         {point}
                       </div>
                     ))}
@@ -119,12 +119,12 @@ const InvestorJourney = () => {
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {scenarios.map((scenario) => (
               <Card key={scenario.title} className="p-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
                   {scenario.icon}
                 </div>
                 <h3 className="mt-5 text-xl font-bold text-app-text">{scenario.title}</h3>
                 <p className="mt-3 text-sm leading-8 text-app-text-muted">{scenario.summary}</p>
-                <div className="mt-4 rounded-2xl border border-success/20 bg-success/10 p-4 text-sm leading-7 text-app-text">
+                <div className="mt-4 rounded-2xl border border-success/20 bg-[#eef3e7] p-4 text-sm leading-7 text-app-text">
                   {scenario.result}
                 </div>
               </Card>

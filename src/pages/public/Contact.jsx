@@ -56,7 +56,7 @@ const Contact = () => {
                 <h2 className="text-2xl font-bold text-app-text">قنوات التواصل</h2>
                 <div className="mt-6 space-y-5">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
                       <MailIcon className="h-5 w-5" />
                     </div>
                     <div>
@@ -67,7 +67,7 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
                       <PhoneIcon className="h-5 w-5" />
                     </div>
                     <div>
@@ -77,7 +77,7 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
                       <MapPinIcon className="h-5 w-5" />
                     </div>
                     <div>
@@ -101,7 +101,7 @@ const Contact = () => {
                 </div>
                 <div className="mt-6 space-y-3">
                   {workingHours.map((item) => (
-                    <div key={item.day} className="flex items-center justify-between rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                    <div key={item.day} className="flex items-center justify-between rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
                       <span className="font-semibold text-app-text">{item.day}</span>
                       <span className={`text-sm ${item.hours === 'مغلق' ? 'text-danger' : 'text-app-text-muted'}`}>
                         {item.hours}
@@ -135,7 +135,7 @@ const Contact = () => {
                     onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                     required
                     placeholder="الاسم الكامل"
-                    className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
+                    className="w-full rounded-2xl border border-[#e5cfba] bg-white/75 px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
                   />
                   <div className="grid gap-4 md:grid-cols-2">
                     <input
@@ -144,20 +144,20 @@ const Contact = () => {
                       required
                       type="email"
                       placeholder="البريد الإلكتروني"
-                      className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
+                      className="w-full rounded-2xl border border-[#e5cfba] bg-white/75 px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
                     />
                     <input
                       value={formData.phone}
                       onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
                       placeholder="رقم الجوال"
-                      className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
+                      className="w-full rounded-2xl border border-[#e5cfba] bg-white/75 px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
                     />
                   </div>
                   <select
                     value={formData.subject}
                     onChange={(e) => setFormData((prev) => ({ ...prev, subject: e.target.value }))}
                     required
-                    className="w-full rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text"
+                    className="w-full rounded-2xl border border-[#e5cfba] bg-white/75 px-4 py-3 text-sm text-app-text"
                   >
                     <option value="">اختر نوع الرسالة</option>
                     <option value="investment">استفسار استثماري</option>
@@ -171,7 +171,7 @@ const Contact = () => {
                     required
                     rows={6}
                     placeholder="اشرح احتياجك أو سؤالك بشكل مختصر"
-                    className="w-full resize-none rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
+                    className="w-full resize-none rounded-2xl border border-[#e5cfba] bg-white/75 px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
                   />
                   <Button type="submit" size="lg" className="w-full">
                     إرسال الرسالة
@@ -191,10 +191,10 @@ const Contact = () => {
               يمكنك استعراض الفرص أو استخدام أداة التحليل قبل التواصل، ثم العودة إلينا عند الحاجة.
             </p>
             <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link to="/opportunities" className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-5 py-3 text-sm font-semibold text-app-text">
+              <Link to="/opportunities" className="rounded-2xl bg-gradient-to-r from-[#8f4f2d] via-[#aa653c] to-[#c38256] px-5 py-3 text-sm font-semibold text-[#fff8f0]">
                 تصفح الفرص
               </Link>
-              <Link to="/investment-analysis" className="rounded-2xl border border-app-border bg-app-surface-soft px-5 py-3 text-sm font-semibold text-app-text">
+              <Link to="/investment-analysis" className="rounded-2xl border border-[#dfc4ac] bg-white/60 px-5 py-3 text-sm font-semibold text-app-text">
                 ابدأ التحليل
               </Link>
             </div>

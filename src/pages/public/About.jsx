@@ -91,7 +91,7 @@ const About = () => {
             {values.map((item, index) => (
               <AnimatedSection key={item.title} delay={index * 80}>
                 <Card className="h-full p-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
                     {item.icon}
                   </div>
                   <h3 className="mt-5 text-xl font-bold text-app-text">{item.title}</h3>
@@ -115,7 +115,7 @@ const About = () => {
               </div>
               <div className="grid gap-4">
                 {highlights.map((item) => (
-                  <div key={item} className="flex items-start gap-3 rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                  <div key={item} className="flex items-start gap-3 rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
                     <UsersIcon className="mt-1 h-5 w-5 shrink-0 text-brand" />
                     <p className="text-sm leading-7 text-app-text-muted">{item}</p>
                   </div>
@@ -129,7 +129,7 @@ const About = () => {
       <section className="pb-16 lg:pb-20">
         <div className="landx-shell">
           <Card className="p-8 text-center lg:p-10">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
               <BuildingIcon className="h-6 w-6" />
             </div>
             <h2 className="mt-5 text-3xl font-black text-app-text">ابدأ من التجربة الأنسب لك.</h2>
@@ -138,10 +138,10 @@ const About = () => {
               لتشكيل العرض المناسب.
             </p>
             <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link to="/opportunities" className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-5 py-3 text-sm font-semibold text-app-text">
+              <Link to="/opportunities" className="rounded-2xl bg-gradient-to-r from-[#8f4f2d] via-[#aa653c] to-[#c38256] px-5 py-3 text-sm font-semibold text-[#fff8f0]">
                 استعرض الفرص
               </Link>
-              <Link to="/contact" className="rounded-2xl border border-app-border bg-app-surface-soft px-5 py-3 text-sm font-semibold text-app-text">
+              <Link to="/contact" className="rounded-2xl border border-[#dfc4ac] bg-white/60 px-5 py-3 text-sm font-semibold text-app-text">
                 تواصل معنا
               </Link>
             </div>

@@ -56,12 +56,18 @@ const PublicLayout = ({ children }) => {
     ].join(' ');
 
   return (
-    <div className="min-h-screen bg-app-bg text-app-text">
-      <div className="sticky top-0 z-50 border-b border-app-border/80 bg-app-bg/70 backdrop-blur-2xl">
+    <div className="relative min-h-screen overflow-hidden bg-app-bg text-app-text">
+      <div className="landx-orbit right-[6%] top-28 h-48 w-48" />
+      <div className="landx-orbit left-[8%] top-[22rem] h-32 w-32 [animation-delay:1.8s]" />
+      <div className="landx-orbit bottom-40 right-[14%] h-56 w-56 [animation-delay:3.2s]" />
+      <div className="landx-line left-[8%] top-40 w-72 rotate-[12deg]" />
+      <div className="landx-line right-[6%] top-[30rem] w-80 -rotate-[10deg] [animation-delay:2s]" />
+
+      <div className="sticky top-0 z-50 border-b border-app-border/70 bg-white/55 backdrop-blur-2xl">
         <header className="landx-shell">
           <div className="flex items-center justify-between gap-4 py-4">
             <Link to="/" className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-gradient-to-br from-brand/25 to-brand-deep/25 shadow-lg shadow-brand/10">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-gradient-to-br from-[#fff8f1] via-[#f3e2d0] to-[#d8b391] shadow-lg shadow-brand/10">
                 <span className="text-xl font-black text-brand">ل</span>
               </div>
               <div className="leading-tight">
@@ -197,12 +203,14 @@ const PublicLayout = ({ children }) => {
 
       <main>{children}</main>
 
-      <footer className="mt-20 border-t border-app-border/70 bg-[#160d09]/90">
+      <footer className="relative mt-20 overflow-hidden border-t border-app-border/70 bg-[linear-gradient(180deg,rgba(242,228,212,0.74),rgba(227,206,185,0.96))]">
+        <div className="landx-orbit bottom-10 left-[8%] h-40 w-40" />
+        <div className="landx-line right-[12%] top-24 w-72 -rotate-[8deg]" />
         <div className="landx-shell py-14">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr_0.85fr_1fr]">
             <div className="space-y-5">
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff7ef]">
                   <span className="text-xl font-black text-brand">ل</span>
                 </div>
                 <div>
@@ -216,7 +224,7 @@ const PublicLayout = ({ children }) => {
               </p>
               <div className="grid grid-cols-3 gap-3">
                 {quickStats.map((item) => (
-                  <div key={item.label} className="rounded-2xl border border-app-border bg-app-surface-soft/60 p-4">
+                  <div key={item.label} className="rounded-2xl border border-[#e4cdb6] bg-white/55 p-4">
                     <div className="text-lg font-black text-app-text">{item.value}</div>
                     <div className="mt-1 text-xs leading-6 text-app-text-soft">{item.label}</div>
                   </div>
@@ -248,7 +256,7 @@ const PublicLayout = ({ children }) => {
               {isAuthenticated ? (
                 <Link
                   to={roleHome[user?.role] || '/investor/dashboard'}
-                  className="flex items-center justify-between rounded-[1.5rem] border border-app-border bg-app-surface-soft px-5 py-4"
+                  className="flex items-center justify-between rounded-[1.5rem] border border-[#e2c7ae] bg-white/60 px-5 py-4"
                 >
                   <div>
                     <div className="text-sm text-app-text-soft">حسابك الحالي</div>
@@ -257,15 +265,15 @@ const PublicLayout = ({ children }) => {
                   <UserIcon className="h-5 w-5 text-brand" />
                 </Link>
               ) : (
-                <div className="landx-panel rounded-[1.5rem] p-5">
+                <div className="landx-glass rounded-[1.5rem] p-5">
                   <div className="text-sm leading-7 text-app-text-muted">
                     جرّب المنصة من خلال تسجيل حساب جديد أو الدخول بالحسابات التجريبية.
                   </div>
                   <div className="mt-4 grid gap-3">
-                    <Link to="/register" className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-4 py-3 text-center text-sm font-semibold text-app-text">
+                    <Link to="/register" className="rounded-2xl bg-gradient-to-r from-[#8f4f2d] via-[#aa653c] to-[#c38256] px-4 py-3 text-center text-sm font-semibold text-[#fff8f0]">
                       إنشاء حساب جديد
                     </Link>
-                    <Link to="/login" className="rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-center text-sm font-semibold text-app-text">
+                    <Link to="/login" className="rounded-2xl border border-[#dfc4ac] bg-white/60 px-4 py-3 text-center text-sm font-semibold text-app-text">
                       تسجيل الدخول
                     </Link>
                   </div>

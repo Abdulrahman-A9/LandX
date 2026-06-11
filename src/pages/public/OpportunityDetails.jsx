@@ -217,7 +217,7 @@ const OpportunityDetails = () => {
       </section>
 
       <section className="py-12 lg:py-16">
-        <div className="landx-shell grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="landx-shell grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-8">
             <Card className="overflow-hidden">
               <div className="aspect-[16/9] overflow-hidden bg-[#ead7c1]">
@@ -232,12 +232,23 @@ const OpportunityDetails = () => {
             </Card>
 
             <Card className="p-6 lg:p-7">
-              <h2 className="text-2xl font-bold text-app-text">وصف الفرصة</h2>
-              <p className="mt-4 text-sm leading-8 text-app-text-muted">{opportunity.description}</p>
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <div className="landx-kicker">القراءة الأساسية</div>
+                  <h2 className="mt-4 text-2xl font-bold text-app-text">وصف الفرصة</h2>
+                </div>
+                <div className="rounded-2xl border border-[#e2c8b2] bg-white/55 px-4 py-3 text-sm text-app-text-muted">
+                  الترتيب المقترح: فهم سريع ثم مقارنة ثم إرسال اهتمام
+                </div>
+              </div>
+              <p className="mt-5 text-sm leading-8 text-app-text-muted">{opportunity.description}</p>
             </Card>
 
             <Card className="p-6 lg:p-7">
-              <h2 className="text-2xl font-bold text-app-text">ما الذي يميزها؟</h2>
+              <div className="flex items-center justify-between gap-4">
+                <h2 className="text-2xl font-bold text-app-text">ما الذي يميزها؟</h2>
+                <div className="text-sm text-app-text-soft">نقاط مركزة تساعد على فرز القرار بسرعة</div>
+              </div>
               <div className="mt-5 grid gap-3 md:grid-cols-2">
                 {opportunity.features.map((feature) => (
                   <div key={feature} className="flex items-start gap-3 rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
@@ -249,10 +260,16 @@ const OpportunityDetails = () => {
             </Card>
           </div>
 
-          <div className="space-y-6">
-            <Card className="p-6">
-              <h2 className="text-xl font-bold text-app-text">ملخص سريع للقرار</h2>
-              <div className="mt-5 space-y-4">
+          <div className="space-y-6 lg:sticky lg:top-28 lg:self-start">
+            <Card className="overflow-hidden p-0">
+              <div className="landx-dark-card rounded-none rounded-t-[1.75rem] p-6">
+                <div className="text-sm text-[#f0cfb3]">ملخص القرار</div>
+                <h2 className="mt-3 text-2xl font-black text-[#fff8f0]">منظم وواضح قبل الإجراء</h2>
+                <p className="mt-3 text-sm leading-8 text-[#f7e6d7]">
+                  رتبنا التفاصيل هنا من الأكثر تأثيراً على القرار إلى الخطوة التنفيذية التالية.
+                </p>
+              </div>
+              <div className="space-y-4 p-6">
                 <div className="rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
                   <div className="text-sm text-app-text-soft">الجهة المعلنة</div>
                   <div className="mt-2 flex items-center gap-2 font-bold text-app-text">
@@ -267,6 +284,20 @@ const OpportunityDetails = () => {
                 <div className="rounded-2xl border border-brand/20 bg-[#f7ecdf] p-4 text-sm leading-7 text-app-text-muted">
                   عند الإرسال يتم حفظ طلب الاهتمام والاستفسار داخل قاعدة البيانات ويمكن مراجعتهما من لوحة المستثمر.
                 </div>
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <h3 className="text-lg font-bold text-app-text">ترتيب القراءة المقترح</h3>
+              <div className="mt-4 space-y-3">
+                {['راجع العائد والاستثمار المطلوب', 'اقرأ وصف الفرصة ونقاط التميز', 'إذا كانت مناسبة، أرسل طلب الاهتمام من نفس الصفحة'].map((step, index) => (
+                  <div key={step} className="flex items-start gap-3 rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f2e1cf] text-sm font-bold text-brand">
+                      {index + 1}
+                    </div>
+                    <div className="text-sm leading-7 text-app-text-muted">{step}</div>
+                  </div>
+                ))}
               </div>
             </Card>
           </div>
