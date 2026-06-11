@@ -13,6 +13,7 @@ const MunicipalityDashboard = () => {
     const [inquiries, opportunities] = await Promise.all([inquiryApi.municipality(token), opportunitiesApi.list()]);
     return {
       inquiries,
+      platformOpportunities: opportunities,
       opportunities: opportunities.filter((item) => item.municipality_id === user?.municipality_id),
     };
   }, [token, user?.municipality_id]);
@@ -21,6 +22,7 @@ const MunicipalityDashboard = () => {
     const opportunities = data.opportunities || [];
     const inquiries = data.inquiries || [];
     return {
+      platformOpportunities: data.platformOpportunities?.length || 0,
       totalOpportunities: opportunities.length,
       activeOpportunities: opportunities.filter((item) => item.status === 'active').length,
       pendingInquiries: inquiries.filter((item) => item.status === 'pending').length,
@@ -58,6 +60,10 @@ const MunicipalityDashboard = () => {
           <p className="mt-3 max-w-2xl text-sm leading-8 text-app-text-muted">
             هذه الشاشة تعكس الفرص التابعة لبلديتك والاستفسارات الواردة عليها مباشرة من قاعدة البيانات.
           </p>
+          <div className="mt-5 rounded-2xl border border-[#ead9c7] bg-white/55 p-4 text-sm leading-8 text-app-text-muted">
+            للتوضيح: المنصة العامة تعرض جميع الفرص المنشورة في النظام، أما لوحة البلدية فتعرض فقط
+            الفرص المرتبطة ببلديتك الحالية. هذا ليس تعارضاً في البيانات، بل فصل صلاحيات وتشغيل.
+          </div>
         </Card>
         <Card className="p-7">
           <div className="text-sm text-app-text-soft">أولوية اليوم</div>
@@ -70,10 +76,11 @@ const MunicipalityDashboard = () => {
 
       <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {[
+          { label: 'إجمالي المنصة', value: stats.platformOpportunities, helper: 'كل الفرص المنشورة في النظام', icon: <LeafIcon className="h-5 w-5" />, tone: 'text-brand' },
           { label: 'إجمالي الفرص', value: stats.totalOpportunities, helper: 'فرص مرتبطة ببلديتك', icon: <LeafIcon className="h-5 w-5" />, tone: 'text-app-text' },
           { label: 'الفرص النشطة', value: stats.activeOpportunities, helper: 'جاهزة للاستعراض', icon: <CheckIcon className="h-5 w-5" />, tone: 'text-success' },
           { label: 'الاستفسارات', value: stats.pendingInquiries, helper: 'بانتظار الرد', icon: <FileTextIcon className="h-5 w-5" />, tone: 'text-warning' },
-          { label: 'قيمة الاستثمار', value: formatCurrency(stats.totalInvestment), helper: 'إجمالي الفرص الحالية', icon: <DollarSignIcon className="h-5 w-5" />, tone: 'text-brand' },
+          { label: 'قيمة الاستثمار', value: formatCurrency(stats.totalInvestment), helper: 'إجمالي فرص بلديتك الحالية', icon: <DollarSignIcon className="h-5 w-5" />, tone: 'text-brand' },
         ].map((item) => (
           <Card key={item.label} className="p-6">
             <div className="flex items-center justify-between">

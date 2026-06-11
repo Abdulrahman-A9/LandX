@@ -33,8 +33,15 @@ const MunicipalityOpportunities = () => {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-app-text">إدارة الفرص الاستثمارية</h1>
-          <p className="mt-2 text-app-text-muted">هذه القائمة تعرض فقط الفرص التابعة لبلديتك من قاعدة البيانات.</p>
+          <p className="mt-2 text-app-text-muted">
+            هذه القائمة تعرض فقط الفرص التابعة لبلديتك من قاعدة البيانات، بينما صفحة المنصة العامة تعرض جميع الفرص المنشورة في النظام.
+          </p>
         </div>
+      </div>
+
+      <div className="mb-6 rounded-2xl border border-[#ead9c7] bg-white/55 p-4 text-sm leading-8 text-app-text-muted">
+        إجمالي الفرص في المنصة حالياً: <span className="font-bold text-app-text">{opportunities.length}</span>
+        {' '}فرصة. الظاهر هنا لبلديتك فقط: <span className="font-bold text-app-text">{ownOpportunities.length}</span>.
       </div>
 
       <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-4">
