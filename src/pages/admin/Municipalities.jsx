@@ -7,11 +7,22 @@ import { municipalityApi } from '../../lib/api';
 import { formatArabicDate } from '../../lib/formatters';
 
 const AdminMunicipalities = () => {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const { data: municipalities, loading, error } = useAsyncData(() => municipalityApi.list(token), [token]);
 
   const activeCount = municipalities.filter((item) => item.is_active).length;
   const inactiveCount = municipalities.filter((item) => !item.is_active).length;
+
+  if (!token || user?.role !== 'admin') {
+    return (
+      <Card className="p-10 text-center">
+        <h1 className="text-3xl font-black text-app-text">البلديات غير متاحة حالياً</h1>
+        <p className="mt-3 text-sm leading-8 text-app-text-muted">
+          هذه الصفحة إدارية بالكامل، ولن تعرض بيانات `municipalities` إلا بعد تسجيل الدخول بحساب الإدارة.
+        </p>
+      </Card>
+    );
+  }
 
   if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل البلديات...</Card>;
   if (error) return <Card className="p-10 text-center text-danger">{error}</Card>;

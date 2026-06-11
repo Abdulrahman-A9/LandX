@@ -7,7 +7,7 @@ import { adminApi } from '../../lib/api';
 import { BuildingIcon, LeafIcon, ShieldCheckIcon, UsersIcon } from '../../components/ui/Icons';
 
 const AdminDashboard = () => {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const { data, loading, error } = useAsyncData(() => adminApi.stats(token), [token]);
 
   const nextSteps = [
@@ -28,6 +28,17 @@ const AdminDashboard = () => {
     },
   ];
 
+  if (!token || user?.role !== 'admin') {
+    return (
+      <Card className="p-10 text-center">
+        <h1 className="text-3xl font-black text-app-text">هذه الصفحة تتطلب صلاحية الإدارة</h1>
+        <p className="mt-3 text-sm leading-8 text-app-text-muted">
+          سجّل الدخول بحساب `admin` حتى تظهر الإحصاءات والمستخدمون والبلديات والبيانات الحقيقية داخل اللوحة.
+        </p>
+      </Card>
+    );
+  }
+
   if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل لوحة الإدارة...</Card>;
   if (error) return <Card className="p-10 text-center text-danger">{error}</Card>;
 
@@ -43,7 +54,7 @@ const AdminDashboard = () => {
         </Card>
         <Card className="p-7">
           <div className="text-sm text-app-text-soft">أولوية الإشراف</div>
-          <div className="mt-4 rounded-2xl border border-danger/20 bg-danger/10 p-5">
+          <div className="mt-4 rounded-2xl border border-danger/20 bg-[#f3e5e2] p-5">
             <div className="text-3xl font-black text-danger">{data.inquiries}</div>
             <div className="mt-2 text-sm leading-7 text-app-text-muted">استفسارات مسجلة تحتاج متابعة على مستوى النظام.</div>
           </div>
@@ -60,7 +71,7 @@ const AdminDashboard = () => {
           <Card key={item.label} className="p-6">
             <div className="flex items-center justify-between">
               <div className="text-sm text-app-text-muted">{item.label}</div>
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
                 {item.icon}
               </div>
             </div>

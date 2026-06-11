@@ -21,15 +21,20 @@ const normalizeUser = (profile) => ({
 });
 
 export const AuthProvider = ({ children }) => {
+  const storedToken = localStorage.getItem('landx_token');
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem('landx_user');
-    return stored ? JSON.parse(stored) : null;
+    if (!storedToken || !stored) return null;
+    return JSON.parse(stored);
   });
-  const [token, setToken] = useState(() => localStorage.getItem('landx_token'));
-  const [loading, setLoading] = useState(Boolean(localStorage.getItem('landx_token')));
+  const [token, setToken] = useState(() => storedToken);
+  const [loading, setLoading] = useState(Boolean(storedToken));
 
   useEffect(() => {
     if (!token) {
+      setUser(null);
+      localStorage.removeItem('landx_user');
+      setLoading(false);
       return;
     }
 
