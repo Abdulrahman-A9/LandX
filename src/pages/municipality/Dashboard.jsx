@@ -57,7 +57,7 @@ const MunicipalityDashboard = () => {
         <Card className="p-7">
           <div className="landx-kicker">تشغيل البلدية</div>
           <h1 className="mt-5 text-4xl font-black text-app-text">لوحة البلدية</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-8 text-app-text-muted">
+          <p className="mt-3 max-w-2xl text-base leading-8 text-app-text-muted">
             هذه الشاشة تعكس الفرص التابعة لبلديتك والاستفسارات الواردة عليها مباشرة من قاعدة البيانات.
           </p>
           <div className="mt-5 rounded-2xl border border-[#ead9c7] bg-white/55 p-4 text-sm leading-8 text-app-text-muted">
@@ -66,8 +66,8 @@ const MunicipalityDashboard = () => {
           </div>
         </Card>
         <Card className="p-7">
-          <div className="text-sm text-app-text-soft">أولوية اليوم</div>
-          <div className="mt-4 rounded-2xl border border-warning/20 bg-warning/10 p-5">
+          <div className="text-sm font-semibold text-app-text-muted">أولوية اليوم</div>
+          <div className="mt-4 rounded-2xl border border-warning/20 bg-[#fbf1e6] p-5">
             <div className="text-3xl font-black text-warning">{stats.pendingInquiries}</div>
             <div className="mt-2 text-sm leading-7 text-app-text-muted">استفسارات مفتوحة تحتاج فرزًا أو ردًا.</div>
           </div>
@@ -82,17 +82,17 @@ const MunicipalityDashboard = () => {
           { label: 'الاستفسارات', value: stats.pendingInquiries, helper: 'بانتظار الرد', icon: <FileTextIcon className="h-5 w-5" />, tone: 'text-warning' },
           { label: 'قيمة الاستثمار', value: formatCurrency(stats.totalInvestment), helper: 'إجمالي فرص بلديتك الحالية', icon: <DollarSignIcon className="h-5 w-5" />, tone: 'text-brand' },
         ].map((item) => (
-          <Card key={item.label} className="p-6">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-app-text-muted">{item.label}</div>
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
-                {item.icon}
+            <Card key={item.label} className="p-6">
+              <div className="flex items-center justify-between">
+                <div className="text-sm font-semibold text-app-text-muted">{item.label}</div>
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
+                  {item.icon}
+                </div>
               </div>
-            </div>
-            <div className={`mt-6 text-3xl font-black ${item.tone}`}>{item.value}</div>
-            <div className="mt-2 text-sm text-app-text-soft">{item.helper}</div>
-          </Card>
-        ))}
+              <div className={`mt-6 text-3xl font-black ${item.tone}`}>{item.value}</div>
+              <div className="mt-2 text-sm leading-7 text-app-text-muted">{item.helper}</div>
+            </Card>
+          ))}
       </section>
 
       <section>
@@ -103,7 +103,7 @@ const MunicipalityDashboard = () => {
         <div className="grid gap-5 xl:grid-cols-3">
           {nextSteps.map((item, index) => (
             <Card key={item.title} className={`p-6 ${index === 1 && stats.pendingInquiries ? 'border-warning/40' : ''}`}>
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
                 <PlusIcon className="h-5 w-5" />
               </div>
               <h3 className="mt-5 text-xl font-bold text-app-text">{item.title}</h3>

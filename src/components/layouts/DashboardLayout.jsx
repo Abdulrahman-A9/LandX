@@ -103,25 +103,25 @@ const DashboardLayout = ({ role = 'investor' }) => {
   return (
     <div className="min-h-screen bg-app-bg text-app-text">
       <div className="flex min-h-screen">
-        <aside className="hidden w-[308px] shrink-0 border-l border-app-border/80 bg-[#160d09]/90 xl:block">
+        <aside className="hidden w-[308px] shrink-0 border-l border-[#d6b89f] bg-[linear-gradient(180deg,#6b3d23_0%,#4f2d1b_100%)] text-[#fff8f0] xl:block">
           <div className="sticky top-0 flex h-screen flex-col">
-            <div className="border-b border-app-border/80 p-6">
+            <div className="border-b border-white/10 p-6">
               <Link to="/" className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10">
-                  <span className="text-xl font-black text-brand">ل</span>
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
+                  <span className="text-xl font-black text-[#ffd7b7]">ل</span>
                 </div>
                 <div>
-                  <div className="font-heading text-2xl font-black">LandX</div>
-                  <div className="text-sm text-app-text-soft">{meta.title}</div>
+                  <div className="font-heading text-2xl font-black text-[#fff8f0]">LandX</div>
+                  <div className="text-sm text-[#f0cfb3]">{meta.title}</div>
                 </div>
               </Link>
             </div>
 
             <div className="p-6">
-              <div className="rounded-[1.75rem] border border-app-border bg-app-surface-soft/60 p-5">
-                <div className="text-sm text-app-text-soft">الحساب النشط</div>
-                <div className="mt-2 text-lg font-bold text-app-text">{displayName}</div>
-                <div className="mt-1 text-sm text-app-text-muted">{meta.subtitle}</div>
+              <div className="rounded-[1.75rem] border border-white/10 bg-white/10 p-5">
+                <div className="text-sm text-[#f0cfb3]">الحساب النشط</div>
+                <div className="mt-2 text-lg font-bold text-[#fff8f0]">{displayName}</div>
+                <div className="mt-1 text-sm leading-7 text-[#f7e6d7]">{meta.subtitle}</div>
               </div>
             </div>
 
@@ -135,11 +135,11 @@ const DashboardLayout = ({ role = 'investor' }) => {
                       to={item.path}
                       className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300 ${
                         isActive
-                          ? 'bg-brand/15 text-app-text'
-                          : 'text-app-text-muted hover:bg-app-surface-soft hover:text-app-text'
+                          ? 'bg-white/14 text-[#fff8f0]'
+                          : 'text-[#f0cfb3] hover:bg-white/8 hover:text-[#fff8f0]'
                       }`}
                     >
-                      <span className={isActive ? 'text-brand' : 'text-app-text-soft'}>{item.icon}</span>
+                      <span className={isActive ? 'text-[#ffd7b7]' : 'text-[#d7aa86]'}>{item.icon}</span>
                       <span>{item.label}</span>
                     </Link>
                   );
@@ -147,10 +147,10 @@ const DashboardLayout = ({ role = 'investor' }) => {
               </div>
             </nav>
 
-            <div className="border-t border-app-border/80 p-4">
+            <div className="border-t border-white/10 p-4">
               <Link
                 to="/"
-                className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-app-text-muted transition-colors hover:bg-app-surface-soft hover:text-app-text"
+                className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-[#f0cfb3] transition-colors hover:bg-white/8 hover:text-[#fff8f0]"
               >
                 <HomeIcon className="h-5 w-5" />
                 العودة للموقع العام
@@ -167,35 +167,35 @@ const DashboardLayout = ({ role = 'investor' }) => {
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-40 border-b border-app-border/80 bg-app-bg/80 backdrop-blur-2xl">
+          <header className="sticky top-0 z-40 border-b border-[#dbc1aa] bg-white/70 backdrop-blur-2xl">
             <div className="landx-shell py-4">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setMobileOpen((value) => !value)}
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-app-border bg-app-surface-soft xl:hidden"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#dfc4ac] bg-white/70 xl:hidden"
                     aria-label="Toggle dashboard menu"
                   >
                     {mobileOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
                   </button>
                   <div>
-                    <div className="font-heading text-2xl font-black">{meta.title}</div>
-                    <div className="text-sm text-app-text-soft">{meta.subtitle}</div>
+                    <div className="font-heading text-3xl font-black text-app-text">{meta.title}</div>
+                    <div className="text-sm leading-7 text-app-text-muted">{meta.subtitle}</div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="hidden rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm text-app-text-muted md:flex md:items-center md:gap-2">
+                  <div className="hidden rounded-full border border-[#dfc4ac] bg-white/75 px-4 py-2 text-sm font-semibold text-app-text-muted md:flex md:items-center md:gap-2">
                     <BellIcon className="h-4 w-4 text-brand" />
                     بيانات مباشرة من النظام
                   </div>
-                  <div className="hidden h-11 items-center gap-3 rounded-full border border-app-border bg-app-surface-soft px-3 md:flex">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand/15 text-sm font-bold text-brand">
+                  <div className="hidden h-11 items-center gap-3 rounded-full border border-[#dfc4ac] bg-white/75 px-3 md:flex">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f2dfcd] text-sm font-bold text-brand">
                       {displayName.charAt(0)}
                     </div>
                     <div className="text-sm">
                       <div className="font-semibold text-app-text">{displayName}</div>
-                      <div className="text-app-text-soft">جلسة عمل نشطة</div>
+                      <div className="text-app-text-muted">جلسة عمل نشطة</div>
                     </div>
                   </div>
                 </div>

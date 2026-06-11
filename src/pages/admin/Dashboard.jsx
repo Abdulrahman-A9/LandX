@@ -48,12 +48,12 @@ const AdminDashboard = () => {
         <Card className="p-7">
           <div className="landx-kicker">إدارة المنصة</div>
           <h1 className="mt-5 text-4xl font-black text-app-text">لوحة الإدارة</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-8 text-app-text-muted">
+          <p className="mt-3 max-w-2xl text-base leading-8 text-app-text-muted">
             الإحصاءات هنا قادمة مباشرة من الجداول الفعلية: المستخدمون، البلديات، الفرص، الطلبات، والتحليلات.
           </p>
         </Card>
         <Card className="p-7">
-          <div className="text-sm text-app-text-soft">أولوية الإشراف</div>
+          <div className="text-sm font-semibold text-app-text-muted">أولوية الإشراف</div>
           <div className="mt-4 rounded-2xl border border-danger/20 bg-[#f3e5e2] p-5">
             <div className="text-3xl font-black text-danger">{data.inquiries}</div>
             <div className="mt-2 text-sm leading-7 text-app-text-muted">استفسارات مسجلة تحتاج متابعة على مستوى النظام.</div>
@@ -68,17 +68,17 @@ const AdminDashboard = () => {
           { label: 'الفرص', value: data.opportunities, helper: `${data.active_opportunities} نشطة حاليًا`, icon: <LeafIcon className="h-5 w-5" />, tone: 'text-success' },
           { label: 'التحليلات', value: data.analyses, helper: 'تقارير محفوظة في النظام', icon: <ShieldCheckIcon className="h-5 w-5" />, tone: 'text-warning' },
         ].map((item) => (
-          <Card key={item.label} className="p-6">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-app-text-muted">{item.label}</div>
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
-                {item.icon}
+            <Card key={item.label} className="p-6">
+              <div className="flex items-center justify-between">
+                <div className="text-sm font-semibold text-app-text-muted">{item.label}</div>
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
+                  {item.icon}
+                </div>
               </div>
-            </div>
-            <div className={`mt-6 text-3xl font-black ${item.tone}`}>{item.value}</div>
-            <div className="mt-2 text-sm text-app-text-soft">{item.helper}</div>
-          </Card>
-        ))}
+              <div className={`mt-6 text-3xl font-black ${item.tone}`}>{item.value}</div>
+              <div className="mt-2 text-sm leading-7 text-app-text-muted">{item.helper}</div>
+            </Card>
+          ))}
       </section>
 
       <section>
