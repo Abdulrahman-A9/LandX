@@ -1,4 +1,14 @@
-const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
+const isBrowser = typeof window !== 'undefined';
+const isLocalHost =
+  isBrowser &&
+  (window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1');
+
+const fallbackApiBaseUrl = isLocalHost
+  ? 'http://127.0.0.1:8000/api'
+  : 'https://landx.onrender.com/api';
+
+const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL || fallbackApiBaseUrl;
 const API_BASE_URL = rawApiBaseUrl.replace(/\/+$/, '');
 
 const authHeaders = (token, headers = {}) => {
@@ -10,7 +20,12 @@ const authHeaders = (token, headers = {}) => {
 };
 
 async function request(path, options = {}) {
-  const response = await fetch(`${API_BASE_URL}${path}`, options);
+  let response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, options);
+  } catch (error) {
+    throw new Error('Backend service is unavailable. Check API deployment or VITE_API_BASE_URL.');
+  }
   if (!response.ok) {
     const payload = await response.json().catch(() => ({}));
     throw new Error(payload.detail || 'Request failed');
