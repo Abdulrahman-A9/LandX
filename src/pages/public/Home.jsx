@@ -72,40 +72,40 @@ const strengths = [
 ];
 
 const heroAside = (
-  <div className="landx-panel max-w-xl overflow-hidden p-5">
+  <div className="max-w-xl overflow-hidden rounded-[2.25rem] border border-[#f4dfc8] bg-[linear-gradient(145deg,rgba(255,250,244,0.95),rgba(246,232,216,0.92))] p-5 shadow-[var(--landx-shadow)]">
     <div className="grid gap-4 sm:grid-cols-[0.9fr_1.1fr]">
       <div className="grid gap-4">
-        <div className="rounded-[1.5rem] border border-app-border bg-app-surface-soft/60 p-5">
+        <div className="landx-soft-card p-5">
           <div className="text-sm text-app-text-soft">وضوح المسار</div>
           <div className="mt-4 text-5xl font-black text-app-text">3</div>
-          <div className="mt-3 text-sm leading-7 text-app-text-muted">ثلاث نقاط دخول رئيسية: استكشاف فرص، تحليل فكرة، أو إنشاء حساب ومتابعة الخدمة.</div>
+          <div className="mt-3 text-sm leading-7 text-app-text-muted">مسارات رئيسية تبدأ من الخدمة ثم تقودك للإجراء المناسب بدون زحام بصري.</div>
         </div>
-        <div className="rounded-[1.5rem] border border-app-border bg-app-surface-soft/60 p-5">
+        <div className="landx-soft-card p-5">
           <div className="flex items-center gap-2 text-sm text-app-text-soft">
             <CheckCircleIcon className="h-4 w-4 text-success" />
             جاهز للتنفيذ
           </div>
-          <div className="mt-3 text-sm leading-7 text-app-text-muted">المنصة تربط بين الواجهة والباك اند وقاعدة البيانات في تدفق واحد قابل للعرض العملي.</div>
+          <div className="mt-3 text-sm leading-7 text-app-text-muted">الواجهة، الباك اند، وقاعدة البيانات تعمل ضمن رحلة واحدة قابلة للعرض العملي أمام اللجنة.</div>
         </div>
       </div>
 
-      <div className="rounded-[1.75rem] border border-brand/20 bg-gradient-to-br from-brand/15 via-app-surface-soft/80 to-app-surface p-6">
+      <div className="landx-dark-card p-6">
         <div className="flex items-center justify-between">
-          <div className="rounded-full border border-brand/20 bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">لوحة القرار</div>
-          <SparklesIcon className="h-5 w-5 text-brand" />
+          <div className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-[#fff3e7]">لوحة القرار</div>
+          <SparklesIcon className="h-5 w-5 text-[#ffd9bb]" />
         </div>
         <div className="mt-6 space-y-4">
-          <div className="rounded-2xl border border-app-border bg-app-bg/35 p-4">
-            <div className="text-xs text-app-text-soft">أفضل بداية</div>
-            <div className="mt-2 text-xl font-bold text-app-text">اختر الخدمة أولًا</div>
+          <div className="rounded-2xl border border-white/10 bg-black/10 p-4">
+            <div className="text-xs text-[#f0cfb3]">أفضل بداية</div>
+            <div className="mt-2 text-xl font-bold text-[#fff8f0]">ابدأ من نية المستخدم</div>
           </div>
-          <div className="rounded-2xl border border-app-border bg-app-bg/35 p-4">
-            <div className="text-xs text-app-text-soft">أفضل انتقال</div>
-            <div className="mt-2 text-xl font-bold text-app-text">ثم سجّل أو أكمل مباشرة</div>
+          <div className="rounded-2xl border border-white/10 bg-black/10 p-4">
+            <div className="text-xs text-[#f0cfb3]">أفضل انتقال</div>
+            <div className="mt-2 text-xl font-bold text-[#fff8f0]">استكشف ثم سجل أو أكمل</div>
           </div>
-          <div className="rounded-2xl border border-app-border bg-app-bg/35 p-4">
-            <div className="text-xs text-app-text-soft">أفضل متابعة</div>
-            <div className="mt-2 text-xl font-bold text-app-text">راجع كل شيء من اللوحة</div>
+          <div className="rounded-2xl border border-white/10 bg-black/10 p-4">
+            <div className="text-xs text-[#f0cfb3]">أفضل متابعة</div>
+            <div className="mt-2 text-xl font-bold text-[#fff8f0]">كل الطلبات محفوظة بلوحتك</div>
           </div>
         </div>
       </div>
@@ -135,15 +135,15 @@ const Home = () => {
     <div className="overflow-hidden">
       <PageHero
         eyebrow="منصة قرار استثماري أوضح"
-        title="ابدأ من الخدمة التي تريدها، ثم تحرك داخل مسار واضح من الفهم إلى التنفيذ."
-        description="LandX تنظّم رحلة المستخدم في مسارات محددة: استكشاف فرص، تحليل فكرة، أو متابعة الطلبات بعد التسجيل. الهدف هو تقليل التشتت ورفع وضوح القرار."
+        title="واجهة أهدأ، قرار أسرع، وتجربة تستوعبك من أول خطوة."
+        description="LandX ترتب رحلة المستثمر والبلدية داخل تجربة دافئة وواضحة: تستكشف، تقارن، تفهم، ثم تتحرك مباشرة إلى الإجراء الذي تحتاجه دون فوضى أو تشتيت."
         actions={
           <>
-            <Link to="/opportunities" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-6 py-3.5 text-base font-semibold text-app-text shadow-lg shadow-brand/20">
+            <Link to="/opportunities" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#8f4f2d] via-[#ab6940] to-[#c9885a] px-6 py-3.5 text-base font-semibold text-[#fff8f0] shadow-lg shadow-brand/20">
               استعراض الفرص
               <ArrowRightIcon className="h-4 w-4" />
             </Link>
-            <Link to="/investment-analysis" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-app-border bg-app-surface-soft px-6 py-3.5 text-base font-semibold text-app-text">
+            <Link to="/investment-analysis" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#e2c7ae] bg-white/70 px-6 py-3.5 text-base font-semibold text-app-text">
               ابدأ تحليل فكرتك
               <FileTextIcon className="h-4 w-4" />
             </Link>
@@ -165,7 +165,7 @@ const Home = () => {
             {servicePaths.map((item, index) => (
               <AnimatedSection key={item.title} delay={index * 90}>
                 <Card className="flex h-full flex-col p-6">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">{item.icon}</div>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">{item.icon}</div>
                   <h3 className="mt-5 text-xl font-bold text-app-text">{item.title}</h3>
                   <p className="mt-3 flex-1 text-sm leading-8 text-app-text-muted">{item.description}</p>
                   <Link to={item.to} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
@@ -185,7 +185,7 @@ const Home = () => {
             {stats.map((item, index) => (
               <AnimatedSection key={item.label} delay={index * 80}>
                 <Card className="h-full p-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">{item.icon}</div>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">{item.icon}</div>
                   <div className="mt-5 text-3xl font-black text-app-text">{formatCompactNumber(item.value)}</div>
                   <div className="mt-2 text-sm text-app-text-muted">{item.label}</div>
                 </Card>
@@ -204,7 +204,7 @@ const Home = () => {
             {journey.map((item, index) => (
               <AnimatedSection key={item.title} delay={index * 90}>
                 <Card className="h-full p-6">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">{item.icon}</div>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">{item.icon}</div>
                   <h3 className="mt-5 text-xl font-bold text-app-text">{item.title}</h3>
                   <p className="mt-3 text-sm leading-8 text-app-text-muted">{item.description}</p>
                 </Card>
@@ -224,7 +224,7 @@ const Home = () => {
               {strengths.map((item, index) => (
                 <AnimatedSection key={item.title} delay={index * 100}>
                   <Card className="flex items-start gap-4 p-5">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">{item.icon}</div>
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">{item.icon}</div>
                     <div>
                       <h3 className="text-lg font-bold text-app-text">{item.title}</h3>
                       <p className="mt-2 text-sm leading-8 text-app-text-muted">{item.description}</p>
@@ -286,8 +286,8 @@ const Home = () => {
                   </h2>
                 </div>
                 <div className="grid gap-3">
-                  <Link to="/opportunities" className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-5 py-4 text-center text-sm font-semibold text-app-text">تصفح الفرص</Link>
-                  <Link to="/investment-analysis" className="rounded-2xl border border-app-border bg-app-surface-soft px-5 py-4 text-center text-sm font-semibold text-app-text">تحليل فكرة جديدة</Link>
+                  <Link to="/opportunities" className="rounded-2xl bg-gradient-to-r from-[#8f4f2d] via-[#ab6940] to-[#c9885a] px-5 py-4 text-center text-sm font-semibold text-[#fff8f0]">تصفح الفرص</Link>
+                  <Link to="/investment-analysis" className="rounded-2xl border border-[#e2c7ae] bg-white/65 px-5 py-4 text-center text-sm font-semibold text-app-text">تحليل فكرة جديدة</Link>
                   <Link to="/contact" className="rounded-2xl border border-app-border bg-transparent px-5 py-4 text-center text-sm font-semibold text-app-text-muted">تواصل مع الفريق</Link>
                 </div>
               </div>

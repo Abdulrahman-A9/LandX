@@ -3,9 +3,9 @@ import React from 'react';
 const Card = ({ children, className = '', hover = false, ...props }) => {
   return (
     <div
-      className={`rounded-[1.75rem] border border-app-border/80 bg-card-gradient shadow-[0_18px_44px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-all duration-300 ${
+      className={`rounded-[1.75rem] border border-app-border/80 bg-card-gradient shadow-[var(--landx-shadow-soft)] backdrop-blur-xl transition-all duration-300 ${
         hover
-          ? 'hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_26px_56px_rgba(0,0,0,0.28)]'
+          ? 'hover:-translate-y-1.5 hover:border-brand/35 hover:shadow-[var(--landx-shadow)]'
           : 'hover:border-app-border'
       } ${className}`}
       {...props}

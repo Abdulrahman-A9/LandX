@@ -132,7 +132,7 @@ const OpportunityDetails = () => {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-app-border/70">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(197,123,69,0.18),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(125,47,54,0.12),transparent_26%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(182,116,69,0.22),transparent_26%),radial-gradient(circle_at_bottom_left,rgba(255,248,239,0.95),transparent_28%),linear-gradient(180deg,rgba(255,251,247,0.92),rgba(242,229,213,0.82))]" />
         <div className="landx-shell relative py-14 lg:py-16">
           <Link to="/opportunities" className="inline-flex items-center gap-2 text-sm font-semibold text-app-text-muted hover:text-app-text">
             <ArrowRightIcon className="h-4 w-4" />
@@ -153,14 +153,14 @@ const OpportunityDetails = () => {
 
             <Card className="p-6">
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-success/20 bg-success/10 p-4">
+                <div className="rounded-2xl border border-success/20 bg-[#eef3e7] p-4">
                   <div className="flex items-center gap-2 text-xs text-app-text-soft">
                     <PercentIcon className="h-4 w-4 text-success" />
                     العائد المتوقع
                   </div>
                   <div className="mt-3 text-3xl font-black text-success">{opportunity.expectedReturn}%</div>
                 </div>
-                <div className="rounded-2xl border border-brand/20 bg-brand/10 p-4">
+                <div className="rounded-2xl border border-brand/20 bg-[#f7ecdf] p-4">
                   <div className="flex items-center gap-2 text-xs text-app-text-soft">
                     <LeafIcon className="h-4 w-4 text-brand" />
                     الاستثمار المطلوب
@@ -169,7 +169,7 @@ const OpportunityDetails = () => {
                     {formatCurrency(opportunity.investmentRequired, opportunity.currency)}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                <div className="rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
                   <div className="flex items-center gap-2 text-xs text-app-text-soft">
                     <MapPinIcon className="h-4 w-4 text-brand" />
                     المساحة
@@ -178,7 +178,7 @@ const OpportunityDetails = () => {
                     {opportunity.area} {opportunity.areaUnit}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                <div className="rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
                   <div className="flex items-center gap-2 text-xs text-app-text-soft">
                     <CalendarIcon className="h-4 w-4 text-brand" />
                     حالة النشر
@@ -186,7 +186,7 @@ const OpportunityDetails = () => {
                   <div className="mt-3 text-lg font-bold text-app-text">{statusLabel(opportunity.status)}</div>
                 </div>
               </div>
-              <div className="mt-5 rounded-2xl border border-app-border bg-app-surface-soft p-4 text-sm leading-7 text-app-text-muted">
+              <div className="mt-5 rounded-2xl border border-[#ead9c7] bg-white/55 p-4 text-sm leading-7 text-app-text-muted">
                 المسار الصحيح هنا: راجع الملخص أولًا، ثم قرر إن كنت تريد إرسال اهتمام واستفسار ليُحفظا معًا داخل النظام.
               </div>
               <div className="mt-5 grid gap-3">
@@ -196,7 +196,7 @@ const OpportunityDetails = () => {
                 {!token || user?.role !== 'investor' ? (
                   <Link
                     to={interestAuthLink}
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-app-border bg-app-surface-soft px-5 py-3 text-sm font-semibold text-app-text"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#dfc4ac] bg-white/70 px-5 py-3 text-sm font-semibold text-app-text"
                   >
                     أنشئ حساب مستثمر وأكمل الطلب
                     <ArrowRightIcon className="h-4 w-4" />
@@ -204,7 +204,7 @@ const OpportunityDetails = () => {
                 ) : (
                   <Link
                     to="/investor/inquiries"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-app-border bg-app-surface-soft px-5 py-3 text-sm font-semibold text-app-text"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#dfc4ac] bg-white/70 px-5 py-3 text-sm font-semibold text-app-text"
                   >
                     متابعة استفساراتي
                     <MessageCircleIcon className="h-4 w-4" />
@@ -220,12 +220,12 @@ const OpportunityDetails = () => {
         <div className="landx-shell grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="space-y-8">
             <Card className="overflow-hidden">
-              <div className="aspect-[16/9] overflow-hidden bg-app-surface-soft">
+              <div className="aspect-[16/9] overflow-hidden bg-[#ead7c1]">
                 {opportunity.images?.length ? (
                   <img src={opportunity.images[0]} alt={opportunity.title} className="h-full w-full object-cover" />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center">
-                    <LeafIcon className="h-16 w-16 text-app-text-soft" />
+                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#efdcca] via-[#d8b18f] to-[#9a603b]">
+                    <LeafIcon className="h-16 w-16 text-[#fff8f0]" />
                   </div>
                 )}
               </div>
@@ -240,7 +240,7 @@ const OpportunityDetails = () => {
               <h2 className="text-2xl font-bold text-app-text">ما الذي يميزها؟</h2>
               <div className="mt-5 grid gap-3 md:grid-cols-2">
                 {opportunity.features.map((feature) => (
-                  <div key={feature} className="flex items-start gap-3 rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                  <div key={feature} className="flex items-start gap-3 rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
                     <CheckCircleIcon className="mt-1 h-5 w-5 shrink-0 text-success" />
                     <span className="text-sm leading-7 text-app-text-muted">{feature}</span>
                   </div>
@@ -253,18 +253,18 @@ const OpportunityDetails = () => {
             <Card className="p-6">
               <h2 className="text-xl font-bold text-app-text">ملخص سريع للقرار</h2>
               <div className="mt-5 space-y-4">
-                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                <div className="rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
                   <div className="text-sm text-app-text-soft">الجهة المعلنة</div>
                   <div className="mt-2 flex items-center gap-2 font-bold text-app-text">
                     <BuildingIcon className="h-4 w-4 text-brand" />
                     {opportunity.municipality}
                   </div>
                 </div>
-                <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
+                <div className="rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
                   <div className="text-sm text-app-text-soft">أفضل خطوة تالية</div>
                   <div className="mt-2 font-bold text-app-text">إذا كانت المؤشرات مناسبة، أرسل اهتمامك الآن ليبدأ مسار المتابعة داخل حسابك.</div>
                 </div>
-                <div className="rounded-2xl border border-brand/20 bg-brand/10 p-4 text-sm leading-7 text-app-text-muted">
+                <div className="rounded-2xl border border-brand/20 bg-[#f7ecdf] p-4 text-sm leading-7 text-app-text-muted">
                   عند الإرسال يتم حفظ طلب الاهتمام والاستفسار داخل قاعدة البيانات ويمكن مراجعتهما من لوحة المستثمر.
                 </div>
               </div>

@@ -6,7 +6,8 @@
 
 @layer base {
   :root {
-    --landx-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+    --landx-shadow: 0 28px 70px rgba(108, 64, 34, 0.16);
+    --landx-shadow-soft: 0 18px 40px rgba(120, 76, 45, 0.12);
   }
 
   html {
@@ -25,12 +26,12 @@
 
   body {
     @apply bg-app-bg text-app-text font-body antialiased;
-    color-scheme: dark;
+    color-scheme: light;
     background-image:
-      radial-gradient(circle at top right, rgba(193, 122, 72, 0.18), transparent 26%),
-      radial-gradient(circle at 15% 22%, rgba(239, 228, 215, 0.07), transparent 18%),
-      radial-gradient(circle at bottom left, rgba(108, 55, 27, 0.16), transparent 24%),
-      linear-gradient(180deg, rgba(22, 13, 9, 0.99), rgba(26, 18, 14, 1));
+      radial-gradient(circle at top right, rgba(178, 111, 66, 0.24), transparent 24%),
+      radial-gradient(circle at 14% 18%, rgba(255, 250, 243, 0.85), transparent 22%),
+      radial-gradient(circle at 78% 75%, rgba(206, 152, 112, 0.18), transparent 24%),
+      linear-gradient(180deg, #f8f2ea 0%, #f3e8d9 52%, #efe1cf 100%);
     background-attachment: fixed;
   }
 
@@ -64,13 +65,13 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(37, 24, 18, 0.88);
+    background: rgba(214, 193, 171, 0.55);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, rgba(184, 106, 58, 0.95), rgba(108, 55, 27, 0.95));
+    background: linear-gradient(180deg, rgba(177, 110, 68, 0.95), rgba(113, 63, 34, 0.92));
     border-radius: 999px;
-    border: 2px solid rgba(37, 24, 18, 0.9);
+    border: 2px solid rgba(245, 235, 222, 0.92);
   }
 }
 
@@ -92,10 +93,25 @@
   }
 
   .landx-kicker {
-    @apply inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/10 px-4 py-2 text-sm font-semibold text-brand;
+    @apply inline-flex items-center gap-2 rounded-full border border-brand/15 bg-[#fffaf4] px-4 py-2 text-sm font-semibold text-brand shadow-[var(--landx-shadow-soft)];
   }
 
   .landx-heading {
     @apply font-heading text-app-text;
+  }
+
+  .landx-glass {
+    @apply rounded-[1.75rem] border border-white/60 bg-white/55 backdrop-blur-xl;
+    box-shadow: var(--landx-shadow-soft);
+  }
+
+  .landx-soft-card {
+    @apply rounded-[1.6rem] border border-[#fff8f0] bg-gradient-to-br from-[#fffaf5] via-[#f7ecdf] to-[#ecd7c0];
+    box-shadow: var(--landx-shadow-soft);
+  }
+
+  .landx-dark-card {
+    @apply rounded-[1.8rem] border border-[#946446]/25 bg-gradient-to-br from-[#6b3d23] via-[#875130] to-[#b16f45] text-[#fff8f0];
+    box-shadow: 0 28px 60px rgba(103, 56, 28, 0.24);
   }
 }
