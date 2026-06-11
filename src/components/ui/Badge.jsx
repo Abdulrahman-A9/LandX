@@ -2,11 +2,11 @@ import React from 'react';
 
 const Badge = ({ children, variant = 'default', className = '' }) => {
   const variants = {
-    default: 'border border-app-border bg-app-surface-soft text-app-text-muted',
-    primary: 'border border-brand/30 bg-brand/10 text-brand',
-    success: 'border border-success/30 bg-success/10 text-success',
-    warning: 'border border-warning/30 bg-warning/10 text-warning',
-    danger: 'border border-danger/30 bg-danger/10 text-danger',
+    default: 'border border-[#dbc5b0] bg-[#fff7ef] text-[#8b674f]',
+    primary: 'border border-brand/20 bg-[#f7ecdf] text-brand',
+    success: 'border border-success/25 bg-[#eef3e7] text-success',
+    warning: 'border border-warning/25 bg-[#fbf1e6] text-warning',
+    danger: 'border border-danger/25 bg-[#f5e5e2] text-danger',
   };
   
   return (

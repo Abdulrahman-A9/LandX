@@ -43,14 +43,17 @@ const MunicipalityInquiries = () => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-app-text">استفسارات المستثمرين</h1>
-        <p className="mt-2 text-app-text-muted">يمكنك الرد هنا مباشرة، وسيظهر الرد للمستثمر في حسابه.</p>
+        <h1 className="text-3xl font-black text-app-text">استفسارات المستثمرين</h1>
+        <p className="mt-2 max-w-3xl text-base leading-8 text-app-text-muted">
+          كل استفسار هنا مرتبط بفرصة محددة، والرد يظهر للمستثمر داخل حسابه مباشرة. استخدم هذه الصفحة
+          كمسار رسمي وواضح للمتابعة بدل الرسائل المتفرقة.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">
         <Card className="p-6 bg-card-gradient border border-app-border">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-app-text-muted">إجمالي الاستفسارات</h3>
+            <h3 className="text-sm font-semibold text-app-text-muted">إجمالي الاستفسارات</h3>
             <MessageCircleIcon className="text-app-text-soft" />
           </div>
           <p className="text-3xl font-bold text-app-text">{inquiries.length}</p>
@@ -75,30 +78,30 @@ const MunicipalityInquiries = () => {
 
       <Card className="bg-card-gradient border border-app-border">
         <div className="p-6 border-b border-app-border">
-          <h2 className="text-xl font-bold text-app-text">قائمة الاستفسارات</h2>
+          <h2 className="text-xl font-black text-app-text">قائمة الاستفسارات</h2>
         </div>
         <div className="p-6 space-y-4">
           {inquiries.map((inquiry) => {
             const badge = getStatusBadge(inquiry.status);
             return (
-              <div key={inquiry.id} className="rounded-lg border border-app-border bg-app-surface-soft p-4">
+              <div key={inquiry.id} className="rounded-2xl border border-[#e2c8b2] bg-white/65 p-5">
                 <div className="mb-3 flex items-start justify-between">
                   <div>
                     <div className="mb-2 flex items-center gap-3">
                       <h3 className="font-bold text-app-text">{inquiry.subject}</h3>
                       <span className={`px-3 py-1 rounded-full text-xs border ${badge.className}`}>{badge.label}</span>
                     </div>
-                    <p className="text-sm text-app-text-muted mb-1">الفرصة رقم #{inquiry.opportunity_id}</p>
+                    <p className="text-sm leading-7 text-app-text-muted mb-1">الفرصة رقم #{inquiry.opportunity_id}</p>
                     <p className="text-xs text-app-text-soft">{formatArabicDate(inquiry.created_at)}</p>
                   </div>
                 </div>
-                <p className="mb-4 text-app-text">{inquiry.message}</p>
+                <p className="mb-4 text-sm leading-8 text-app-text-muted">{inquiry.message}</p>
 
                 {inquiry.replies?.length ? (
-                  <div className="mb-4 space-y-2 border-t border-app-border pt-3">
+                  <div className="mb-4 space-y-2 border-t border-[#ead9c7] pt-3">
                     {inquiry.replies.map((reply) => (
-                      <div key={reply.id} className="rounded-lg bg-app-surface p-3">
-                        <p className="text-sm text-app-text-muted">{reply.message}</p>
+                      <div key={reply.id} className="rounded-2xl bg-[#fbf5ef] p-3">
+                        <p className="text-sm leading-8 text-app-text-muted">{reply.message}</p>
                         <p className="mt-1 text-xs text-app-text-soft">{formatArabicDate(reply.created_at)}</p>
                       </div>
                     ))}
@@ -111,7 +114,7 @@ const MunicipalityInquiries = () => {
                       value={replyText}
                       onChange={(e) => setReplyText(e.target.value)}
                       rows={4}
-                      className="w-full resize-none rounded-2xl border border-app-border bg-app-surface px-4 py-3 text-sm text-app-text"
+                      className="w-full resize-none rounded-2xl border border-[#e5cfba] bg-white/75 px-4 py-3 text-sm text-app-text placeholder:text-app-text-soft"
                       placeholder="اكتب ردك هنا"
                     />
                     <div className="flex gap-3">

@@ -74,20 +74,20 @@ const InvestorDashboard = () => {
         <Card className="p-7">
           <div className="landx-kicker">لوحة قيادة المستثمر</div>
           <h1 className="mt-5 text-4xl font-black text-app-text">ابدأ من هنا ثم تحرك للخطوة التالية بوضوح</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-8 text-app-text-muted">
+          <p className="mt-3 max-w-2xl text-base leading-8 text-app-text-muted">
             هذه اللوحة لا تعرض أرقامًا فقط، بل تختصر أين وصلت في المسار وماذا ينبغي أن تفعل بعد ذلك داخل المنصة.
           </p>
         </Card>
 
         <Card className="p-7">
-          <div className="text-sm text-app-text-soft">ملخص الجلسة</div>
+          <div className="text-sm font-semibold text-app-text-muted">ملخص الجلسة</div>
           <div className="mt-5 grid grid-cols-2 gap-4">
-            <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
-              <div className="text-xs text-app-text-soft">طلبات الاهتمام</div>
+            <div className="rounded-2xl border border-[#e2c8b2] bg-white/60 p-4">
+              <div className="text-xs font-semibold text-app-text-soft">طلبات الاهتمام</div>
               <div className="mt-2 text-3xl font-black text-success">{stats.totalInvestments}</div>
             </div>
-            <div className="rounded-2xl border border-app-border bg-app-surface-soft p-4">
-              <div className="text-xs text-app-text-soft">استفسارات معلقة</div>
+            <div className="rounded-2xl border border-[#e2c8b2] bg-white/60 p-4">
+              <div className="text-xs font-semibold text-app-text-soft">استفسارات معلقة</div>
               <div className="mt-2 text-3xl font-black text-warning">{stats.pendingInquiries}</div>
             </div>
           </div>
@@ -95,23 +95,23 @@ const InvestorDashboard = () => {
       </section>
 
       <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {[
-          { label: 'إجمالي الطلبات', value: stats.totalInvestments, helper: 'طلبات اهتمام مسجلة', icon: <WalletIcon className="h-5 w-5" />, tone: 'text-app-text' },
-          { label: 'قيد المتابعة', value: stats.activeInvestments, helper: 'تحت المراجعة أو معتمدة', icon: <TrendingUpIcon className="h-5 w-5" />, tone: 'text-success' },
-          { label: 'قيمة مقترحة', value: formatCurrency(stats.totalInvested), helper: 'إجمالي المبالغ المسجلة', icon: <DollarSignIcon className="h-5 w-5" />, tone: 'text-brand' },
-          { label: 'تقارير التحليل', value: stats.analyses, helper: 'تحليلات محفوظة في القاعدة', icon: <FileTextIcon className="h-5 w-5" />, tone: 'text-warning' },
-        ].map((item) => (
-          <Card key={item.label} className="p-6">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-app-text-muted">{item.label}</div>
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
-                {item.icon}
+          {[
+            { label: 'إجمالي الطلبات', value: stats.totalInvestments, helper: 'طلبات اهتمام مسجلة', icon: <WalletIcon className="h-5 w-5" />, tone: 'text-app-text' },
+            { label: 'قيد المتابعة', value: stats.activeInvestments, helper: 'تحت المراجعة أو معتمدة', icon: <TrendingUpIcon className="h-5 w-5" />, tone: 'text-success' },
+            { label: 'قيمة مقترحة', value: formatCurrency(stats.totalInvested), helper: 'إجمالي المبالغ المسجلة', icon: <DollarSignIcon className="h-5 w-5" />, tone: 'text-brand' },
+            { label: 'تقارير التحليل', value: stats.analyses, helper: 'تحليلات محفوظة في القاعدة', icon: <FileTextIcon className="h-5 w-5" />, tone: 'text-warning' },
+          ].map((item) => (
+            <Card key={item.label} className="p-6">
+              <div className="flex items-center justify-between">
+                <div className="text-sm font-semibold text-app-text-muted">{item.label}</div>
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
+                  {item.icon}
+                </div>
               </div>
-            </div>
-            <div className={`mt-6 text-3xl font-black ${item.tone}`}>{item.value}</div>
-            <div className="mt-2 text-sm text-app-text-soft">{item.helper}</div>
-          </Card>
-        ))}
+              <div className={`mt-6 text-3xl font-black ${item.tone}`}>{item.value}</div>
+              <div className="mt-2 text-sm leading-7 text-app-text-muted">{item.helper}</div>
+            </Card>
+          ))}
       </section>
 
       <section>
@@ -124,7 +124,7 @@ const InvestorDashboard = () => {
         <div className="grid gap-5 xl:grid-cols-3">
           {nextSteps.map((item) => (
             <Card key={item.title} className={`p-6 ${item.highlight ? 'border-brand/40' : ''}`}>
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/20 bg-brand/10 text-brand">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
                 {item.icon}
               </div>
               <h3 className="mt-5 text-xl font-bold text-app-text">{item.title}</h3>
