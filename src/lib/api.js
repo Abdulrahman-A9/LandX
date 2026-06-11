@@ -161,6 +161,18 @@ export const adminApi = {
     request('/admin/users', {
       headers: authHeaders(token),
     }),
+  municipalities: (token) =>
+    request('/admin/municipalities', {
+      headers: authHeaders(token),
+    }),
+  opportunities: (token) =>
+    request('/admin/opportunities', {
+      headers: authHeaders(token),
+    }),
+  news: (token) =>
+    request('/admin/news', {
+      headers: authHeaders(token),
+    }),
 };
 
 export { API_BASE_URL };

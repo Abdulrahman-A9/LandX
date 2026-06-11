@@ -40,18 +40,20 @@ const Announcements = () => {
     }
   };
 
-  if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل الإعلانات...</Card>;
+  if (loading) return <Card className="p-10 text-center text-app-text-muted">جارٍ تحميل الإعلانات...</Card>;
   if (error) return <Card className="p-10 text-center text-danger">{error}</Card>;
 
   return (
-    <div>
-      <div className="mb-8">
+    <div className="space-y-8">
+      <div>
         <h1 className="text-3xl font-bold text-app-text">الإعلانات</h1>
-        <p className="mt-2 text-app-text-muted">يمكنك نشر إعلان جديد وسيظهر مباشرة في الصفحة العامة.</p>
+        <p className="mt-2 max-w-3xl text-base leading-8 text-app-text-muted">
+          استخدم هذه الصفحة لنشر الإعلانات التشغيلية أو التنبيهية التي يجب أن تظهر مباشرة للمستثمرين والزوار.
+        </p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <Card className="p-6">
+        <Card className="border border-app-border bg-card-gradient p-6">
           <h2 className="text-xl font-bold text-app-text">إعلان جديد</h2>
           <form onSubmit={handleSubmit} className="mt-5 space-y-4">
             <input value={formData.title} onChange={(e) => setFormData((p) => ({ ...p, title: e.target.value }))} required placeholder="عنوان الإعلان" className="w-full rounded-2xl border border-app-border bg-app-surface px-4 py-3 text-app-text" />
@@ -61,23 +63,23 @@ const Announcements = () => {
               <option value="low">عادي</option>
             </select>
             <textarea value={formData.content} onChange={(e) => setFormData((p) => ({ ...p, content: e.target.value }))} required rows={5} placeholder="محتوى الإعلان" className="w-full resize-none rounded-2xl border border-app-border bg-app-surface px-4 py-3 text-app-text" />
-            <Button type="submit" disabled={submitting}>{submitting ? 'جاري النشر...' : 'نشر الإعلان'}</Button>
+            <Button type="submit" disabled={submitting}>{submitting ? 'جارٍ النشر...' : 'نشر الإعلان'}</Button>
           </form>
         </Card>
 
-        <Card className="bg-card-gradient border border-app-border">
-          <div className="p-6 border-b border-app-border">
+        <Card className="border border-app-border bg-card-gradient">
+          <div className="border-b border-app-border p-6">
             <h2 className="text-xl font-bold text-app-text">قائمة الإعلانات</h2>
           </div>
-          <div className="p-6 space-y-4">
+          <div className="space-y-4 p-6">
             {announcements.map((announcement) => (
-              <div key={announcement.id} className="rounded-lg border border-app-border bg-app-surface-soft p-4">
+              <div key={announcement.id} className="rounded-2xl border border-[#e2c8b2] bg-white/70 p-4 shadow-[0_18px_40px_rgba(90,52,26,0.07)]">
                 <div className="mb-2 flex items-center gap-3">
                   <MegaphoneIcon className="text-brand" />
                   <h3 className="font-bold text-app-text">{announcement.title}</h3>
                 </div>
-                <p className="text-sm text-app-text-muted">{formatArabicDate(announcement.created_at)}</p>
-                <p className="mt-3 text-app-text">{announcement.content}</p>
+                <p className="text-sm font-medium text-app-text-muted">{formatArabicDate(announcement.created_at)}</p>
+                <p className="mt-3 text-sm leading-8 text-app-text">{announcement.content}</p>
               </div>
             ))}
           </div>
