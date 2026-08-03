@@ -32,9 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (!token) {
-      setUser(null);
       localStorage.removeItem('landx_user');
-      setLoading(false);
       return;
     }
 

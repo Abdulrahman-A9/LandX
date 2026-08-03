@@ -23,7 +23,7 @@ async function request(path, options = {}) {
   let response;
   try {
     response = await fetch(`${API_BASE_URL}${path}`, options);
-  } catch (error) {
+  } catch {
     throw new Error('Backend service is unavailable. Check API deployment or VITE_API_BASE_URL.');
   }
   if (!response.ok) {

@@ -2,7 +2,7 @@
 
 ## Quick start
 
-1. Create a PostgreSQL database named `landx`.
+1. Create a PostgreSQL database named `landx` (MySQL is also supported when `DATABASE_URL` uses `mysql+pymysql`).
 2. Copy `.env.example` to `.env` and update credentials.
 3. Install dependencies:
 
@@ -36,6 +36,12 @@ uvicorn app.main:app --reload
 
 ```text
 postgresql+psycopg://postgres:password@127.0.0.1:5432/landx
+```
+
+- Example MySQL `DATABASE_URL`:
+
+```text
+mysql+pymysql://root:password@127.0.0.1:3306/landx
 ```
 
 - On Render, use the PostgreSQL connection details provided by your database service and place the final value in `DATABASE_URL`.
