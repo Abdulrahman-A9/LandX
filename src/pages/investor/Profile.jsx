@@ -31,7 +31,7 @@ const Profile = () => {
         <div>
           <h1 className="text-3xl font-bold text-app-text">الملف الشخصي</h1>
           <p className="mt-2 max-w-3xl text-base leading-8 text-app-text-muted">
-            هذا الملف هو مرجع بياناتك الأساسية داخل المنصة، ويظهر في مسارات التقديم والمتابعة والتواصل.
+            حدّث بياناتك لتسهيل التقديم والتواصل مع الجهات المعلنة.
           </p>
         </div>
         {!isEditing ? <Button onClick={() => setIsEditing(true)}>تعديل</Button> : null}

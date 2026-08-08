@@ -20,7 +20,7 @@ const Users = () => {
       <Card className="p-10 text-center">
         <h1 className="text-3xl font-black text-app-text">المستخدمون غير متاحين حالياً</h1>
         <p className="mt-3 text-sm leading-8 text-app-text-muted">
-          يجب تسجيل الدخول بحساب إدارة حتى تتمكن هذه الصفحة من قراءة جدول `users` من الباك اند.
+          سجّل الدخول بحساب إدارة لإدارة حسابات مستخدمي LandX.
         </p>
       </Card>
     );
@@ -33,7 +33,7 @@ const Users = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-app-text">المستخدمون</h1>
-        <p className="mt-2 text-app-text-muted">القائمة أدناه مرتبطة بجدول `users` الفعلي في قاعدة البيانات.</p>
+        <p className="mt-2 text-app-text-muted">راجع حسابات المستثمرين والجهات الشريكة وحالتها الحالية.</p>
       </div>
 
       <Card className="overflow-hidden">

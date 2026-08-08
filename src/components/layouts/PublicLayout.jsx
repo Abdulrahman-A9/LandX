@@ -18,7 +18,7 @@ const navLinks = [
   { to: '/', label: 'الرئيسية' },
   { to: '/opportunities', label: 'الفرص' },
   { to: '/investment-analysis', label: 'تحليل الفكرة' },
-  { to: '/investor-journey', label: 'رحلة المستثمر' },
+  { to: '/investor-journey', label: 'كيف تستفيد من LandX' },
 ];
 
 const quickStats = [
@@ -66,7 +66,7 @@ const PublicLayout = ({ children }) => {
           <div className="flex items-center justify-between gap-4 py-4">
             <Link to="/" className="flex items-center gap-3">
               <BrandLogo imageClassName="h-12 w-auto" />
-              <div className="hidden text-sm text-app-text-soft sm:block">منصة قرار استثماري أوضح وأكثر هدوءًا</div>
+              <div className="hidden text-sm text-app-text-soft sm:block">فرص استثمارية أوضح، وقرارات أكثر ثقة</div>
             </Link>
 
             <nav className="hidden items-center gap-1 xl:flex">
@@ -204,10 +204,10 @@ const PublicLayout = ({ children }) => {
             <div className="space-y-5">
               <div className="space-y-2">
                 <BrandLogo imageClassName="h-14 w-auto" />
-                <div className="text-sm text-app-text-soft">تجربة استثمار عربية أكثر تركيزًا</div>
+                <div className="text-sm text-app-text-soft">منصة تجمع الفرصة بالمستثمر المناسب</div>
               </div>
               <p className="max-w-md text-sm leading-8 text-app-text-muted">
-                المنصة تجمع بين اكتشاف الفرص، قراءة الجدوى، وفهم المسار التنفيذي بلغة واضحة وواجهة هادئة تخفف التشتت أثناء اتخاذ القرار.
+                LandX تجمع الفرص الاستثمارية والجهات المعلنة والمستثمرين في مساحة واحدة تساعد على التقييم والتواصل وتحويل الاهتمام إلى خطوة عملية.
               </p>
               <div className="grid grid-cols-3 gap-3">
                 {quickStats.map((item) => (
@@ -224,17 +224,17 @@ const PublicLayout = ({ children }) => {
               <ul className="space-y-3 text-sm text-app-text-muted">
                 <li><Link to="/opportunities" className="hover:text-app-text">الفرص الاستثمارية</Link></li>
                 <li><Link to="/investment-analysis" className="hover:text-app-text">تحليل الفكرة</Link></li>
-                <li><Link to="/investor-journey" className="hover:text-app-text">رحلة المستثمر</Link></li>
+                <li><Link to="/investor-journey" className="hover:text-app-text">كيف تستفيد من LandX</Link></li>
                 <li><Link to="/news" className="hover:text-app-text">الأخبار والإعلانات</Link></li>
               </ul>
             </div>
 
             <div>
-              <div className="mb-4 text-sm font-bold text-app-text">المسارات</div>
+              <div className="mb-4 text-sm font-bold text-app-text">لمن صممت LandX؟</div>
               <ul className="space-y-3 text-sm text-app-text-muted">
-                <li className="flex items-start gap-2"><TargetIcon className="mt-1 h-4 w-4 text-brand" /> للمستثمر الباحث عن قرار أسرع</li>
-                <li className="flex items-start gap-2"><SearchIcon className="mt-1 h-4 w-4 text-brand" /> للبلدية التي تريد عرضًا أوضح للفرص</li>
-                <li className="flex items-start gap-2"><MessageCircleIcon className="mt-1 h-4 w-4 text-brand" /> للفريق الذي يدير الاستفسارات والطلبات</li>
+                <li className="flex items-start gap-2"><TargetIcon className="mt-1 h-4 w-4 text-brand" /> للمستثمر الباحث عن فرصة مناسبة</li>
+                <li className="flex items-start gap-2"><SearchIcon className="mt-1 h-4 w-4 text-brand" /> للجهة التي تريد جذب استثمارات نوعية</li>
+                <li className="flex items-start gap-2"><MessageCircleIcon className="mt-1 h-4 w-4 text-brand" /> للفريق الذي يتابع الطلبات والشراكات</li>
               </ul>
             </div>
 
@@ -254,7 +254,7 @@ const PublicLayout = ({ children }) => {
               ) : (
                 <div className="landx-glass rounded-[1.5rem] p-5">
                   <div className="text-sm leading-7 text-app-text-muted">
-                    جرّب المنصة من خلال تسجيل حساب جديد أو الدخول بالحسابات التجريبية.
+                    أنشئ حسابك وابدأ باستكشاف الفرص أو تقييم فكرتك الاستثمارية.
                   </div>
                   <div className="mt-4 grid gap-3">
                     <Link to="/register" className="rounded-2xl bg-gradient-to-r from-[#8f4f2d] via-[#aa653c] to-[#c38256] px-4 py-3 text-center text-sm font-semibold text-[#fff8f0]">
@@ -271,7 +271,7 @@ const PublicLayout = ({ children }) => {
 
           <div className="mt-10 flex flex-col gap-3 border-t border-app-border/70 pt-6 text-sm text-app-text-soft md:flex-row md:items-center md:justify-between">
             <p>© 2024 LandX. جميع الحقوق محفوظة.</p>
-            <p>واجهة عربية أولًا مبنية لتقليل الفوضى وتسريع الفهم.</p>
+            <p>فرص أوضح، تواصل مباشر، وقرارات استثمارية مدروسة.</p>
           </div>
         </div>
       </footer>

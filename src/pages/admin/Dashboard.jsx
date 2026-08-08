@@ -13,12 +13,12 @@ const AdminDashboard = () => {
   const nextSteps = [
     {
       title: 'مراجعة المستخدمين',
-      description: 'تحقق من حالة الحسابات الجديدة والنشطة، خصوصًا إذا كنت ستعرض النظام أمام اللجنة.',
+      description: 'تابع الحسابات الجديدة والنشطة وتأكد من جاهزية تجربة المستخدمين.',
       to: '/admin/users',
     },
     {
       title: 'مراجعة البلديات والفرص',
-      description: 'تأكد أن الجهات والفرص الظاهرة في الواجهة العامة تعكس البيانات التي تريد عرضها.',
+      description: 'راجع الجهات والفرص المنشورة وتأكد من جودة المحتوى المعروض للمستثمرين.',
       to: '/admin/opportunities',
     },
     {
@@ -56,7 +56,7 @@ const AdminDashboard = () => {
           <div className="text-sm font-semibold text-app-text-muted">أولوية الإشراف</div>
           <div className="mt-4 rounded-2xl border border-danger/20 bg-[#f3e5e2] p-5">
             <div className="text-3xl font-black text-danger">{data.inquiries}</div>
-            <div className="mt-2 text-sm leading-7 text-app-text-muted">استفسارات مسجلة تحتاج متابعة على مستوى النظام.</div>
+            <div className="mt-2 text-sm leading-7 text-app-text-muted">استفسارات المستثمرين التي تحتاج متابعة.</div>
           </div>
         </Card>
       </section>
@@ -66,7 +66,7 @@ const AdminDashboard = () => {
           { label: 'المستخدمون', value: data.users, helper: 'إجمالي الحسابات', icon: <UsersIcon className="h-5 w-5" />, tone: 'text-app-text' },
           { label: 'البلديات', value: data.municipalities, helper: 'جهات مفعلة', icon: <BuildingIcon className="h-5 w-5" />, tone: 'text-brand' },
           { label: 'الفرص', value: data.opportunities, helper: `${data.active_opportunities} نشطة حاليًا`, icon: <LeafIcon className="h-5 w-5" />, tone: 'text-success' },
-          { label: 'التحليلات', value: data.analyses, helper: 'تقارير محفوظة في النظام', icon: <ShieldCheckIcon className="h-5 w-5" />, tone: 'text-warning' },
+          { label: 'التحليلات', value: data.analyses, helper: 'تقييمات استثمارية محفوظة', icon: <ShieldCheckIcon className="h-5 w-5" />, tone: 'text-warning' },
         ].map((item) => (
             <Card key={item.label} className="p-6">
               <div className="flex items-center justify-between">
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
       <section>
         <div className="mb-4">
           <h2 className="text-2xl font-bold text-app-text">الخطوات المقترحة الآن</h2>
-          <p className="mt-2 text-sm leading-7 text-app-text-muted">هذه الخطوات ترتب مراجعة النظام إداريًا قبل العرض أو التشغيل النهائي.</p>
+          <p className="mt-2 text-sm leading-7 text-app-text-muted">راجع مؤشرات المنصة والمحتوى والطلبات للحفاظ على جودة الخدمة.</p>
         </div>
         <div className="grid gap-5 xl:grid-cols-3">
           {nextSteps.map((item) => (

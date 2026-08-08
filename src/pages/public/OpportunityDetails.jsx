@@ -187,7 +187,7 @@ const OpportunityDetails = () => {
                 </div>
               </div>
               <div className="mt-5 rounded-2xl border border-[#ead9c7] bg-white/55 p-4 text-sm leading-7 text-app-text-muted">
-                المسار الصحيح هنا: راجع الملخص أولًا، ثم قرر إن كنت تريد إرسال اهتمام واستفسار ليُحفظا معًا داخل النظام.
+                ابدأ بمراجعة المؤشرات الأساسية، ثم أرسل اهتمامك أو استفسارك إلى الجهة المعلنة عندما تجد الفرصة المناسبة.
               </div>
               <div className="mt-5 grid gap-3">
                 <Button size="lg" onClick={handlePrimaryAction}>
@@ -278,11 +278,11 @@ const OpportunityDetails = () => {
                   </div>
                 </div>
                 <div className="rounded-2xl border border-[#ead9c7] bg-white/55 p-4">
-                  <div className="text-sm text-app-text-soft">أفضل خطوة تالية</div>
-                  <div className="mt-2 font-bold text-app-text">إذا كانت المؤشرات مناسبة، أرسل اهتمامك الآن ليبدأ مسار المتابعة داخل حسابك.</div>
+                  <div className="text-sm text-app-text-soft">خطوتك الاستثمارية التالية</div>
+                  <div className="mt-2 font-bold text-app-text">إذا وجدت الفرصة مناسبة، أرسل اهتمامك لتبدأ الجهة بمراجعة طلبك.</div>
                 </div>
                 <div className="rounded-2xl border border-brand/20 bg-[#f7ecdf] p-4 text-sm leading-7 text-app-text-muted">
-                  عند الإرسال يتم حفظ طلب الاهتمام والاستفسار داخل قاعدة البيانات ويمكن مراجعتهما من لوحة المستثمر.
+                  بعد الإرسال يمكنك متابعة حالة الطلب والردود من حساب المستثمر.
                 </div>
               </div>
             </Card>
@@ -326,7 +326,7 @@ const OpportunityDetails = () => {
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h2 className="text-2xl font-bold text-app-text">إبداء اهتمام بالفرصة</h2>
-                <p className="mt-1 text-sm text-app-text-muted">سيتم تسجيل طلب اهتمام واستفسار أولي في النظام.</p>
+                <p className="mt-1 text-sm text-app-text-muted">سيصل إلى الجهة المعلنة طلب اهتمام واستفسار أولي منك.</p>
               </div>
               <button
                 onClick={() => setShowForm(false)}

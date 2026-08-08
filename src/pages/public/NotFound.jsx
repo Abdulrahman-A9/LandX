@@ -52,7 +52,7 @@ const NotFound = () => {
             </Link>
             <span className="text-muted">|</span>
             <Link to="/investor-journey" className="text-app-text-muted hover:text-app-text font-medium transition-colors">
-              رحلة المستثمر
+              كيف تستفيد من LandX
             </Link>
           </div>
         </div>

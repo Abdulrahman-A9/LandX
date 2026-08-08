@@ -18,7 +18,7 @@ const InvestorOpportunities = () => {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-app-text">الفرص الاستثمارية المتاحة</h1>
-        <p className="mt-2 text-app-text-muted">هذه القائمة مرتبطة ببيانات الفرص الحقيقية المنشورة في النظام.</p>
+        <p className="mt-2 text-app-text-muted">استعرض الفرص المنشورة وقارن بينها وفق أهدافك الاستثمارية.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">

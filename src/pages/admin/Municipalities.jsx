@@ -31,7 +31,7 @@ const AdminMunicipalities = () => {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-app-text">إدارة البلديات</h1>
-        <p className="mt-2 text-app-text-muted">هذه الصفحة تقرأ مباشرة من جدول `municipalities` في قاعدة البيانات.</p>
+        <p className="mt-2 text-app-text-muted">تابع الجهات الشريكة والفرص التي تقدمها للمستثمرين.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">

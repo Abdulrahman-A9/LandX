@@ -43,9 +43,9 @@ const Contact = () => {
   return (
     <div>
       <PageHero
-        eyebrow="تواصل مباشر"
-        title="إذا احتجت دعماً أو رغبت في شراكة، اجعل الرسالة الأولى مختصرة وواضحة."
-        description="صممت صفحة التواصل لتقود المستخدم مباشرة إلى الإجراء المطلوب دون تفاصيل زائدة: معلومات واضحة، أوقات عمل، ونموذج قصير منظم."
+        eyebrow="تواصل مع LandX"
+        title="لديك استفسار أو فرصة أو مقترح شراكة؟ نحن نسمعك."
+        description="أرسل تفاصيل طلبك وسيتواصل معك الفريق لمساعدتك في الوصول إلى الخدمة أو الشريك المناسب."
       />
 
       <section className="py-12 lg:py-16">
@@ -162,7 +162,7 @@ const Contact = () => {
                     <option value="">اختر نوع الرسالة</option>
                     <option value="investment">استفسار استثماري</option>
                     <option value="partnership">شراكة أو تعاون</option>
-                    <option value="technical">دعم تقني</option>
+                    <option value="technical">مساعدة في استخدام المنصة</option>
                     <option value="other">أخرى</option>
                   </select>
                   <textarea

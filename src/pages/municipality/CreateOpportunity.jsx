@@ -62,7 +62,7 @@ const CreateOpportunity = () => {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-app-text">إضافة فرصة استثمارية جديدة</h1>
-        <p className="mt-2 text-app-text-muted">هذا النموذج ينشئ الفرصة مباشرة داخل قاعدة البيانات.</p>
+        <p className="mt-2 text-app-text-muted">أضف تفاصيل مشروعك ليظهر للمستثمرين الباحثين عن فرص مناسبة.</p>
       </div>
 
       <Card className="bg-card-gradient border border-app-border p-6">

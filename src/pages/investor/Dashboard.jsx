@@ -51,14 +51,14 @@ const InvestorDashboard = () => {
     },
     {
       title: 'أنشئ تحليلًا جديدًا',
-      description: 'حوّل فكرة غير ناضجة إلى تقرير محفوظ تستطيع الرجوع إليه أو عرضه أمام اللجنة.',
+      description: 'قيّم فكرتك ماليًا واحتفظ بالنتائج لمراجعتها قبل اتخاذ القرار.',
       to: '/investment-analysis',
       icon: <TrendingUpIcon className="h-5 w-5" />,
       highlight: !stats.analyses,
     },
     {
       title: 'راجع استفساراتك',
-      description: 'تابع الاستفسارات المفتوحة والردود الواردة من الجهات المعلنة داخل النظام.',
+      description: 'تابع أسئلتك والردود الواردة من الجهات المعلنة في مكان واحد.',
       to: '/investor/inquiries',
       icon: <MessageCircleIcon className="h-5 w-5" />,
       highlight: stats.pendingInquiries > 0,
@@ -75,7 +75,7 @@ const InvestorDashboard = () => {
           <div className="landx-kicker">لوحة قيادة المستثمر</div>
           <h1 className="mt-5 text-4xl font-black text-app-text">ابدأ من هنا ثم تحرك للخطوة التالية بوضوح</h1>
           <p className="mt-3 max-w-2xl text-base leading-8 text-app-text-muted">
-            هذه اللوحة لا تعرض أرقامًا فقط، بل تختصر أين وصلت في المسار وماذا ينبغي أن تفعل بعد ذلك داخل المنصة.
+            هنا تجد فرصك وتقييماتك وطلباتك مرتبة لتعرف خطوتك التالية بوضوح.
           </p>
         </Card>
 
@@ -118,7 +118,7 @@ const InvestorDashboard = () => {
         <div className="mb-4">
           <h2 className="text-2xl font-bold text-app-text">الخطوات المقترحة الآن</h2>
           <p className="mt-2 text-sm leading-7 text-app-text-muted">
-            هذه الإجراءات مرتبة لتقودك من الاكتشاف إلى التحليل ثم إلى المتابعة بدون تشتت.
+            ابدأ باكتشاف الفرصة، ثم قيّمها وتواصل مع الجهة المعلنة وتابع طلبك.
           </p>
         </div>
         <div className="grid gap-5 xl:grid-cols-3">

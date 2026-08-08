@@ -54,7 +54,7 @@ const adminNav = [
 const roleMeta = {
   investor: {
     title: 'لوحة المستثمر',
-    subtitle: 'متابعة الفرص والاستثمارات والاستفسارات في مسار واحد واضح.',
+    subtitle: 'أدر فرصك وتقييماتك وطلباتك من مكان واحد.',
     nav: investorNav,
   },
   municipality: {
@@ -185,7 +185,7 @@ const DashboardLayout = ({ role = 'investor' }) => {
                 <div className="flex items-center gap-3">
                   <div className="hidden rounded-full border border-[#dfc4ac] bg-white/75 px-4 py-2 text-sm font-semibold text-app-text-muted md:flex md:items-center md:gap-2">
                     <BellIcon className="h-4 w-4 text-brand" />
-                    بيانات مباشرة من النظام
+                    معلومات محدثة لحسابك
                   </div>
                   <div className="hidden h-11 items-center gap-3 rounded-full border border-[#dfc4ac] bg-white/75 px-3 md:flex">
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f2dfcd] text-sm font-bold text-brand">

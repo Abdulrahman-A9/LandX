@@ -33,7 +33,7 @@ const AdminSettings = () => {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-app-text">إعدادات المنصة</h1>
-        <p className="mt-2 text-app-text-muted">واجهة إعدادات عرضية منظمة بدل عناصر تجريبية غير مكتملة.</p>
+        <p className="mt-2 text-app-text-muted">راجع إعدادات المنصة ومعلومات التشغيل الأساسية من مكان واحد.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -53,7 +53,7 @@ const AdminSettings = () => {
         <Card className="bg-card-gradient border border-app-border p-6">
           <div className="mb-6 flex items-center gap-3">
             <ShieldIcon className="text-app-text-soft" />
-            <h2 className="text-xl font-bold text-app-text">إعدادات النظام</h2>
+            <h2 className="text-xl font-bold text-app-text">إعدادات التشغيل</h2>
           </div>
           <div className="space-y-4">
             {[
@@ -84,11 +84,11 @@ const AdminSettings = () => {
         <Card className="bg-card-gradient border border-app-border p-6">
           <div className="mb-6 flex items-center gap-3">
             <DatabaseIcon className="text-app-text-soft" />
-            <h2 className="text-xl font-bold text-app-text">قاعدة البيانات</h2>
+            <h2 className="text-xl font-bold text-app-text">بيانات المنصة</h2>
           </div>
           <div className="space-y-4 text-sm text-app-text-muted">
-            <div className="rounded-lg border border-app-border bg-app-surface-soft p-4">MySQL مرتبطة عبر FastAPI وSQLAlchemy.</div>
-            <div className="rounded-lg border border-app-border bg-app-surface-soft p-4">يمكن عرض الجداول والسجلات مباشرة من Workbench أو phpMyAdmin.</div>
+            <div className="rounded-lg border border-app-border bg-app-surface-soft p-4">بيانات المستخدمين والفرص والطلبات محفوظة ومهيأة للإدارة والمتابعة.</div>
+            <div className="rounded-lg border border-app-border bg-app-surface-soft p-4">تستخدم هذه المساحة لمراجعة جاهزية البيانات قبل نشر الفرص ومتابعة المستثمرين.</div>
           </div>
         </Card>
       </div>

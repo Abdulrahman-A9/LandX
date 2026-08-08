@@ -40,7 +40,7 @@ const Investments = () => {
       <div>
         <h1 className="text-3xl font-bold text-app-text">استثماراتي</h1>
         <p className="mt-2 max-w-3xl text-base leading-8 text-app-text-muted">
-          هنا تظهر جميع طلبات الاهتمام الاستثمارية المرتبطة بحسابك، مع حالتها الحالية والمبالغ المسجلة والملاحظات المحفوظة داخل النظام.
+          راجع طلبات اهتمامك الاستثمارية وحالتها والملاحظات المرتبطة بكل فرصة.
         </p>
       </div>
 

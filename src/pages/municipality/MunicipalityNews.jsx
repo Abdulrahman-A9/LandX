@@ -48,7 +48,7 @@ const MunicipalityNews = () => {
       <div>
         <h1 className="text-3xl font-bold text-app-text">الأخبار</h1>
         <p className="mt-2 max-w-3xl text-base leading-8 text-app-text-muted">
-          الأخبار تظهر للزوار والمستثمرين كواجهة حيوية لنشاط البلدية ومواسمها ومشاريعها الحالية.
+          استخدم الأخبار لتعريف المستثمرين بنشاط البلدية ومواسمها ومشاريعها الحالية.
         </p>
       </div>
 

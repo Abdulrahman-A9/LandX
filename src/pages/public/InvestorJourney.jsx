@@ -47,13 +47,13 @@ const scenarios = [
   {
     title: 'مستخدم متردد ويكره التعقيد',
     summary: 'يخاف من ضياع الوقت بين الصفحات والإجراءات غير الضرورية.',
-    result: 'يبدأ من هذه الصفحة، يفهم المسار، ثم يختار خطوة واحدة واضحة بدل التشتت.',
+    result: 'يبدأ من الفرص المناسبة له، يقارنها، ثم يختار خطوته التالية بثقة.',
     icon: <SearchIcon className="h-5 w-5" />,
   },
   {
     title: 'مستخدم يحتاج تواصلًا بعد القرار',
-    summary: 'يريد أن ينتقل من الفهم إلى المتابعة الرسمية داخل النظام.',
-    result: 'يسجل حسابًا ثم يتابع الطلبات والاستفسارات من لوحة المستثمر بسهولة.',
+    summary: 'يريد أن ينتقل من تقييم الفرصة إلى تواصل رسمي مع الجهة المعلنة.',
+    result: 'ينشئ حسابًا ثم يتابع اهتماماته وطلباته من مساحة واحدة.',
     icon: <HandshakeIcon className="h-5 w-5" />,
   },
 ];
@@ -63,17 +63,17 @@ const InvestorJourney = () => {
     <div className="min-h-screen py-16 text-app-text">
       <div className="landx-shell space-y-16">
         <section className="text-center">
-          <div className="landx-kicker">رحلة المستثمر</div>
-          <h1 className="mt-5 text-4xl font-black md:text-5xl">كيف يتحرك المستخدم من البداية إلى القرار داخل LandX؟</h1>
+          <div className="landx-kicker">من تجربة الاكتشاف إلى الاستثمار</div>
+          <h1 className="mt-5 text-4xl font-black md:text-5xl">كيف تساعدك LandX على الوصول إلى الفرصة المناسبة؟</h1>
           <p className="mx-auto mt-5 max-w-4xl text-lg leading-9 text-app-text-muted">
-            هذه الصفحة تشرح المسار الصحيح داخل المنصة: من اختيار البداية المناسبة، إلى فهم الفرصة أو الفكرة، ثم تنفيذ الإجراء المناسب ومتابعته من اللوحة.
+            تبدأ بتحديد هدفك، ثم تستكشف الفرص أو تقيّم فكرتك، وبعدها تتواصل مع الجهة المعلنة وتتابع طلبك من حسابك.
           </p>
         </section>
 
         <section>
           <Card className="p-8">
-            <h2 className="text-center text-2xl font-bold text-app-text">المخطط المختصر للرحلة</h2>
-            <p className="mt-2 text-center text-sm leading-7 text-app-text-muted">خطوات محددة تختصر كيف يدخل المستخدم، ماذا يرى، ومتى يتحول من الفهم إلى الإجراء.</p>
+            <h2 className="text-center text-2xl font-bold text-app-text">خطواتك نحو القرار</h2>
+            <p className="mt-2 text-center text-sm leading-7 text-app-text-muted">من اختيار الهدف إلى تقييم الفرصة والتواصل مع الجهة المناسبة.</p>
             <div className="mt-8 grid gap-6 md:grid-cols-4">
               {stages.map((stage) => (
                 <div key={stage.number} className="text-center">
@@ -134,7 +134,7 @@ const InvestorJourney = () => {
 
         <section>
           <Card className="mx-auto max-w-4xl p-8 text-center">
-            <h2 className="text-2xl font-bold text-app-text">ما النهاية الصحيحة للرحلة؟</h2>
+            <h2 className="text-2xl font-bold text-app-text">متى تصبح جاهزًا للخطوة التالية؟</h2>
             <p className="mx-auto mt-4 max-w-3xl text-sm leading-8 text-app-text-muted">
               النهاية ليست دائمًا تقديمًا رسميًا فقط. أحيانًا تكون تقريرًا محفوظًا، أو طلب اهتمام، أو قرارًا واعيًا بعدم المتابعة. المهم أن المستخدم يصل إلى قرار واضح ومدعوم بالبيانات.
             </p>

@@ -27,7 +27,7 @@ const AdminAnalytics = () => {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-app-text">التقارير والتحليلات</h1>
-        <p className="mt-2 text-app-text-muted">إحصاءات حقيقية مستخرجة من قاعدة البيانات الحالية.</p>
+        <p className="mt-2 text-app-text-muted">مؤشرات تساعدك على متابعة نمو الفرص وتفاعل المستثمرين.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-4">

@@ -95,7 +95,7 @@ const Register = () => {
             <div className="mt-6">
               <h2 className="text-3xl font-black text-app-text">إنشاء حساب جديد</h2>
               <p className="mt-2 text-sm leading-7 text-app-text-muted">
-                التسجيل هنا مرتبط مباشرة بالباك اند ويضيف الحساب فعليًا إلى قاعدة البيانات.
+                أنشئ حسابك للوصول إلى الفرص الاستثمارية وحفظ تقييماتك وطلباتك.
               </p>
             </div>
 
@@ -202,7 +202,7 @@ const Register = () => {
               </div>
 
               <div className="rounded-2xl border border-app-border bg-app-surface-soft/60 p-4 text-sm leading-7 text-app-text-muted">
-                بالتسجيل فأنت تضيف حسابًا فعليًا داخل النظام ويمكن عرضه مباشرة لاحقًا من لوحة الإدارة أو من قاعدة البيانات.
+                بعد التسجيل يمكنك إدارة ملفك واهتماماتك وتواصلك مع الجهات المعلنة من حسابك.
               </div>
 
               <Button type="submit" size="lg" className="w-full" disabled={submitting}>
@@ -248,7 +248,7 @@ const Register = () => {
                 <span className="font-semibold">ما الذي يحدث بعد التسجيل؟</span>
               </div>
               <div className="mt-4 space-y-3 text-sm leading-7 text-app-text-muted">
-                <p>1. يُنشأ الحساب داخل قاعدة البيانات مباشرة.</p>
+                <p>1. يجهز لك الحساب للوصول إلى خدمات LandX.</p>
                 <p>2. يتم تسجيل الدخول تلقائيًا بالحساب الجديد.</p>
                 <p>3. يتم نقلك إلى الصفحة التالية المناسبة بدل إيقافك عند شاشة الدخول.</p>
               </div>

@@ -43,7 +43,7 @@ const MunicipalityDashboard = () => {
     },
     {
       title: 'تحديث المحتوى المنشور',
-      description: 'راجع الأخبار والإعلانات لضمان أن الواجهة العامة تعكس حالة البلدية الحالية.',
+      description: 'حدّث أخبارك وإعلاناتك ليبقى المستثمرون على اطلاع بفرص البلدية ومشاريعها.',
       to: '/municipality/news',
     },
   ];
@@ -58,11 +58,10 @@ const MunicipalityDashboard = () => {
           <div className="landx-kicker">تشغيل البلدية</div>
           <h1 className="mt-5 text-4xl font-black text-app-text">لوحة البلدية</h1>
           <p className="mt-3 max-w-2xl text-base leading-8 text-app-text-muted">
-            هذه الشاشة تعكس الفرص التابعة لبلديتك والاستفسارات الواردة عليها مباشرة من قاعدة البيانات.
+            هنا تدير فرص بلديتك وتتابع استفسارات المستثمرين واهتماماتهم.
           </p>
           <div className="mt-5 rounded-2xl border border-[#ead9c7] bg-white/55 p-4 text-sm leading-8 text-app-text-muted">
-            للتوضيح: المنصة العامة تعرض جميع الفرص المنشورة في النظام، أما لوحة البلدية فتعرض فقط
-            الفرص المرتبطة ببلديتك الحالية. هذا ليس تعارضاً في البيانات، بل فصل صلاحيات وتشغيل.
+            تعرض المنصة العامة جميع الفرص المنشورة، بينما تركز مساحة البلدية على الفرص التابعة لها والطلبات الواردة عليها.
           </div>
         </Card>
         <Card className="p-7">
@@ -76,7 +75,7 @@ const MunicipalityDashboard = () => {
 
       <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {[
-          { label: 'إجمالي المنصة', value: stats.platformOpportunities, helper: 'كل الفرص المنشورة في النظام', icon: <LeafIcon className="h-5 w-5" />, tone: 'text-brand' },
+          { label: 'إجمالي المنصة', value: stats.platformOpportunities, helper: 'فرص منشورة للمستثمرين', icon: <LeafIcon className="h-5 w-5" />, tone: 'text-brand' },
           { label: 'إجمالي الفرص', value: stats.totalOpportunities, helper: 'فرص مرتبطة ببلديتك', icon: <LeafIcon className="h-5 w-5" />, tone: 'text-app-text' },
           { label: 'الفرص النشطة', value: stats.activeOpportunities, helper: 'جاهزة للاستعراض', icon: <CheckIcon className="h-5 w-5" />, tone: 'text-success' },
           { label: 'الاستفسارات', value: stats.pendingInquiries, helper: 'بانتظار الرد', icon: <FileTextIcon className="h-5 w-5" />, tone: 'text-warning' },

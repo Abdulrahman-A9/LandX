@@ -29,7 +29,7 @@ const AdminOpportunities = () => {
       <div>
         <h1 className="text-3xl font-bold text-app-text">إشراف الفرص الاستثمارية</h1>
         <p className="mt-2 max-w-3xl text-base leading-8 text-app-text-muted">
-          هذه الواجهة تعرض جميع الفرص الاستثمارية الحقيقية المخزنة في النظام، مع حالتها الحالية وقيمتها والجهة المالكة لها.
+          راجع جميع الفرص الاستثمارية المنشورة وحالتها وقيمتها والجهة المعلنة لها.
         </p>
       </div>
 
