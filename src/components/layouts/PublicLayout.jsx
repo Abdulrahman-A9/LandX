@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import BrandLogo from '../shared/BrandLogo';
 import {
   ArrowRightIcon,
   BuildingIcon,
@@ -18,9 +19,6 @@ const navLinks = [
   { to: '/opportunities', label: 'الفرص' },
   { to: '/investment-analysis', label: 'تحليل الفكرة' },
   { to: '/investor-journey', label: 'رحلة المستثمر' },
-  { to: '/news', label: 'الأخبار' },
-  { to: '/about', label: 'عن المنصة' },
-  { to: '/contact', label: 'تواصل معنا' },
 ];
 
 const quickStats = [
@@ -66,14 +64,9 @@ const PublicLayout = ({ children }) => {
       <div className="sticky top-0 z-50 border-b border-app-border/70 bg-white/55 backdrop-blur-2xl">
         <header className="landx-shell">
           <div className="flex items-center justify-between gap-4 py-4">
-            <Link to="/" className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-gradient-to-br from-[#fff8f1] via-[#f3e2d0] to-[#d8b391] shadow-lg shadow-brand/10">
-                <span className="text-xl font-black text-brand">ل</span>
-              </div>
-              <div className="leading-tight">
-                <div className="font-heading text-2xl font-black tracking-tight">LandX</div>
-                <div className="text-sm text-app-text-soft">منصة قرار استثماري أوضح وأكثر هدوءاً</div>
-              </div>
+            <Link to="/" className="flex items-center gap-3">
+              <BrandLogo imageClassName="h-12 w-auto" />
+              <div className="hidden text-sm text-app-text-soft sm:block">منصة قرار استثماري أوضح وأكثر هدوءًا</div>
             </Link>
 
             <nav className="hidden items-center gap-1 xl:flex">
@@ -157,7 +150,7 @@ const PublicLayout = ({ children }) => {
                   {isAuthenticated ? (
                     <>
                       <div className="rounded-2xl bg-app-surface-soft px-4 py-3 text-sm text-app-text-muted">
-                        مرحباً، <span className="font-semibold text-app-text">{user?.name}</span>
+                        مرحبًا، <span className="font-semibold text-app-text">{user?.name}</span>
                       </div>
                       <Link
                         to={roleHome[user?.role] || '/investor/dashboard'}
@@ -209,18 +202,12 @@ const PublicLayout = ({ children }) => {
         <div className="landx-shell py-14">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr_0.85fr_1fr]">
             <div className="space-y-5">
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff7ef]">
-                  <span className="text-xl font-black text-brand">ل</span>
-                </div>
-                <div>
-                  <div className="font-heading text-2xl font-black">LandX</div>
-                  <div className="text-sm text-app-text-soft">تجربة استثمار عربية أكثر تركيزاً</div>
-                </div>
+              <div className="space-y-2">
+                <BrandLogo imageClassName="h-14 w-auto" />
+                <div className="text-sm text-app-text-soft">تجربة استثمار عربية أكثر تركيزًا</div>
               </div>
               <p className="max-w-md text-sm leading-8 text-app-text-muted">
-                المنصة تجمع بين اكتشاف الفرص، قراءة الجدوى، وفهم المسار التنفيذي بلغة واضحة
-                وواجهة هادئة تخفف التشتت أثناء اتخاذ القرار.
+                المنصة تجمع بين اكتشاف الفرص، قراءة الجدوى، وفهم المسار التنفيذي بلغة واضحة وواجهة هادئة تخفف التشتت أثناء اتخاذ القرار.
               </p>
               <div className="grid grid-cols-3 gap-3">
                 {quickStats.map((item) => (
@@ -246,7 +233,7 @@ const PublicLayout = ({ children }) => {
               <div className="mb-4 text-sm font-bold text-app-text">المسارات</div>
               <ul className="space-y-3 text-sm text-app-text-muted">
                 <li className="flex items-start gap-2"><TargetIcon className="mt-1 h-4 w-4 text-brand" /> للمستثمر الباحث عن قرار أسرع</li>
-                <li className="flex items-start gap-2"><SearchIcon className="mt-1 h-4 w-4 text-brand" /> للبلدية التي تريد عرضاً أوضح للفرص</li>
+                <li className="flex items-start gap-2"><SearchIcon className="mt-1 h-4 w-4 text-brand" /> للبلدية التي تريد عرضًا أوضح للفرص</li>
                 <li className="flex items-start gap-2"><MessageCircleIcon className="mt-1 h-4 w-4 text-brand" /> للفريق الذي يدير الاستفسارات والطلبات</li>
               </ul>
             </div>
@@ -284,7 +271,7 @@ const PublicLayout = ({ children }) => {
 
           <div className="mt-10 flex flex-col gap-3 border-t border-app-border/70 pt-6 text-sm text-app-text-soft md:flex-row md:items-center md:justify-between">
             <p>© 2024 LandX. جميع الحقوق محفوظة.</p>
-            <p>واجهة عربية أولاً مبنية لتقليل الفوضى وتسريع الفهم.</p>
+            <p>واجهة عربية أولًا مبنية لتقليل الفوضى وتسريع الفهم.</p>
           </div>
         </div>
       </footer>

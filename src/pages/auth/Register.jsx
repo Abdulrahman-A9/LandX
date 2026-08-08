@@ -4,6 +4,7 @@ import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
+import BrandLogo from '../../components/shared/BrandLogo';
 import { authApi } from '../../lib/api';
 import { buildAuthRoute, resolvePostAuthRoute, serviceIntentCopy } from '../../lib/flow';
 import {
@@ -218,6 +219,7 @@ const Register = () => {
           </Card>
 
           <div className="order-1 space-y-8 lg:order-2">
+            <BrandLogo imageClassName="h-20 w-auto" />
             <div className="landx-kicker">{intentCopy.badge}</div>
             <div>
               <h1 className="text-4xl font-black leading-tight text-app-text md:text-5xl">

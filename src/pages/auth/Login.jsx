@@ -4,6 +4,7 @@ import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
+import BrandLogo from '../../components/shared/BrandLogo';
 import { ArrowRightIcon, LockIcon, MailIcon, ShieldCheckIcon } from '../../components/ui/Icons';
 import { buildAuthRoute, resolvePostAuthRoute, serviceIntentCopy } from '../../lib/flow';
 
@@ -55,6 +56,7 @@ const Login = () => {
       <div className="landx-shell">
         <div className="grid min-h-[calc(100vh-5rem)] gap-8 lg:grid-cols-[1fr_0.95fr] lg:items-center">
           <div className="space-y-8">
+            <BrandLogo imageClassName="h-20 w-auto" />
             <div className="landx-kicker">{intentCopy.badge}</div>
             <div>
               <h1 className="text-4xl font-black leading-tight text-app-text md:text-5xl">

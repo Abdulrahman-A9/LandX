@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import BrandLogo from '../shared/BrandLogo';
 import {
   BarChartIcon,
   BellIcon,
@@ -107,13 +108,10 @@ const DashboardLayout = ({ role = 'investor' }) => {
           <div className="sticky top-0 flex h-screen flex-col">
             <div className="border-b border-white/10 p-6">
               <Link to="/" className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
-                  <span className="text-xl font-black text-[#ffd7b7]">ل</span>
+                <div className="rounded-2xl bg-white/90 px-3 py-2 shadow-lg shadow-black/10">
+                  <BrandLogo imageClassName="h-10 w-auto" />
                 </div>
-                <div>
-                  <div className="font-heading text-2xl font-black text-[#fff8f0]">LandX</div>
-                  <div className="text-sm text-[#f0cfb3]">{meta.title}</div>
-                </div>
+                <div className="text-sm text-[#f0cfb3]">{meta.title}</div>
               </Link>
             </div>
 
