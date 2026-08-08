@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, status
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, selectinload
 
 from app.db import get_db
@@ -78,6 +79,25 @@ def update_opportunity(
     db.commit()
     db.refresh(opportunity)
     return opportunity
+
+
+@router.delete("/{opportunity_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_opportunity(
+    opportunity_id: int,
+    db: Session = Depends(get_db),
+    user: User = Depends(require_roles(UserRole.municipality, UserRole.admin)),
+) -> None:
+    opportunity = db.get(Opportunity, opportunity_id)
+    if not opportunity:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Opportunity not found")
+    if user.role == UserRole.municipality and opportunity.municipality_id != user.municipality_id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Cannot delete this opportunity")
+    db.delete(opportunity)
+    try:
+        db.commit()
+    except IntegrityError as exc:
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="لا يمكن حذف فرصة لديها طلبات أو استفسارات. أغلقها بدلًا من ذلك.") from exc
 
 
 @router.post("/{opportunity_id}/images", response_model=OpportunityImageResponse)

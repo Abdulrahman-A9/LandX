@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import { useAuth } from '../../context/AuthContext';
@@ -7,6 +8,8 @@ import { opportunitiesApi } from '../../lib/api';
 
 const CreateOpportunity = () => {
   const { token } = useAuth();
+  const [searchParams] = useSearchParams();
+  const editId = searchParams.get('edit');
   const { addToast } = useToast();
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -19,6 +22,11 @@ const CreateOpportunity = () => {
     description: '',
   });
 
+  useEffect(() => {
+    if (!editId) return;
+    opportunitiesApi.getById(editId).then((item) => setFormData({ title: item.title || '', location: item.location || '', season: item.season || '', area: item.area || '', investmentRequired: item.investment_required || '', expectedReturn: item.expected_return || '', description: item.description || '' })).catch((error) => addToast(error.message || 'تعذر تحميل الفرصة.', 'error'));
+  }, [addToast, editId]);
+
   const handleChange = (event) => {
     setFormData((prev) => ({
       ...prev,
@@ -30,7 +38,7 @@ const CreateOpportunity = () => {
     event.preventDefault();
     try {
       setSubmitting(true);
-      await opportunitiesApi.create(token, {
+      const payload = {
         title: formData.title,
         location: formData.location,
         season: formData.season,
@@ -40,8 +48,10 @@ const CreateOpportunity = () => {
         expected_return: Number(formData.expectedReturn || 0),
         description: formData.description,
         status: 'pending',
-      });
-      addToast('تم إنشاء الفرصة وربطها ببلديتك بنجاح.', 'success');
+      };
+      if (editId) await opportunitiesApi.update(token, editId, payload);
+      else await opportunitiesApi.create(token, payload);
+      addToast(editId ? 'تم تحديث الفرصة بنجاح.' : 'تم إنشاء الفرصة وربطها ببلديتك بنجاح.', 'success');
       setFormData({
         title: '',
         location: '',
@@ -61,8 +71,8 @@ const CreateOpportunity = () => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-app-text">إضافة فرصة استثمارية جديدة</h1>
-        <p className="mt-2 text-app-text-muted">أضف تفاصيل مشروعك ليظهر للمستثمرين الباحثين عن فرص مناسبة.</p>
+        <h1 className="text-3xl font-bold text-app-text">{editId ? 'تعديل الفرصة الاستثمارية' : 'إضافة فرصة استثمارية جديدة'}</h1>
+        <p className="mt-2 text-app-text-muted">{editId ? 'حدّث بيانات المشروع ليبقى العرض دقيقًا ومقنعًا للمستثمرين.' : 'أضف تفاصيل مشروعك ليظهر للمستثمرين الباحثين عن فرص مناسبة.'}</p>
       </div>
 
       <Card className="bg-card-gradient border border-app-border p-6">
@@ -108,7 +118,7 @@ const CreateOpportunity = () => {
 
           <div className="flex gap-3">
             <Button type="submit" disabled={submitting}>
-              {submitting ? 'جاري الحفظ...' : 'حفظ الفرصة'}
+              {submitting ? 'جاري الحفظ...' : editId ? 'حفظ التعديلات' : 'حفظ الفرصة'}
             </Button>
             <Button
               type="button"

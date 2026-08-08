@@ -1,102 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '../../components/ui/Card';
-import { BuildingIcon, CheckIcon, XIcon } from '../../components/ui/Icons';
+import Button from '../../components/ui/Button';
 import { useAuth } from '../../context/AuthContext';
 import { useAsyncData } from '../../hooks/useAsyncData';
-import { municipalityApi } from '../../lib/api';
-import { formatArabicDate } from '../../lib/formatters';
+import { adminApi } from '../../lib/api';
+import { useToast } from '../../context/ToastContext';
+import { BuildingIcon, PlusIcon, XIcon } from '../../components/ui/Icons';
+
+const blank = { name: '', region: '', description: '', contact_email: '', contact_phone: '', is_active: true };
 
 const AdminMunicipalities = () => {
   const { token, user } = useAuth();
-  const { data: municipalities, loading, error } = useAsyncData(() => municipalityApi.list(token), [token]);
-
-  const activeCount = municipalities.filter((item) => item.is_active).length;
-  const inactiveCount = municipalities.filter((item) => !item.is_active).length;
-
-  if (!token || user?.role !== 'admin') {
-    return (
-      <Card className="p-10 text-center">
-        <h1 className="text-3xl font-black text-app-text">البلديات غير متاحة حالياً</h1>
-        <p className="mt-3 text-sm leading-8 text-app-text-muted">
-          هذه الصفحة إدارية بالكامل، ولن تعرض بيانات `municipalities` إلا بعد تسجيل الدخول بحساب الإدارة.
-        </p>
-      </Card>
-    );
-  }
-
-  if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل البلديات...</Card>;
-  if (error) return <Card className="p-10 text-center text-danger">{error}</Card>;
-
-  return (
-    <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-app-text">إدارة البلديات</h1>
-        <p className="mt-2 text-app-text-muted">تابع الجهات الشريكة والفرص التي تقدمها للمستثمرين.</p>
-      </div>
-
-      <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-app-text-muted">إجمالي البلديات</h3>
-            <BuildingIcon className="text-app-text-soft" />
-          </div>
-          <p className="text-3xl font-bold text-app-text">{municipalities.length}</p>
-        </Card>
-
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-app-text-muted">النشطة</h3>
-            <CheckIcon className="text-success" />
-          </div>
-          <p className="text-3xl font-bold text-success">{activeCount}</p>
-        </Card>
-
-        <Card className="p-6 bg-card-gradient border border-app-border">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-app-text-muted">غير النشطة</h3>
-            <XIcon className="text-warning" />
-          </div>
-          <p className="text-3xl font-bold text-warning">{inactiveCount}</p>
-        </Card>
-      </div>
-
-      <Card className="bg-card-gradient border border-app-border">
-        <div className="p-6 border-b border-app-border">
-          <h2 className="text-xl font-bold text-app-text">قائمة البلديات</h2>
-        </div>
-        <div className="p-6 overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-app-border">
-                <th className="px-4 py-3 text-right text-sm font-medium text-app-text-muted">البلدية</th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-app-text-muted">المنطقة</th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-app-text-muted">البريد</th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-app-text-muted">الهاتف</th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-app-text-muted">الحالة</th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-app-text-muted">الإنشاء</th>
-              </tr>
-            </thead>
-            <tbody>
-              {municipalities.map((municipality) => (
-                <tr key={municipality.id} className="border-b border-app-border hover:bg-app-surface-soft">
-                  <td className="px-4 py-4 text-app-text">{municipality.name}</td>
-                  <td className="px-4 py-4 text-app-text">{municipality.region}</td>
-                  <td className="px-4 py-4 text-app-text-muted">{municipality.contact_email || '-'}</td>
-                  <td className="px-4 py-4 text-app-text-muted">{municipality.contact_phone || '-'}</td>
-                  <td className="px-4 py-4">
-                    <span className={`rounded-full px-3 py-1 text-xs ${municipality.is_active ? 'bg-success/10 text-success' : 'bg-warning/10 text-warning'}`}>
-                      {municipality.is_active ? 'نشط' : 'غير نشط'}
-                    </span>
-                  </td>
-                  <td className="px-4 py-4 text-app-text-soft">{formatArabicDate(municipality.created_at)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Card>
-    </div>
-  );
+  const { addToast } = useToast();
+  const { data: municipalities, loading, error, setData } = useAsyncData(() => adminApi.municipalities(token), [token]);
+  const [editing, setEditing] = useState(null);
+  const [form, setForm] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const change = (event) => setForm((previous) => ({ ...previous, [event.target.name]: event.target.type === 'checkbox' ? event.target.checked : event.target.value }));
+  const openCreate = () => { setEditing(null); setForm(blank); };
+  const openEdit = (item) => { setEditing(item); setForm({ name: item.name || '', region: item.region || '', description: item.description || '', contact_email: item.contact_email || '', contact_phone: item.contact_phone || '', is_active: item.is_active }); };
+  const save = async (event) => { event.preventDefault(); try { setSaving(true); const saved = editing ? await adminApi.updateMunicipality(token, editing.id, form) : await adminApi.createMunicipality(token, form); setData((previous) => editing ? previous.map((item) => item.id === saved.id ? saved : item) : [saved, ...previous]); setForm(null); setEditing(null); addToast(editing ? 'تم تحديث الجهة الشريكة.' : 'تمت إضافة الجهة الشريكة.', 'success'); } catch (saveError) { addToast(saveError.message || 'تعذر حفظ الجهة.', 'error'); } finally { setSaving(false); } };
+  const remove = async (item) => { if (!window.confirm(`حذف ${item.name}؟`)) return; try { await adminApi.deleteMunicipality(token, item.id); setData((previous) => previous.filter((row) => row.id !== item.id)); addToast('تم حذف الجهة.', 'success'); } catch (removeError) { addToast(removeError.message || 'تعذر حذف الجهة.', 'error'); } };
+  if (!token || user?.role !== 'admin') return <Card className="p-10 text-center"><h1 className="text-3xl font-black">إدارة الجهات محمية</h1><p className="mt-3 text-sm text-app-text-muted">سجّل الدخول بحساب مدير المنصة.</p></Card>;
+  if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل الجهات...</Card>;
+  if (error) return <Card className="p-10 text-center text-danger">تعذر تحميل الجهات: {error}</Card>;
+  return <div className="space-y-6"><div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end"><div><div className="landx-kicker"><BuildingIcon className="h-4 w-4" /> الشراكات</div><h1 className="mt-4 text-3xl font-black text-app-text">الجهات والبلديات</h1><p className="mt-2 text-sm leading-7 text-app-text-muted">أنشئ الجهات الشريكة، حدّث معلوماتها، واربطها بالفرص الاستثمارية.</p></div><Button onClick={openCreate}><PlusIcon className="h-4 w-4" /> جهة جديدة</Button></div><div className="grid gap-4 sm:grid-cols-3"><Card className="border-[#eadacc] p-5"><div className="text-xs font-bold text-app-text-muted">إجمالي الجهات</div><div className="mt-3 text-3xl font-black text-[#8c4e2f]">{municipalities.length}</div></Card><Card className="border-[#eadacc] p-5"><div className="text-xs font-bold text-app-text-muted">نشطة</div><div className="mt-3 text-3xl font-black text-[#5d9872]">{municipalities.filter((item) => item.is_active).length}</div></Card><Card className="border-[#eadacc] p-5"><div className="text-xs font-bold text-app-text-muted">بحاجة متابعة</div><div className="mt-3 text-3xl font-black text-[#b17b3e]">{municipalities.filter((item) => !item.is_active).length}</div></Card></div>{form ? <Card className="border-[#e3c6b0] bg-[#fffaf5] p-6"><div className="flex justify-between"><div><div className="text-xs font-bold text-[#a4623e]">{editing ? 'تعديل بيانات الجهة' : 'إضافة جهة شريكة'}</div><h2 className="mt-2 text-xl font-black text-app-text">{editing ? editing.name : 'بيانات الجهة الجديدة'}</h2></div><button onClick={() => setForm(null)} aria-label="إغلاق" className="rounded-xl p-2 text-app-text-muted hover:bg-[#f2dfd1]"><XIcon /></button></div><form onSubmit={save} className="mt-5 grid gap-4 md:grid-cols-2"><label className="grid gap-2 text-sm font-bold">اسم الجهة<input required name="name" value={form.name} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold">المنطقة<input required name="region" value={form.region} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold">البريد<input type="email" name="contact_email" value={form.contact_email} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold">الهاتف<input name="contact_phone" value={form.contact_phone} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold md:col-span-2">نبذة عن الجهة<textarea name="description" value={form.description} onChange={change} rows="3" className="landx-form-input resize-none" /></label><label className="flex items-center gap-3 text-sm font-bold"><input type="checkbox" name="is_active" checked={form.is_active} onChange={change} className="h-4 w-4 accent-[#a4623e]" /> جهة نشطة</label><div className="flex gap-3 md:col-span-2"><Button type="submit" disabled={saving}>{saving ? 'جاري الحفظ...' : editing ? 'حفظ التعديلات' : 'إضافة الجهة'}</Button><Button type="button" variant="outline" onClick={() => setForm(null)}>إلغاء</Button></div></form></Card> : null}<Card className="overflow-hidden border-[#eadacc]"><div className="border-b border-[#eadacc] p-5"><h2 className="text-xl font-black text-app-text">دليل الجهات الشريكة</h2></div><div className="overflow-x-auto"><table className="min-w-full text-right text-sm"><thead className="bg-[#fbf5ef] text-xs text-app-text-muted"><tr>{['الجهة','المنطقة','التواصل','الحالة','إجراءات'].map((heading) => <th key={heading} className="px-5 py-4">{heading}</th>)}</tr></thead><tbody>{municipalities.map((item) => <tr key={item.id} className="border-t border-[#efe4db] hover:bg-[#fffaf5]"><td className="px-5 py-4 font-bold text-app-text">{item.name}</td><td className="px-5 py-4 text-app-text-muted">{item.region}</td><td className="px-5 py-4 text-xs text-app-text-muted">{item.contact_email || item.contact_phone || 'غير مضاف'}</td><td className="px-5 py-4"><span className={`rounded-full px-3 py-1 text-xs font-bold ${item.is_active ? 'bg-[#e5f3e8] text-[#4b8b61]' : 'bg-[#f8e5e1] text-[#ae5d50]'}`}>{item.is_active ? 'نشطة' : 'غير نشطة'}</span></td><td className="px-5 py-4"><div className="flex gap-2"><button onClick={() => openEdit(item)} className="rounded-lg border border-[#e5cdbb] px-3 py-2 text-xs font-bold text-[#9b5d3d]">تعديل</button><button onClick={() => remove(item)} className="rounded-lg border border-danger/20 px-3 py-2 text-xs font-bold text-danger">حذف</button></div></td></tr>)}</tbody></table></div></Card></div>;
 };
 
 export default AdminMunicipalities;

@@ -12,6 +12,7 @@ const MunicipalityNews = () => {
   const { token, user } = useAuth();
   const { addToast } = useToast();
   const [formData, setFormData] = useState({ title: '', content: '', priority: 'medium' });
+  const [editing, setEditing] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const { data: news, loading, error, setData } = useAsyncData(async () => {
     const result = await newsApi.municipality(token);
@@ -22,17 +23,19 @@ const MunicipalityNews = () => {
     event.preventDefault();
     try {
       setSubmitting(true);
-      const created = await newsApi.create(token, {
+      const payload = {
         title: formData.title,
         content: formData.content,
         priority: formData.priority,
         type: 'news',
         municipality_id: user?.municipality_id,
         is_published: true,
-      });
-      setData((prev) => [created, ...prev]);
+      };
+      const saved = editing ? await newsApi.update(token, editing.id, payload) : await newsApi.create(token, payload);
+      setData((prev) => editing ? prev.map((item) => item.id === saved.id ? saved : item) : [saved, ...prev]);
       setFormData({ title: '', content: '', priority: 'medium' });
-      addToast('تم نشر الخبر بنجاح.', 'success');
+      setEditing(null);
+      addToast(editing ? 'تم تحديث الخبر.' : 'تم نشر الخبر بنجاح.', 'success');
     } catch (err) {
       addToast(err.message || 'تعذر نشر الخبر.', 'error');
     } finally {
@@ -54,7 +57,7 @@ const MunicipalityNews = () => {
 
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <Card className="border border-app-border bg-card-gradient p-6">
-          <h2 className="text-xl font-bold text-app-text">خبر جديد</h2>
+          <h2 className="text-xl font-bold text-app-text">{editing ? 'تعديل الخبر' : 'خبر جديد'}</h2>
           <form onSubmit={handleSubmit} className="mt-5 space-y-4">
             <input value={formData.title} onChange={(e) => setFormData((p) => ({ ...p, title: e.target.value }))} required placeholder="عنوان الخبر" className="w-full rounded-2xl border border-app-border bg-app-surface px-4 py-3 text-app-text" />
             <select value={formData.priority} onChange={(e) => setFormData((p) => ({ ...p, priority: e.target.value }))} className="w-full rounded-2xl border border-app-border bg-app-surface px-4 py-3 text-app-text">
@@ -63,7 +66,7 @@ const MunicipalityNews = () => {
               <option value="low">عادي</option>
             </select>
             <textarea value={formData.content} onChange={(e) => setFormData((p) => ({ ...p, content: e.target.value }))} required rows={5} placeholder="محتوى الخبر" className="w-full resize-none rounded-2xl border border-app-border bg-app-surface px-4 py-3 text-app-text" />
-            <Button type="submit" disabled={submitting}>{submitting ? 'جارٍ النشر...' : 'نشر الخبر'}</Button>
+            <Button type="submit" disabled={submitting}>{submitting ? 'جارٍ الحفظ...' : editing ? 'حفظ التعديلات' : 'نشر الخبر'}</Button>
           </form>
         </Card>
 
@@ -80,6 +83,7 @@ const MunicipalityNews = () => {
                 </div>
                 <p className="text-sm font-medium text-app-text-muted">{formatArabicDate(item.created_at)}</p>
                 <p className="mt-3 text-sm leading-8 text-app-text">{item.content}</p>
+                <div className="mt-4 flex gap-2"><button onClick={() => { setEditing(item); setFormData({ title: item.title, content: item.content, priority: item.priority || 'medium' }); }} className="rounded-lg border border-[#e5cdbb] px-3 py-2 text-xs font-bold text-[#9b5d3d]">تعديل</button><button onClick={async () => { if (!window.confirm('حذف الخبر؟')) return; try { await newsApi.remove(token, item.id); setData((prev) => prev.filter((row) => row.id !== item.id)); addToast('تم حذف الخبر.', 'success'); } catch (removeError) { addToast(removeError.message || 'تعذر حذف الخبر.', 'error'); } }} className="rounded-lg border border-danger/20 px-3 py-2 text-xs font-bold text-danger">حذف</button></div>
               </div>
             ))}
           </div>

@@ -1,133 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '../../components/ui/Card';
+import Button from '../../components/ui/Button';
 import { useAuth } from '../../context/AuthContext';
 import { useAsyncData } from '../../hooks/useAsyncData';
-import { adminApi } from '../../lib/api';
-import { LeafIcon, EyeIcon, CheckIcon, XIcon, ShieldCheckIcon } from '../../components/ui/Icons';
+import { adminApi, opportunitiesApi } from '../../lib/api';
+import { useToast } from '../../context/ToastContext';
 import { formatCurrency } from '../../lib/formatters';
+import { CheckIcon, EyeIcon, LeafIcon, PencilIcon, PlusIcon, XIcon } from '../../components/ui/Icons';
+
+const statusLabels = { active: 'نشطة', pending: 'قيد المراجعة', draft: 'مسودة', closed: 'مغلقة', rejected: 'مرفوضة' };
 
 const AdminOpportunities = () => {
-  const { token } = useAuth();
-  const { data: opportunities, loading, error } = useAsyncData(() => adminApi.opportunities(token), [token]);
-
-  const getStatusBadge = (status) => {
-    const badges = {
-      active: { label: 'نشطة', className: 'bg-success/10 text-success border-success/30' },
-      pending: { label: 'قيد المراجعة', className: 'bg-warning/10 text-warning border-warning/30' },
-      draft: { label: 'مسودة', className: 'bg-app-surface-soft text-app-text border-app-border' },
-      closed: { label: 'مغلقة', className: 'bg-danger/10 text-danger border-danger/30' },
-      rejected: { label: 'مرفوضة', className: 'bg-danger/10 text-danger border-danger/30' },
-    };
-    return badges[status] || badges.pending;
-  };
-
-  if (loading) return <Card className="p-10 text-center text-app-text-muted">جارٍ تحميل الفرص...</Card>;
-  if (error) return <Card className="p-10 text-center text-danger">{error}</Card>;
-
-  return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-app-text">إشراف الفرص الاستثمارية</h1>
-        <p className="mt-2 max-w-3xl text-base leading-8 text-app-text-muted">
-          راجع جميع الفرص الاستثمارية المنشورة وحالتها وقيمتها والجهة المعلنة لها.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
-        <Card className="border border-app-border bg-card-gradient p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-app-text-muted">إجمالي الفرص</h3>
-            <LeafIcon className="text-app-text-soft" />
-          </div>
-          <p className="text-3xl font-bold text-app-text">{opportunities.length}</p>
-        </Card>
-
-        <Card className="border border-app-border bg-card-gradient p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-app-text-muted">الفرص النشطة</h3>
-            <CheckIcon className="text-success" />
-          </div>
-          <p className="text-3xl font-bold text-success">{opportunities.filter((o) => o.status === 'active').length}</p>
-        </Card>
-
-        <Card className="border border-app-border bg-card-gradient p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-app-text-muted">قيد المراجعة</h3>
-            <ShieldCheckIcon className="text-warning" />
-          </div>
-          <p className="text-3xl font-bold text-warning">{opportunities.filter((o) => o.status === 'pending').length}</p>
-        </Card>
-
-        <Card className="border border-app-border bg-card-gradient p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-app-text-muted">إجمالي القيمة</h3>
-            <LeafIcon className="text-app-text-soft" />
-          </div>
-          <p className="text-3xl font-bold text-brand">
-            {formatCurrency(opportunities.reduce((sum, o) => sum + Number(o.investment_required || 0), 0))} ر.س
-          </p>
-        </Card>
-      </div>
-
-      <Card className="border border-app-border bg-card-gradient">
-        <div className="border-b border-app-border p-6">
-          <h2 className="text-xl font-bold text-app-text">قائمة الفرص</h2>
-        </div>
-        <div className="overflow-x-auto p-6">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-app-border">
-                <th className="px-4 py-3 text-right text-sm font-semibold text-app-text-muted">الفرصة</th>
-                <th className="px-4 py-3 text-right text-sm font-semibold text-app-text-muted">البلدية</th>
-                <th className="px-4 py-3 text-right text-sm font-semibold text-app-text-muted">الموقع</th>
-                <th className="px-4 py-3 text-right text-sm font-semibold text-app-text-muted">الحالة</th>
-                <th className="px-4 py-3 text-right text-sm font-semibold text-app-text-muted">القيمة</th>
-                <th className="px-4 py-3 text-right text-sm font-semibold text-app-text-muted">الإجراءات</th>
-              </tr>
-            </thead>
-            <tbody>
-              {opportunities.map((opportunity) => {
-                const badge = getStatusBadge(opportunity.status);
-                return (
-                  <tr key={opportunity.id} className="border-b border-app-border hover:bg-app-surface-soft">
-                    <td className="px-4 py-4">
-                      <p className="font-medium text-app-text">{opportunity.title}</p>
-                      <p className="text-sm text-app-text-muted">
-                        {opportunity.season || '-'} • {opportunity.area || '-'}
-                      </p>
-                    </td>
-                    <td className="px-4 py-4 text-app-text">{opportunity.municipality_name || `#${opportunity.municipality_id}`}</td>
-                    <td className="px-4 py-4 text-app-text">{opportunity.location}</td>
-                    <td className="px-4 py-4">
-                      <span className={`rounded-full border px-3 py-1 text-xs ${badge.className}`}>{badge.label}</span>
-                    </td>
-                    <td className="px-4 py-4 text-app-text">{formatCurrency(opportunity.investment_required)} ر.س</td>
-                    <td className="px-4 py-4">
-                      <div className="flex gap-2">
-                        <button className="rounded-lg p-2 transition-colors hover:bg-app-surface-soft" title="عرض">
-                          <EyeIcon className="text-app-text-soft" />
-                        </button>
-                        {opportunity.status === 'pending' ? (
-                          <>
-                            <button className="rounded-lg p-2 transition-colors hover:bg-success/20" title="موافقة">
-                              <CheckIcon className="text-success" />
-                            </button>
-                            <button className="rounded-lg p-2 transition-colors hover:bg-danger/20" title="رفض">
-                              <XIcon className="text-danger" />
-                            </button>
-                          </>
-                        ) : null}
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </Card>
-    </div>
-  );
+  const { token, user } = useAuth();
+  const { addToast } = useToast();
+  const { data: opportunities, loading, error, setData } = useAsyncData(() => adminApi.opportunities(token), [token]);
+  const [form, setForm] = useState(null);
+  const [editing, setEditing] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const openEdit = (item) => { setEditing(item); setForm({ title: item.title || '', description: item.description || '', location: item.location || '', season: item.season || '', area: item.area || '', area_unit: item.area_unit || 'متر مربع', expected_return: item.expected_return || '', investment_required: item.investment_required || '', municipality_id: item.municipality_id || '', status: item.status || 'pending' }); };
+  const change = (event) => setForm((previous) => ({ ...previous, [event.target.name]: event.target.value }));
+  const save = async (event) => { event.preventDefault(); try { setSaving(true); const payload = { ...form, area: Number(form.area || 0), expected_return: Number(form.expected_return || 0), investment_required: Number(form.investment_required || 0), municipality_id: Number(form.municipality_id), status: form.status }; const saved = await opportunitiesApi.update(token, editing.id, payload); setData((previous) => previous.map((row) => row.id === saved.id ? saved : row)); setForm(null); setEditing(null); addToast('تم تحديث الفرصة الاستثمارية.', 'success'); } catch (saveError) { addToast(saveError.message || 'تعذر تحديث الفرصة.', 'error'); } finally { setSaving(false); } };
+  const updateStatus = async (item, status) => { try { const saved = await adminApi.updateOpportunityStatus(token, item.id, status); setData((previous) => previous.map((row) => row.id === saved.id ? saved : row)); addToast(`تم تغيير حالة الفرصة إلى ${statusLabels[status]}.`, 'success'); } catch (statusError) { addToast(statusError.message || 'تعذر تغيير الحالة.', 'error'); } };
+  const remove = async (item) => { if (!window.confirm(`حذف فرصة ${item.title}؟`)) return; try { await adminApi.deleteOpportunity(token, item.id); setData((previous) => previous.filter((row) => row.id !== item.id)); addToast('تم حذف الفرصة.', 'success'); } catch (removeError) { addToast(removeError.message || 'تعذر حذف الفرصة.', 'error'); } };
+  if (!token || user?.role !== 'admin') return <Card className="p-10 text-center"><h1 className="text-3xl font-black">إدارة الفرص محمية</h1><p className="mt-3 text-sm text-app-text-muted">سجّل الدخول بحساب مدير المنصة.</p></Card>;
+  if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل الفرص...</Card>;
+  if (error) return <Card className="p-10 text-center text-danger">تعذر تحميل الفرص: {error}</Card>;
+  return <div className="space-y-6"><div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end"><div><div className="landx-kicker"><LeafIcon className="h-4 w-4" /> محفظة الفرص</div><h1 className="mt-4 text-3xl font-black text-app-text">الفرص الاستثمارية</h1><p className="mt-2 text-sm leading-7 text-app-text-muted">راجع المحتوى، حدّث بيانات الفرص، واعتمد ما يستحق الظهور للمستثمرين.</p></div><Button onClick={() => window.location.assign('/municipality/opportunities/create')}><PlusIcon className="h-4 w-4" /> إضافة فرصة</Button></div><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"><Card className="border-[#eadacc] p-5"><div className="text-xs font-bold text-app-text-muted">إجمالي الفرص</div><div className="mt-3 text-3xl font-black text-[#8c4e2f]">{opportunities.length}</div></Card><Card className="border-[#eadacc] p-5"><div className="text-xs font-bold text-app-text-muted">نشطة</div><div className="mt-3 text-3xl font-black text-[#5d9872]">{opportunities.filter((item) => item.status === 'active').length}</div></Card><Card className="border-[#eadacc] p-5"><div className="text-xs font-bold text-app-text-muted">قيد المراجعة</div><div className="mt-3 text-3xl font-black text-[#b17b3e]">{opportunities.filter((item) => item.status === 'pending').length}</div></Card><Card className="border-[#eadacc] p-5"><div className="text-xs font-bold text-app-text-muted">القيمة المعروضة</div><div className="mt-3 text-xl font-black text-[#9d5d3c]">{formatCurrency(opportunities.reduce((sum, item) => sum + Number(item.investment_required || 0), 0))} ر.س</div></Card></div>{form ? <Card className="border-[#e3c6b0] bg-[#fffaf5] p-6"><div className="flex justify-between"><div><div className="text-xs font-bold text-[#a4623e]">تعديل الفرصة</div><h2 className="mt-2 text-xl font-black text-app-text">{editing.title}</h2></div><button onClick={() => setForm(null)} aria-label="إغلاق" className="rounded-xl p-2 text-app-text-muted hover:bg-[#f2dfd1]"><XIcon /></button></div><form onSubmit={save} className="mt-5 grid gap-4 md:grid-cols-2"><label className="grid gap-2 text-sm font-bold">عنوان الفرصة<input required name="title" value={form.title} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold">الموقع<input required name="location" value={form.location} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold">الموسم<input name="season" value={form.season} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold">المساحة<input type="number" name="area" value={form.area} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold">الاستثمار المطلوب<input type="number" name="investment_required" value={form.investment_required} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold">العائد المتوقع %<input type="number" name="expected_return" value={form.expected_return} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold md:col-span-2">الوصف<textarea required name="description" value={form.description} onChange={change} rows="4" className="landx-form-input resize-none" /></label><label className="grid gap-2 text-sm font-bold">رقم الجهة<input required type="number" name="municipality_id" value={form.municipality_id} onChange={change} className="landx-form-input" /></label><label className="grid gap-2 text-sm font-bold">الحالة<select name="status" value={form.status} onChange={change} className="landx-form-input"><option value="pending">قيد المراجعة</option><option value="active">نشطة</option><option value="draft">مسودة</option><option value="closed">مغلقة</option><option value="rejected">مرفوضة</option></select></label><div className="flex gap-3 md:col-span-2"><Button type="submit" disabled={saving}>{saving ? 'جاري الحفظ...' : 'حفظ التعديلات'}</Button><Button type="button" variant="outline" onClick={() => setForm(null)}>إلغاء</Button></div></form></Card> : null}<Card className="overflow-hidden border-[#eadacc]"><div className="border-b border-[#eadacc] p-5"><h2 className="text-xl font-black text-app-text">قائمة الفرص</h2><p className="mt-1 text-xs text-app-text-muted">كل فرصة هنا قابلة للمراجعة والتحديث قبل عرضها.</p></div><div className="overflow-x-auto"><table className="min-w-full text-right text-sm"><thead className="bg-[#fbf5ef] text-xs text-app-text-muted"><tr>{['الفرصة','الجهة','الموقع','الحالة','الاستثمار','إجراءات'].map((heading) => <th key={heading} className="px-5 py-4">{heading}</th>)}</tr></thead><tbody>{opportunities.map((item) => <tr key={item.id} className="border-t border-[#efe4db] hover:bg-[#fffaf5]"><td className="px-5 py-4"><div className="font-bold text-app-text">{item.title}</div><div className="mt-1 text-xs text-app-text-soft">{item.season || 'موسم مفتوح'} · {item.area || 0} {item.area_unit || 'م²'}</div></td><td className="px-5 py-4 text-app-text-muted">#{item.municipality_id}</td><td className="px-5 py-4 text-app-text-muted">{item.location}</td><td className="px-5 py-4"><span className={`rounded-full px-3 py-1 text-xs font-bold ${item.status === 'active' ? 'bg-[#e5f3e8] text-[#4b8b61]' : item.status === 'rejected' ? 'bg-[#f8e5e1] text-[#ae5d50]' : 'bg-[#fff0d9] text-[#a27136]'}`}>{statusLabels[item.status] || item.status}</span></td><td className="px-5 py-4 font-bold text-[#9d5d3c]">{formatCurrency(item.investment_required)} ر.س</td><td className="px-5 py-4"><div className="flex flex-wrap gap-2"><button onClick={() => openEdit(item)} className="inline-flex items-center gap-1 rounded-lg border border-[#e5cdbb] px-3 py-2 text-xs font-bold text-[#9b5d3d]"><PencilIcon className="h-3 w-3" /> تعديل</button>{item.status === 'pending' ? <button onClick={() => updateStatus(item, 'active')} className="inline-flex items-center gap-1 rounded-lg border border-success/20 px-3 py-2 text-xs font-bold text-success"><CheckIcon className="h-3 w-3" /> اعتماد</button> : null}<button onClick={() => remove(item)} className="rounded-lg border border-danger/20 px-3 py-2 text-xs font-bold text-danger">حذف</button><a href={`/opportunities/${item.id}`} target="_blank" rel="noreferrer" className="rounded-lg border border-[#eadacc] px-3 py-2 text-xs font-bold text-app-text-muted"><EyeIcon className="inline h-3 w-3" /> عرض</a></div></td></tr>)}</tbody></table></div></Card></div>;
 };
 
 export default AdminOpportunities;

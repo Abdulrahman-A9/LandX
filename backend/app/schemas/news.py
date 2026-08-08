@@ -13,6 +13,10 @@ class NewsCreate(BaseModel):
     municipality_id: int | None = None
 
 
+class NewsUpdate(NewsCreate):
+    pass
+
+
 class NewsResponse(TimestampedResponse):
     title: str
     content: str

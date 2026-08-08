@@ -4,118 +4,20 @@ import Card from '../../components/ui/Card';
 import { useAuth } from '../../context/AuthContext';
 import { useAsyncData } from '../../hooks/useAsyncData';
 import { inquiryApi, opportunitiesApi } from '../../lib/api';
-import { CheckIcon, DollarSignIcon, FileTextIcon, LeafIcon, PlusIcon } from '../../components/ui/Icons';
+import { ArrowRightIcon, CheckIcon, DollarSignIcon, FileTextIcon, LeafIcon, MegaphoneIcon, PlusIcon } from '../../components/ui/Icons';
 import { formatCurrency } from '../../lib/formatters';
 
 const MunicipalityDashboard = () => {
   const { token, user } = useAuth();
-  const { data, loading, error } = useAsyncData(async () => {
-    const [inquiries, opportunities] = await Promise.all([inquiryApi.municipality(token), opportunitiesApi.list()]);
-    return {
-      inquiries,
-      platformOpportunities: opportunities,
-      opportunities: opportunities.filter((item) => item.municipality_id === user?.municipality_id),
-    };
-  }, [token, user?.municipality_id]);
-
-  const stats = useMemo(() => {
-    const opportunities = data.opportunities || [];
-    const inquiries = data.inquiries || [];
-    return {
-      platformOpportunities: data.platformOpportunities?.length || 0,
-      totalOpportunities: opportunities.length,
-      activeOpportunities: opportunities.filter((item) => item.status === 'active').length,
-      pendingInquiries: inquiries.filter((item) => item.status === 'pending').length,
-      totalInvestment: opportunities.reduce((sum, item) => sum + Number(item.investment_required || 0), 0),
-    };
-  }, [data]);
-
-  const nextSteps = [
-    {
-      title: 'إضافة فرصة جديدة',
-      description: 'أضف فرصة استثمارية جديدة إذا كانت القائمة الحالية لا تعكس كامل الفرص المتاحة في البلدية.',
-      to: '/municipality/opportunities/create',
-    },
-    {
-      title: 'مراجعة الاستفسارات',
-      description: 'ابدأ بالاستفسارات المفتوحة لأنها أكثر ما يؤثر على تجربة المستثمر ومصداقية الجهة.',
-      to: '/municipality/inquiries',
-    },
-    {
-      title: 'تحديث المحتوى المنشور',
-      description: 'حدّث أخبارك وإعلاناتك ليبقى المستثمرون على اطلاع بفرص البلدية ومشاريعها.',
-      to: '/municipality/news',
-    },
-  ];
-
-  if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل لوحة البلدية...</Card>;
-  if (error) return <Card className="p-10 text-center text-danger">{error}</Card>;
-
-  return (
-    <div className="space-y-8">
-      <section className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
-        <Card className="p-7">
-          <div className="landx-kicker">تشغيل البلدية</div>
-          <h1 className="mt-5 text-4xl font-black text-app-text">لوحة البلدية</h1>
-          <p className="mt-3 max-w-2xl text-base leading-8 text-app-text-muted">
-            هنا تدير فرص بلديتك وتتابع استفسارات المستثمرين واهتماماتهم.
-          </p>
-          <div className="mt-5 rounded-2xl border border-[#ead9c7] bg-white/55 p-4 text-sm leading-8 text-app-text-muted">
-            تعرض المنصة العامة جميع الفرص المنشورة، بينما تركز مساحة البلدية على الفرص التابعة لها والطلبات الواردة عليها.
-          </div>
-        </Card>
-        <Card className="p-7">
-          <div className="text-sm font-semibold text-app-text-muted">أولوية اليوم</div>
-          <div className="mt-4 rounded-2xl border border-warning/20 bg-[#fbf1e6] p-5">
-            <div className="text-3xl font-black text-warning">{stats.pendingInquiries}</div>
-            <div className="mt-2 text-sm leading-7 text-app-text-muted">استفسارات مفتوحة تحتاج فرزًا أو ردًا.</div>
-          </div>
-        </Card>
-      </section>
-
-      <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {[
-          { label: 'إجمالي المنصة', value: stats.platformOpportunities, helper: 'فرص منشورة للمستثمرين', icon: <LeafIcon className="h-5 w-5" />, tone: 'text-brand' },
-          { label: 'إجمالي الفرص', value: stats.totalOpportunities, helper: 'فرص مرتبطة ببلديتك', icon: <LeafIcon className="h-5 w-5" />, tone: 'text-app-text' },
-          { label: 'الفرص النشطة', value: stats.activeOpportunities, helper: 'جاهزة للاستعراض', icon: <CheckIcon className="h-5 w-5" />, tone: 'text-success' },
-          { label: 'الاستفسارات', value: stats.pendingInquiries, helper: 'بانتظار الرد', icon: <FileTextIcon className="h-5 w-5" />, tone: 'text-warning' },
-          { label: 'قيمة الاستثمار', value: formatCurrency(stats.totalInvestment), helper: 'إجمالي فرص بلديتك الحالية', icon: <DollarSignIcon className="h-5 w-5" />, tone: 'text-brand' },
-        ].map((item) => (
-            <Card key={item.label} className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="text-sm font-semibold text-app-text-muted">{item.label}</div>
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
-                  {item.icon}
-                </div>
-              </div>
-              <div className={`mt-6 text-3xl font-black ${item.tone}`}>{item.value}</div>
-              <div className="mt-2 text-sm leading-7 text-app-text-muted">{item.helper}</div>
-            </Card>
-          ))}
-      </section>
-
-      <section>
-        <div className="mb-4">
-          <h2 className="text-2xl font-bold text-app-text">الخطوات المقترحة الآن</h2>
-          <p className="mt-2 text-sm leading-7 text-app-text-muted">رتب العمل حسب الأولوية: نشر، متابعة، ثم تحسين المحتوى.</p>
-        </div>
-        <div className="grid gap-5 xl:grid-cols-3">
-          {nextSteps.map((item, index) => (
-            <Card key={item.title} className={`p-6 ${index === 1 && stats.pendingInquiries ? 'border-warning/40' : ''}`}>
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/15 bg-[#fff8f2] text-brand">
-                <PlusIcon className="h-5 w-5" />
-              </div>
-              <h3 className="mt-5 text-xl font-bold text-app-text">{item.title}</h3>
-              <p className="mt-3 text-sm leading-8 text-app-text-muted">{item.description}</p>
-              <Link to={item.to} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
-                الانتقال الآن
-              </Link>
-            </Card>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
+  const { data, loading, error } = useAsyncData(async () => { const [inquiries, opportunities] = await Promise.all([inquiryApi.municipality(token), opportunitiesApi.list()]); return { inquiries, opportunities: opportunities.filter((item) => item.municipality_id === user?.municipality_id), platformOpportunities: opportunities }; }, [token, user?.municipality_id]);
+  const stats = useMemo(() => { const opportunities = data.opportunities || []; const inquiries = data.inquiries || []; return { platform: data.platformOpportunities?.length || 0, total: opportunities.length, active: opportunities.filter((item) => item.status === 'active').length, pending: inquiries.filter((item) => item.status === 'pending').length, value: opportunities.reduce((sum, item) => sum + Number(item.investment_required || 0), 0) }; }, [data]);
+  if (loading) return <Card className="p-10 text-center text-app-text-muted">جاري تحميل مساحة الشريك...</Card>;
+  if (error) return <Card className="p-10 text-center text-danger">تعذر تحميل بيانات البلدية: {error}</Card>;
+  const actions = [{ title: 'أضف فرصة استثمارية', description: 'اعرض مشروعًا جديدًا أمام المستثمرين.', href: '/municipality/opportunities/create', icon: <PlusIcon /> }, { title: 'رد على المستثمرين', description: 'تابع الاستفسارات وحوّل الاهتمام إلى تواصل.', href: '/municipality/inquiries', icon: <FileTextIcon /> }, { title: 'حدّث حضور البلدية', description: 'انشر خبرًا أو إعلانًا عن مشاريعك القادمة.', href: '/municipality/news', icon: <MegaphoneIcon /> }];
+  return <div className="space-y-7"><section className="relative overflow-hidden rounded-[2rem] bg-[linear-gradient(120deg,#351c13,#633720_64%,#9b5a38)] p-7 text-white shadow-[0_24px_60px_rgba(91,47,25,0.2)] lg:p-9"><div className="absolute -left-12 -top-16 h-56 w-56 rounded-full border border-white/10" /><div className="relative grid gap-7 lg:grid-cols-[1.2fr_0.8fr] lg:items-end"><div><div className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-bold text-[#f5c49f]">مساحة الجهة الشريكة</div><h1 className="mt-5 max-w-2xl text-3xl font-black leading-[1.4] md:text-5xl">قدّم فرصتك الاستثمارية<br /><span className="text-[#f5c49f]">بصورة تليق بها.</span></h1><p className="mt-4 max-w-2xl text-sm leading-8 text-[#f1d8c5]">أدر فرص البلدية، استقبل اهتمام المستثمرين، وحدث الأخبار من مساحة تشغيل واحدة.</p></div><div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-5"><div className="text-xs font-bold text-[#f1c5a3]">أولوية اليوم</div><div className="mt-3 text-4xl font-black">{stats.pending}</div><div className="mt-1 text-sm text-[#f1d8c5]">استفسار بانتظار ردك</div><Link to="/municipality/inquiries" className="mt-5 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-bold text-[#613720]">فتح الاستفسارات <ArrowRightIcon className="h-4 w-4" /></Link></div></div></section>
+    <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">{[[`فرص البلدية`, stats.total, 'مشاريعك المنشورة', <LeafIcon />, 'text-[#8c4e2f]'], ['الفرص النشطة', stats.active, 'جاهزة للمستثمرين', <CheckIcon />, 'text-[#5d9872]'], ['استفسارات مفتوحة', stats.pending, 'بحاجة إلى متابعة', <FileTextIcon />, 'text-[#b17b3e]'], ['قيمة المشاريع', formatCurrency(stats.value), 'قيمة الاستثمار المطلوبة', <DollarSignIcon />, 'text-[#a7673f]'], ['على LandX', stats.platform, 'إجمالي الفرص المنشورة', <LeafIcon />, 'text-[#8c4e2f]']].map(([label, value, helper, icon, tone]) => <Card key={label} className="border-[#eadacc] p-5"><div className="flex items-start justify-between"><div><div className="text-sm font-bold text-app-text-muted">{label}</div><div className={`mt-4 text-3xl font-black ${tone}`}>{value}</div></div><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#f7eadf] text-[#a4623e]">{icon}</div></div><div className="mt-3 text-xs text-app-text-soft">{helper}</div></Card>)}</section>
+    <section><div className="mb-4"><div className="text-xs font-bold text-[#ad704e]">تشغيل الجهة</div><h2 className="mt-2 text-2xl font-black text-app-text">أدوات تساعدك على جذب الاستثمار</h2><p className="mt-2 text-sm leading-7 text-app-text-muted">اجعل فرصك حاضرة، ومعلوماتك محدثة، وردودك في متناول المستثمر.</p></div><div className="grid gap-5 xl:grid-cols-3">{actions.map((item) => <Link to={item.href} key={item.title}><Card className="h-full border-[#eadacc] p-6 transition-all hover:-translate-y-1 hover:border-[#c8895f] hover:shadow-[0_18px_35px_rgba(96,52,29,0.12)]"><div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#f7eadf] text-[#a4623e]">{item.icon}</div><h3 className="mt-5 text-xl font-bold text-app-text">{item.title}</h3><p className="mt-3 text-sm leading-8 text-app-text-muted">{item.description}</p><div className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#9d5d3c]">فتح الأداة <ArrowRightIcon className="h-4 w-4" /></div></Card></Link>)}</div></section>
+  </div>;
 };
 
 export default MunicipalityDashboard;

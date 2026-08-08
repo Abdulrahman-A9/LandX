@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import func, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import get_db
@@ -87,6 +88,25 @@ def update_user_status(
     return target
 
 
+@router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    user: User = Depends(require_roles(UserRole.admin)),
+) -> None:
+    target = db.get(User, user_id)
+    if not target:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    if target.id == user.id:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cannot delete the current admin")
+    db.delete(target)
+    try:
+        db.commit()
+    except IntegrityError as exc:
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="لا يمكن حذف حساب مرتبط بطلبات أو تحليلات. أوقفه بدلًا من ذلك.") from exc
+
+
 @router.get("/municipalities", response_model=list[MunicipalityResponse])
 def list_municipalities(
     db: Session = Depends(get_db),
@@ -125,6 +145,23 @@ def update_municipality(
     return municipality
 
 
+@router.delete("/municipalities/{municipality_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_municipality(
+    municipality_id: int,
+    db: Session = Depends(get_db),
+    user: User = Depends(require_roles(UserRole.admin)),
+) -> None:
+    municipality = db.get(Municipality, municipality_id)
+    if not municipality:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Municipality not found")
+    db.delete(municipality)
+    try:
+        db.commit()
+    except IntegrityError as exc:
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="لا يمكن حذف جهة لديها فرص أو مستخدمون مرتبطون. عطّلها بدلًا من ذلك.") from exc
+
+
 @router.get("/opportunities", response_model=list[OpportunityResponse])
 def admin_list_opportunities(
     db: Session = Depends(get_db),
@@ -147,6 +184,23 @@ def update_opportunity_status(
     db.commit()
     db.refresh(opportunity)
     return opportunity
+
+
+@router.delete("/opportunities/{opportunity_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_opportunity(
+    opportunity_id: int,
+    db: Session = Depends(get_db),
+    user: User = Depends(require_roles(UserRole.admin)),
+) -> None:
+    opportunity = db.get(Opportunity, opportunity_id)
+    if not opportunity:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Opportunity not found")
+    db.delete(opportunity)
+    try:
+        db.commit()
+    except IntegrityError as exc:
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="لا يمكن حذف فرصة لديها طلبات أو استفسارات. أغلقها بدلًا من ذلك.") from exc
 
 
 @router.get("/news", response_model=list[NewsResponse])

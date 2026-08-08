@@ -70,6 +70,17 @@ export const opportunitiesApi = {
       headers: authHeaders(token, { 'Content-Type': 'application/json' }),
       body: JSON.stringify(payload),
     }),
+  update: (token, id, payload) =>
+    request(`/opportunities/${id}`, {
+      method: 'PUT',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload),
+    }),
+  remove: (token, id) =>
+    request(`/opportunities/${id}`, {
+      method: 'DELETE',
+      headers: authHeaders(token),
+    }),
 };
 
 export const newsApi = {
@@ -84,6 +95,13 @@ export const newsApi = {
       headers: authHeaders(token, { 'Content-Type': 'application/json' }),
       body: JSON.stringify(payload),
     }),
+  update: (token, id, payload) =>
+    request(`/news/${id}`, {
+      method: 'PUT',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload),
+    }),
+  remove: (token, id) => request(`/news/${id}`, { method: 'DELETE', headers: authHeaders(token) }),
 };
 
 export const municipalityApi = {
@@ -161,14 +179,56 @@ export const adminApi = {
     request('/admin/users', {
       headers: authHeaders(token),
     }),
+  createUser: (token, payload) =>
+    request('/admin/users', {
+      method: 'POST',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload),
+    }),
+  updateUser: (token, id, payload) =>
+    request(`/admin/users/${id}`, {
+      method: 'PUT',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload),
+    }),
+  updateUserStatus: (token, id, is_active) =>
+    request(`/admin/users/${id}/status`, {
+      method: 'PATCH',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ is_active }),
+    }),
+  deleteUser: (token, id) =>
+    request(`/admin/users/${id}`, { method: 'DELETE', headers: authHeaders(token) }),
   municipalities: (token) =>
     request('/admin/municipalities', {
       headers: authHeaders(token),
     }),
+  createMunicipality: (token, payload) =>
+    request('/admin/municipalities', {
+      method: 'POST',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload),
+    }),
+  updateMunicipality: (token, id, payload) =>
+    request(`/admin/municipalities/${id}`, {
+      method: 'PUT',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload),
+    }),
+  deleteMunicipality: (token, id) =>
+    request(`/admin/municipalities/${id}`, { method: 'DELETE', headers: authHeaders(token) }),
   opportunities: (token) =>
     request('/admin/opportunities', {
       headers: authHeaders(token),
     }),
+  updateOpportunityStatus: (token, id, status) =>
+    request(`/admin/opportunities/${id}/status`, {
+      method: 'PATCH',
+      headers: authHeaders(token, { 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ status }),
+    }),
+  deleteOpportunity: (token, id) =>
+    request(`/admin/opportunities/${id}`, { method: 'DELETE', headers: authHeaders(token) }),
   news: (token) =>
     request('/admin/news', {
       headers: authHeaders(token),
