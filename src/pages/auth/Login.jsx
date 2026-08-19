@@ -8,12 +8,6 @@ import BrandLogo from '../../components/shared/BrandLogo';
 import { ArrowRightIcon, LockIcon, MailIcon, ShieldCheckIcon } from '../../components/ui/Icons';
 import { buildAuthRoute, resolvePostAuthRoute, serviceIntentCopy } from '../../lib/flow';
 
-const demoAccounts = [
-  'حساب المستثمر التجريبي: investor@landx.sa / 123456',
-  'حساب البلدية التجريبي: municipality@landx.sa / 123456',
-  'حساب الإدارة التجريبي: admin@landx.sa / 123456',
-];
-
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,24 +61,14 @@ const Login = () => {
               </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
-              {demoAccounts.map((item) => (
-                <div key={item} className="rounded-2xl border border-app-border bg-app-surface-soft p-4 text-sm leading-7 text-app-text-muted">
-                  {item}
-                </div>
-              ))}
-            </div>
-
             <div className="rounded-[2rem] border border-app-border bg-card-gradient p-6">
               <div className="flex items-center gap-2 text-app-text">
                 <ShieldCheckIcon className="h-5 w-5 text-brand" />
-                <span className="font-semibold">رحلة مباشرة بعد الدخول</span>
+                <span className="font-semibold">مرحبًا بك</span>
               </div>
-              <div className="mt-4 space-y-3 text-sm leading-7 text-app-text-muted">
-                <p>1. ستصل فورًا إلى حسابك الخاص وتستعرض الفرص والطلبات التي بدأت بها.</p>
-                <p>2. سيتم توجيهك تلقائيًا إلى لوحة العمل المناسبة لدورك داخل المنصة.</p>
-                <p>3. تستمر في رحلتك من نفس النقطة دون الحاجة إلى إعادة الخطوات.</p>
-              </div>
+              <p className="mt-4 text-sm leading-7 text-app-text-muted">
+                كل ما تحتاجه في مكان واحد، والرحلة تبدأ من تسجيل الدخول.
+              </p>
             </div>
           </div>
 
