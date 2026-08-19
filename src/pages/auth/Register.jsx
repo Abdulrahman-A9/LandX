@@ -95,7 +95,7 @@ const Register = () => {
             <div className="mt-6">
               <h2 className="text-3xl font-black text-app-text">إنشاء حساب جديد</h2>
               <p className="mt-2 text-sm leading-7 text-app-text-muted">
-                أنشئ حسابك للوصول إلى الفرص الاستثمارية وحفظ تقييماتك وطلباتك.
+                ابدأ الآن وابدأ رحلتك في LandX من خلال حسابك الشخصي الذي يتيح لك متابعة الفرص والطلبات بسهولة.
               </p>
             </div>
 
@@ -245,12 +245,12 @@ const Register = () => {
             <div className="rounded-[2rem] border border-app-border bg-card-gradient p-6">
               <div className="flex items-center gap-2 text-app-text">
                 <ShieldCheckIcon className="h-5 w-5 text-brand" />
-                <span className="font-semibold">ما الذي يحدث بعد التسجيل؟</span>
+                <span className="font-semibold">ماذا يحدث بعد إنشاء الحساب؟</span>
               </div>
               <div className="mt-4 space-y-3 text-sm leading-7 text-app-text-muted">
-                <p>1. يجهز لك الحساب للوصول إلى خدمات LandX.</p>
-                <p>2. يتم تسجيل الدخول تلقائيًا بالحساب الجديد.</p>
-                <p>3. يتم نقلك إلى الصفحة التالية المناسبة بدل إيقافك عند شاشة الدخول.</p>
+                <p>1. سيتم إعداد حسابك بسرعة لتبدأ استخدام خدمات LandX.</p>
+                <p>2. سيتم تسجيل الدخول تلقائيًا إلى الحساب الجديد.</p>
+                <p>3. ستنتقل مباشرة إلى الصفحة المناسبة لك دون أي تأخير.</p>
               </div>
             </div>
           </div>

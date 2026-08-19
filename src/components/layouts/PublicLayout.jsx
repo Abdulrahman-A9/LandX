@@ -99,13 +99,13 @@ const PublicLayout = ({ children }) => {
                 <>
                   <Link
                     to="/login"
-                    className="inline-flex items-center gap-2 rounded-full border border-app-border bg-app-surface-soft px-4 py-2 text-sm font-semibold text-app-text hover:border-brand/30 hover:bg-app-surface"
+                    className="inline-flex items-center gap-2 rounded-full border border-[#3b2c24] bg-[#1f1a17] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:border-brand/40 hover:bg-[#2c241f]"
                   >
                     دخول
                   </Link>
                   <Link
                     to="/register"
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand to-brand-deep px-4 py-2 text-sm font-semibold text-app-text shadow-lg shadow-brand/20 hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#8f4f2d] via-[#aa653c] to-[#c38256] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-brand/20 hover:-translate-y-0.5"
                   >
                     ابدأ الآن
                     <ArrowRightIcon className="h-4 w-4" />
@@ -174,14 +174,14 @@ const PublicLayout = ({ children }) => {
                       <Link
                         to="/login"
                         onClick={closeMobileMenu}
-                        className="rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm font-semibold text-app-text"
+                        className="rounded-2xl border border-[#3b2c24] bg-[#1f1a17] px-4 py-3 text-sm font-semibold text-white"
                       >
                         تسجيل الدخول
                       </Link>
                       <Link
                         to="/register"
                         onClick={closeMobileMenu}
-                        className="rounded-2xl bg-gradient-to-r from-brand to-brand-deep px-4 py-3 text-sm font-semibold text-app-text"
+                        className="rounded-2xl bg-gradient-to-r from-[#8f4f2d] via-[#aa653c] to-[#c38256] px-4 py-3 text-sm font-semibold text-white"
                       >
                         إنشاء حساب
                       </Link>

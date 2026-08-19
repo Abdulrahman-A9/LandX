@@ -9,9 +9,9 @@ import { ArrowRightIcon, LockIcon, MailIcon, ShieldCheckIcon } from '../../compo
 import { buildAuthRoute, resolvePostAuthRoute, serviceIntentCopy } from '../../lib/flow';
 
 const demoAccounts = [
-  'مستثمر: investor@landx.sa / 123456',
-  'بلدية: municipality@landx.sa / 123456',
-  'إدارة: admin@landx.sa / 123456',
+  'حساب المستثمر التجريبي: investor@landx.sa / 123456',
+  'حساب البلدية التجريبي: municipality@landx.sa / 123456',
+  'حساب الإدارة التجريبي: admin@landx.sa / 123456',
 ];
 
 const Login = () => {
@@ -78,12 +78,12 @@ const Login = () => {
             <div className="rounded-[2rem] border border-app-border bg-card-gradient p-6">
               <div className="flex items-center gap-2 text-app-text">
                 <ShieldCheckIcon className="h-5 w-5 text-brand" />
-                <span className="font-semibold">ما الذي سيحدث بعد الدخول؟</span>
+                <span className="font-semibold">رحلة مباشرة بعد الدخول</span>
               </div>
               <div className="mt-4 space-y-3 text-sm leading-7 text-app-text-muted">
-                <p>1. سجّل الدخول للوصول إلى فرصك وطلباتك المحفوظة.</p>
-                <p>2. ستنتقل مباشرة إلى الصفحة المناسبة لحسابك.</p>
-                <p>3. تكمل الخدمة من نفس النقطة دون إعادة الخطوات.</p>
+                <p>1. ستصل فورًا إلى حسابك الخاص وتستعرض الفرص والطلبات التي بدأت بها.</p>
+                <p>2. سيتم توجيهك تلقائيًا إلى لوحة العمل المناسبة لدورك داخل المنصة.</p>
+                <p>3. تستمر في رحلتك من نفس النقطة دون الحاجة إلى إعادة الخطوات.</p>
               </div>
             </div>
           </div>
@@ -95,9 +95,9 @@ const Login = () => {
             </Link>
 
             <div className="mt-6">
-              <h2 className="text-3xl font-black text-app-text">تسجيل الدخول</h2>
+              <h2 className="text-3xl font-black text-app-text">مرحبًا بعودتك</h2>
               <p className="mt-2 text-sm leading-7 text-app-text-muted">
-                أدخل بياناتك للوصول إلى لوحة المستثمر أو البلدية أو الإدارة حسب نوع الحساب.
+                سجّل الدخول إلى حسابك للوصول إلى لوحة العمل المناسبة لك واستئناف رحلتك بسهولة.
               </p>
             </div>
 
@@ -145,8 +145,8 @@ const Login = () => {
               </div>
 
               <div className="flex items-center justify-between rounded-2xl border border-app-border bg-app-surface-soft px-4 py-3 text-sm text-app-text-muted">
-                <span>نسيت كلمة المرور؟</span>
-                <span className="font-semibold text-app-text">تواصل مع الدعم حاليًا</span>
+                <span>هل تحتاج مساعدة؟</span>
+                <span className="font-semibold text-app-text">تواصل معنا</span>
               </div>
 
               <Button type="submit" size="lg" className="w-full" disabled={submitting}>
@@ -160,7 +160,7 @@ const Login = () => {
                 ملاحظة
               </div>
               <p className="mt-2">
-                بعد الدخول ستنتقل تلقائيًا إلى مساحة العمل المناسبة لدورك في LandX.
+                فور تسجيل الدخول، سيتم توجيهك تلقائيًا إلى مساحة العمل المناسبة لحسابك في LandX.
               </p>
             </div>
 
