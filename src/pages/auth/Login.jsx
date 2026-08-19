@@ -61,15 +61,6 @@ const Login = () => {
               </p>
             </div>
 
-            <div className="rounded-[2rem] border border-app-border bg-card-gradient p-6">
-              <div className="flex items-center gap-2 text-app-text">
-                <ShieldCheckIcon className="h-5 w-5 text-brand" />
-                <span className="font-semibold">مرحبًا بك</span>
-              </div>
-              <p className="mt-4 text-sm leading-7 text-app-text-muted">
-                كل ما تحتاجه في مكان واحد، والرحلة تبدأ من تسجيل الدخول.
-              </p>
-            </div>
           </div>
 
           <Card className="p-6 lg:p-8">

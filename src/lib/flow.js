@@ -23,7 +23,7 @@ export const serviceIntentCopy = {
   default: {
     badge: 'مرحبًا بك',
     title: 'سجّل الدخول إلى حسابك',
-    description: 'استمر في رحلتك داخل LandX بسهولة وأمان.',
+    description: 'تابع رحلتك في LandX بسهولة وأدخل إلى مساحة العمل المناسبة لك.',
   },
 };
 
