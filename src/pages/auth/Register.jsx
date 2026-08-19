@@ -230,18 +230,6 @@ const Register = () => {
               </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
-              {[
-                'للمستثمر: استكشاف الفرص وفهم الجدوى.',
-                'للبلدية: تنظيم النشر وإدارة الطلبات.',
-                'للجنة: بيانات فعلية يمكن عرضها من القاعدة.',
-              ].map((item) => (
-                <div key={item} className="rounded-2xl border border-app-border bg-app-surface-soft p-4 text-sm leading-7 text-app-text-muted">
-                  {item}
-                </div>
-              ))}
-            </div>
-
             <div className="rounded-[2rem] border border-app-border bg-card-gradient p-6">
               <div className="flex items-center gap-2 text-app-text">
                 <ShieldCheckIcon className="h-5 w-5 text-brand" />

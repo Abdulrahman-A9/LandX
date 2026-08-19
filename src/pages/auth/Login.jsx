@@ -129,12 +129,12 @@ const Login = () => {
               </Button>
             </form>
 
-            <div className="mt-6 rounded-2xl border border-app-border bg-app-surface-soft/60 p-4 text-sm leading-7 text-app-text-muted">
-              <div className="flex items-center gap-2 font-semibold text-app-text">
-                <ShieldCheckIcon className="h-4 w-4 text-brand" />
+            <div className="mt-6 rounded-2xl border border-[#3b2c24] bg-[#1f1a17] p-4 text-sm leading-7 text-white">
+              <div className="flex items-center gap-2 font-semibold text-white">
+                <ShieldCheckIcon className="h-4 w-4 text-white" />
                 ملاحظة
               </div>
-              <p className="mt-2">
+              <p className="mt-2 text-white">
                 فور تسجيل الدخول، سيتم توجيهك تلقائيًا إلى مساحة العمل المناسبة لحسابك في LandX.
               </p>
             </div>
